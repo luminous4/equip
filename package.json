@@ -1,0 +1,15 @@
+{
+  "name": "equipe",
+  "version": "1.0.0",
+  "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luminous4/equip/"
+  },
+  "author": "",
+  "license": "ISC"
+}
