@@ -1,4 +1,4 @@
-# Equipe #
+# Equip #
 
 ### A group collaboration tool with a customizable set of features to fit any group's needs. ###
 
