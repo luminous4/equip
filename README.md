@@ -6,13 +6,13 @@ Our app provides a user-friendly platform for collaboration for any kind of team
 
 People have to work together in groups in all settings--work, recreation, school--and to manage those teams there are a number of small and simple applications spread across multiple platforms. It's tough to centralize contact and exchange.
 
-Equipe makes team workflow more efficient and fun! Everything is centered on your group and additional features are easily added and customized to fit your needs.
+Equip makes team workflow more efficient and fun! Everything is centered on your group and additional features are easily added and customized to fit your needs.
 
 Tech Stack:
  - Angular
  - Node/Express
 
 We will conform to the [AirBnB](https://github.com/airbnb/javascript/tree/master/es5) style guide
-Our commit messages will follow [Semantic Commit Messages](http://seesparkbox.com/foundry/semantic_commit_messages)
-..* Instead of a '-' after the type of commit we will use '[]'. For example, we will use '[feat] add beta sequence' instead of 'feat: add beta sequence'
-..* We will manage our different tasks using Waffle.io
+Our commit messages will follow [Semantic Commit Messages](http://karma-runner.github.io/0.8/dev/git-commit-msg.html)
+
+We will manage our different tasks using Waffle.io
