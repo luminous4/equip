@@ -12,8 +12,8 @@ angular.module('equip')
   this.addMessage = function() {
     var date = moment().format('YYYY-MM-DD hh:mm');
     $scope.messages.$add({
-      user: this.user,
-      message: this.message,
+      username: this.user,
+      text: this.message,
       createdAt: date
     });
 
