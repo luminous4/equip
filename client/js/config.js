@@ -43,6 +43,7 @@ function config($stateProvider, $urlRouterProvider) {
 				authData: null
 			},
 			templateUrl: 'components/chat/chat.html',
+			controller: "ChatCtrl as chat",
 			data: { pageTitle: 'Chat' }
 		})
 		.state('index.projects', {

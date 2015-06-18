@@ -7477,3 +7477,7 @@ body.skin-3 {
         display: none;
     }
 }
+
+.chat-box {
+  margin-top: 30px;
+}

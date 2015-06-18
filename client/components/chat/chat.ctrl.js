@@ -1,3 +1,5 @@
-/**
- * Created by Joe on 6/17/15.
- */
+angular.module('equip')
+
+.controller('ChatCtrl', function($scope) {
+
+});
