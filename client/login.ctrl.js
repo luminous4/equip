@@ -5,14 +5,11 @@ angular.module('equip')
 
   .controller('loginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
     // To prevent form refresh
-    event.preventDefault();
+    // event.preventDefault();
     var ref = new Firebase(refUrl);
-
-    var username = this.email;
-    var password = this.password;
     var loginObj = $firebaseAuth(ref);
 
     this.login = function() {
-      User.login(username, password, loginObj);
+      User.login(this.email, this.password, loginObj);
     };
   })
