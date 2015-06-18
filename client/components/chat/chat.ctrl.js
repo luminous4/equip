@@ -6,24 +6,21 @@ angular.module('equip')
 
   console.log(chatMessages);
 
-  this.poster = "Test";
+  this.user = "Test";
   $scope.messages = chatMessages;
 
   this.addMessage = function() {
+    var date = Date.now();
     $scope.messages.$add({
-      user: this.poster,
-      message: this.message
+      user: this.user,
+      message: this.message,
+      createdAt: date
     });
 
     this.message = "";
   };
 
   $scope.messages.$loaded(function() {
-    if ($scope.messages.length === 0) {
-      $scope.messages.$add({
-        user: "Emily",
-        message: "HEY!"
-      });
-    }
+    console.log("Messages fetched succesfully");
   });
 })
