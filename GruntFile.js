@@ -67,13 +67,15 @@ module.exports = function(grunt) {
     // Testing
 
     jshint: {
-      files: ['client/built/<%= pkg.name %>.js'],
+      files: ['client/js/*.js'],
       options: {
         force: 'true',
-        jshintrc: '.jshintrc',
+        jshintrc: 'test/.jshintrc',
         ignores: [
           'client/bower_components/*.js',
-          'client/dist/**/*.js'
+          'client/built/**/*.js',
+          'client/js/jquery/**/*.js',
+          'client/js/plugins/**/*.js'
         ]
       }
     },

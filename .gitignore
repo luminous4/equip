@@ -4,3 +4,4 @@ bower_components
 # Webstorm-specific files
 .idea
 
+client/built/
