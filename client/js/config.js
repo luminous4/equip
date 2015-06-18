@@ -46,6 +46,7 @@ function config($stateProvider, $urlRouterProvider) {
 		})
 		.state('index.settings', {
 			url: "/settings",
+			controller: "SettingsCtrl as settings",
 			templateUrl: "components/settings/settings.html",
 			data: {pageTitle: 'Settings'}
 		})
