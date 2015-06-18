@@ -16,5 +16,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "summernote": "~0.6.7",
+    "jquery": "~2.1.4",
+    "font-awesome": "~4.3.0",
+    "jquery-ui": "~1.11.4"
+  }
 }
