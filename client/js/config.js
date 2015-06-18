@@ -1,9 +1,20 @@
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise("/index/home");
-
+	$urlRouterProvider.otherwise('/login');
 
 	$stateProvider
 
+		.state('login', {
+			url:'/login',
+			templateUrl: '/login.html',
+			controller: 'loginCtrl as userLogin',
+			data: { pageTitle: 'login' }
+		})
+		.state('register', {
+			url:'/register',
+			templateUrl: '/register.html',
+			controller: 'registerCtrl as userRegister',
+			data: { pageTitle: 'register' }
+		})
 		.state('index', {
 			abstract: true,
 			url: "/index",
