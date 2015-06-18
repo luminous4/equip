@@ -44,7 +44,15 @@
       ];
 
       this.projects = projectArray;
-      this.hello = "hello there!";
+
+      this.tabs = [
+        "Project List",
+        "Create A Project",
+        "Edit Project"
+      ];
+
+      this.currentTab = "Project List";
+      this.searchString = "";
     })
     .filter('projectSearch', function(){
 
@@ -61,7 +69,7 @@
         // Using the forEach helper method to loop through the array
         angular.forEach(arr, function(item){
 
-          if(item.title.toLowerCase().indexOf(searchString) !== -1){
+          if(item.name.toLowerCase().indexOf(searchString) !== -1){
             result.push(item);
           }
 

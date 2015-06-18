@@ -19,37 +19,33 @@
                 <!-- Box title -->
 
                 <div class="ibox-title">
-                    <h5>All projects assigned to this account</h5>
+                    <h5>{{projectCtrl.currentTab}}</h5>
 
                     <div class="ibox-tools">
-                        <a href="" class="btn btn-primary btn-xs">Create new project</a>
+                        <a href="/#/index/project-create" class="btn btn-primary btn-xs">Create new project</a>
                     </div>
                 </div>
                 <div class="ibox-content">
 
-                <!-- Search bar -->
+                    <!-- Search bar -->
 
-                <div class="row m-b-sm m-t-sm">
-                    <div class="col-md-1">
-                        <button type="button" id="loading-example-btn" class="btn btn-white btn-sm">
-                            <i class="fa fa-refresh"></i> Refresh
-                        </button>
-                    </div>
-                    <div class="col-md-11">
-                        <div class="input-group">
-                            <input type="text" placeholder="Search" class="input-sm form-control"> 
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-primary"> Go!</button> 
-                            </span>
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm">
+                                <i class="fa fa-refresh"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="input-group">
+                                <input type="text" ng-model="projectCtrl.searchString" placeholder="Search" class="input-sm form-control"> 
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- List of projects -->
+                    <!-- List of projects -->
 
-                <div class="project-list">
-                    {{projectCtrl.hello}}
-                    <table class="table table-hover" ng-repeat="project in projectCtrl.projects">
+                    <div class="project-list">
+                    <table class="table table-hover" ng-repeat="project in projectCtrl.projects | projectSearch:projectCtrl.searchString">
                     <tbody>
                         <tr>
                             <td class="project-status">
@@ -67,9 +63,7 @@
                                 </div>
                             </td>
                             <td class="project-people">
-                                <a href=""><img alt="image" class="img-circle" src="img/duck.jpg"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/pig.png"></a>
-                                <a href=""><img alt="image" class="img-circle" src="img/giraffe.jpg"></a>
+                                <span ng-repeat="user in project.userList"><a href="google.com"><img alt="image" class="img-circle" src="{{user.icon}}"></a>
                             </td>
                             <td class="project-actions">
                                 <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
@@ -78,6 +72,7 @@
                         </tr>
                     </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
