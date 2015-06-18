@@ -22,12 +22,12 @@
           <div>
             <div class="chat-activity-list">
 
-              <div ng-repeat="message in messages" class="chat-element">
-                  <a href="#" class="pull-left">
+              <div ng-repeat="message in messages" class="chat-element" ng-class-even="'right'">
+                  <a href="#" ng-class-odd="'pull-left'" ng-class-even="'pull-right'">
                       <img alt="image" class="img-circle" src="img/duck.jpg">
                   </a>
-                  <div class="media-body ">
-                      <small class="pull-right text-navy">1m ago</small>
+                  <div class="media-body " ng-class-even="'text-right'">
+                      <small class="text-navy" ng-class-odd="'pull-right'" ng-class-even="'pull-left'">1m ago</small>
                       <strong>{{message.user}}</strong>
                       <p class="m-b-xs">
                           {{message.message}}
