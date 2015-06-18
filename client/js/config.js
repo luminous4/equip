@@ -26,6 +26,7 @@ function config($stateProvider, $urlRouterProvider) {
 		})
 		.state('index.projects', {
 			url: "/projects",
+			controller: "ProjectController as projectCtrl",
 			templateUrl: "components/projects/projects.html",
 			data: { pageTitle: 'Projects' }
 		})
