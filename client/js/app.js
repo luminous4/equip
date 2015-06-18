@@ -1,6 +1,7 @@
 (function () {
 	angular.module('equip', [
 		'ui.router',
-		'firebase'
+		'firebase',
+    'equip.settings'
 	])
 })();

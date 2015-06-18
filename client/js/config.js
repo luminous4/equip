@@ -44,6 +44,11 @@ function config($stateProvider, $urlRouterProvider) {
 			templateUrl: "components/texteditor/texteditor.html",
 			data: { pageTitle: 'Text Editor' }
 		})
+		.state('index.settings', {
+			url: "/settings",
+			templateUrl: "components/settings/settings.html",
+			data: {pageTitle: 'Settings'}
+		})
 }
 angular
 	.module('equip')
