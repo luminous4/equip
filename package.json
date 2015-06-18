@@ -1,0 +1,27 @@
+{
+  "name": "equip",
+  "version": "0.1.0",
+  "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luminous4/equip"
+  },
+  "author": [
+    "Emily Shenfield",
+    "Nick McCormick",
+    "Christiane Kammerl",
+    "Joe Prempeh"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luminous4/equip/issues"
+  },
+  "homepage": "https://github.com/luminous4/equip",
+  "dependencies": {
+    "express": "^4.12.4"
+  }
+}

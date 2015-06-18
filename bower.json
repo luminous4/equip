@@ -1,0 +1,20 @@
+{
+  "name": "equip",
+  "version": "0.1.0",
+  "homepage": "https://github.com/luminous4/equip",
+  "authors": [
+    "Emily Shenfield",
+    "Nick McCormick",
+    "Christiane Kammerl",
+    "Joe Prempeh"
+  ],
+  "description": "Group collaboration tool",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
