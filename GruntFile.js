@@ -4,13 +4,13 @@
   // Primary commands -- use these!
 
     // grunt rebase
-      // 1. runs the command 'git pull --rebase upstream master'
+      // 1. runs the command 'git pull --rebase upstream development'
       // 2. 'grunt build'
   
     // grunt push
       // 1. 'grunt build'
       // 2. 'grunt test'
-      // 3. runs the command 'git push origin master'
+      // 3. runs the command 'git push heroku master'
   
     // grunt serve
       // 1. 'grunt build'
