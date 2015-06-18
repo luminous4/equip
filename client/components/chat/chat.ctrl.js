@@ -1,25 +1,26 @@
 angular.module('equip')
 
 .controller('ChatCtrl', function($scope, $firebaseArray) {
-  var ref = new Firebase("https://mkseqip.firebaseIO.com");
+  var ref = new Firebase("https://mksequip.firebaseIO.com/messages");
   var chatMessages = $firebaseArray(ref);
 
+  console.log(chatMessages);
+
   this.poster = "Test";
-  this.messages = chatMessages;
+  $scope.messages = chatMessages;
 
   this.addMessage = function() {
-    this.messages.$add({
+    $scope.messages.$add({
       user: this.poster,
-      message: this.post
+      message: this.message
     });
 
     this.message = "";
   };
 
-  this.messages.$loaded(function() {
-    console.log(this.messages);
-    if (this.messages.length === 0) {
-      this.messages.$add({
+  $scope.messages.$loaded(function() {
+    if ($scope.messages.length === 0) {
+      $scope.messages.$add({
         user: "Emily",
         message: "HEY!"
       });
