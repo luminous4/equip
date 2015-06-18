@@ -13,6 +13,16 @@
       </div>
   </div>
 
+  <div>
+    <ul class="chatbox">
+      <li ng-repeat="message in messages">{{ message.from }}: {{ message.content }}</li>
+    </ul>
+    <form ng-submit="addMessage()">
+      <input type="text" ng-model="message">
+      <input type="submit" value="Add Message">
+    </form>
+  </div>
+
   <div class="row">
       <div class="col-lg-12">
           <div class="ibox float-e-margins">
