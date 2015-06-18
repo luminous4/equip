@@ -3,37 +3,37 @@ angular.module('equip')
   .factory('User', function($location) {
 
     var login = function(email, password, firebaseLoginObj) {
-      var username = email;
-
       console.log('inside login func in factory');
 
-      firebaseLoginObj.$authWithPassword('password', {
-            email: username,
-            password: password
+      firebaseLoginObj.$authWithPassword({
+          email: email,
+          password: password
         })
-        .then(function(user) {
-            // Success callback
-            console.log('Authentication successful');
-            $location.path('/index')
-        }, function(error) {
-            // Failure callback
-            console.log('Authentication failure in login');
+        .then(function(authData) {
+          // Success callback
+          console.log('Authentication successful:', authData);
+          $location.path('/index');
+        })
+        .catch(function(error) {
+          console.log('Authentication error in login:', + error);
         });
-
     };
 
     var register = function(email, password, firebaseAuthObj) {
-
       console.log('inside register func in factory');
+      console.log("email in register func in factory", email);
 
-      firebaseAuthObj.$createUser(email, password)
-        .then(function(userData) {
-            // Success callback
-            console.log("User created with uid: " + userData.uid);
-            $location.path('/login');
-        })
-        .catch(function(error) {
-          console.log("error:", + error);
+      firebaseAuthObj.$createUser({
+        email: email,
+        password: password
+      })
+      .then(function(userData) {
+        // Success callback
+        console.log("User created with uid: " + userData.uid);
+        $location.path('/login');
+      })
+      .catch(function(error) {
+        console.log("error:", + error);
       });
     };
 
