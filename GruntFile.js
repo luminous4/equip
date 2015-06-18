@@ -13,8 +13,9 @@
       // 3. runs the command 'git push origin master'
   
     // grunt serve
-      // 1. nodemon 
-      // 2. watch for changes. on change, 'grunt build'
+      // 1. 'grunt build'
+      // 2. nodemon 
+      // 3. watch for changes. on change, 'grunt build'
 
 
   // Secondary commands -- ideally you should not have to use these directly
