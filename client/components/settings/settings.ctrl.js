@@ -1,4 +1,4 @@
-angular.module('equip.settings', [])
+angular.module('equip')
 
 .controller('SettingsCtrl', function($scope) {
 
