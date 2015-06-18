@@ -14,7 +14,8 @@
   </div>
 
   <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
           <div class="ibox float-e-margins">
 
               <div class="ibox-content">
@@ -27,12 +28,11 @@
                       <img alt="image" class="img-circle" src="img/duck.jpg">
                   </a>
                   <div class="media-body " ng-class-even="'text-right'">
-                      <small class="text-navy" ng-class-odd="'pull-right'" ng-class-even="'pull-left'">1m ago</small>
                       <strong>{{message.user}}</strong>
                       <p class="m-b-xs">
                           {{message.message}}
                       </p>
-                      <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                      <small class="text-muted">{{message.createdAt}}</small>
                   </div>
               </div>
             </div>
@@ -50,6 +50,7 @@
           </div>
           </div>
       </div>
+      <div class="col-lg-2"></div>
     </div>
 
 </div>
