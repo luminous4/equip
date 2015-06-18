@@ -29,11 +29,12 @@
             <div class="form-group">
                 <input ng-model="userRegister.password" type="password" class="form-control" placeholder="Password" required="">
             </div>
-            <button ng-click='console.log("hi")' type="button" class="btn btn-primary block full-width m-b">Register</button>
+            <button ng-click="userRegister.register()" type="submit" class="btn btn-primary block full-width m-b">Register</button>
         </form>
         <p class="m-t"> <small>&copy; 2015 Luminous4</small> </p>
     </div>
 </div>
+
 
 <script src="register.ctrl.js"></script>
 <script src="components/user/user.factory.js"></script>
