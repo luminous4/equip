@@ -1,0 +1,10 @@
+.projectuserHover:hover{
+    background-color: #e5e5e5;
+}
+.projectuserHover{
+    padding:20px;
+}
+.projectuserName{
+    font-size:14px;
+    padding:10px;
+}
