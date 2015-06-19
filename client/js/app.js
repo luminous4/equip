@@ -2,6 +2,7 @@
 	angular.module('equip', [
 		'ui.router',
 		'firebase',
-    'nouislider'
+    'nouislider',
+		'summernote'
 	])
 })();
