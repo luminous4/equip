@@ -180,7 +180,8 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('push', [
-    'rebase',
+    'shell:rebase',
+    'build',
     'mochaTest',
     'jshint',
     'shell:herokuDeploy',
