@@ -18,11 +18,25 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('index', {
 			abstract: true,
 			url: "/index",
-			templateUrl: "components/common/content.html"
+			templateUrl: "components/common/content.html",
+			// controller: "indexCtrl as index",
+			// resolve: {
+   //    // controller will not be loaded until $requireAuth resolves
+   //    	currentAuth: function() {
+	  //     	var ref = new Firebase(refUrl);
+	  //       // $requireAuth returns a promise so the resolve waits for it to complete
+	  //       // If the promise is rejected, it will throw a $stateChangeError (see below)
+	  //       return ref.$requireAuth();
+	  //     }
+   //  	}
 		})
 		.state('index.home', {
 			url: "/home",
+			params: {
+				authData: null
+			},
 			templateUrl: "components/home/home.html",
+			controller: "homeCtrl as home",
 			data: { pageTitle: 'Home' }
 		})
 		.state('index.calendar', {
@@ -64,7 +78,17 @@ function config($stateProvider, $urlRouterProvider) {
 }
 angular
 	.module('equip')
+  .constant('refUrl', 'https://mksequip.firebaseIO.com')
 	.config(config)
+	// constant variables are available throughout app
 	.run(function($rootScope, $state) {
 		$rootScope.$state = $state;
+		// $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+ 	//  		// We can catch the error thrown when the $requireAuth promise is rejected
+  // 		// and redirect the user back to the home page
+  // 		if (error === "AUTH_REQUIRED") {
+  //   		$state.go("login");
+  // 		}
+		// });
 	});
+
