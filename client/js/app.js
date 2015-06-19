@@ -5,4 +5,6 @@
     'nouislider',
 		'summernote'
 	])
+
+
 })();

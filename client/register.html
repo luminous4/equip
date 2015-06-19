@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="equip">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,20 +24,19 @@
         <p>Please register</p>
         <form class="m-t" role="form" action="#">
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Username" required="">
+                <input ng-model="userRegister.email" type="email" class="form-control" placeholder="Username" required="">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="">
+                <input ng-model="userRegister.password" type="password" class="form-control" placeholder="Password" required="">
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
-
-            <a ui-sref="forgot_password"><small>Forgot password?</small></a>
-            <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" ui-sref="register">Create an account</a>
+            <button ng-click="userRegister.register()" type="submit" class="btn btn-primary block full-width m-b">Register</button>
         </form>
         <p class="m-t"> <small>&copy; 2015 Luminous4</small> </p>
     </div>
 </div>
 
+
+<script src="register.ctrl.js"></script>
+<script src="components/user/user.factory.js"></script>
 </body>
 </html>
