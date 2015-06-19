@@ -10,7 +10,8 @@
       // 1. 'grunt build'
       // 2. 'grunt test'
       // 3. runs the command 'git push heroku master'
-
+      // 4. runs the command 'git push origin'
+  
     // grunt serve
       // 1. 'grunt build'
       // 2. nodemon
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
     // Testing
 
     jshint: {
-      files: ['client/js/*.js'],
+      files: ['client/js/*.js', 'client/components/**/*.js'],
       options: {
         force: 'true',
         jshintrc: 'test/.jshintrc',
@@ -74,7 +75,10 @@ module.exports = function(grunt) {
           'client/bower_components/*.js',
           'client/built/**/*.js',
           'client/js/jquery/**/*.js',
-          'client/js/plugins/**/*.js'
+          'client/js/plugins/**/*.js',
+          'client/js/angular-nouislider.js',
+          'client/js/icheck.min.js'
+
         ]
       }
     },
@@ -93,11 +97,12 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'client/dist/*.js'
+          'client/js/*.js', 
+          'client/components/**/*.js'
         ],
         tasks: [
           'concat',
-          'uglify'
+          'uglify',
         ]
       },
       css: {
@@ -128,6 +133,14 @@ module.exports = function(grunt) {
         options: {
             stdout: true,
             stderr: true
+        }
+      },
+
+      push: {
+        command: 'git push origin',
+        options: {
+          stdout: true,
+          stderr: true
         }
       }
     },
@@ -176,6 +189,7 @@ module.exports = function(grunt) {
     'build',
     'test',
     'shell:herokuDeploy',
+    'shell:'
   ]);
 
   ////////////////////////////////////////////////////
