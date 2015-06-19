@@ -1,4 +1,7 @@
-function TextEditorCtrl($scope, $firebaseObject){
+function TextEditorCtrl($scope, $firebaseObject, User){
+
+  console.log('token available in TextEditorCtrl:', User.isAuth());
+
 	$scope.document = {};
 
 	var ref = new Firebase("https://mksequip.firebaseio.com/documents");

@@ -1,15 +1,18 @@
 // angular controller
-  // crud functions that will eventually get info from and send to firebase 
+  // crud functions that will eventually get info from and send to firebase
   // ng-repeat for each project
 
-  // factory to keep state 
+  // factory to keep state
 
   // may need a form for creating a new project
     // createproject.ctrl.js
 
 (function() {
   angular.module('equip')
-    .controller('ProjectController', function() {
+    .controller('ProjectController', function(User) {
+
+      console.log('token available in ProjectController:', User.isAuth());
+
 
       var ref = new Firebase("https://mksequip.firebaseio.com/projects");
 
@@ -46,7 +49,7 @@
           ],
           calendarEvents: [],
           completion:40
-        }  
+        }
       ];
 
       this.projects = projectArray;
@@ -82,7 +85,7 @@
 
         ref.push(this.editingProject);
         this.projects.push(angular.copy(this.editingProject));
-        
+
         this.editingProject = {
           name: "Project Title",
           label: "",

@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .factory('User', function($location, $state) {
+  .factory('User', function($location, $state, $window) {
 
     var login = function(email, password, firebaseLoginObj) {
       console.log('inside login func in factory');
@@ -11,8 +11,9 @@ angular.module('equip')
         })
         .then(function(authData) {
           // Success callback
-          console.log('Logged in as:', authData.uid, authData);
-          $state.go('index.home', {authData: authData});
+          console.log('token in login func in user factory:', authData.token);
+          $window.localStorage.setItem('equipAuth', authData.token);
+          $state.go('index.home');
         })
         .catch(function(error) {
           console.log('Authentication error in login:', + error);
@@ -30,6 +31,7 @@ angular.module('equip')
       .then(function(userData) {
         // Success callback
         console.log('User created with uid: ' + userData.uid);
+        $window.localStorage.setItem('equipAuth', userData.token);
         $location.path('/login');
       })
       .catch(function(error) {
@@ -37,8 +39,13 @@ angular.module('equip')
       });
     };
 
+    var isAuth = function() {
+      return !!$window.localStorage.getItem('equipAuth');
+    }
+
     return {
       login: login,
-      register: register
+      register: register,
+      isAuth: isAuth
     };
   })
