@@ -12,7 +12,7 @@ angular.module('equip')
   this.addMessage = function() {
     var date = moment().format('YYYY-MM-DD hh:mm');
     $scope.messages.$add({
-      username: this.user,
+      chatName: this.user,
       text: this.message,
       createdAt: date
     });
