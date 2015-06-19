@@ -7,7 +7,7 @@
       // 2. 'grunt build'
 
     // grunt push
-      // 1. 'grunt build'
+      // 1. 'grunt rebase' (see above)
       // 2. 'grunt test'
       // 3. runs the command 'git push heroku master'
       // 4. runs the command 'git push origin'
@@ -16,6 +16,8 @@
       // 1. 'grunt build'
       // 2. nodemon
       // 3. watch for changes. on change, 'grunt build'
+        // a. on javascript file change, concat + uglify
+        // b. on css file change, cssmin
 
 
   // Secondary commands -- ideally you should not have to use these directly
@@ -186,7 +188,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('push', [
-    'build',
+    'rebase',
     'test',
     'shell:herokuDeploy',
     'shell:'
