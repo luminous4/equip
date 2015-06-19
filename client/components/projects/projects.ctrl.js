@@ -11,6 +11,8 @@
   angular.module('equip')
     .controller('ProjectController', function() {
 
+      var ref = new Firebase("https://mksequip.firebaseio.com/projects");
+
       //Some dummy data
       var userArray = [
         {
@@ -73,6 +75,25 @@
         this.setTab(2);
         this.editingProject = project;
       }
+
+      this.createProject = function() {
+        console.log('its clicked');
+        console.log(this.projects);
+
+        ref.push(this.editingProject);
+        this.projects.push(angular.copy(this.editingProject));
+        
+        this.editingProject = {
+          name: "Project Title",
+          label: "",
+          userList: [],
+          calendarEvents: [],
+          completion: 10
+        }
+        this.setTab(0);
+      }
+
+      //make this.editProject later
 
       this.editingProject = {
         name: "Project Title",
