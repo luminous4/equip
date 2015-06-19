@@ -1,3 +1,7 @@
-/**
- * Created by Joe on 6/17/15.
- */
+angular.module('equip')
+
+  .controller('homeCtrl', function($scope, $state, $stateParams) {
+    if(!$stateParams.authData) {
+      $state.go('login');
+    }
+  })

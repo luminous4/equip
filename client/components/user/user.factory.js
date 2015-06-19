@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .factory('User', function($location) {
+  .factory('User', function($location, $state) {
 
     var login = function(email, password, firebaseLoginObj) {
       console.log('inside login func in factory');
@@ -11,8 +11,8 @@ angular.module('equip')
         })
         .then(function(authData) {
           // Success callback
-          console.log('Authentication successful:', authData);
-          $location.path('/index');
+          console.log('Logged in as:', authData.uid, authData);
+          $state.go('index.home', {authData: authData});
         })
         .catch(function(error) {
           console.log('Authentication error in login:', + error);

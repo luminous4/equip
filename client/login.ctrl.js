@@ -1,8 +1,5 @@
 angular.module('equip')
 
-  // constant variables are available throughout app
-  .constant('refUrl', 'https://mksequip.firebaseIO.com')
-
   .controller('loginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
     // To prevent form refresh
     // event.preventDefault();
@@ -10,6 +7,7 @@ angular.module('equip')
     var loginObj = $firebaseAuth(ref);
 
     this.login = function() {
+      console.log('just clicked login button');
       User.login(this.email, this.password, loginObj);
     };
   })
