@@ -10,25 +10,28 @@
 (function() {
   angular.module('equip')
     .controller('ProjectController', function() {
+
+      //Some dummy data
+      var userArray = [
+        {
+          name: 'Giraffe',
+          icon: 'img/giraffe.jpg'
+        }, {
+          name: "Pig",
+          icon: 'img/pig.png'
+        }, {
+          name: "Duck",
+          icon: "img/duck.jpg"
+        }
+      ];
+
       var projectArray = [
         {
           name: 'Rebuild the zoo',
           label: 'Zoo',
-          userList: [
-            {
-              name: 'Giraffe',
-              icon: 'img/giraffe.jpg'
-            },
-            {
-              name: "Pig",
-              icon: 'img/pig.png'
-            },
-            {
-              name: "Duck",
-              icon: "img/duck.jpg"
-            }
-          ],
-          calendarEvents: []
+          userList: userArray,
+          calendarEvents: [],
+          completion:70
         },
         {
           name: 'Eat garbage',
@@ -39,20 +42,46 @@
               icon: 'img/pig.png'
             },
           ],
-          calendarEvents: []
+          calendarEvents: [],
+          completion:40
         }  
       ];
 
       this.projects = projectArray;
+      this.allUsers = userArray;
 
       this.tabs = [
         "Project List",
         "Create A Project",
         "Edit Project"
       ];
-
       this.currentTab = "Project List";
       this.searchString = "";
+
+      //Functions
+      this.setTab = function(tabNumber) {
+        this.currentTab = this.tabs[tabNumber];
+      }
+      this.flipPresence = function(user) {
+        if(this.editingProject.userList.indexOf(user) > -1) {
+          this.editingProject.userList.splice(this.editingProject.userList.indexOf(user), 1);
+        } else {
+          this.editingProject.userList.push(user);
+        }
+      }
+      this.editProject = function(project) {
+        this.setTab(2);
+        this.editingProject = project;
+      }
+
+      this.editingProject = {
+        name: "Project Title",
+        label: "",
+        userList: [],
+        calendarEvents: [],
+        completion: 10
+      };
+
     })
     .filter('projectSearch', function(){
 
