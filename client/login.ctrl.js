@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .controller('loginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
+  .controller('LoginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
     var ref = new Firebase(refUrl);
     var loginObj = $firebaseAuth(ref);
 

@@ -1,30 +1,29 @@
 // Commands:
 
-
   // Primary commands -- use these!
 
     // grunt rebase
       // 1. runs the command 'git pull --rebase upstream development'
       // 2. 'grunt build'
-  
+
     // grunt push
       // 1. 'grunt build'
       // 2. 'grunt test'
       // 3. runs the command 'git push heroku master'
-  
+
     // grunt serve
       // 1. 'grunt build'
-      // 2. nodemon 
+      // 2. nodemon
       // 3. watch for changes. on change, 'grunt build'
 
 
   // Secondary commands -- ideally you should not have to use these directly
-  
+
     // grunt build
       // 1. concat
       // 2. uglify
       // 3. cssmin
-  
+
     // grunt test
       // 1. mocha
       // 2. jshint
@@ -149,7 +148,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
   // Primary grunt tasks
   ////////////////////////////////////////////////////
-  
+
   grunt.registerTask('serve', function (target) {
 
     grunt.task.run([ 'build' ]);

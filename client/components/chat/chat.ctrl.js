@@ -1,6 +1,10 @@
 angular.module('equip')
 
-.controller('ChatCtrl', function($scope, $firebaseArray) {
+.controller('ChatCtrl', function($scope, $firebaseArray, User) {
+
+  console.log('token available in ChatCtrl:', User.isAuth());
+
+
   var ref = new Firebase("https://mksequip.firebaseIO.com/messages");
   var chatMessages = $firebaseArray(ref);
 
