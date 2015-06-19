@@ -71,7 +71,7 @@ module.exports = function(grunt) {
     jshint: {
       files: ['client/js/*.js', 'client/components/**/*.js'],
       options: {
-        force: 'true',
+        force: 'false',
         jshintrc: 'test/.jshintrc',
         ignores: [
           'client/bower_components/*.js',
@@ -149,16 +149,8 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-postcss');
-
+  // Loads all grunt tasks
+  require('load-grunt-tasks')(grunt);
 
   ////////////////////////////////////////////////////
   // Primary grunt tasks
