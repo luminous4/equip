@@ -1,5 +1,5 @@
 function config($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/login');
+	$urlRouterProvider.otherwise('/index');
 
 	$stateProvider
 
@@ -22,48 +22,56 @@ function config($stateProvider, $urlRouterProvider) {
 			authenticate: true
 		})
 		.state('index.home', {
-			url: '/home',
+			url: '',
 			templateUrl: 'components/home/home.html',
 			controller: 'HomeCtrl as home',
-			data: { pageTitle: 'Home' }
+			data: { pageTitle: 'Home' },
+			authenticate: true
 		})
 		.state('index.calendar', {
 			url: '/calendar',
 			templateUrl: 'components/calendar/calendar.html',
-			data: { pageTitle: 'Calendar' }
+			data: { pageTitle: 'Calendar' },
+			authenticate: true
 		})
 		.state('index.chat', {
 			url: '/chat',
 			templateUrl: 'components/chat/chat.html',
 			controller: "ChatCtrl as chat",
-			data: { pageTitle: 'Chat' }
+			data: { pageTitle: 'Chat' },
+			authenticate: true
 		})
 		.state('index.projects', {
 			url: '/projects',
 			templateUrl: 'components/projects/projects.html',
 			controller: "ProjectController as projectCtrl",
-			data: { pageTitle: 'Projects' }
+			data: { pageTitle: 'Projects' },
+			authenticate: true
 		})
 		.state('index.team', {
 			url: '/team',
 			templateUrl: 'components/team/team.html',
-			data: { pageTitle: 'Team Directory' }
+			data: { pageTitle: 'Team Directory' },
+			authenticate: true
 		})
 		.state('index.documents', {
 			url: '/documents',
 			templateUrl: 'components/documents/documents.html',
-			data: { pageTitle: 'Documents' }
+			data: { pageTitle: 'Documents' },
+			authenticate: true
 		})
 		.state('index.texteditor', {
 			url: '/texteditor',
 			templateUrl: 'components/texteditor/texteditor.html',
-			data: { pageTitle: 'Text Editor' }
+			data: { pageTitle: 'Text Editor' },
+			authenticate: true
 		})
 		.state('index.settings', {
 			url: '/settings',
 			controller: 'SettingsCtrl as settings',
 			templateUrl: 'components/settings/settings.html',
-			data: { pageTitle: 'Settings'}
+			data: { pageTitle: 'Settings'},
+			authenticate: true
 		})
 }
 angular
@@ -73,9 +81,12 @@ angular
 	.config(config)
 	.run(function($rootScope, $state, $location, User) {
 		$rootScope.$state = $state;
- 		$rootScope.$on('$routeChangeStart', function (evt, next, current) {
-   		if (next.$$route && next.$$route.authenticate && !User.isAuth()) {
-     		$location.path('/login');
+ 		$rootScope.$on('$stateChangeStart', function (evt, next, current) {
+   		if (next && next.authenticate && !User.isAuth()) {
+ 				evt.preventDefault();
+ 				$rootScope.$evalAsync(function() {
+ 				  $location.path('/login');
+ 				});
    		}
  		});
 	});
