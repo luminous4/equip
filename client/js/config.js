@@ -17,78 +17,82 @@ function config($stateProvider, $urlRouterProvider) {
 		})
 		.state('index', {
 			abstract: true,
-			url: "/index",
-			templateUrl: "components/common/content.html",
-			// controller: "indexCtrl as index",
-			// resolve: {
-   //    // controller will not be loaded until $requireAuth resolves
-   //    	currentAuth: function() {
-	  //     	var ref = new Firebase(refUrl);
-	  //       // $requireAuth returns a promise so the resolve waits for it to complete
-	  //       // If the promise is rejected, it will throw a $stateChangeError (see below)
-	  //       return ref.$requireAuth();
-	  //     }
-   //  	}
+			url: '/index',
+			templateUrl: 'components/common/content.html',
 		})
 		.state('index.home', {
-			url: "/home",
+			url: '/home',
 			params: {
 				authData: null
 			},
-			templateUrl: "components/home/home.html",
-			controller: "homeCtrl as home",
+			templateUrl: 'components/home/home.html',
+			controller: 'homeCtrl as home',
 			data: { pageTitle: 'Home' }
 		})
 		.state('index.calendar', {
-			url: "/calendar",
-			templateUrl: "components/calendar/calendar.html",
+			url: '/calendar',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/calendar/calendar.html',
 			data: { pageTitle: 'Calendar' }
 		})
 		.state('index.chat', {
-			url: "/chat",
-			templateUrl: "components/chat/chat.html",
+			url: '/chat',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/chat/chat.html',
 			data: { pageTitle: 'Chat' }
 		})
 		.state('index.projects', {
-			url: "/projects",
-			templateUrl: "components/projects/projects.html",
+			url: '/projects',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/projects/projects.html',
 			data: { pageTitle: 'Projects' }
 		})
 		.state('index.team', {
-			url: "/team",
-			templateUrl: "components/team/team.html",
+			url: '/team',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/team/team.html',
 			data: { pageTitle: 'Team Directory' }
 		})
 		.state('index.documents', {
-			url: "/documents",
-			templateUrl: "components/documents/documents.html",
+			url: '/documents',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/documents/documents.html',
 			data: { pageTitle: 'Documents' }
 		})
 		.state('index.texteditor', {
-			url: "/texteditor",
-			templateUrl: "components/texteditor/texteditor.html",
+			url: '/texteditor',
+			params: {
+				authData: null
+			},
+			templateUrl: 'components/texteditor/texteditor.html',
 			data: { pageTitle: 'Text Editor' }
 		})
 		.state('index.settings', {
-			url: "/settings",
-			controller: "SettingsCtrl as settings",
-			templateUrl: "components/settings/settings.html",
+			url: '/settings',
+			params: {
+				authData: null
+			},
+			controller: 'SettingsCtrl as settings',
+			templateUrl: 'components/settings/settings.html',
 			data: {pageTitle: 'Settings'}
 		})
 }
 angular
 	.module('equip')
+	// constant variables are available throughout app
   .constant('refUrl', 'https://mksequip.firebaseIO.com')
 	.config(config)
-	// constant variables are available throughout app
 	.run(function($rootScope, $state) {
 		$rootScope.$state = $state;
-		// $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
- 	//  		// We can catch the error thrown when the $requireAuth promise is rejected
-  // 		// and redirect the user back to the home page
-  // 		if (error === "AUTH_REQUIRED") {
-  //   		$state.go("login");
-  // 		}
-		// });
 	});
 
