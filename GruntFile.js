@@ -13,9 +13,10 @@
       // 4. runs the command 'git push origin'
   
     // grunt serve
-      // 1. 'grunt build'
-      // 2. nodemon
-      // 3. watch for changes. on change, 'grunt build'
+      // 1. 'grunt test'
+      // 2. 'grunt build'
+      // 3. nodemon 
+      // 4. watch for changes. 
         // a. on javascript file change, concat + uglify
         // b. on css file change, cssmin
 
@@ -158,7 +159,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', function (target) {
 
-    grunt.task.run([ 'build' ]);
+    grunt.task.run([ 'build', 'test']);
 
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
@@ -181,11 +182,13 @@ module.exports = function(grunt) {
 
   grunt.registerTask('push', [
     'shell:rebase',
-    'build',
+    'concat',
+    'uglify',
+    'cssmin',
     'mochaTest',
     'jshint',
     'shell:herokuDeploy',
-    'shell:'
+    'shell:push'
   ]);
 
   ////////////////////////////////////////////////////

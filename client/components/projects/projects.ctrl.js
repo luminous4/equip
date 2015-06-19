@@ -14,6 +14,9 @@
       console.log('token available in ProjectController:', User.isAuth());
 
 
+      var ref = new Firebase("https://mksequip.firebaseIO.com/projects");
+      var chatMessages = $firebaseArray(ref);
+
       var ref = new Firebase("https://mksequip.firebaseio.com/projects");
 
       //Some dummy data
