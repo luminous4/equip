@@ -51,6 +51,7 @@ function config($stateProvider, $urlRouterProvider) {
 				authData: null
 			},
 			templateUrl: 'components/projects/projects.html',
+			controller: "ProjectController as projectCtrl",
 			data: { pageTitle: 'Projects' }
 		})
 		.state('index.team', {

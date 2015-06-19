@@ -1,6 +1,10 @@
 (function () {
 	angular.module('equip', [
 		'ui.router',
-		'firebase'
+		'firebase',
+    'nouislider',
+		'summernote'
 	])
+
+
 })();
