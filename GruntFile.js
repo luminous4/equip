@@ -8,9 +8,8 @@
 
     // grunt push
       // 1. 'grunt rebase' (see above)
-      // 2. 'grunt test'
-      // 3. runs the command 'git push heroku master'
-      // 4. runs the command 'git push origin'
+      // 2. runs the command 'git push heroku master'
+      // 3. runs the command 'git push origin'
   
     // grunt serve
       // 1. 'grunt test'
@@ -159,7 +158,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', function (target) {
 
-    grunt.task.run([ 'build', 'test']);
+    grunt.task.run([ 'build' ]);
 
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
@@ -182,11 +181,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('push', [
     'shell:rebase',
-    'concat',
-    'uglify',
-    'cssmin',
-    'mochaTest',
-    'jshint',
+    'build',
     'shell:herokuDeploy',
     'shell:push'
   ]);
@@ -196,8 +191,8 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest',
-    'jshint'
+    'jshint',
+    'mochaTest'
   ]);
 
 
