@@ -3,6 +3,4 @@
 		'ui.router',
 		'firebase'
 	])
-
-
 })();

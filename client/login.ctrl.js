@@ -1,8 +1,6 @@
 angular.module('equip')
 
   .controller('loginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
-    // To prevent form refresh
-    // event.preventDefault();
     var ref = new Firebase(refUrl);
     var loginObj = $firebaseAuth(ref);
 

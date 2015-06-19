@@ -21,7 +21,7 @@ angular.module('equip')
 
     var register = function(email, password, firebaseAuthObj) {
       console.log('inside register func in factory');
-      console.log("email in register func in factory", email);
+      console.log('email in register func in factory', email);
 
       firebaseAuthObj.$createUser({
         email: email,
@@ -29,11 +29,11 @@ angular.module('equip')
       })
       .then(function(userData) {
         // Success callback
-        console.log("User created with uid: " + userData.uid);
+        console.log('User created with uid: ' + userData.uid);
         $location.path('/login');
       })
       .catch(function(error) {
-        console.log("error:", + error);
+        console.log('error:', + error);
       });
     };
 
