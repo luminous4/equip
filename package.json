@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "test": "echo testing!!!; test/example.js",
-    "start":"node server/server.js"
+    "start":"node server/server.js",
     "postinstall":"echo postinstall time; ./node_modules/grunt-cli/bin/grunt build"
   },
   "repository": {
