@@ -15,48 +15,13 @@
       $state.go('login');
     }
 
-    var ref = new Firebase("https://mksequip.firebaseIO.com/projects");
-    // var projectArray = $firebaseArray(ref);
+    var userArray = $firebaseArray(usersRef);
+    var usersRef = new Firebase("https://mksequip.firebaseIO.com/users");
 
-    var userRef = new Firebase("https://mksequip.firebaseio.com/projects");
+    var projectsRef = new Firebase("https://mksequip.firebaseio.com/projects");
+    var projectsArray = $firebaseArray(projectsArray);
 
-    //Some dummy data
-    var userArray = [
-      {
-        name: 'Giraffe',
-        icon: 'img/giraffe.jpg'
-      }, {
-        name: "Pig",
-        icon: 'img/pig.png'
-      }, {
-        name: "Duck",
-        icon: "img/duck.jpg"
-      }
-    ];
-
-    var projectArray = [
-      {
-        name: 'Rebuild the zoo',
-        label: 'Zoo',
-        userList: userArray,
-        calendarEvents: [],
-        completion:70
-      },
-      {
-        name: 'Eat garbage',
-        label: 'Zoo',
-        userList: [
-          {
-            name: "Pig",
-            icon: 'img/pig.png'
-          },
-        ],
-        calendarEvents: [],
-        completion:40
-      }  
-    ];
-
-    this.projects = projectArray;
+    this.projects = projectsArray;
     this.allUsers = userArray;
 
     this.tabs = [
@@ -84,10 +49,8 @@
     }
 
     this.createProject = function() {
-      console.log('its clicked');
-      console.log(this.projects);
-
-      ref.push(this.editingProject);
+      
+      projectsRef.push(this.editingProject);
       this.projects.push(angular.copy(this.editingProject));
       
       this.editingProject = {
