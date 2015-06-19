@@ -181,7 +181,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('push', [
     'rebase',
-    'test',
+    'mochaTest',
+    'jshint',
     'shell:herokuDeploy',
     'shell:'
   ]);
