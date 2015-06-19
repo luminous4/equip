@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .factory('User', function($location, $state, $window) {
+  .factory('User', function($location, $state, $window, refUrl) {
 
     var login = function(email, password, firebaseLoginObj) {
       console.log('inside login func in factory');
@@ -32,6 +32,12 @@ angular.module('equip')
         // Success callback
         console.log('User created with uid: ' + userData.uid);
         $window.localStorage.setItem('equipAuth', userData.token);
+
+        var ref = new Firebase(refUrl);
+        ref.child("users").child(userData.uid).set({
+          name: email.replace(/@.*/, '')
+        });
+
         $location.path('/login');
       })
       .catch(function(error) {
