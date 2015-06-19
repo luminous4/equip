@@ -4,7 +4,8 @@
   "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo testing!!!; test/example.js",
+    "start":"node server/server.js"
     "postinstall":"echo postinstall time; ./node_modules/grunt-cli/bin/grunt build"
   },
   "repository": {
