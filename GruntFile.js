@@ -7,14 +7,17 @@
       // 2. 'grunt build'
 
     // grunt push
-      // 1. 'grunt build'
-      // 2. 'grunt test'
-      // 3. runs the command 'git push heroku master'
-
+      // 1. 'grunt rebase' (see above)
+      // 2. runs the command 'git push heroku master'
+      // 3. runs the command 'git push origin'
+  
     // grunt serve
-      // 1. 'grunt build'
-      // 2. nodemon
-      // 3. watch for changes. on change, 'grunt build'
+      // 1. 'grunt test'
+      // 2. 'grunt build'
+      // 3. nodemon 
+      // 4. watch for changes. 
+        // a. on javascript file change, concat + uglify
+        // b. on css file change, cssmin
 
 
   // Secondary commands -- ideally you should not have to use these directly
@@ -66,15 +69,18 @@ module.exports = function(grunt) {
     // Testing
 
     jshint: {
-      files: ['client/js/*.js'],
+      files: ['client/js/*.js', 'client/components/**/*.js'],
       options: {
-        force: 'true',
+        force: 'false',
         jshintrc: 'test/.jshintrc',
         ignores: [
           'client/bower_components/*.js',
           'client/built/**/*.js',
           'client/js/jquery/**/*.js',
-          'client/js/plugins/**/*.js'
+          'client/js/plugins/**/*.js',
+          'client/js/angular-nouislider.js',
+          'client/js/icheck.min.js'
+
         ]
       }
     },
@@ -93,11 +99,12 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'client/dist/*.js'
+          'client/js/*.js', 
+          'client/components/**/*.js'
         ],
         tasks: [
           'concat',
-          'uglify'
+          'uglify',
         ]
       },
       css: {
@@ -129,21 +136,21 @@ module.exports = function(grunt) {
             stdout: true,
             stderr: true
         }
+      },
+
+      push: {
+        command: 'git push origin',
+        options: {
+          stdout: true,
+          stderr: true
+        }
       }
     },
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-postcss');
-
+  // Loads all grunt tasks
+  require('load-grunt-tasks')(grunt);
 
   ////////////////////////////////////////////////////
   // Primary grunt tasks
@@ -173,9 +180,10 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('push', [
+    'shell:rebase',
     'build',
-    'test',
     'shell:herokuDeploy',
+    'shell:push'
   ]);
 
   ////////////////////////////////////////////////////
@@ -183,8 +191,8 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest',
-    'jshint'
+    'jshint',
+    'mochaTest'
   ]);
 
 
