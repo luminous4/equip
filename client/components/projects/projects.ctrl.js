@@ -10,19 +10,11 @@
 (function() {
   angular.module('equip')
 
-  .controller('ProjectController', function($scope, $state, $stateParams) {
-    if(!$stateParams.authData) {
-      $state.go('login');
-    }
+  .controller('ProjectController', function($scope, $state, $stateParams, $firebaseArray, refUrl) {
 
-    var userArray = $firebaseArray(usersRef);
-    var usersRef = new Firebase("https://mksequip.firebaseIO.com/users");
-
-    var projectsRef = new Firebase("https://mksequip.firebaseio.com/projects");
-    var projectsArray = $firebaseArray(projectsArray);
-
-    this.projects = projectsArray;
-    this.allUsers = userArray;
+    var ref = new Firebase(refUrl);
+    this.projects = $firebaseArray(ref.child("projects"));
+    this.allUsers = $firebaseArray(ref.child("users"));
 
     this.tabs = [
       "Project List",
@@ -33,26 +25,29 @@
     this.searchString = "";
 
     //Functions
+      //Navigation
     this.setTab = function(tabNumber) {
       this.currentTab = this.tabs[tabNumber];
-    }
-    this.flipPresence = function(user) {
-      if(this.editingProject.userList.indexOf(user) > -1) {
-        this.editingProject.userList.splice(this.editingProject.userList.indexOf(user), 1);
-      } else {
-        this.editingProject.userList.push(user);
-      }
     }
     this.editProject = function(project) {
       this.setTab(2);
       this.editingProject = project;
     }
 
-    this.createProject = function() {
+      //Editing functions
+    this.flipPresence = function(user) {
+      if(this.editingProject.userList.indexOf(user.$id) > -1) {
+        this.editingProject.userList.splice(this.editingProject.userList.indexOf(user.$id), 1);
+      } else {
+        this.editingProject.userList.push(user.$id);
+      }
+    }
+    this.createProjectSubmit = function() {
+      var ref = new Firebase(refUrl);
+      var projectsRef = ref.child("projects");
       
-      projectsRef.push(this.editingProject);
-      this.projects.push(angular.copy(this.editingProject));
-      
+      var newProjectRef = projectsRef.push(this.editingProject);
+
       this.editingProject = {
         name: "Project Title",
         label: "",
@@ -62,9 +57,38 @@
       }
       this.setTab(0);
     }
+    this.editProjectSubmit = function() {
+      var ref = new Firebase(refUrl);
+      var projectsRef = ref.child("projects");
+      
 
-    //make this.editProject later
+      projectsRef.$save(this.editingProject)
+        .then(function() {
+          this.editingProject = {
+            name: "Project Title",
+            label: "",
+            userList: [],
+            calendarEvents: [],
+            completion: 10
+          }
+          this.setTab(0);
+        });
+    }
 
+      //UI functions
+    this.getUserPicture = function(userId) {
+      for(var i = 0; i < this.allUsers.length; i++) {
+        console.log(this.allUsers[i].$id);
+        console.log(userId);
+        if(this.allUsers[i].$id.toString() === userId.toString()) {
+          console.log(this.allUsers[i].imgUrl);
+          return this.allUsers[i].imgUrl;
+        }
+      }
+      return "";
+    }
+
+      //Initialization
     this.editingProject = {
       name: "Project Title",
       label: "",
