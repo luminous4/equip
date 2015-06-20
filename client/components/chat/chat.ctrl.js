@@ -5,15 +5,26 @@ angular.module('equip')
   var userObj = $window.localStorage.getItem('firebase:session::mksequip');
   var userId = JSON.parse(userObj).uid;
 
+
   var ref = new Firebase(refUrl);
   var chatMessages = $firebaseArray(ref.child("messages"));
 
   $scope.messages = chatMessages;
 
+  var getUser = function(fb, cb) {
+    fb.child('users').child(userId).once("value", function(data) {
+      cb(data.val().displayName);
+    });
+  };
+
+  getUser(ref, function(name) {
+    $scope.user = name;
+  });
+
   this.addMessage = function() {
     var date = moment().format('YYYY-MM-DD hh:mm');
     $scope.messages.$add({
-      chatName: this.user,
+      chatName: $scope.user,
       text: this.message,
       createdAt: date
     });
