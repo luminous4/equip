@@ -28,7 +28,7 @@
                     </div>
                     <div class="ibox-tools" ng-show="projectCtrl.currentTab !== 'Project List'">
                         <button ng-click="projectCtrl.setTab(0)" class="btn btn-primary btn-xs">
-                            Project List
+                            Back to Project List
                         </button>
                     </div>
                 </div>
@@ -61,15 +61,17 @@
                                 <small>Created 14.08.2014</small>
                             </td>
                             <td class="project-completion">
-                                <small>Completion with: {{project.completion}}%</small>
-                                <div class="progress progress-mini">
-                                    <div style="width: {{project.completion}}%;" class="progress-bar"></div>
+                                <div ng-show="(project.completion > -1)">
+                                    <small>Completion with: {{project.completion}}%</small>
+                                    <div class="progress progress-mini">
+                                        <div style="width: {{project.completion}}%;" class="progress-bar"></div>
+                                    </div>
                                 </div>
                             </td>
                             <td class="project-people">
-                                <span ng-repeat="user in project.userList">
+                                <span ng-repeat="userId in project.userList">
                                     <a href="google.com">
-                                        <img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(user)}}">
+                                        <img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(userId)}}">
                                     </a>
                                 </span>
                             </td>
@@ -101,14 +103,14 @@
                                                     <br/>
                                                     <small>Created 14.08.2014</small>
                                                 </td>
-                                                <td class="project-completion">
+                                                <td class="project-completion" ng-show="(projectCtrl.editingProject.completion !== null)">
                                                     <small>Completion with: {{projectCtrl.editingProject.completion}}%</small>
                                                     <div class="progress progress-mini">
                                                         <div style="width: {{projectCtrl.editingProject.completion}}%;" class="progress-bar"></div>
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <span ng-repeat="user in projectCtrl.editingProject.userList"><a href="google.com"><img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(user)}}"></a>
+                                                    <span ng-repeat="userId in projectCtrl.editingProject.userList"><a href="google.com"><img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(userId)}}"></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -140,7 +142,7 @@
                                                 <div ng-repeat="user in projectCtrl.allUsers">
                                                 <label style="text-align:left;" class="project-people projectuserHover" ng-click="projectCtrl.flipPresence(user)"> 
                                                     <img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(user)}}"></img>
-                                                    <span class="projectuserName">{{user.name}}</span>
+                                                    <span class="projectuserName">{{user.displayName  || user.name}}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -152,16 +154,20 @@
                                                     Completion percentage
                                                 </h4>
                                                 <div class="row m-b-lg">
-                                                    <div slider ng-model="projectCtrl.editingProject.completion" start=0 end=100></div>
+                                                    <div slider ng-model="projectCtrl.editingProject.completion" start=0 end=100 step=10></div>
                                                     <br/>
-                                                    {{projectCtrl.editingProject.completion}}
+                                                    <span ng-show="(projectCtrl.editingProject.completion !== null)">
+                                                        Completion with: {{projectCtrl.editingProject.completion}}%
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="input-group m-b">
                                         <button type="button" ng-show="projectCtrl.currentTab === 'Create A Project'" ng-click="projectCtrl.createProjectSubmit()" class="btn btn-primary">Create a new project!</button> 
-                                        <button type="button" ng-show="projectCtrl.currentTab === 'Edit Project'" ng-click="projectCtrl.editProject()" class="btn btn-primary">Save changes!</button>                                     </div>
+                                        <button type="button" ng-show="projectCtrl.currentTab === 'Edit Project'" ng-click="projectCtrl.editProjectSubmit()" class="btn btn-primary">Save changes!</button>   
+                                        <button style="margin-left:20px" type="button" ng-show="projectCtrl.currentTab === 'Edit Project'" ng-click="projectCtrl.editProjectSubmit(true)" class="btn btn-primary">Delete this project!</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
