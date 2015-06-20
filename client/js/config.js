@@ -31,6 +31,7 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('index.calendar', {
 			url: '/calendar',
 			templateUrl: 'components/calendar/calendar.html',
+			controller: 'CalendarCtrl as calendar',
 			data: { pageTitle: 'Calendar' },
 			authenticate: true
 		})
