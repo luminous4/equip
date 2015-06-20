@@ -35,7 +35,8 @@ angular.module('equip')
 
         var ref = new Firebase(refUrl);
         ref.child("users").child(userData.uid).set({
-          name: email.replace(/@.*/, '')
+          name: email.replace(/@.*/, ''), 
+          displayName: email.replace(/@.*/, '')
         });
 
         $location.path('/login');

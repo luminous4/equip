@@ -9,11 +9,25 @@ angular.module('equip')
   this.saveUserInfo = function() {
     //add to firebase reference with the following info
     var ref = new Firebase(refUrl);
-    ref.child("users").child(userId).update({
-      displayName: this.displayName,
-      phoneNumber: this.phoneNumber,
-      imgUrl: this.imgUrl
-    });
+    if (this.displayName) {
+      ref.child("users").child(userId).update({
+        displayName: this.displayName,
+      });
+    }
+    if (this.phoneNumber) {
+      ref.child("users").child(userId).update({
+        phoneNumber: this.phoneNumber,
+      });
+    }
+    if (this.imgUrl) {
+      ref.child("users").child(userId).update({
+        imgUrl: this.imgUrl,
+      });
+    }
+
+    this.displayName = "";
+    this.phoneNumber = "";
+    this.imgUrl = "";
   };
 
 });

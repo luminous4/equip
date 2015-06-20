@@ -1,6 +1,9 @@
 angular.module('equip')
 
-  .controller('HomeCtrl', function($scope, User) {
+  .controller('HomeCtrl', function($rootScope, $location, $window, $scope, User) {
 
-    console.log('token available in homeCtrl:', User.isAuth());
+    $rootScope.signOut = function() {
+      $window.localStorage.removeItem('equipAuth');
+      $location.path('/login');      
+    };
   })
