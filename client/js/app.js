@@ -4,7 +4,8 @@
 		'firebase',
     'nouislider',
 		'summernote',
-    'ui.calendar'
+    'ui.calendar', 
+    'luegg.directives'
 	])
 
 

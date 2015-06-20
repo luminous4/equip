@@ -1,10 +1,14 @@
-.projectuserHover:hover{
+.projectuserHover:hover {
     background-color: #e5e5e5;
 }
-.projectuserHover{
+.projectuserHover {
     padding:20px;
 }
-.projectuserName{
+.projectuserName {
     font-size:14px;
     padding:10px;
+}
+.chat-activity-list {
+  max-height: 450px;
+  overflow-y: auto;
 }

@@ -1,6 +1,6 @@
 angular.module('equip')
 
-.controller('ChatCtrl', function($scope, $firebaseArray, $window, User, refUrl) {
+.controller('ChatCtrl', function($scope, $firebaseArray, $location, $anchorScroll, $window, User, refUrl) {
 
   var userObj = $window.localStorage.getItem('firebase:session::mksequip');
   var userId = JSON.parse(userObj).uid;
@@ -34,7 +34,13 @@ angular.module('equip')
     this.message = "";
   };
 
+  var scrollToBottom = function() {
+    $location.hash('chat-bottom');
+    $anchorScroll();
+  };
+
   $scope.messages.$loaded(function() {
     console.log("Messages fetched succesfully");
+    scrollToBottom();
   });
 })
