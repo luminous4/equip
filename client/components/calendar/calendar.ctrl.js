@@ -16,20 +16,37 @@ angular.module('equip')
        $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
     };
 
+
     $scope.events = {
       events: [
         {
-            title: 'Event1',
-            start: '2015-06-19'
+          title: 'Event1',
+          start: '2015 06 20 14:30',
+          end: '2015 06 20 16:00',
+          id: '1',
+          url: '#/index/projects',
+          className: 'test',
+          allDay: false,
+          stick: true
         },
         {
-            title: 'Event2',
-            start: '2015-06-20'
-        }
+          title: 'Event2',
+          start: '2015 06 21 11:30',
+          end: '2015 06 21 12:00',
+          id: '2',
+          url: '#/index/projects',
+          className: 'anotherTest',
+          allDay: false,
+          stick: true
+        },
       ],
       color: 'lightblue',   // optional
       textColor: 'black' // optional
     };
+
+    console.log('$scope.events.events[0].end', $scope.events.events[0].end);
+    console.log('$scope.events.events[0].className', $scope.events.events[0].className);
+
 
     this.uiConfig = {
       calendar:{
