@@ -52,6 +52,7 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('index.team', {
 			url: '/team',
 			templateUrl: 'components/team/team.html',
+			controller: "TeamController as teamCtrl",
 			data: { pageTitle: 'Team Directory' },
 			authenticate: true
 		})
