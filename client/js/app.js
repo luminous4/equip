@@ -3,7 +3,8 @@
 		'ui.router',
 		'firebase',
     'nouislider',
-		'summernote'
+		'summernote',
+    'ui.calendar'
 	])
 
 

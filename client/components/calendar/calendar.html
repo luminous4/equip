@@ -11,3 +11,28 @@
         </ol>
     </div>
 </div>
+
+<div class="wrapper wrapper-content" ng-controller="CalendarCtrl">
+    <div class="row animated fadeInDown">
+        <div class="col-lg-9">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Your Calendar</h5>
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content ui-calendar">
+                    <div class="btn-toolbar">
+                        <p class="lead">Your Calendar</p>
+                    </div>
+                    <div ui-calendar="calendar.uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="calendar.eventSources"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
