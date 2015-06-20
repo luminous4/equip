@@ -94,6 +94,10 @@
                         "infowindow" : true,
                         "React" : true,
                         "angular":true,
-                        "refUrl":true
+                        "refUrl":true,
+                        "ref":true,
+                        "Firebase":true,
+                        "$firebaseArray":true,
+                        "moment":true
                       }
 }

@@ -9,94 +9,44 @@
 
 (function() {
   angular.module('equip')
-    .controller('ProjectController', function(User) {
 
-      console.log('token available in ProjectController:', User.isAuth());
+  .controller('ProjectController', function($scope, $state, $stateParams, $firebaseArray, refUrl) {
 
+    var ref = new Firebase(refUrl);
+    this.projects = $firebaseArray(ref.child("projects"));
+    this.allUsers = $firebaseArray(ref.child("users"));
 
-      var ref = new Firebase("https://mksequip.firebaseio.com/projects");
+    this.tabs = [
+      "Project List",
+      "Create A Project",
+      "Edit Project"
+    ];
+    this.currentTab = "Project List";
+    this.searchString = "";
 
-      //Some dummy data
-      var userArray = [
-        {
-          name: 'Giraffe',
-          icon: 'img/giraffe.jpg'
-        }, {
-          name: "Pig",
-          icon: 'img/pig.png'
-        }, {
-          name: "Duck",
-          icon: "img/duck.jpg"
-        }
-      ];
+    //Functions
+      //Navigation
+    this.setTab = function(tabNumber) {
+      this.currentTab = this.tabs[tabNumber];
+    }
+    this.editProject = function(project) {
+      this.setTab(2);
+      this.editingProject = project;
+    }
 
-      var projectArray = [
-        {
-          name: 'Rebuild the zoo',
-          label: 'Zoo',
-          userList: userArray,
-          calendarEvents: [],
-          completion:70
-        },
-        {
-          name: 'Eat garbage',
-          label: 'Zoo',
-          userList: [
-            {
-              name: "Pig",
-              icon: 'img/pig.png'
-            },
-          ],
-          calendarEvents: [],
-          completion:40
-        }
-      ];
-
-      this.projects = projectArray;
-      this.allUsers = userArray;
-
-      this.tabs = [
-        "Project List",
-        "Create A Project",
-        "Edit Project"
-      ];
-      this.currentTab = "Project List";
-      this.searchString = "";
-
-      //Functions
-      this.setTab = function(tabNumber) {
-        this.currentTab = this.tabs[tabNumber];
+      //Editing functions
+    this.flipPresence = function(user) {
+      if(this.editingProject.userList.indexOf(user.$id) > -1) {
+        this.editingProject.userList.splice(this.editingProject.userList.indexOf(user.$id), 1);
+      } else {
+        this.editingProject.userList.push(user.$id);
       }
-      this.flipPresence = function(user) {
-        if(this.editingProject.userList.indexOf(user) > -1) {
-          this.editingProject.userList.splice(this.editingProject.userList.indexOf(user), 1);
-        } else {
-          this.editingProject.userList.push(user);
-        }
-      }
-      this.editProject = function(project) {
-        this.setTab(2);
-        this.editingProject = project;
-      }
-
-      this.createProject = function() {
-        console.log('its clicked');
-        console.log(this.projects);
-
-        ref.push(this.editingProject);
-        this.projects.push(angular.copy(this.editingProject));
-
-        this.editingProject = {
-          name: "Project Title",
-          label: "",
-          userList: [],
-          calendarEvents: [],
-          completion: 10
-        }
-        this.setTab(0);
-      }
-
-      //make this.editProject later
+    }
+    this.createProjectSubmit = function() {
+      var ref = new Firebase(refUrl);
+      var projectsRef = ref.child("projects");
+      
+      var newProjectRef = projectsRef.push(this.editingProject);
 
       this.editingProject = {
         name: "Project Title",
@@ -104,31 +54,72 @@
         userList: [],
         calendarEvents: [],
         completion: 10
-      };
+      }
+      this.setTab(0);
+    }
+    this.editProjectSubmit = function() {
+      var ref = new Firebase(refUrl);
+      var projectsRef = ref.child("projects");
+      
 
-    })
-    .filter('projectSearch', function(){
+      projectsRef.$save(this.editingProject)
+        .then(function() {
+          this.editingProject = {
+            name: "Project Title",
+            label: "",
+            userList: [],
+            calendarEvents: [],
+            completion: 10
+          }
+          this.setTab(0);
+        });
+    }
 
-      return function(arr, searchString){
+      //UI functions
+    this.getUserPicture = function(userId) {
+      for(var i = 0; i < this.allUsers.length; i++) {
+        console.log(this.allUsers[i].$id);
+        console.log(userId);
+        if(this.allUsers[i].$id.toString() === userId.toString()) {
+          console.log(this.allUsers[i].imgUrl);
+          return this.allUsers[i].imgUrl;
+        }
+      }
+      return "";
+    }
 
-        if(!searchString){
-          return arr;
+      //Initialization
+    this.editingProject = {
+      name: "Project Title",
+      label: "",
+      userList: [],
+      calendarEvents: [],
+      completion: 10
+    };
+
+  })
+  .filter('projectSearch', function(){
+
+    return function(arr, searchString){
+
+      if(!searchString){
+        return arr;
+      }
+
+      var result = [];
+
+      searchString = searchString.toLowerCase();
+
+      // Using the forEach helper method to loop through the array
+      angular.forEach(arr, function(item){
+
+        if(item.name.toLowerCase().indexOf(searchString) !== -1){
+          result.push(item);
         }
 
-        var result = [];
+      });
 
-        searchString = searchString.toLowerCase();
-
-        // Using the forEach helper method to loop through the array
-        angular.forEach(arr, function(item){
-
-          if(item.name.toLowerCase().indexOf(searchString) !== -1){
-            result.push(item);
-          }
-
-        });
-
-        return result;
-      }
-    });
+      return result;
+    }
+  });
 })();
