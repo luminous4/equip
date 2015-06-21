@@ -71,24 +71,22 @@
     this.editProjectSubmit = function(toDelete) {
       var that = this;
 
+      var ref = new Firebase(refUrl + "/projects");
+
+      var projectRef = $firebaseObject(ref.child(that.editingProject.$id));
+    
       if(toDelete) {
-        var ref = new Firebase(refUrl + "/projects");
-        var projectRef = $firebaseObject(ref.child(that.editingProject.$id));
         projectRef.$save();
         that.setTab(0);
         return;
       }
 
-      var ref = new Firebase(refUrl + "/projects");
-
-      var projectRef = $firebaseObject(ref.child(that.editingProject.$id));
-
       var proj = that.editingProject;
-      if(proj.name)     projectRef.name = proj.name;
-      if(proj.label)      projectRef.label = proj.label;
-      if(proj.userList)     projectRef.userList = proj.userList;
-      if(proj.calendarEvents)     projectRef.calendarEvents = proj.calendarEvents;
-      if(proj.completion)     projectRef.completion = proj.completion;
+      if(proj.name)           projectRef.name           = proj.name;
+      if(proj.label)          projectRef.label          = proj.label;
+      if(proj.userList)       projectRef.userList       = proj.userList;
+      if(proj.calendarEvents) projectRef.calendarEvents = proj.calendarEvents;
+      if(proj.completion)     projectRef.completion     = proj.completion;
 
       projectRef.$save(proj)
         .then(function() {
@@ -98,7 +96,8 @@
 
       //UI functions
     this.getUserPicture = function(userId) {
-      if(userId === null) return "img/user.png";
+      if(userId === null || userId === undefined) return "img/user.png";
+      if(userId.imgUrl !== undefined) return userId.imgUrl;
       for(var i = 0; i < this.allUsers.length; i++) {
         if(this.allUsers[i].$id.toString() === userId.toString()) {
           if(this.allUsers[i].imgUrl) {
@@ -111,7 +110,7 @@
     }
 
   })
-  .filter('projectSearch', function(){
+  .filter('search', function(){
 
     return function(arr, searchString){
 
@@ -125,8 +124,7 @@
 
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item){
-
-        if(item.name.toLowerCase().indexOf(searchString) !== -1){
+        if(item !== null && item !== undefined && item.name.toLowerCase().indexOf(searchString) !== -1){
           result.push(item);
         }
 

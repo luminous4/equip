@@ -7,6 +7,4 @@
     'ui.calendar', 
     'luegg.directives'
 	])
-
-
 })();
