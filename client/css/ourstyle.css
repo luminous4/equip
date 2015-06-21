@@ -24,4 +24,7 @@
   font-size: 20px;
   margin-top: 20px;
   font-weight: 200;
+
+.row.event {
+  padding: 5px;
 }

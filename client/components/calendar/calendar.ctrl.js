@@ -1,21 +1,23 @@
 angular.module('equip')
 
   .controller('CalendarCtrl', function($scope, User) {
-    console.log('in CalendarCtrl');
+    // console.log('in CalendarCtrl');
 
-    /* alert on eventClick */
-    this.alertOnEventClick = function( date, jsEvent, view){
-        $scope.alertMessage = (date.title + ' was clicked ');
-    };
-    /* alert on Drop */
-    this.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
-    };
-    /* alert on Resize */
-    this.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-    };
+    this.saveNewEvent = function() {
+      // console.log('add event clicked');
+      var newEvent = {};
+      newEvent['title'] = this.title;
+      newEvent['start'] = this.startYear + ' ' + this.startMonth  + ' ' + this.startDay  + ' ' + this.startHour  + ':' + this.startMinutes;
+      newEvent['end'] = this.endYear + ' ' + this.endMonth  + ' ' + this.endDay  + ' ' + this.endHour  + ':' + this.endMinutes;
+      newEvent['id'] = 3;
+      newEvent['className'] = 'test';
+      newEvent['allDay'] = false;
+      newEvent['stick'] = true;
 
+      // console.log('newEvent', newEvent);
+      $scope.events.events.push(newEvent);
+      console.log('eventSources after adding event', this.eventSources);
+    };
 
     $scope.events = {
       events: [
@@ -44,25 +46,19 @@ angular.module('equip')
       textColor: 'black' // optional
     };
 
-    console.log('$scope.events.events[0].end', $scope.events.events[0].end);
-    console.log('$scope.events.events[0].className', $scope.events.events[0].className);
-
-
     this.uiConfig = {
       calendar:{
         height: 600,
         editable: true,
         header:{
-          left: 'month basicWeek basicDay agendaWeek agendaDay',
+          left: 'month agendaWeek agendaDay',
           center: 'title',
           right: 'today prev,next'
-        },
-        dayClick: this.alertEventOnClick,
-        eventDrop: this.alertOnDrop,
-        eventResize: this.alertOnResize
+        }
       }
-    };
+  };
     /* event sources array*/
+
     this.eventSources = [$scope.events];
     console.log('eventSources', this.eventSources);
 });
