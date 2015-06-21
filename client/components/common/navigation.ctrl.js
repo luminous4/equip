@@ -1,6 +1,6 @@
 angular.module('equip')
 
-.controller('NavCtrl', function($scope, $window, refUrl) {
+.controller('NavCtrl', function($scope, $rootScope, $location, $window, refUrl) {
 
   var userObj = $window.localStorage.getItem('firebase:session::mksequip');
   var userId = JSON.parse(userObj).uid;
@@ -19,5 +19,10 @@ angular.module('equip')
       $scope.img = img;
     });    
   }
+
+  $rootScope.signOut = function() {
+    $window.localStorage.removeItem('equipAuth');
+    $location.path('/login');      
+  };
 
 })
