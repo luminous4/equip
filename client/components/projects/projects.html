@@ -51,7 +51,7 @@
                     <div class="project-list">
                     <table class="table table-hover" >
                     <tbody>
-                        <tr ng-repeat="project in projectCtrl.projects | projectSearch:projectCtrl.searchString">
+                        <tr ng-repeat="project in projectCtrl.projects | search:projectCtrl.searchString">
                             <td class="project-status">
                                 <span class="label label-primary">{{project.label}}</span>
                             </td>
@@ -110,7 +110,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="project-people">
-                                                    <span ng-repeat="userId in projectCtrl.editingProject.userList"><a href="google.com"><img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(userId)}}"></a>
+                                                    <span ng-repeat="userId in projectCtrl.editingProject.userList"><a href="google.com"><img alt="image" class="img-circle" src="{{projectCtrl.getUserPicture(userId)}}"></a></span>
                                                 </td>
                                             </tr>
                                         </tbody>
