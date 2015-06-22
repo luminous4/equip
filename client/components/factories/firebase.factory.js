@@ -42,8 +42,6 @@ angular.module('equip')
     };
 
     var updateItem = function(path, newObject) {
-      var editId = item.$id;
-
       newObject = firebaseSterilization(newObject);
       console.log(newObject);
 
@@ -53,13 +51,9 @@ angular.module('equip')
       console.log('just edited:', targetItem);
     };
 
-    var removeItem = function (path, item) {
+    var removeItem = function (path) {
 
-      var editId = item.$id;
-
-      var targetArray = [path, editId];
-
-      var targetItem = translateReference(targetArray);
+      var targetItem = translateReference(path);
 
       targetItem.remove();
 

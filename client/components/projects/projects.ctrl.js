@@ -73,12 +73,12 @@
       var that = this;
 
       if(toDelete) {
-        FirebaseFactory.removeItem("projects", that.editingProject);
+        FirebaseFactory.removeItem(["projects", that.editingProject.$id]);
         that.setTab(0);
         return;
       }
 
-      FirebaseFactory.updateItem("projects", that.editingProject, that.editingProject);
+      FirebaseFactory.updateItem(["projects", that.editingProject.$id], that.editingProject);
 
       that.setTab(0);    
     }
