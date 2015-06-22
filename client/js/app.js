@@ -5,6 +5,7 @@
     'nouislider',
 		'summernote',
     'ui.calendar', 
-    'luegg.directives'
+    'luegg.directives',
+		'ngMessages' // Angular Messages
 	])
 })();
