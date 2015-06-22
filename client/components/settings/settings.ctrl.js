@@ -1,6 +1,6 @@
 angular.module('equip')
 
-.controller('SettingsCtrl', function($scope, $window, $firebaseArray, refUrl) {
+.controller('SettingsCtrl', function($scope, $window, $firebaseArray, FirebaseFactory, refUrl) {
   
   var userObj = $window.localStorage.getItem('firebase:session::mksequip');
   var userId = JSON.parse(userObj).uid;
@@ -26,8 +26,10 @@ angular.module('equip')
           ref.child('teams').child(teamName).set({teamName: teamName, users: null});
         }
 
-        var teamUsers = $firebaseArray(ref.child('teams').child(teamName).child('users'));
-        teamUsers.$add(userId);
+        FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId);
+
+        // var teamUsers = $firebaseArray(ref.child('teams').child(teamName).child('users'));
+        // teamUsers.$add();
       })
 
       var userTeams = $firebaseArray(ref.child('users').child(userId).child('teams'));
