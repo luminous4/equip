@@ -29,39 +29,31 @@ angular.module('equip')
       }
     }
 
-    var getCollection = function(target) {
-      return $firebaseArray(translateReference(target));
+    var getCollection = function(path) {
+      return $firebaseArray(translateReference(path));
     };
 
-    var addToCollection = function(collection, newItem) {
+    var addToCollection = function(path, newItem) {
       newItem = firebaseSterilization(newItem);
 
-      var targetCollection = translateReference(collection);
+      var targetCollection = translateReference(path);
       targetCollection.push(newItem);
-      console.log('added to:', collection);
+      console.log('added to:', path);
     };
 
-    var updateItem = function(collection, item, newObject) {
-      var editId = item.$id;
-
+    var updateItem = function(path, newObject) {
       newObject = firebaseSterilization(newObject);
       console.log(newObject);
 
-      var targetArray = [collection, editId];
-
-      var targetItem = translateReference(targetArray);
+      var targetItem = translateReference(path);
 
       targetItem.update(newObject);
       console.log('just edited:', targetItem);
     };
 
-    var removeItem = function (collection, item) {
+    var removeItem = function (path) {
 
-      var editId = item.$id;
-
-      var targetArray = [collection, editId];
-
-      var targetItem = translateReference(targetArray);
+      var targetItem = translateReference(path);
 
       targetItem.remove();
 
