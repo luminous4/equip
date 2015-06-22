@@ -11,15 +11,15 @@ angular.module('equip')
 
   $scope.messages = chatMessages;
 
-  var getUser = function(fb, cb) {
-    fb.child('users').child(userId).once("value", function(data) {
-      cb(data.val().displayName, data.val().imgUrl);
+  var getFromFirebase = function(collection, firebase, cb) {
+    firebase.child(collection).child(userId).once('value', function(data) {
+      cb(data.val());
     });
   };
 
-  getUser(ref, function(name, img) {
-    $scope.user = name;
-    $scope.img = img;
+  getFromFirebase('users', ref, function(data) {
+    $scope.user = data.displayName;
+    $scope.img = data.imgUrl;
   });
 
   this.addMessage = function() {
