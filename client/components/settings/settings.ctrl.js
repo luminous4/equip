@@ -15,42 +15,31 @@ angular.module('equip')
 
   this.saveUserInfo = function() {
     if (this.displayName) {
-      ref.child('users').child(userId).update({
-        displayName: this.displayName
-      });
+      FirebaseFactory.updateItem(['users', userId], {displayName: this.displayName});
     }
 
     if (this.teamName) {
       checkIfTeamExists(this.teamName, function(teamName, exists) {
         if(!exists) {
-          ref.child('teams').child(teamName).set({teamName: teamName, users: null});
+          FirebaseFactory.updateItem(['teams', teamName], {users: null});
         }
-
         FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId);
+      });
 
-        // var teamUsers = $firebaseArray(ref.child('teams').child(teamName).child('users'));
-        // teamUsers.$add();
-      })
-
-      var userTeams = $firebaseArray(ref.child('users').child(userId).child('teams'));
-      userTeams.$add(this.teamName);
+      FirebaseFactory.addToCollection(['users', userId, 'teams'], this.teamName);
     }
 
     if (this.phoneNumber) {
-      ref.child('users').child(userId).update({
-        phoneNumber: this.phoneNumber
-      });
+      FirebaseFactory.updateItem(['users', userId], {phoneNumber: this.phoneNumber});
     }
     if (this.imgUrl) {
-      ref.child('users').child(userId).update({
-        imgUrl: this.imgUrl
-      });
+      FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl});
     }
 
-    this.displayName = "";
-    this.teamName = "";
-    this.phoneNumber = "";
-    this.imgUrl = "";
+    this.displayName = '';
+    this.teamName = '';
+    this.phoneNumber = '';
+    this.imgUrl = '';
   };
 
 });

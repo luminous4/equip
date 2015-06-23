@@ -1,25 +1,26 @@
 angular.module('equip')
 
-.controller('ChatCtrl', function($scope, $firebaseArray, $location, $anchorScroll, $window, User, refUrl) {
+.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, $location, $window, User, refUrl, FirebaseFactory) {
 
-  var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-  var userId = JSON.parse(userObj).uid;
-
+  var userId = FirebaseFactory.getCurrentUser().uid;
 
   var ref = new Firebase(refUrl);
-  var chatMessages = $firebaseArray(ref.child("messages"));
 
-  $scope.messages = chatMessages;
+  $rootScope.$watch('selectedTeam', function() {
+    if ($rootScope.selectedTeam) {
+      $scope.messages = FirebaseFactory.getCollection(['teams', $rootScope.selectedTeam.$value, 'messages']);
+    }
+  });
 
-  var getUser = function(fb, cb) {
-    fb.child('users').child(userId).once("value", function(data) {
-      cb(data.val().displayName, data.val().imgUrl);
+  var getFromFirebase = function(collection, firebase, cb) {
+    firebase.child(collection).child(userId).once('value', function(data) {
+      cb(data.val());
     });
   };
 
-  getUser(ref, function(name, img) {
-    $scope.user = name;
-    $scope.img = img;
+  getFromFirebase('users', ref, function(data) {
+    $scope.user = data.displayName;
+    $scope.img = data.imgUrl;
   });
 
   this.addMessage = function() {
@@ -31,16 +32,7 @@ angular.module('equip')
       createdAt: date
     });
 
-    this.message = "";
+    this.message = '';
   };
 
-  var scrollToBottom = function() {
-    $location.hash('chat-bottom');
-    $anchorScroll();
-  };
-
-  $scope.messages.$loaded(function() {
-    console.log("Messages fetched succesfully");
-    scrollToBottom();
-  });
 })
