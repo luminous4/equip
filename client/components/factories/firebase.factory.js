@@ -4,16 +4,16 @@ angular.module('equip')
     var ref = new Firebase(refUrl);
 
     var firebaseSterilization = function(input) {
-      if(input["$$hashKey"] !== undefined) {
-        delete input["$$hashKey"];
+      if(input['$$hashKey'] !== undefined) {
+        delete input['$$hashKey'];
       }
 
-      if(input["$id"] !== undefined) {
-        delete input["$id"];
+      if(input['$id'] !== undefined) {
+        delete input['$id'];
       }
 
-      if(input["$priority"] !== undefined) {
-        delete input["$priority"];
+      if(input['$priority'] !== undefined) {
+        delete input['$priority'];
       }
 
       for(var key in input) {

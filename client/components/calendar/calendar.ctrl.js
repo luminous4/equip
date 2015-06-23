@@ -71,13 +71,13 @@ angular.module('equip')
         eventEnd = endDate + ' ' +  endTime;
       }
 
-      newEvent['title'] = this.title;
-      newEvent['start'] = eventStart;
-      newEvent['end'] = eventEnd;
+      newEvent.title = this.title;
+      newEvent.start = eventStart;
+      newEvent.end = eventEnd;
       // newEvent['allDay'] = false;
-      newEvent['stick'] = true;
-      newEvent['userId'] = currentUser.uid;
-      newEvent['projectId'] = eventProjectId || 'Test Project';
+      newEvent.stick = true;
+      newEvent.userId = currentUser.uid;
+      newEvent.projectId = eventProjectId || 'Test Project';
 
       FirebaseFactory.addToCollection('events', newEvent);
       console.log('added event:', newEvent.title);
