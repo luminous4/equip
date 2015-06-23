@@ -13,7 +13,6 @@ angular.module('equip')
     $rootScope.selectedTeam = this.selectedTeam;
   };
 
-
   var getFromFirebase = function(collection, firebase, cb) {
     firebase.child(collection).child(userId).once('value', function(data) {
       cb(data.val());
