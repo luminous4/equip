@@ -1,18 +1,14 @@
 angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, $firebaseArray, $window, User, refUrl) {
+  .controller('CalendarCtrl', function($scope, FirebaseFactory, User, refUrl) {
     console.log('in CalendarCtrl');
 
-    var ref = new Firebase(refUrl);
-    var allUsers = $firebaseArray(ref.child("users"));
+    var allUsers = FirebaseFactory.getCollection('users');
     // console.log('all users', allUsers);
-
-    // current user
-    var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-    var userId = JSON.parse(userObj).uid;
-    // console.log('current user', userId);
-
-    var allEvents = $firebaseArray(ref.child('events'));
+    var currentUser = FirebaseFactory.getCurrentUser;
+    //currentUser.uid;
+    var allEvents = FirebaseFactory.getCollection('events');
+    // console.log('all events', allEvents);
 
     this.saveNewEvent = function() {
       // console.log('add event clicked');
@@ -28,10 +24,9 @@ angular.module('equip')
       // console.log('newEvent', newEvent);
       allEvents.$add(newEvent);
       // console.log('eventSources after adding event', this.eventSources);
+      allEvents.child('users').$add({userId: userId});
       // allEvents.child('projects').$add({projectId: projectId});
     };
-
-
 
     $scope.events = {
       events: [
