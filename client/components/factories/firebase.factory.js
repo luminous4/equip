@@ -4,18 +4,25 @@ angular.module('equip')
     var ref = new Firebase(refUrl);
 
     var firebaseSterilization = function(input) {
-      if(input["$$hashKey"] !== undefined)     delete input["$$hashKey"];
-      if(input["$id"] !== undefined)           delete input["$id"];
-      if(input["$priority"] !== undefined)     delete input["$priority"];
+      if(input["$$hashKey"] !== undefined) {
+        delete input["$$hashKey"];
+      }
+
+      if(input["$id"] !== undefined) {
+        delete input["$id"];
+      }
+
+      if(input["$priority"] !== undefined) {
+        delete input["$priority"];
+      }
 
       for(var key in input) {
         if(input[key] === undefined) {
           delete(input[key]);
         }
       }
-
       return input;
-    }
+    };
 
     var translateReference = function(input) {
       if(Array.isArray(input)) {
@@ -24,10 +31,12 @@ angular.module('equip')
           result = result.child(input[i]);
         }
         return result;
+      } else if (typeof input === 'string') {
+          return ref.child(input);
       } else {
-        return ref.child(input);
+        return input; // input is a Firebase Reference Object
       }
-    }
+    };
 
     var getCollection = function(path) {
       return $firebaseArray(translateReference(path));
@@ -35,28 +44,23 @@ angular.module('equip')
 
     var addToCollection = function(path, newItem) {
       newItem = firebaseSterilization(newItem);
-
       var targetCollection = translateReference(path);
-      targetCollection.push(newItem);
+      var addedItem = targetCollection.push(newItem);
       console.log('added to:', path);
+      return addedItem;
     };
 
     var updateItem = function(path, newObject) {
       newObject = firebaseSterilization(newObject);
-      console.log(newObject);
-
+      // console.log(newObject);
       var targetItem = translateReference(path);
-
       targetItem.update(newObject);
       console.log('just edited:', targetItem);
     };
 
     var removeItem = function (path) {
-
       var targetItem = translateReference(path);
-
       targetItem.remove();
-
       console.log('removed:', targetItem);
     };
 
