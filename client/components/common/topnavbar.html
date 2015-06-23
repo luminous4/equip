@@ -1,7 +1,7 @@
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <h2 class="team-list">Your Teams <drop-down/></h2>
+            <select ng-options="team as team.$value for team in usersTeams" ng-model="common.selectedTeam" ng-change="common.changeContext()"></select>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>

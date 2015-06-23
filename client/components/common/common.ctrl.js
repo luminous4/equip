@@ -1,11 +1,18 @@
 angular.module('equip')
 
-.controller('CommonCtrl', function($scope, $rootScope, $location, $window, refUrl) {
+.controller('CommonCtrl', function($scope, $rootScope, $location, $window, refUrl, FirebaseFactory) {
 
   var userObj = $window.localStorage.getItem('firebase:session::mksequip');
   var userId = JSON.parse(userObj).uid;
 
   var ref = new Firebase(refUrl);
+
+  $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams']);
+
+  this.changeContext = function() {
+    $rootScope.selectedTeam = this.selectedTeam;
+  };
+
 
   var getFromFirebase = function(collection, firebase, cb) {
     firebase.child(collection).child(userId).once('value', function(data) {
@@ -19,10 +26,6 @@ angular.module('equip')
       $scope.img = data.imgUrl;
     });    
   }
-
-  
-
-
 
   this.signOut = function() {
     $window.localStorage.removeItem('equipAuth');
