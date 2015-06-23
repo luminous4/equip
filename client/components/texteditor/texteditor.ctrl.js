@@ -4,12 +4,12 @@ function TextEditorCtrl($scope, $firebaseObject, User){
 
 	$scope.document = {};
 
-	var ref = new Firebase("https://mksequip.firebaseio.com/documents");
+	var ref = new Firebase('https://mksequip.firebaseio.com/documents');
 	/*
 	* fb creates an instance of $firebase which we'll use to save to Firebase
 	* */
 	//var syncObject = $firebaseObject(ref);
-	//syncObject.$bindTo($scope, "document");
+	//syncObject.$bindTo($scope, 'document');
 
 	/*
 	* Read the document title and body entered by the user using $scope.

@@ -4,10 +4,10 @@
   .controller('TeamController', function($scope, $state, $stateParams, 
                                             $firebaseArray, refUrl, $firebaseObject) {
     var ref = new Firebase(refUrl);
-    this.allUsers = $firebaseArray(ref.child("users"));
+    this.allUsers = $firebaseArray(ref.child('users'));
     console.log(this.allUsers);
-    // this.allClients = $firebaseArray(ref.child("clients"));
-    this.allClients = $firebaseArray(ref.child("clients"));
+    // this.allClients = $firebaseArray(ref.child('clients'));
+    this.allClients = $firebaseArray(ref.child('clients'));
 
     this.clientEditMode = false;
     this.editingANewClient = false;
@@ -17,12 +17,12 @@
     this.currentClient = null;
     this.currentTeamMember = null;
 
-    this.searchString = "";
+    this.searchString = '';
 
     // UI functions
     this.setTab = function(tab) {
       this.tab = tab;
-      this.searchString = "";
+      this.searchString = '';
     }
     this.viewUser = function(user) {
       this.currentTeamMember = user;
@@ -39,7 +39,7 @@
       this.editingANewClient = true;
     }
     this.registerNewClient = function() {
-      var ref = new Firebase(refUrl).child("clients");
+      var ref = new Firebase(refUrl).child('clients');
       var newClientRef = ref.push(this.currentClient);
 
       this.currentClient = {};
@@ -57,7 +57,7 @@
 
       var that = this;
 
-      var ref = new Firebase(refUrl + "/clients");
+      var ref = new Firebase(refUrl + '/clients');
 
       var clientRef = $firebaseObject(ref.child(that.currentClient.$id));
 
@@ -78,14 +78,14 @@
     }
 
     this.getUserPicture = function(userId) {
-      if(userId === null || userId === undefined) return "img/user.png";
+      if(userId === null || userId === undefined) return 'img/user.png';
       if(userId.imgUrl !== undefined) return userId.imgUrl;
       for(var i = 0; i < this.allUsers.length; i++) {
         if(this.allUsers[i].$id.toString() === userId.toString()) {
           if(this.allUsers[i].imgUrl) {
             return this.allUsers[i].imgUrl;
           } else {
-            return "img/user.png";
+            return 'img/user.png';
           }
         }
       }

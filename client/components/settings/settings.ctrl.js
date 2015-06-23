@@ -36,10 +36,10 @@ angular.module('equip')
       FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl});
     }
 
-    this.displayName = "";
-    this.teamName = "";
-    this.phoneNumber = "";
-    this.imgUrl = "";
+    this.displayName = '';
+    this.teamName = '';
+    this.phoneNumber = '';
+    this.imgUrl = '';
   };
 
 });

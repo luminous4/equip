@@ -34,7 +34,7 @@ angular.module('equip')
         $window.localStorage.setItem('equipAuth', userData.token);
 
         var ref = new Firebase(refUrl);
-        ref.child("users").child(userData.uid).set({
+        ref.child('users').child(userData.uid).set({
           name: email,
           displayName: email.replace(/@.*/, ''),
           imgUrl: 'http://bioweb.uwlax.edu/bio203/s2009/aschenbr_rach/cat%20eyes%20and%20ears.jpg'

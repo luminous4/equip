@@ -32,7 +32,7 @@ angular.module('equip')
       createdAt: date
     });
 
-    this.message = "";
+    this.message = '';
   };
 
 })

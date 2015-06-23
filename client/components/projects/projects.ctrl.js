@@ -14,16 +14,16 @@
                                             $firebaseArray, refUrl, $firebaseObject) {
 
     var ref = new Firebase(refUrl);
-    this.projects = $firebaseArray(ref.child("projects"));
-    this.allUsers = $firebaseArray(ref.child("users"));
+    this.projects = $firebaseArray(ref.child('projects'));
+    this.allUsers = $firebaseArray(ref.child('users'));
 
     this.tabs = [
-      "Project List",
-      "Create A Project",
-      "Edit Project"
+      'Project List',
+      'Create A Project',
+      'Edit Project'
     ];
-    this.currentTab = "Project List";
-    this.searchString = "";
+    this.currentTab = 'Project List';
+    this.searchString = '';
 
     //Functions
       //Navigation
@@ -31,8 +31,8 @@
       this.currentTab = this.tabs[tabNumber];
       if(tabNumber === 1) {
         this.editingProject = {
-          name: "Project Title",
-          label: "",
+          name: 'Project Title',
+          label: '',
           userList: [],
           calendarEvents: [],
           completion: null
@@ -57,11 +57,11 @@
     }
     this.createProjectSubmit = function() {
       var that = this;
-      FirebaseFactory.addToCollection("projects", that.editingProject);
+      FirebaseFactory.addToCollection('projects', that.editingProject);
 
       this.editingProject = {
-        name: "Project Title",
-        label: "",
+        name: 'Project Title',
+        label: '',
         userList: [],
         calendarEvents: [],
         completion: 10
@@ -73,19 +73,19 @@
       var that = this;
 
       if(toDelete) {
-        FirebaseFactory.removeItem(["projects", that.editingProject.$id]);
+        FirebaseFactory.removeItem(['projects', that.editingProject.$id]);
         that.setTab(0);
         return;
       }
 
-      FirebaseFactory.updateItem(["projects", that.editingProject.$id], that.editingProject);
+      FirebaseFactory.updateItem(['projects', that.editingProject.$id], that.editingProject);
 
       that.setTab(0);    
     }
 
       //UI functions
     this.getUserPicture = function(userId) {
-      if(userId === null || userId === undefined) return "img/user.png";
+      if(userId === null || userId === undefined) return 'img/user.png';
       if(userId.imgUrl !== undefined) return userId.imgUrl;
 
       for(var i = 0; i < this.allUsers.length; i++) {
@@ -93,7 +93,7 @@
           if(this.allUsers[i].imgUrl) {
             return this.allUsers[i].imgUrl;
           } else {
-            return "img/user.png";
+            return 'img/user.png';
           }
         }
       }

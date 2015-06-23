@@ -38,21 +38,21 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('index.chat', {
 			url: '/chat',
 			templateUrl: 'components/chat/chat.html',
-			controller: "ChatCtrl as chat",
+			controller: 'ChatCtrl as chat',
 			data: { pageTitle: 'Chat' },
 			authenticate: true
 		})
 		.state('index.projects', {
 			url: '/projects',
 			templateUrl: 'components/projects/projects.html',
-			controller: "ProjectController as projectCtrl",
+			controller: 'ProjectController as projectCtrl',
 			data: { pageTitle: 'Projects' },
 			authenticate: true
 		})
 		.state('index.team', {
 			url: '/team',
 			templateUrl: 'components/team/team.html',
-			controller: "TeamController as teamCtrl",
+			controller: 'TeamController as teamCtrl',
 			data: { pageTitle: 'Team Directory' },
 			authenticate: true
 		})
