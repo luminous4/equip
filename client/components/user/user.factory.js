@@ -35,8 +35,8 @@ angular.module('equip')
 
         var ref = new Firebase(refUrl);
         ref.child("users").child(userData.uid).set({
-          name: email, 
-          displayName: email.replace(/@.*/, ''), 
+          name: email,
+          displayName: email.replace(/@.*/, ''),
           imgUrl: 'http://bioweb.uwlax.edu/bio203/s2009/aschenbr_rach/cat%20eyes%20and%20ears.jpg'
         });
 
@@ -49,7 +49,7 @@ angular.module('equip')
 
     var isAuth = function() {
       return !!$window.localStorage.getItem('equipAuth');
-    }
+    };
 
     return {
       login: login,

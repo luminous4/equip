@@ -10,7 +10,7 @@
 (function() {
   angular.module('equip')
 
-  .controller('ProjectController', function($scope, $state, $stateParams, 
+  .controller('ProjectController', function($scope, $state, $stateParams, FirebaseFactory, 
                                             $firebaseArray, refUrl, $firebaseObject) {
 
     var ref = new Firebase(refUrl);
@@ -56,8 +56,8 @@
       }
     }
     this.createProjectSubmit = function() {
-      var ref = new Firebase(refUrl).child("projects");
-      var newProjectRef = ref.push(this.editingProject);
+      var that = this;
+      FirebaseFactory.addToCollection("projects", that.editingProject);
 
       this.editingProject = {
         name: "Project Title",
@@ -69,35 +69,25 @@
       this.setTab(0);
     }
     this.editProjectSubmit = function(toDelete) {
+
       var that = this;
 
-      var ref = new Firebase(refUrl + "/projects");
-
-      var projectRef = $firebaseObject(ref.child(that.editingProject.$id));
-    
       if(toDelete) {
-        projectRef.$save();
+        FirebaseFactory.removeItem(["projects", that.editingProject.$id]);
         that.setTab(0);
         return;
       }
 
-      var proj = that.editingProject;
-      if(proj.name)           projectRef.name           = proj.name;
-      if(proj.label)          projectRef.label          = proj.label;
-      if(proj.userList)       projectRef.userList       = proj.userList;
-      if(proj.calendarEvents) projectRef.calendarEvents = proj.calendarEvents;
-      if(proj.completion)     projectRef.completion     = proj.completion;
+      FirebaseFactory.updateItem(["projects", that.editingProject.$id], that.editingProject);
 
-      projectRef.$save(proj)
-        .then(function() {
-          that.setTab(0);
-        });
+      that.setTab(0);    
     }
 
       //UI functions
     this.getUserPicture = function(userId) {
       if(userId === null || userId === undefined) return "img/user.png";
       if(userId.imgUrl !== undefined) return userId.imgUrl;
+
       for(var i = 0; i < this.allUsers.length; i++) {
         if(this.allUsers[i].$id.toString() === userId.toString()) {
           if(this.allUsers[i].imgUrl) {
