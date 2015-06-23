@@ -31,83 +31,41 @@
             </div>
 
             <div name="userForm" class="calendarForm col-sm-4">
-                <p>Start
+                <p>
                     <div class="row event">
-                      <label class="col-sm-4 control-label">Title</label>
+                      <label class="col-sm-4 control-label">Event Title</label>
                       <div class="col-sm-8">
                         <input type="text" class="form-control" placeholder="Your Event Title" ng-model="calendar.title">
                       </div>
                     </div>
 
                     <div class="row event">
-                      <label class="col-sm-4 control-label">Start Day</label>
+                      <label class="col-sm-4 control-label">Start Date</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="20" ng-model="calendar.startDay">
+                        <input type="date" class="form-control" placeholder="20" ng-model="calendar.startDate">
                       </div>
                     </div>
 
                     <div class="row event">
-                      <label class="col-sm-4 control-label">Start Month</label>
+                      <label class="col-sm-4 control-label">Time</label>
                       <div class="col-sm-8">
-                          <input type="text" class="form-control" placeholder="06" ng-model="calendar.startMonth">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">Start Year</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="2015" ng-model="calendar.startYear">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">Start Hour</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="16" ng-model="calendar.startHour">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">Start Minutes</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="30" ng-model="calendar.startMinutes">
+                        <input type="time" class="form-control" placeholder="16" ng-model="calendar.startTime">
                       </div>
                     </div>
                 </p>
 
-                 <p>End
+                 <p>
                     <div class="row event">
-                      <label class="col-sm-4 control-label">End Day</label>
+                      <label class="col-sm-4 control-label">End Date</label>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="20" ng-model="calendar.endDay">
+                        <input type="date" class="form-control" placeholder="20" ng-model="calendar.endDate">
                       </div>
                     </div>
 
                     <div class="row event">
-                      <label class="col-sm-4 control-label">End Month</label>
+                      <label class="col-sm-4 control-label">Time</label>
                       <div class="col-sm-8">
-                          <input type="text" class="form-control" placeholder="06" ng-model="calendar.endMonth">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">End Year</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="2015" ng-model="calendar.endYear">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">End Hour</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="16" ng-model="calendar.endHour">
-                      </div>
-                    </div>
-
-                    <div class="row event">
-                      <label class="col-sm-4 control-label">End Minutes</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="30" ng-model="calendar.endMinutes">
+                        <input type="time" class="form-control" placeholder="16" ng-model="calendar.endTime">
                       </div>
                     </div>
                 </p>
