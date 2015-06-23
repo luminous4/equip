@@ -1,7 +1,12 @@
 angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, User) {
+  .controller('CalendarCtrl', function($scope, FirebaseFactory) {
     // console.log('in CalendarCtrl');
+    var allUsers = FirebaseFactory.getCollection('users');
+    var currentUser = FirebaseFactory.getCurrentUser();
+
+    //TODO (select from drop down)
+    var eventProjectId = this.project;
 
     this.saveNewEvent = function() {
       // console.log('add event clicked');
@@ -9,41 +14,13 @@ angular.module('equip')
       newEvent['title'] = this.title;
       newEvent['start'] = this.startYear + ' ' + this.startMonth  + ' ' + this.startDay  + ' ' + this.startHour  + ':' + this.startMinutes;
       newEvent['end'] = this.endYear + ' ' + this.endMonth  + ' ' + this.endDay  + ' ' + this.endHour  + ':' + this.endMinutes;
-      newEvent['id'] = 3;
-      newEvent['className'] = 'test';
       newEvent['allDay'] = false;
       newEvent['stick'] = true;
+      newEvent['userId'] = currentUser.uid;
+      newEvent['projectId'] = eventProjectId || 'Test Project';
 
-      // console.log('newEvent', newEvent);
-      $scope.events.events.push(newEvent);
-      console.log('eventSources after adding event', this.eventSources);
-    };
-
-    $scope.events = {
-      events: [
-        {
-          title: 'Event1',
-          start: '2015 06 20 14:30',
-          end: '2015 06 20 16:00',
-          id: '1',
-          url: '#/index/projects',
-          className: 'test',
-          allDay: false,
-          stick: true
-        },
-        {
-          title: 'Event2',
-          start: '2015 06 21 11:30',
-          end: '2015 06 21 12:00',
-          id: '2',
-          url: '#/index/projects',
-          className: 'anotherTest',
-          allDay: false,
-          stick: true
-        },
-      ],
-      color: 'lightblue',   // optional
-      textColor: 'black' // optional
+      FirebaseFactory.addToCollection('events', newEvent);
+      console.log('added event:', newEvent.title);
     };
 
     this.uiConfig = {
@@ -57,8 +34,8 @@ angular.module('equip')
         }
       }
   };
-    /* event sources array*/
 
-    this.eventSources = [$scope.events];
-    console.log('eventSources', this.eventSources);
+  var allEvents = FirebaseFactory.getCollection('events');
+  this.eventSources = [allEvents];
+  // console.log('eventSources', this.eventSources);
 });
