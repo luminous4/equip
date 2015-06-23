@@ -23,6 +23,9 @@
     "url": "https://github.com/luminous4/equip/issues"
   },
   "homepage": "https://github.com/luminous4/equip",
+  "engines" : {
+    "node"  : "0.12.0"
+  },
   "dependencies": {
     "body-parser": "^1.12.4",
     "express": "^4.12.4",
