@@ -1,6 +1,6 @@
 # Equip #
 
-## Equip your team with the tools you'll need. ##
+Equip your team with the tools you'll need.
 
 ## Demo ##
 [http://luminous4-equip.herokuapp.com](http://luminous4-equip.herokuapp.com)
