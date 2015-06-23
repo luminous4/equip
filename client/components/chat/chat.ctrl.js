@@ -1,15 +1,16 @@
 angular.module('equip')
 
-.controller('ChatCtrl', function($scope, $firebaseArray, $location, $anchorScroll, $window, User, refUrl) {
+.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, $location, $window, User, refUrl, FirebaseFactory) {
 
-  var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-  var userId = JSON.parse(userObj).uid;
-
+  var userId = FirebaseFactory.getCurrentUser().uid;
 
   var ref = new Firebase(refUrl);
-  var chatMessages = $firebaseArray(ref.child("messages"));
 
-  $scope.messages = chatMessages;
+  $rootScope.$watch('selectedTeam', function() {
+    if ($rootScope.selectedTeam) {
+      $scope.messages = FirebaseFactory.getCollection(['teams', $rootScope.selectedTeam.$value, 'messages']);
+    }
+  });
 
   var getFromFirebase = function(collection, firebase, cb) {
     firebase.child(collection).child(userId).once('value', function(data) {
@@ -34,13 +35,4 @@ angular.module('equip')
     this.message = "";
   };
 
-  var scrollToBottom = function() {
-    $location.hash('chat-bottom');
-    $anchorScroll();
-  };
-
-  $scope.messages.$loaded(function() {
-    console.log("Messages fetched succesfully");
-    scrollToBottom();
-  });
 })
