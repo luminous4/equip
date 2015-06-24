@@ -36,9 +36,15 @@
 .row.event {
   padding: 5px;
 }
+.chat-name {
+  display: inline;
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 100;
+}
 .chat-text {
-  font-size: 25px;
-  font-weight: 200;
+  font-size: 15px;
+  font-weight: 500;
 }
 .chat-display, 
 .settings-display {
