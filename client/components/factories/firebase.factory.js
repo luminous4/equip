@@ -29,7 +29,7 @@ angular.module('equip')
       if(Array.isArray(input)) {
         var result = ref;
         if (!topLevel){
-          result = result.child('teams').child($rootScope.selectedTeam.$value);
+          result = ref.child('teams').child($rootScope.selectedTeam.$value);
         }
         for(var i = 0; i < input.length; i++) {
           result = result.child(input[i]);
@@ -37,7 +37,7 @@ angular.module('equip')
         return result;
       } else if (typeof input === 'string') {
           if (!topLevel) {
-            return result.child('teams').child($rootScope.selectedTeam.$value).child(input);
+            return ref.child('teams').child($rootScope.selectedTeam.$value).child(input);
           }
           return ref.child(input);
       } else {
