@@ -101,7 +101,8 @@
     }
 
   })
-  .filter('search', function(){
+
+  .filter('teamSearch', function(){
 
     return function(arr, searchString){
 

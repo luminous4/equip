@@ -49,6 +49,10 @@ angular.module('equip')
       return $firebaseArray(translateReference(path, topLevel));
     };
 
+    var getObject = function(path, topLevel) {
+      return $firebaseObject(translateReference(path, topLevel));
+    }
+
     var addToCollection = function(path, newItem, topLevel) {
       newItem = firebaseSterilization(newItem);
       var targetCollection = translateReference(path, topLevel);
@@ -77,11 +81,30 @@ angular.module('equip')
       return user;
     };
 
+    var getCurrentTeamUserlist = function() {
+      var that = this;
+
+      var teamUsers = FirebaseFactory.getCollection('users');
+      this.teamContacts = [];
+
+      var ref = new Firebase(refUrl);
+      
+      teamUsers.$loaded().then(function(){
+          console.log(teamUsers);
+        angular.forEach(teamUsers, function(user) {
+          console.log(user);
+          that.teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
+        })
+        console.log(that.teamContacts);
+      });
+    };
+
     return {
       getCollection: getCollection,
       addToCollection: addToCollection,
       updateItem: updateItem,
       removeItem: removeItem,
-      getCurrentUser: getCurrentUser
+      getCurrentUser: getCurrentUser,
+      getCurrentTeamUserlist: getCurrentTeamUserlist
     };
   })
