@@ -1,7 +1,7 @@
 angular.module('equip')
 
   .factory('User', function($location, $state, $window, refUrl) {
-    var login = function(email, password, firebaseLoginObj) {
+    var login = function(email, password, firebaseLoginObj, callback) {
       console.log('inside login func in factory');
 
       firebaseLoginObj.$authWithPassword({
@@ -13,9 +13,11 @@ angular.module('equip')
           console.log('token in login func in user factory:', authData.token);
           $window.localStorage.setItem('equipAuth', authData.token);
           $state.go('index.home');
+          // callback(true);
         })
         .catch(function(error) {
           console.log('Authentication error in login:', + error);
+          callback(false);
         });
     };
 

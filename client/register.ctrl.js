@@ -6,11 +6,13 @@ angular.module('equip')
 
     $scope.success = true;
 
-    this.register = function() {
+    $scope.register = function() {
       // console.log('just clicked register button');
-      User.register(this.email, this.password, authObj, function(success) {
+      User.register($scope.email, $scope.password, authObj, function(success) {
         if (!success) {
           $scope.success = false;
+          $scope.email = '';
+          $scope.password = '';
         }
       });
     };
