@@ -51,8 +51,8 @@ function config($stateProvider, $urlRouterProvider) {
 		})
 		.state('index.team', {
 			url: '/team',
-			templateUrl: 'components/team/team.html',
-			controller: 'TeamController as teamCtrl',
+			templateUrl: 'components/contactList/contactList.html',
+			controller: "ContactController as contactCtrl",
 			data: { pageTitle: 'Team Directory' },
 			authenticate: true
 		})

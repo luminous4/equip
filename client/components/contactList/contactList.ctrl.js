@@ -1,7 +1,7 @@
 (function() {
   angular.module('equip')
 
-  .controller('TeamController', function($scope, $state, $stateParams, 
+  .controller('ContactController', function($scope, $state, $stateParams, 
                                             $firebaseArray, refUrl, $firebaseObject) {
     var ref = new Firebase(refUrl);
     this.allUsers = $firebaseArray(ref.child('users'));
@@ -15,7 +15,7 @@
     this.tab = 1;
 
     this.currentClient = null;
-    this.currentTeamMember = null;
+    this.currentContact = null;
 
     this.searchString = '';
 
@@ -25,7 +25,7 @@
       this.searchString = '';
     }
     this.viewUser = function(user) {
-      this.currentTeamMember = user;
+      this.currentContact = user;
     }
     this.viewClient = function(client) {
       this.clientEditMode = false;
