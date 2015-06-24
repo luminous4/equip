@@ -31,7 +31,9 @@
                 <div class="col-lg-12">
                   <div class="file-box" ng-repeat="document in documentList">
                     <div class="file">
-                      <a href="">
+                      <a ui-sref="index.texteditor({ documentId: document.$id,
+                                                     documentTitle: document.title,
+                                                     documentBody: document.body})">
                         <span class="corner"></span>
 
                         <div class="icon">
