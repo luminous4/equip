@@ -18,32 +18,33 @@
     <div class="col-lg-8">
       <div class="ibox float-e-margins">
 
-        <div class="ibox-content">
+        <div class="ibox-content chat-display">
 
           <div>
             <div class="chat-activity-list" scroll-glue>
 
-              <div ng-repeat="message in messages" class="chat-element" ng-class-even="'right'">
-                <a href="#" ng-class-odd="'pull-left'" ng-class-even="'pull-right'">
+              <div ng-repeat="message in messages" class="chat-element row">
+                <div class="col-sm-1">
                   <img alt="image" class="img-circle" ng-src="{{message.userImg}}" />
-                </a>
-                <div class="media-body " ng-class-even="'text-right'">
-                  <strong>{{message.chatName}}</strong>
-                  <p class="m-b-xs">
+                </div>
+                <div class="media-body col-sm-7">
+                  <strong>{{message.chatName}}</strong> 
+                  <small class="text-muted">{{message.createdAt}}</small>
+                  <p class="m-b-xs chat-text">
                     {{message.text}}
                   </p>
-                  <small class="text-muted">{{message.createdAt}}</small>
                 </div>
               </div>
             </div>
           </div>
           <div class="chat-form">
-            <form role="form">
+            <form role="form" ng-submit="chat.addMessage()">
               <div class="form-group">
-                <textarea ng-model="chat.message" class="form-control" placeholder="Message"></textarea>
+                <input ng-model="chat.message" class="form-control" placeholder="Say something!"></input>
               </div>
               <div class="text-right">
-                <button ng-click="chat.addMessage()" type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Send message</strong></button>
+                <h2 ng-show="!chat.canSend">Please join a team!</h2>
+                <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Send message</strong></button>
               </div>
             </form>
           </div>

@@ -5,6 +5,7 @@ angular.module('equip')
   var userId = FirebaseFactory.getCurrentUser().uid;
 
   var ref = new Firebase(refUrl);
+  this.canSend = true;
 
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
@@ -25,13 +26,16 @@ angular.module('equip')
 
   this.addMessage = function() {
     var date = moment().format('YYYY-MM-DD hh:mm');
-    $scope.messages.$add({
-      chatName: $scope.user,
-      userImg: $scope.img,
-      text: this.message,
-      createdAt: date
-    });
-
+    if (!$rootScope.selectedTeam) {
+      this.canSend = false;
+    } else {
+      $scope.messages.$add({
+        chatName: $scope.user,
+        userImg: $scope.img,
+        text: this.message,
+        createdAt: date
+      });      
+    }
     this.message = '';
   };
 

@@ -9,8 +9,15 @@ angular.module('equip')
 
   $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams'], true);
 
+  $scope.usersTeams.$loaded()
+  .then(function() {
+    this.currentTeamOption = $scope.usersTeams[0];
+    $rootScope.selectedTeam = this.currentTeamOption;
+  });
+
   this.changeContext = function() {
-    $rootScope.selectedTeam = this.selectedTeam;
+    console.log("changedContext: ", this.currentTeamOption);
+    $rootScope.selectedTeam = this.currentTeamOption;
   };
 
   var getFromFirebase = function(collection, firebase, cb) {
