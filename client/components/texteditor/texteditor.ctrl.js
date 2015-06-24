@@ -33,6 +33,7 @@ function TextEditorCtrl($scope, $firebaseObject, User, FirebaseFactory, $statePa
 	* */
 	$scope.saveDocument = function(){
 		console.log('save clicked!');
+		$scope.saveStatus = true;
 		//ref.push({
 		//	title: $scope.document.title,
 		//	body: $scope.document.body
@@ -44,10 +45,37 @@ function TextEditorCtrl($scope, $firebaseObject, User, FirebaseFactory, $statePa
 				body : $scope.document.body
 			});
 		} else {
-			FirebaseFactory.addToCollection('documents', {
+			console.log('save and continue, StateParams docId does not exist');
+			$stateParams.documentId = FirebaseFactory.addToCollection('documents', {
 					title: $scope.document.title,
 					body: $scope.document.body
 			});
+			$stateParams.documentId = $stateParams.documentId.$id;
+		}
+	};
+
+
+	/*
+	 * saveDocument saves the text to Firebase
+	 * */
+	$scope.saveAndExit = function(){
+		//ref.push({
+		//	title: $scope.document.title,
+		//	body: $scope.document.body
+		//});
+
+		if($stateParams.documentId || $scope.saveStatus) {
+			FirebaseFactory.updateItem(['documents', $stateParams.documentId], {
+				title: $scope.document.title,
+				body : $scope.document.body
+			});
+			$state.go('index.documents');
+		} else {
+			FirebaseFactory.addToCollection('documents', {
+				title: $scope.document.title,
+				body: $scope.document.body
+			}).$loaded().then(console.log('this loaded'));
+			$state.go('index.documents');
 		}
 	};
 
