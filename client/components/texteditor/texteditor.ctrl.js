@@ -1,4 +1,4 @@
-function TextEditorCtrl($scope, $firebaseObject, User){
+function TextEditorCtrl($scope, $firebaseObject, User, FirebaseFactory){
 
   console.log('token available in TextEditorCtrl:', User.isAuth());
 
@@ -22,9 +22,13 @@ function TextEditorCtrl($scope, $firebaseObject, User){
 	* */
 	$scope.saveDocument = function(){
 		console.log('save clicked!');
-		ref.push({
-			title: $scope.document.title,
-			body: $scope.document.body
+		//ref.push({
+		//	title: $scope.document.title,
+		//	body: $scope.document.body
+		//});
+		FirebaseFactory.addToCollection('documents', {
+				title: $scope.document.title,
+				body: $scope.document.body
 		});
 	};
 }

@@ -12,7 +12,7 @@
   </div>
 </div>
 <!-- Document Controller -->
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content" ng-controller="DocumentCtrl">
   <div class="row">
     <div class="col-md-3">
       <div class="ibox float-e-margins">
@@ -20,10 +20,30 @@
           <div class="file-manager">
             <a ui-sref="index.texteditor"><button class="btn btn-primary btn-block">New Document</button></a>
             <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
             <!-- Start File Content -->
             <div class="col-lg-9 animated fadeInRight">
               <div class="row">
                 <div class="col-lg-12">
+                  <div class="file-box" ng-repeat="document in documentList">
+                    <div class="file">
+                      <a href="">
+                        <span class="corner"></span>
+
+                        <div class="icon">
+                          <i class="fa fa-file"></i>
+                        </div>
+                        <div class="file-name">
+                          {{document.title}}
+                          <br/>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
                   <h5>Files</h5>
 
                   <div ibox-tools></div>
@@ -36,8 +56,3 @@
               </div>
               <!--End File Content-->
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
