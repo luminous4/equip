@@ -24,12 +24,17 @@
       <p>Please login</p>
       <form class="m-t" role="form">
         <div class="form-group">
-          <input ng-model="userLogin.email" type="email" class="form-control" placeholder="Email" required="">
+          <input ng-model="email" type="email" class="form-control" placeholder="Email" required="">
         </div>
         <div class="form-group">
-          <input ng-model="userLogin.password" type="password" class="form-control" placeholder="Password" required="">
+          <input ng-model="password" type="password" class="form-control" placeholder="Password" required="">
         </div>
-        <button ng-click="userLogin.login()" class="btn btn-primary block full-width m-b">Login</button>
+
+        <div ng-if="!success">
+          <p>Something went wrong. Please try again.</p>
+        </div>
+
+        <button ng-click="login()" class="btn btn-primary block full-width m-b">Login</button>
 
         <a ui-sref="forgot_password"><small>Forgot password?</small></a>
         <p class="text-muted text-center"><small>Do not have an account?</small></p>

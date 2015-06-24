@@ -24,15 +24,15 @@
       <p>Please register</p>
       <form class="m-t" role="form" name="registerForm">
         <div class="form-group">
-          <input ng-model="userRegister.email" name="email" type="email" class="form-control" placeholder="Email" required="">
+          <input ng-model="email" name="email" type="email" class="form-control" placeholder="Email" required="">
         </div>
         <div ng-if="!(success)">
           <p>Your email is already taken. Please try again.</p>
         </div>
         <div class="form-group">
-          <input ng-model="userRegister.password" type="password" class="form-control" placeholder="Password" required="">
+          <input ng-model="password" type="password" class="form-control" placeholder="Password" required="">
         </div>
-        <button ng-click="userRegister.register()" ng-disabled="!(success)" class="btn btn-primary block full-width m-b">Register</button>
+        <button ng-click="register()" ng-disabled="!(success)" class="btn btn-primary block full-width m-b">Register</button>
       </form>
       <p class="m-t"> <small>&copy; 2015 Luminous4</small> </p>
     </div>
