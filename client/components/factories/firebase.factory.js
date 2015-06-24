@@ -57,7 +57,9 @@ angular.module('equip')
       newItem = firebaseSterilization(newItem);
       var targetCollection = translateReference(path, topLevel);
       var addedItem = targetCollection.push(newItem);
+      addedItem = $firebaseObject(addedItem);
       console.log('added to:', path);
+      console.log('added item from firebase factory', addedItem);
       return addedItem;
     };
 
