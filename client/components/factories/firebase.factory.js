@@ -49,6 +49,10 @@ angular.module('equip')
       return $firebaseArray(translateReference(path, topLevel));
     };
 
+    var getObject = function(path, topLevel) {
+      return $firebaseObject(translateReference(path, topLevel));
+    }
+
     var addToCollection = function(path, newItem, topLevel) {
       newItem = firebaseSterilization(newItem);
       var targetCollection = translateReference(path, topLevel);
@@ -83,16 +87,15 @@ angular.module('equip')
       var teamUsers = FirebaseFactory.getCollection('users');
       this.teamContacts = [];
 
-      console.log(teamUsers);
-
       var ref = new Firebase(refUrl);
       
       teamUsers.$loaded().then(function(){
-        angular.forEach(teamUsers, function(user) {
           console.log(teamUsers);
-          that.teamContacts.push($firebaseObject(ref.child('users').child(user.$id)));
+        angular.forEach(teamUsers, function(user) {
+          console.log(user);
+          that.teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
         })
-        console.log(that.teamContacts); 
+        console.log(that.teamContacts);
       });
     };
 
