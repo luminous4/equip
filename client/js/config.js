@@ -66,6 +66,8 @@ function config($stateProvider, $urlRouterProvider) {
 			url: '/texteditor',
 			templateUrl: 'components/texteditor/texteditor.html',
 			data: { pageTitle: 'Text Editor' },
+			controller: "TextEditorCtrl as TextEditorCtrl",
+			params: { documentId: null, documentTitle: null, documentBody: null },
 			authenticate: true
 		})
 		.state('index.settings', {

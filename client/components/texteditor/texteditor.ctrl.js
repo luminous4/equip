@@ -1,7 +1,7 @@
 function TextEditorCtrl($scope, $firebaseObject, User, FirebaseFactory, $stateParams, $firebaseArray, $state){
 	var ref = new Firebase('https://mksequip.firebaseio.com/documents');
 	var Firedoc = $firebaseArray(ref);
-	console.log('docid',$stateParams.documentId);
+
 	if($stateParams.documentId) {
 		var get = Firedoc.$getRecord($stateParams.documentId);
 		console.log('get', get);
@@ -37,10 +37,18 @@ function TextEditorCtrl($scope, $firebaseObject, User, FirebaseFactory, $statePa
 		//	title: $scope.document.title,
 		//	body: $scope.document.body
 		//});
-		FirebaseFactory.addToCollection('documents', {
+		if($stateParams.documentId) {
+			console.log('update');
+			FirebaseFactory.updateItem(['documents', $stateParams.documentId], {
 				title: $scope.document.title,
-				body: $scope.document.body
-		});
+				body : $scope.document.body
+			});
+		} else {
+			FirebaseFactory.addToCollection('documents', {
+					title: $scope.document.title,
+					body: $scope.document.body
+			});
+		}
 	};
 
 	/*
