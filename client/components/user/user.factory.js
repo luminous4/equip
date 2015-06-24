@@ -13,7 +13,7 @@ angular.module('equip')
           console.log('token in login func in user factory:', authData.token);
           $window.localStorage.setItem('equipAuth', authData.token);
           $state.go('index.home');
-          // callback(true);
+          callback(true);
         })
         .catch(function(error) {
           console.log('Authentication error in login:', + error);
