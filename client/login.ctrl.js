@@ -4,8 +4,16 @@ angular.module('equip')
     var ref = new Firebase(refUrl);
     var loginObj = $firebaseAuth(ref);
 
-    this.login = function() {
+    $scope.success = true;
+
+    $scope.login = function() {
       console.log('just clicked login button');
-      User.login(this.email, this.password, loginObj);
+      User.login($scope.email, $scope.password, loginObj, function(success) {
+        if (!success) {
+          $scope.success = false;
+          $scope.email = '';
+          $scope.password = '';
+        }
+      });
     };
   })
