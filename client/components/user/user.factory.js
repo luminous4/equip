@@ -1,7 +1,6 @@
 angular.module('equip')
 
   .factory('User', function($location, $state, $window, refUrl) {
-
     var login = function(email, password, firebaseLoginObj) {
       console.log('inside login func in factory');
 
@@ -20,7 +19,7 @@ angular.module('equip')
         });
     };
 
-    var register = function(email, password, firebaseAuthObj) {
+    var register = function(email, password, firebaseAuthObj, callback) {
       console.log('inside register func in factory');
       console.log('email in register func in factory', email);
 
@@ -41,9 +40,11 @@ angular.module('equip')
         });
 
         $location.path('/login');
+        callback(true);
       })
       .catch(function(error) {
         console.log('error:', + error);
+        callback(false);
       });
     };
 
