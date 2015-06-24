@@ -8,7 +8,7 @@ angular.module('equip')
 
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
-      $scope.messages = FirebaseFactory.getCollection(['teams', $rootScope.selectedTeam.$value, 'messages']);
+      $scope.messages = FirebaseFactory.getCollection('messages');
     }
   });
 

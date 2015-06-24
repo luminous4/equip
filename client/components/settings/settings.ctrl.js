@@ -15,25 +15,25 @@ angular.module('equip')
 
   this.saveUserInfo = function() {
     if (this.displayName) {
-      FirebaseFactory.updateItem(['users', userId], {displayName: this.displayName});
+      FirebaseFactory.updateItem(['users', userId], {displayName: this.displayName}, true);
     }
 
     if (this.teamName) {
       checkIfTeamExists(this.teamName, function(teamName, exists) {
         if(!exists) {
-          FirebaseFactory.updateItem(['teams', teamName], {users: null});
+          FirebaseFactory.updateItem(['teams', teamName], {users: null}, true);
         }
-        FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId);
+        FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId, true);
       });
 
-      FirebaseFactory.addToCollection(['users', userId, 'teams'], this.teamName);
+      FirebaseFactory.addToCollection(['users', userId, 'teams'], this.teamName, true);
     }
 
     if (this.phoneNumber) {
-      FirebaseFactory.updateItem(['users', userId], {phoneNumber: this.phoneNumber});
+      FirebaseFactory.updateItem(['users', userId], {phoneNumber: this.phoneNumber}, true);
     }
     if (this.imgUrl) {
-      FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl});
+      FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl}, true);
     }
 
     this.displayName = '';

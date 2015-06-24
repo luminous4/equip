@@ -2,7 +2,7 @@ angular.module('equip')
 
   .controller('CalendarCtrl', function($scope, FirebaseFactory) {
     // console.log('in CalendarCtrl');
-    var allUsers = FirebaseFactory.getCollection('users');
+    var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
 
     //TODO (select from drop down)
@@ -78,8 +78,10 @@ angular.module('equip')
       newEvent.stick = true;
       newEvent.userId = currentUser.uid;
       newEvent.projectId = eventProjectId || 'Test Project';
-
-      FirebaseFactory.addToCollection('events', newEvent);
+      
+      // at current moment, events are top level, so must pass true
+      // when events move to teams, take true out!
+      FirebaseFactory.addToCollection('events', newEvent, true);
       console.log('added event:', newEvent.title);
     };
 
@@ -95,7 +97,9 @@ angular.module('equip')
       }
   };
 
-  var allEvents = FirebaseFactory.getCollection('events');
+  // at current moment, events are top level, so must pass true
+  // when events move to teams, take true out!
+  var allEvents = FirebaseFactory.getCollection('events', true);
   this.eventSources = [allEvents];
   // console.log('eventSources', this.eventSources);
 });

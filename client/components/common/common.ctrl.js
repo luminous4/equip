@@ -7,7 +7,7 @@ angular.module('equip')
 
   var ref = new Firebase(refUrl);
 
-  $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams']);
+  $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams'], true);
 
   this.changeContext = function() {
     $rootScope.selectedTeam = this.selectedTeam;
