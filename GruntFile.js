@@ -108,7 +108,7 @@ module.exports = function(grunt) {
         ]
       },
       css: {
-        files: 'client/**/*.css',
+        files: 'client/css/*.css',
         tasks: ['cssmin']
       }
     },
