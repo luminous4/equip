@@ -13,8 +13,10 @@
   .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
                                             $firebaseArray, refUrl, $firebaseObject) {
 
-    this.teams = FirebaseFactory.getCollection('teams')
-    this.allUsers = FirebaseFactory.getCollection('users');
+    this.teams = FirebaseFactory.getCollection('teams', true);
+    this.allUsers = FirebaseFactory.getCollection('users', true);
+
+    console.log(this.teams);
 
     this.tabs = [
       "Team List",
@@ -60,6 +62,12 @@
       this.editingTeam = {
         name: "Team Title",
         label: "",
+        userList: [],
+        calendarEvents: [],
+        completion: null
+      };
+      this.setTab(0);
+    }
     this.editProjectSubmit = function(toDelete) {
 
       var that = this;
@@ -79,7 +87,7 @@
       //UI functions
     this.getUserPicture = function(userId) {
       if(userId === null || userId === undefined) return "img/user.png";
-      if(userId.imgUrl !== undefined) return userId.imgUrl;
+        if(userId.imgUrl !== undefined) return userId.imgUrl;
 
       for(var i = 0; i < this.allUsers.length; i++) {
         if(this.allUsers[i].$id.toString() === userId.toString()) {
@@ -107,7 +115,7 @@
 
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item){
-        if(item !== null && item !== undefined && item.name.toLowerCase().indexOf(searchString) !== -1){
+        if(item !== null && item !== undefined && item.$id.toLowerCase().indexOf(searchString) !== -1){
           result.push(item);
         }
 

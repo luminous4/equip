@@ -42,18 +42,18 @@ function config($stateProvider, $urlRouterProvider) {
 			data: { pageTitle: 'Chat' },
 			authenticate: true
 		})
-		.state('index.projects', {
-			url: '/projects',
-			templateUrl: 'components/projects/projects.html',
-			controller: 'ProjectController as projectCtrl',
-			data: { pageTitle: 'Projects' },
+		.state('index.teamedit', {
+			url: '/team',
+			templateUrl: 'components/teamEdit/teamEdit.html',
+			controller: 'TeamController as teamEditCtrl',
+			data: { pageTitle: 'Edit Your Teams' },
 			authenticate: true
 		})
-		.state('index.team', {
-			url: '/team',
+		.state('index.contactlist', {
+			url: '/contactlist',
 			templateUrl: 'components/contactList/contactList.html',
 			controller: "ContactController as contactCtrl",
-			data: { pageTitle: 'Team Directory' },
+			data: { pageTitle: 'Contact List' },
 			authenticate: true
 		})
 		.state('index.documents', {
