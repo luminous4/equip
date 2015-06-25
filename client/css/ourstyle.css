@@ -6,13 +6,17 @@
 .team-list {
   padding-left: 10px;
 }
-.projectuserHover:hover {
-    background-color: #e5e5e5;
+.teamuserHover:hover {
+  background-color: #f1f1f1;
 }
-.projectuserHover {
+.teamuserHover:active{
+  background-color: #ccc;
+}
+.teamuserHover {
     padding:20px;
+    width:200px;
 }
-.projectuserName {
+.teamuserName {
     font-size:14px;
     padding:10px;
 }

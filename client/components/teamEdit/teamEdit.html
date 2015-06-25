@@ -52,21 +52,10 @@
             <table class="table table-hover" >
               <tbody>
                 <tr ng-repeat="team in teamEditCtrl.teams | teamSearch:teamEditCtrl.searchString">
-                  <td class="project-status">
-                    <span class="label label-primary">Label?</span>
-                  </td>
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
                     <br/>
                     <small>Created (created at date)</small>
-                  </td>
-                  <td class="project-completion">
-                    <div ng-show="(team.completion > -1)">
-                      <small>Completion with: (completion)%</small>
-                      <div class="progress progress-mini">
-                        <div style="width: {{team.completion}}%;" class="progress-bar"></div>
-                      </div>
-                    </div>
                   </td>
                   <td class="project-people">
                     <span ng-repeat="userId in team.users">
@@ -76,8 +65,8 @@
                     </span>
                   </td>
                   <td class="project-actions">
-                    <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-                    <a ng-click="teamEditCtrl.editTeam Edit(team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                    <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
+                    <a ng-click="teamEditCtrl.setTab(2, team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
                   </td>
                 </tr>
               </tbody>
@@ -86,7 +75,7 @@
         </div>
 
         <!-- Create and Edit Team Edit tabs (there is a lot of overlap) -->
-        <div class="ibox-content" ng-show="teamEditCtrl.currentTab === 'Create A Team Edit' || teamEditCtrl.currentTab === 'Edit Team Edit'">
+        <div class="ibox-content" ng-show="teamEditCtrl.currentTab === 'Create A Team' || teamEditCtrl.currentTab === 'Edit Team'">
           <div class="row">
             <div class="col-lg-8">
               <div class="ibox float-e-margins">
@@ -95,78 +84,43 @@
                   <table class="table table-hover">
                     <tbody>
                       <tr>
-                        <td class="project-status">
-                          <span class="label label-primary">{{teamEditCtrl.editingTeam.label}}</span>
-                        </td>
                         <td class="project-title">
-                          <a ui-sref="team_detail">{{teamEditCtrl.editingTeam.name}}</a>
+                          <a ui-sref="team_detail">{{teamEditCtrl.editingTeam.$id}}</a>
                           <br/>
                           <small>Created 14.08.2014</small>
                         </td>
-                        <td class="project-completion" ng-show="(teamEditCtrl.editingTeam.completion !== null)">
-                          <small>Completion with: {{teamEditCtrl.editingTeam.completion}}%</small>
-                          <div class="progress progress-mini">
-                            <div style="width: {{teamEditCtrl.editingTeam.completion}}%;" class="progress-bar"></div>
-                          </div>
-                        </td>
                         <td class="project-people">
-                          <span ng-repeat="userId in teamEditCtrl.editingTeam.userList"><a href="google.com"><img style="height:50px" alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(userId)}}"></a></span>
+                          <span ng-repeat="user in teamEditCtrl.editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user.$id)}}"></a></span>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div class="ibox-title">
-                  <div ibox-tools></div>
                 </div>
                 <div class="col-lg-12">
                   <div class="ibox float-e-margins">
                     <div class="ibox-content">
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" placeholder="Team Edit Title" ng-model="teamEditCtrl.editingTeam.name"></div>
+                        <div class="col-sm-10"><input type="text" class="form-control" placeholder="Team Title" ng-model="teamEditCtrl.editingTeam.$id"></div>
                       </div>
                     </div>
                   </div>
-                  <div class="ibox float-e-margins">
-                    <div class="ibox-content">
-                      <div class="form-group">
-                        <label class="col-sm-2 control-label">Label</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" placeholder="Label" ng-model="teamEditCtrl.editingTeam.label"></div>
-                      </div>
-                    </div>
-                  </div>                                    
                   <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
-                        <div ng-repeat="user in teamEditCtrl.allUsers">
-                          <label style="text-align:left;" class="project-people teamuserHover" ng-click="teamEditCtrl.flipPresence(user)"> 
-                            <img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user)}}"></img>
-                            <span class="teamuserName">{{user.displayName  || user.name}}</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                          <h4>
-                            Completion percentage
-                          </h4>
-                          <div class="row m-b-lg">
-                            <div slider ng-model="teamEditCtrl.editingTeam.completion" start=0 end=100 step=10></div>
-                            <br/>
-                            <span ng-show="(teamEditCtrl.editingTeam.completion !== null)">
-                              Completion with: {{teamEditCtrl.editingTeam.completion}}%
-                            </span>
+                        <label ng-click="teamEditCtrl.flipPresence(user)" ng-repeat="user in teamEditCtrl.allUsers" style="text-align:left;" class="project-people teamuserHover">
+                          <div> 
+                            <img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user.$id)}}"></img>
+                            <span class="teamuserName">{{user.displayName}}</span>
                           </div>
-                        </div>
+                        </label>
                       </div>
                     </div>
                     <div class="input-group m-b">
-                      <button type="button" ng-show="teamEditCtrl.currentTab === 'Create A Team'" ng-click="teamEditCtrl.createTeam EditSubmit()" class="btn btn-primary">Create a new team!</button> 
-                      <button type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team Edit'" ng-click="teamEditCtrl.editTeam EditSubmit()" class="btn btn-primary">Save changes!</button>   
-                      <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team Edit'" ng-click="teamEditCtrl.editTeam EditSubmit(true)" class="btn btn-primary">Delete this team!</button>
+                      <button type="button" ng-show="teamEditCtrl.currentTab === 'Create A Team'" ng-click="teamEditCtrl.createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
+                      <button type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.editTeamSubmit()" class="btn btn-primary">Save changes!</button>   
+                      <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.editTeamSubmit(true)" class="btn btn-primary">Delete this team</button>
+                      <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.setTab(0)" class="btn btn-primary">Cancel</button>
                     </div>
                   </div>
                 </div>
