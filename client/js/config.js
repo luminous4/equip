@@ -22,9 +22,8 @@ function config($stateProvider, $urlRouterProvider) {
 			authenticate: true
 		})
 		.state('index.home', {
-			url: '',
+			url: '/home',
 			templateUrl: 'components/home/home.html',
-			controller: 'HomeCtrl as home',
 			data: { pageTitle: 'Home' },
 			authenticate: true
 		})

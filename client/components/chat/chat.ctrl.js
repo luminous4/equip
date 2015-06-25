@@ -48,4 +48,11 @@ angular.module('equip')
     this.message = '';
   };
 
-})
+    /*Start Dashboard Specific Functions*/
+    var init = function() {
+      $scope.messagesDashboard = $scope.messages.slice(0, 5);
+      console.log($scope.messagesDashboard);
+    };
+    /*End Dashboard Specific Functions*/
+
+});
