@@ -49,14 +49,13 @@
           <div class="row event">
             <label class="col-sm-4 control-label">Full Day Event</label>
             <div class="col-sm-8">
-              <input type="radio" ng-model="calendar.fulldayEvent" value="true"> Yes
-              <input type="radio" ng-model="calendar.fulldayEvent" value="false"> No
+              <input type="checkbox" ng-model="calendar.fulldayEvent">
             </div>
           </div>
 
         </p>
 
-        <p>
+        <div ng-hide="calendar.fulldayEvent">
           <div class="row event">
             <label class="col-sm-4 control-label">End Date</label>
             <div class="col-sm-8">
@@ -70,15 +69,20 @@
               <input type="time" class="form-control" placeholder="16" ng-model="calendar.endTime">
             </div>
           </div>
-        </p>
+        </div>
 
-        <div>
+        <p>
           <div class="row event">
-            <div class="col-sm-8 col-sm-offset-4">
-              <button class="btn btn-primary" ng-click="calendar.saveNewEvent()">Add Event</button>
+            <div class="col-sm-offset-4">
+              <div class="col-sm-4">
+                <button class="btn btn-primary btn-sm" ng-click="calendar.saveNewEvent()">Add Event</button>
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-white btn-sm" ng-click="calendar.cancelNewEvent()">Cancel</button>
+              </div>
             </div>
           </div>
-        </div>
+        </p>
       </div> <!-- userForm -->
     </div> <!-- col-lg-12 -->
 

@@ -5,6 +5,13 @@ angular.module('equip')
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
 
+    this.fulldayEvent = true;
+    this.title = '';
+    this.startDate = '';
+    this.startTime = '';
+    this.endDate = '';
+    this.endTime = '';
+
     var getDate = function(dateObj) {
       var date;
       console.log('in getDate: dateObj', dateObj);
@@ -41,40 +48,45 @@ angular.module('equip')
       return time;
     };
 
-    // var fullDay = this.fulldayEvent;
-      // console.log('fullDay', fullDay);
-
     this.saveNewEvent = function() {
       console.log('add event clicked');
-      var eventStart;
-      var eventEnd;
       var newEvent = {};
 
-      console.log('this.startDate after click', this.startDate);
-
-      var startDate = getDate(this.startDate); // called twice after first time adding an event
-      var startTime = getTime(this.startTime);
-      eventStart = startDate + ' ' + startTime;
+      var startDate = getDate(this.startDate);
+      var startTime;
 
       var endDate;
       var endTime;
 
-      if (this.endDate === undefined && this.endTime === undefined) {
-        endDate = startDate;
-        endTime = getTime(this.startTime, true);
-        eventEnd = endDate + ' ' + endTime;
-      } else if (this.endDate === undefined) {
-        endDate = startDate;
-        endTime = getTime(this.endTime);
-        eventEnd = endDate + ' ' + endTime;
+      var eventStart;
+      var eventEnd;
+
+      // full day event
+      if (this.fulldayEvent === true) {
+        startTime = this.startTime = '09:00';
+        endTime = this.endTime = '20:00';
       } else {
-        endDate = getDate(this.endDate);
+        startTime = getTime(this.startTime);
         endTime = getTime(this.endTime);
-        eventEnd = endDate + ' ' +  endTime;
       }
 
+      eventStart = startDate + ' ' + startTime;
 
+      // no end date entered
+      if (this.endDate.length === 0) {
+        endDate = startDate;
+      } else {
+        endDate = getDate(this.endDate);
+      }
 
+      // end time not set yet
+      if (!endTime) {
+        endTime = getTime(this.endTime);
+      }
+
+      eventEnd = endDate + ' ' +  endTime;
+
+      // set new event properties
       newEvent.title = this.title;
       newEvent.start = eventStart;
       newEvent.end = eventEnd;
@@ -91,7 +103,7 @@ angular.module('equip')
       this.startTime = '';
       this.endDate = '';
       this.endTime = '';
-      this.fulldayEvent = '';
+      this.fulldayEvent = true;
     };
 
     this.uiConfig = {
