@@ -14,8 +14,7 @@
   </div>
 
   <div class="row chat-main">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <div class="ibox float-e-margins">
 
         <div class="ibox-content chat-display">
@@ -50,7 +49,7 @@
               </div>
             </div>
           <div class="chat-form">
-            <form role="form" ng-submit="chat.addMessage()">
+            <form role="form" class="chat-add" ng-submit="chat.addMessage()">
               <div class="form-group">
                 <input ng-model="chat.message" class="form-control" placeholder="Say something!"></input>
               </div>
@@ -63,7 +62,6 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-2"></div>
   </div>
 
 </div>
