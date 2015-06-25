@@ -5,12 +5,17 @@ angular.module('equip')
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
 
-    this.fulldayEvent = true;
-    this.title = '';
-    this.startDate = '';
-    this.startTime = '';
-    this.endDate = '';
-    this.endTime = '';
+    this.setInputDefaults = function() {
+      this.fulldayEvent = true;
+      this.sameDay = true;
+      this.title = '';
+      this.startDate = '';
+      this.startTime = '';
+      this.endDate = '';
+      this.endTime = '';
+    }
+
+    this.setInputDefaults();
 
     var getDate = function(dateObj) {
       var date;
@@ -39,11 +44,9 @@ angular.module('equip')
       if (hours < 10) {
         hours = '0' + hours;
       }
-
       if (minutes < 10) {
         minutes = '0' + minutes
       }
-
       time = hours + ':' + minutes;
       return time;
     };
@@ -86,24 +89,22 @@ angular.module('equip')
 
       eventEnd = endDate + ' ' +  endTime;
 
-      // set new event properties
+      // ui-calendar event properties
       newEvent.title = this.title;
       newEvent.start = eventStart;
       newEvent.end = eventEnd;
       newEvent.allDay = this.fulldayEvent;
       newEvent.stick = true;
+      // custom event properties
       newEvent.userId = currentUser.uid;
+      newEvent.startDate = startDate;
+      newEvent.startTime = startTime;
+      newEvent.endDate =  endDate;
+      newEvent.endTime = endTime;
 
       // if events should be added to db top level, add true as third arg
       FirebaseFactory.addToCollection('events', newEvent);
-
-      // empty input fields
-      this.title = '';
-      this.startDate = '';
-      this.startTime = '';
-      this.endDate = '';
-      this.endTime = '';
-      this.fulldayEvent = true;
+      this.setInputDefaults();
     };
 
     this.uiConfig = {
