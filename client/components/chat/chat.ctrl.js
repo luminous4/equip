@@ -11,7 +11,7 @@ angular.module('equip')
     if ($rootScope.selectedTeam) {
       $scope.messages = FirebaseFactory.getCollection('messages');
       /*Start Dashboard Specific Functions*/
-      $scope.dashboardMessages = FirebaseFactory.getCollection('messages').$loaded().then(function(data) {
+      $scope.dashboardMessages = $scope.messages.$loaded().then(function(data) {
         $scope.dashboardMessages = data.slice(data.length - 5, data.length);
       });
       /*End Dashboard Specific Functions*/
