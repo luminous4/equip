@@ -11,8 +11,9 @@ angular.module('equip')
       $scope.showDisplayName = userInfo.displayName;
       $scope.showPhoneNumber = userInfo.phoneNumber;
       $scope.showFacebook = userInfo.Facebook;
-      $scope.showGithub = userInfo.Github;
+      $scope.showGitHub = userInfo.GitHub;
       $scope.showLinkedIn = userInfo.LinkedIn;
+      $scope.showTwitter = userInfo.Twitter;
       $scope.showOther = userInfo.Other;      
     })
   })();

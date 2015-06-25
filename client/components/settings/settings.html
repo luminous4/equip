@@ -43,6 +43,7 @@
               <i ng-show="showFacebook" title="{{showFacebook}}" class="fa fa-facebook-square"></i>
               <i ng-show="showGithub" title="{{showGithub}}" class="fa fa-github"></i>
               <i ng-show="showLinkedIn" title="{{showLinkedIn}}" class="fa fa-linkedin"></i>
+              <i ng-show="showTwitter" title="{{showTwitter}}" class="fa fa-twitter"></i>
               <i ng-show="showOther" title="{{showOther}}" class="fa fa-info"></i>
             </span></label>
                 <div class="input-group m-b">
@@ -50,7 +51,8 @@
                     <select ng-model="socialSelect" class="social-select btn btn-white dropdown-toggle col-sm-2">
                       <option val="facebook">Facebook</option>
                       <option val="linkedin">LinkedIn</option>
-                      <option val="github">Github</option>
+                      <option val="github">GitHub</option>
+                      <option val="twitter">Twitter</option>
                       <option val="other">Other</option>
                     </select>
                     <input type="text" ng-model="socialInput" class="form-control social-input">
