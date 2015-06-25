@@ -30,12 +30,12 @@ angular.module('equip')
     getFromFirebase('users', ref, function(data) {
       $scope.name = data.displayName;
       $scope.img = data.imgUrl;
-    });    
+    });
   }
 
   this.signOut = function() {
     $window.localStorage.removeItem('equipAuth');
-    $location.path('/login');      
+    $location.path('/login');
   };
 
 })
