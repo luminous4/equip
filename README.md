@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/luminous4/equip.png?label=ready&title=Ready)](https://waffle.io/luminous4/equip)
 # Equip #
 
 Equip your team with the tools you'll need.
