@@ -22,6 +22,7 @@ angular.module('equip')
 
   this.signOut = function() {
     $window.localStorage.removeItem('equipAuth');
+    $rootScope.selectedTeam = undefined;
     $location.path('/login');
   };
 
