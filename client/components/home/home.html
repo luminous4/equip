@@ -10,7 +10,6 @@
             </div>
             <div class="ibox-content">
               <div>
-
                 <select class="team-select btn btn-white dropdown-toggle"
                         ng-options="team.$value for team in usersTeams track by team.$id"
                         ng-model="currentTeamOption"
@@ -23,49 +22,27 @@
           <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
               <h5>Recent Documents</h5>
+              <a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
               <ul class="list-group">
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Stock Man</a> Check this stock chart. This price is crazy! </p>
-
-                  <div class="text-center m">
-                    <span id="sparkline8"></span>
-                  </div>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-                </li>
-                <li class="list-group-item ">
-                  <p><a class="text-info" href="">@Jonathan Febrick</a> The standard chunk of Lorem Ipsum</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+                <li ng-repeat="document in documentList" class="list-group-item">
+                  <p><a class="text-info" ui-sref="index.texteditor({ documentId: document.$id,
+                                                     documentTitle: document.title,
+                                                     documentBody: document.body})">{{document.title}}</a></p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        <!-- Chat Widget-->
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
               <h5>Recent Chat Messages</h5>
 
               <div class="ibox-tools">
-                <!--<span class="label label-warning-light">10 Messages</span>-->
               </div>
             </div>
             <div class="ibox-content">
@@ -85,18 +62,17 @@
 
                     </div>
                   </div>
-
-
                 </div>
-
-                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
-
+                <a ui-sref="index.chat">
+                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-right"></i> Go to Chat</button>
+                </a>
               </div>
 
             </div>
           </div>
 
         </div>
+        <!-- Calendar Widget -->
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -217,7 +193,5 @@
 
       </div>
     </div>
-
   </div>
-
 </div>
