@@ -1,13 +1,306 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-8">
-    <h2>Home</h2>
-    <ol class="breadcrumb">
-      <li>
-        <a href="index.html">Home</a>
-      </li>
-      <li class="active">
-        <strong>Home</strong>
-      </li>
-    </ol>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="wrapper wrapper-content">
+      <div class="row">
+        <div class="col-lg-4" ng-controller="HomeCtrl as home">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Choose Your Team</h5> <span class="label label-primary">IN+</span>
+              <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+              <div>
+
+                <select class="team-select btn btn-white dropdown-toggle"
+                        ng-options="team.$value for team in usersTeams track by team.$id"
+                        ng-model="currentTeamOption"
+                        ng-change="home.changeContext()">
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Read below comments and tweets</h5>
+              <div ibox-tools></div>
+            </div>
+            <div class="ibox-content no-padding">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
+                </li>
+                <li class="list-group-item">
+                  <p><a class="text-info" href="">@Stock Man</a> Check this stock chart. This price is crazy! </p>
+
+                  <div class="text-center m">
+                    <span id="sparkline8"></span>
+                  </div>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
+                </li>
+                <li class="list-group-item">
+                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+                </li>
+                <li class="list-group-item ">
+                  <p><a class="text-info" href="">@Jonathan Febrick</a> The standard chunk of Lorem Ipsum</p>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
+                </li>
+                <li class="list-group-item">
+                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
+                </li>
+                <li class="list-group-item">
+                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
+                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Recent Chat Messages</h5>
+
+              <div class="ibox-tools">
+                <!--<span class="label label-warning-light">10 Messages</span>-->
+              </div>
+            </div>
+            <div class="ibox-content">
+
+              <div>
+                <div class="feed-activity-list" ng-controller="ChatCtrl">
+
+                  <div class="feed-element" ng-repeat="message in messages">
+                    <a ui-sref="profile" class="pull-left">
+                      <img alt="image" class="img-circle" ng-src="{{message.userImg}}">
+                    </a>
+
+                    <div class="media-body ">
+                      <small class="pull-right">{{message.chatName}}</small>
+                      <strong>{{message.text}}</strong><br>
+                      <small class="text-muted">{{message.createdAt}}</small>
+
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-4">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Alpha project</h5>
+              <div ibox-tools></div>
+            </div>
+            <div class="ibox-content ibox-heading">
+              <h3>You have meeting today!</h3>
+              <small><i class="fa fa-map-marker"></i> Meeting is on 6:00am. Check your schedule to see detail.</small>
+            </div>
+            <div class="ibox-content inspinia-timeline">
+
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-briefcase"></i>
+                    6:00 am
+                    <br/>
+                    <small class="text-navy">2 hour ago</small>
+                  </div>
+                  <div class="col-xs-7 content no-top-border">
+                    <p class="m-b-xs"><strong>Meeting</strong></p>
+
+                    <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the
+                      sale.</p>
+
+                    <p><line-chart data="main.LineChart.data" options="main.LineChart.options"></line-chart></p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-file-text"></i>
+                    7:00 am
+                    <br/>
+                    <small class="text-navy">3 hour ago</small>
+                  </div>
+                  <div class="col-xs-7 content">
+                    <p class="m-b-xs"><strong>Send documents to Mike</strong></p>
+
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-coffee"></i>
+                    8:00 am
+                    <br/>
+                  </div>
+                  <div class="col-xs-7 content">
+                    <p class="m-b-xs"><strong>Coffee Break</strong></p>
+
+                    <p>
+                      Go to shop and find some products.
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-phone"></i>
+                    11:00 am
+                    <br/>
+                    <small class="text-navy">21 hour ago</small>
+                  </div>
+                  <div class="col-xs-7 content">
+                    <p class="m-b-xs"><strong>Phone with Jeronimo</strong></p>
+
+                    <p>
+                      Lorem Ipsum has been the industry's standard dummy text ever since.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-user-md"></i>
+                    09:00 pm
+                    <br/>
+                    <small>21 hour ago</small>
+                  </div>
+                  <div class="col-xs-7 content">
+                    <p class="m-b-xs"><strong>Go to the doctor dr Smith</strong></p>
+
+                    <p>
+                      Find some issue and go to doctor.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="row">
+                  <div class="col-xs-3 date">
+                    <i class="fa fa-comments"></i>
+                    12:50 pm
+                    <br/>
+                    <small class="text-navy">48 hour ago</small>
+                  </div>
+                  <div class="col-xs-7 content">
+                    <p class="m-b-xs"><strong>Chat with Monica and Sandra</strong></p>
+
+                    <p>
+                      Web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
+
+</div>
+<div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
+
+  <div class="heading" draggable="true">
+    <small class="chat-date pull-right">
+      02.19.2015
+    </small>
+    Small chat
+  </div>
+
+  <div class="content" chat-slim-scroll>
+
+    <div class="left">
+      <div class="author-name">
+        Monica Jackson <small class="chat-date">
+        10:02 am
+      </small>
+      </div>
+      <div class="chat-message active">
+        Lorem Ipsum is simply dummy text input.
+      </div>
+
+    </div>
+    <div class="right">
+      <div class="author-name">
+        Mick Smith
+        <small class="chat-date">
+          11:24 am
+        </small>
+      </div>
+      <div class="chat-message">
+        Lorem Ipsum is simpl.
+      </div>
+    </div>
+    <div class="left">
+      <div class="author-name">
+        Alice Novak
+        <small class="chat-date">
+          08:45 pm
+        </small>
+      </div>
+      <div class="chat-message active">
+        Check this stock char.
+      </div>
+    </div>
+    <div class="right">
+      <div class="author-name">
+        Anna Lamson
+        <small class="chat-date">
+          11:24 am
+        </small>
+      </div>
+      <div class="chat-message">
+        The standard chunk of Lorem Ipsum
+      </div>
+    </div>
+    <div class="left">
+      <div class="author-name">
+        Mick Lane
+        <small class="chat-date">
+          08:45 pm
+        </small>
+      </div>
+      <div class="chat-message active">
+        I belive that. Lorem Ipsum is simply dummy text.
+      </div>
+    </div>
+
+
+  </div>
+  <div class="form-chat">
+    <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
+            class="btn btn-primary" type="button">Send
+    </button> </span></div>
+  </div>
+
+</div>
+<div id="small-chat" ng-click="openChat = !openChat">
+
+  <span class="badge badge-warning pull-right">5</span>
+  <a class="open-small-chat">
+    <i class="fa fa-comments"></i>
+
+  </a>
 </div>

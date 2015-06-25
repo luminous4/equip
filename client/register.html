@@ -24,13 +24,23 @@
       <p>Please register</p>
       <form class="m-t" role="form" name="registerForm">
         <div class="form-group">
-          <input ng-model="email" name="email" type="email" class="form-control" placeholder="Email" required="">
+          <div class="input-group m-b">
+          <span class="input-group-addon">
+            <i class="fa fa-user-plus"></i>
+          </span>
+            <input ng-model="email" name="email" type="email" class="form-control" placeholder="Email Address" required="">
+          </div>
         </div>
         <div ng-if="!(success)">
           <p>Your email is already taken. Please try again.</p>
         </div>
         <div class="form-group">
+          <div class="input-group m-b">
+            <span class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </span>
           <input ng-model="password" type="password" class="form-control" placeholder="Password" required="">
+          </div>
         </div>
         <button ng-click="register()" ng-disabled="!(success)" class="btn btn-primary block full-width m-b">Register</button>
       </form>
