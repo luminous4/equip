@@ -3,7 +3,7 @@
 Equip your team with the tools you'll need.
 
 ## Demo ##
-[www.equip.me](http://www.equip.me)
+[www.equipp.me](http://www.equipp.me)
 
 ## Getting Started ##
 1. Clone the repo `git clone https://github.com/luminous4/equip.git`

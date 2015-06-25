@@ -8,6 +8,9 @@ angular.module('equip')
 			if($rootScope.selectedTeam) {
 				var documentList = FirebaseFactory.getCollection('documents');
 				$scope.documentList = documentList;
+				$scope.documentWidget = documentList.$loaded().then(function(data){
+					$scope.documentWidget = data.reverse().slice(0, 5);
+				});
 			}
 		});
 	});

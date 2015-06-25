@@ -27,7 +27,7 @@
             </div>
             <div class="ibox-content no-padding">
               <ul class="list-group">
-                <li ng-repeat="document in documentList" class="list-group-item">
+                <li ng-repeat="document in documentWidget" class="list-group-item">
                   <p><a class="text-info" ui-sref="index.texteditor({ documentId: document.$id,
                                                      documentTitle: document.title,
                                                      documentBody: document.body})">{{document.title}}</a></p>

@@ -21,9 +21,6 @@ angular.module('equip')
       });
 
     this.changeContext = function() {
-      console.log("changedContext: ", $scope.currentTeamOption);
       $rootScope.selectedTeam = $scope.currentTeamOption;
     };
-
-
-  })
+  });
