@@ -1294,19 +1294,19 @@ button.dim:active:before {
     color: #fff;
 }
 /* Chat */
-.chat-activity-list .chat-element {
+/*.chat-activity-list .chat-element {
     border-bottom: 1px solid #e7eaec;
-}
+}*/
 .chat-element:first-child {
     margin-top: 0;
 }
-.chat-element {
+/*.chat-element {
     padding-bottom: 15px;
-}
-.chat-element,
+}*/
+/*.chat-element,
 .chat-element .media {
     margin-top: 15px;
-}
+}*/
 .chat-element,
 .media-body {
     overflow: hidden;
