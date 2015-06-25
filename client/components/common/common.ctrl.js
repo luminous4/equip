@@ -2,8 +2,7 @@ angular.module('equip')
 
 .controller('CommonCtrl', function($scope, $rootScope, $location, $window, refUrl, FirebaseFactory) {
 
-  var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-  var userId = JSON.parse(userObj).uid;
+  var userId = FirebaseFactory.getCurrentUser().uid;
 
   var ref = new Firebase(refUrl);
 
@@ -17,6 +16,7 @@ angular.module('equip')
     getFromFirebase('users', ref, function(data) {
       $scope.name = data.displayName;
       $scope.img = data.imgUrl;
+      $scope.$apply();
     });
   }
 
