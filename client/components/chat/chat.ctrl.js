@@ -10,6 +10,11 @@ angular.module('equip')
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
       $scope.messages = FirebaseFactory.getCollection('messages');
+      /*Start Dashboard Specific Functions*/
+      $scope.dashboardMessages = $scope.messages.$loaded().then(function(data) {
+        $scope.dashboardMessages = data.slice(data.length - 5, data.length);
+      });
+      /*End Dashboard Specific Functions*/
       lastMessageDate = 0;
     }
   });
@@ -47,12 +52,4 @@ angular.module('equip')
     }
     this.message = '';
   };
-
-    /*Start Dashboard Specific Functions*/
-    var init = function() {
-      $scope.messagesDashboard = $scope.messages.slice(0, 5);
-      console.log($scope.messagesDashboard);
-    };
-    /*End Dashboard Specific Functions*/
-
 });

@@ -5,12 +5,11 @@
         <div class="col-lg-4" ng-controller="HomeCtrl as home">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Choose Your Team</h5> <span class="label label-primary">IN+</span>
+              <h5>Choose Your Team</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content">
               <div>
-
                 <select class="team-select btn btn-white dropdown-toggle"
                         ng-options="team.$value for team in usersTeams track by team.$id"
                         ng-model="currentTeamOption"
@@ -19,52 +18,31 @@
               </div>
             </div>
           </div>
-          <div class="ibox float-e-margins">
+          <!-- Documents Widget -->
+          <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Read below comments and tweets</h5>
+              <h5>Recent Documents</h5>
+              <a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
               <ul class="list-group">
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Stock Man</a> Check this stock chart. This price is crazy! </p>
-
-                  <div class="text-center m">
-                    <span id="sparkline8"></span>
-                  </div>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-                </li>
-                <li class="list-group-item ">
-                  <p><a class="text-info" href="">@Jonathan Febrick</a> The standard chunk of Lorem Ipsum</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
-                </li>
-                <li class="list-group-item">
-                  <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+                <li ng-repeat="document in documentList" class="list-group-item">
+                  <p><a class="text-info" ui-sref="index.texteditor({ documentId: document.$id,
+                                                     documentTitle: document.title,
+                                                     documentBody: document.body})">{{document.title}}</a></p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        <!-- Chat Widget-->
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
               <h5>Recent Chat Messages</h5>
 
               <div class="ibox-tools">
-                <!--<span class="label label-warning-light">10 Messages</span>-->
               </div>
             </div>
             <div class="ibox-content">
@@ -72,7 +50,7 @@
               <div>
                 <div class="feed-activity-list" ng-controller="ChatCtrl">
 
-                  <div class="feed-element" ng-repeat="message in messages">
+                  <div class="feed-element" ng-repeat="message in dashboardMessages">
                     <a ui-sref="profile" class="pull-left">
                       <img alt="image" class="img-circle" ng-src="{{message.userImg}}">
                     </a>
@@ -84,22 +62,21 @@
 
                     </div>
                   </div>
-
-
                 </div>
-
-                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
-
+                <a ui-sref="index.chat">
+                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-right"></i> Go to Chat</button>
+                </a>
               </div>
 
             </div>
           </div>
 
         </div>
+        <!-- Calendar Widget -->
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Alpha project</h5>
+              <h5>Calendar</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content ibox-heading">
@@ -216,91 +193,5 @@
 
       </div>
     </div>
-
   </div>
-
-</div>
-<div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
-
-  <div class="heading" draggable="true">
-    <small class="chat-date pull-right">
-      02.19.2015
-    </small>
-    Small chat
-  </div>
-
-  <div class="content" chat-slim-scroll>
-
-    <div class="left">
-      <div class="author-name">
-        Monica Jackson <small class="chat-date">
-        10:02 am
-      </small>
-      </div>
-      <div class="chat-message active">
-        Lorem Ipsum is simply dummy text input.
-      </div>
-
-    </div>
-    <div class="right">
-      <div class="author-name">
-        Mick Smith
-        <small class="chat-date">
-          11:24 am
-        </small>
-      </div>
-      <div class="chat-message">
-        Lorem Ipsum is simpl.
-      </div>
-    </div>
-    <div class="left">
-      <div class="author-name">
-        Alice Novak
-        <small class="chat-date">
-          08:45 pm
-        </small>
-      </div>
-      <div class="chat-message active">
-        Check this stock char.
-      </div>
-    </div>
-    <div class="right">
-      <div class="author-name">
-        Anna Lamson
-        <small class="chat-date">
-          11:24 am
-        </small>
-      </div>
-      <div class="chat-message">
-        The standard chunk of Lorem Ipsum
-      </div>
-    </div>
-    <div class="left">
-      <div class="author-name">
-        Mick Lane
-        <small class="chat-date">
-          08:45 pm
-        </small>
-      </div>
-      <div class="chat-message active">
-        I belive that. Lorem Ipsum is simply dummy text.
-      </div>
-    </div>
-
-
-  </div>
-  <div class="form-chat">
-    <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
-            class="btn btn-primary" type="button">Send
-    </button> </span></div>
-  </div>
-
-</div>
-<div id="small-chat" ng-click="openChat = !openChat">
-
-  <span class="badge badge-warning pull-right">5</span>
-  <a class="open-small-chat">
-    <i class="fa fa-comments"></i>
-
-  </a>
 </div>
