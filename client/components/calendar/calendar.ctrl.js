@@ -5,9 +5,6 @@ angular.module('equip')
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
 
-    //TODO (select from drop down)
-    var eventProjectId = this.project;
-
     var getDate = function(dateObj) {
       var date;
       console.log('in getDate: dateObj', dateObj);
@@ -44,13 +41,18 @@ angular.module('equip')
       return time;
     };
 
+    // var fullDay = this.fulldayEvent;
+      // console.log('fullDay', fullDay);
+
     this.saveNewEvent = function() {
-      // console.log('add event clicked');
+      console.log('add event clicked');
       var eventStart;
       var eventEnd;
       var newEvent = {};
 
-      var startDate = getDate(this.startDate);
+      console.log('this.startDate after click', this.startDate);
+
+      var startDate = getDate(this.startDate); // called twice after first time adding an event
       var startTime = getTime(this.startTime);
       eventStart = startDate + ' ' + startTime;
 
@@ -71,18 +73,25 @@ angular.module('equip')
         eventEnd = endDate + ' ' +  endTime;
       }
 
+
+
       newEvent.title = this.title;
       newEvent.start = eventStart;
       newEvent.end = eventEnd;
-      // newEvent['allDay'] = false;
+      newEvent.allDay = this.fulldayEvent;
       newEvent.stick = true;
       newEvent.userId = currentUser.uid;
-      newEvent.projectId = eventProjectId || 'Test Project';
-      
-      // at current moment, events are top level, so must pass true
-      // when events move to teams, take true out!
-      FirebaseFactory.addToCollection('events', newEvent, true);
-      console.log('added event:', newEvent.title);
+
+      // if events should be added to db top level, add true as third arg
+      FirebaseFactory.addToCollection('events', newEvent);
+
+      // empty input fields
+      this.title = '';
+      this.startDate = '';
+      this.startTime = '';
+      this.endDate = '';
+      this.endTime = '';
+      this.fulldayEvent = '';
     };
 
     this.uiConfig = {
@@ -95,11 +104,8 @@ angular.module('equip')
           right: 'today prev,next'
         }
       }
-  };
+    };
 
-  // at current moment, events are top level, so must pass true
-  // when events move to teams, take true out!
-  var allEvents = FirebaseFactory.getCollection('events', true);
-  this.eventSources = [allEvents];
-  // console.log('eventSources', this.eventSources);
-});
+    var allEvents = FirebaseFactory.getCollection('events');
+    this.eventSources = [allEvents];
+  });

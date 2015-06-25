@@ -17,15 +17,8 @@
 
     <div class="col-lg-12">
       <div class="ibox float-e-margins col-sm-8">
-        <div class="ibox-title">
-          <h5>Your Calendar</h5>
-          <div ibox-tools></div>
-        </div>
 
         <div class="ibox-content ui-calendar">
-          <div class="btn-toolbar">
-            <p class="lead">Your Calendar</p>
-          </div>
           <div ui-calendar="calendar.uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="calendar.eventSources"></div>
         </div>
       </div>
@@ -52,6 +45,15 @@
               <input type="time" class="form-control" placeholder="16" ng-model="calendar.startTime">
             </div>
           </div>
+
+          <div class="row event">
+            <label class="col-sm-4 control-label">Full Day Event</label>
+            <div class="col-sm-8">
+              <input type="radio" ng-model="calendar.fulldayEvent" value="true"> Yes
+              <input type="radio" ng-model="calendar.fulldayEvent" value="false"> No
+            </div>
+          </div>
+
         </p>
 
         <p>
