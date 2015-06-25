@@ -66,7 +66,7 @@
                   </td>
                   <td class="project-actions">
                     <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
-                    <a ng-click="teamEditCtrl.editTeam(team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                    <a ng-click="teamEditCtrl.setTab(2, team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
                   </td>
                 </tr>
               </tbody>
@@ -108,8 +108,8 @@
                   <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
-                        <label ng-repeat="user in teamEditCtrl.allUsers" style="text-align:left;" class="project-people teamuserHover">
-                          <div ng-click="teamEditCtrl.flipPresence(user)"> 
+                        <label ng-click="teamEditCtrl.flipPresence(user)" ng-repeat="user in teamEditCtrl.allUsers" style="text-align:left;" class="project-people teamuserHover">
+                          <div> 
                             <img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user.$id)}}"></img>
                             <span class="teamuserName">{{user.displayName}}</span>
                           </div>

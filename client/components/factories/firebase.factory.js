@@ -4,6 +4,10 @@ angular.module('equip')
     var ref = new Firebase(refUrl);
 
     var firebaseSterilization = function(input) {
+
+      //returns primitive types and arrays
+      if(Object.keys(input).length < 1) return input;
+
       if(input['$$hashKey'] !== undefined) {
         delete input['$$hashKey'];
       }
@@ -125,7 +129,7 @@ angular.module('equip')
       updateItem: updateItem,
       removeItem: removeItem,
       getCurrentUser: getCurrentUser,
-      getUserInfo: getUserInfo
-
+      getUserInfo: getUserInfo,
+      getObject: getObject
     };
   })

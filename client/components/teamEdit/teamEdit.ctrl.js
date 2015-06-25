@@ -19,34 +19,51 @@
     ];
     this.currentTab = "Team List";
     this.searchString = "";
-    this.editingTeam = {};
+    this.editingTeam = {
+      $id: "Team Title",
+      users: [],
+      calendarEvents: []
+    };
     this.editingTeamUserlist = [];
 
     //Functions
       //Navigation
-    this.setTab = function(tabNumber) {
+    this.setTab = function(tabNumber, team) {
+      
       this.currentTab = this.tabs[tabNumber];
+
       if(tabNumber === 1) {
         this.editingTeam = {
-          name: "Team Title",
-          label: "",
+          $id: "Team Title",
           users: [],
           calendarEvents: []
         };
-      }
-    }
-    this.editTeam = function(team) {
-      console.log(team);
-      this.setTab(2);
-      this.editingTeam = team;
-      var keys = Object.keys(team.users);
-      var ref = new Firebase(refUrl);
-      for(var i = 0; i < keys.length; i++) {
-        for(var j = 0; j < this.allUsers.length; j++) {
-          if(team.users[keys[i]].$id === this.allUsers[j].$id){
-            this.editingTeamUserlist.push(user)          
-          }
+        this.editingTeamUserlist = [];
+
+      } else if(tabNumber === 2) {
+        
+        this.editingTeam = team;
+        this.editingTeamUserlist = [];
+
+        var keys = Object.keys(team.users);
+        var allKeys = [];
+        for(var i = 0; i < this.allUsers.length; i++) {
+          allKeys.push(this.allUsers[i].$id);
         }
+        for(var i = 0; i < keys.length; i++) {
+          this.editingTeamUserlist.push(FirebaseFactory.getObject([ 'users', team.users[keys[i]] ], true) );
+        }
+
+        this.allUsers = [];      
+
+        for(var i = 0; i < allKeys.length; i++) {
+          this.allUsers.push(FirebaseFactory.getObject([ 'users', allKeys[i]], true));
+        }
+
+        // maybe i need to re-get allUsers when i reload tab 0, or just put it in the
+        // switch tab func
+
+        console.log(this.editingTeamUserlist);
       }
     }
 
@@ -56,46 +73,63 @@
         this.editingTeam.users = [];
       }
 
-      if(this.editingTeamUserlist.indexOf(user) === -1) {
-        this.editingTeamUserlist.push(user);
-        console.log(this.editingTeamUserlist);
-      } else {
-        this.editingTeamUserlist.splice(this.editingTeamUserlist.indexOf(user), 1);
+      var thisGuyIsAlreadyHere = false;
+      var thisGuyIndex = -1;
+
+      for(var i = 0; i < this.editingTeamUserlist.length; i++) {
+        console.log('user');
+        console.log(user);
+        console.log('editingTeamUserlist[i]');
+        console.log(this.editingTeamUserlist[i]);
+        if(user.$id === this.editingTeamUserlist[i].$id) {
+          thisGuyIsAlreadyHere = true;
+          thisGuyIndex = i;
+        }
       }
 
-      // if(this.editingTeam.users[])
+      if(thisGuyIsAlreadyHere) {
+        this.editingTeamUserlist.splice(thisGuyIndex, 1);
+      } else {
+        this.editingTeamUserlist.push(user);
+      }
     }
     this.createTeamSubmit = function() {
-      var newRef = FirebaseFactory.addToCollection(this.editingTeam);
+      var usersList = [];
+
+      for(var i = 0; i < this.editingTeamUserlist.length; i++) {
+        usersList.push(this.editingTeamUserlist[i].$id);
+      }
+
+      FirebaseFactory.updateItem(['teams', this.editingTeam.$id], {users: usersList}, true);
 
       this.editingTeam = {
-        name: "Team Title",
-        label: "",
+        $id: "Team Title",
         users: [],
-        calendarEvents: [],
-        completion: null
+        calendarEvents: []
       };
+
       this.setTab(0);
     }
-    this.editProjectSubmit = function(toDelete) {
-
-      var that = this;
+    this.editTeamSubmit = function(toDelete) {
+      var usersList = [];
 
       if(toDelete) {
-        FirebaseFactory.removeItem(['projects', that.editingProject.$id]);
-        that.setTab(0);
+        FirebaseFactory.removeItem(['teams', this.editingTeam.$id], true);
+        this.setTab(0);
         return;
       }
 
-      FirebaseFactory.removeItem(['teams', that.editingTeam.$id]);
+      for(var i = 0; i < this.editingTeamUserlist.length; i++) {
+        usersList.push(this.editingTeamUserlist[i].$id);
+      }
 
-      that.setTab(0);
+      FirebaseFactory.updateItem(['teams', this.editingTeam.$id], {users: usersList}, true);
 
+      this.setTab(0);
     }
 
       //UI functions
     this.getUserPicture = function(userId) {
-      console.log(this.editingTeamUserlist);
       if(userId === null || userId === undefined) return "img/user.png";
         if(userId.imgUrl !== undefined) return userId.imgUrl;
 
