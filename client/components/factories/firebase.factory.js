@@ -131,6 +131,6 @@ angular.module('equip')
       removeItem: removeItem,
       getCurrentUser: getCurrentUser,
       getUserInfo: getUserInfo,
-      getObject: getObject,
+      getObject: getObject
     };
   })
