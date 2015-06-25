@@ -5,7 +5,7 @@
         <div class="col-lg-4" ng-controller="HomeCtrl as home">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Choose Your Team</h5> <span class="label label-primary">IN+</span>
+              <h5>Choose Your Team</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content">
@@ -19,9 +19,10 @@
               </div>
             </div>
           </div>
-          <div class="ibox float-e-margins">
+          <!-- Documents Widget -->
+          <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Read below comments and tweets</h5>
+              <h5>Recent Documents</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
@@ -72,7 +73,7 @@
               <div>
                 <div class="feed-activity-list" ng-controller="ChatCtrl">
 
-                  <div class="feed-element" ng-repeat="message in messages">
+                  <div class="feed-element" ng-repeat="message in dashboardMessages">
                     <a ui-sref="profile" class="pull-left">
                       <img alt="image" class="img-circle" ng-src="{{message.userImg}}">
                     </a>
@@ -99,7 +100,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Alpha project</h5>
+              <h5>Calendar</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content ibox-heading">
@@ -219,88 +220,4 @@
 
   </div>
 
-</div>
-<div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
-
-  <div class="heading" draggable="true">
-    <small class="chat-date pull-right">
-      02.19.2015
-    </small>
-    Small chat
-  </div>
-
-  <div class="content" chat-slim-scroll>
-
-    <div class="left">
-      <div class="author-name">
-        Monica Jackson <small class="chat-date">
-        10:02 am
-      </small>
-      </div>
-      <div class="chat-message active">
-        Lorem Ipsum is simply dummy text input.
-      </div>
-
-    </div>
-    <div class="right">
-      <div class="author-name">
-        Mick Smith
-        <small class="chat-date">
-          11:24 am
-        </small>
-      </div>
-      <div class="chat-message">
-        Lorem Ipsum is simpl.
-      </div>
-    </div>
-    <div class="left">
-      <div class="author-name">
-        Alice Novak
-        <small class="chat-date">
-          08:45 pm
-        </small>
-      </div>
-      <div class="chat-message active">
-        Check this stock char.
-      </div>
-    </div>
-    <div class="right">
-      <div class="author-name">
-        Anna Lamson
-        <small class="chat-date">
-          11:24 am
-        </small>
-      </div>
-      <div class="chat-message">
-        The standard chunk of Lorem Ipsum
-      </div>
-    </div>
-    <div class="left">
-      <div class="author-name">
-        Mick Lane
-        <small class="chat-date">
-          08:45 pm
-        </small>
-      </div>
-      <div class="chat-message active">
-        I belive that. Lorem Ipsum is simply dummy text.
-      </div>
-    </div>
-
-
-  </div>
-  <div class="form-chat">
-    <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
-            class="btn btn-primary" type="button">Send
-    </button> </span></div>
-  </div>
-
-</div>
-<div id="small-chat" ng-click="openChat = !openChat">
-
-  <span class="badge badge-warning pull-right">5</span>
-  <a class="open-small-chat">
-    <i class="fa fa-comments"></i>
-
-  </a>
 </div>
