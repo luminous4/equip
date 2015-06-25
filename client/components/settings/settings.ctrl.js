@@ -6,37 +6,39 @@ angular.module('equip')
 
   (this.getUserInfo = function() {
     var userInfo = FirebaseFactory.getObject(['users', userId], true);
-    console.log('got user info!', userInfo);
-    $scope.showDisplayName = userInfo.displayName;
-    console.log("display name: ", $scope.showDisplayName);
-    $scope.showPhoneNumber = userInfo.phoneNumber;
-    $scope.showFacebook = userInfo.Facebook;
-    $scope.showGithub = userInfo.Github;
-    $scope.showLinkedIn = userInfo.LinkedIn;
-    $scope.showOther = userInfo.Other;
+
+    userInfo.$loaded(function() {
+      $scope.showDisplayName = userInfo.displayName;
+      $scope.showPhoneNumber = userInfo.phoneNumber;
+      $scope.showFacebook = userInfo.Facebook;
+      $scope.showGithub = userInfo.Github;
+      $scope.showLinkedIn = userInfo.LinkedIn;
+      $scope.showOther = userInfo.Other;      
+    })
   })();
 
   this.saveUserInfo = function() {
-    if (this.displayName) {
-      FirebaseFactory.updateItem(['users', userId], {displayName: this.displayName}, true);
+    console.log("called saveUserInfo");
+    if ($scope.displayName) {
+      FirebaseFactory.updateItem(['users', userId], {displayName: $scope.displayName}, true);
     }
-    if (this.phoneNumber) {
-      FirebaseFactory.updateItem(['users', userId], {phoneNumber: this.phoneNumber}, true);
+    if ($scope.phoneNumber) {
+      FirebaseFactory.updateItem(['users', userId], {phoneNumber: $scope.phoneNumber}, true);
     }
-    if (this.socialInput) {
+    if ($scope.socialInput) {
       newSocial = {};
-      newSocial[this.socialSelect] = this.socialInput;
+      newSocial[$scope.socialSelect] = $scope.socialInput;
       FirebaseFactory.updateItem(['users', userId], newSocial, true)
     }
-    if (this.imgUrl) {
-      FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl}, true);
+    if ($scope.imgUrl) {
+      FirebaseFactory.updateItem(['users', userId], {imgUrl: $scope.imgUrl}, true);
     }
 
-    this.displayName = '';
-    this.socialInput = '';
-    this.socialSelect = null;
-    this.phoneNumber = '';
-    this.imgUrl = '';
+    $scope.displayName = '';
+    $scope.socialInput = '';
+    $scope.socialSelect = null;
+    $scope.phoneNumber = '';
+    $scope.imgUrl = '';
   };
 
 });
