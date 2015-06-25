@@ -1,4 +1,5 @@
-.team-select {
+.team-select, 
+.social-select {
   margin: 20px 0 0 20px;
   font-size: 20px;
   font-weight: 100;
@@ -57,4 +58,12 @@
 }
 .chat-add {
   margin-top: 30px !important;
+}
+.social-select {
+  display: inline;
+  margin-top: 0;
+  height: 34px;
+}
+.social-input {
+  width: 82% !important;
 }
