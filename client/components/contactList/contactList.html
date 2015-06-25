@@ -74,9 +74,52 @@
                   <p>
                     About Me goes here: {{contactCtrl.currentContact.aboutMe}}
                   </p>
-                  <button type="button" class="btn btn-primary btn-sm btn-block"><i
-                    class="fa fa-envelope"></i> Send Message
-                  </button>
+
+                  <a href="mailto:{{contactCtrl.currentContact.email}}">
+                    <button type="button" class="btn btn-primary btn-sm btn-block"><i
+                      class="fa fa-envelope"></i> Send Email
+                    </button>
+                  </a>
+
+                  <table>
+                    <tr>
+                      <td> 
+                         <span class="contact-type"><i class="fa fa-phone" > </i></span>
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserPhoneNumber(contactCtrl.currentContact)}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/twitter.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "twitter")}}
+                      </td>
+                    </tr>                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/linkedin.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "LinkedIn")}}
+                      </td>
+                    </tr>                    <tr>
+                      <td> 
+                          <img height="20" width="20" src="/img/facebook.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "Facebook")}}
+                      </td>
+                    </tr>                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/github.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "GitHub")}}
+                      </td>
+                    </tr>                  
+                  </table>
                 </div>
               </div>
             </div>

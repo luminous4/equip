@@ -51,8 +51,13 @@
         }
       }
     }
+    this.getUserInfoPiece = function(user, infoPiece) {
+      if(user && user[infoPiece]) {
+        return user[infoPiece];
+      } else return "Not provided";
+    }
     this.getUserPhoneNumber = function(user) {
-      if(user.phoneNumber) {
+      if(user && user.phoneNumber) {
         var str = user.phoneNumber.toString();
         var end = "";
         for(var i = 0; i < str.length; i++) {
