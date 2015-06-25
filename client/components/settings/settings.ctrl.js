@@ -1,45 +1,59 @@
 angular.module('equip')
 
-.controller('SettingsCtrl', function($scope, $window, $firebaseArray, FirebaseFactory, refUrl) {
+.controller('SettingsCtrl', function($scope, FirebaseFactory) {
   
-  var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-  var userId = JSON.parse(userObj).uid;
-  var ref = new Firebase(refUrl);
+  var userId = FirebaseFactory.getCurrentUser().uid;
 
-  var checkIfTeamExists = function(teamName, cb) {
-    ref.child('teams').child(teamName).once('value', function(snapshot) {
-      var exists = (snapshot.val() !== null);
-      cb(teamName, exists);
-    });
-  }
+  (this.getUserInfo = function() {
+    var userInfo = FirebaseFactory.getObject(['users', userId], true);
+
+    userInfo.$loaded(function() {
+      $scope.showDisplayName = userInfo.displayName;
+      $scope.showPhoneNumber = userInfo.phoneNumber;
+      $scope.showFacebook = userInfo.Facebook;
+      $scope.showGitHub = userInfo.GitHub;
+      $scope.showLinkedIn = userInfo.LinkedIn;
+      $scope.showTwitter = userInfo.Twitter;
+      $scope.showOther = userInfo.Other;      
+    })
+  })();
 
   this.saveUserInfo = function() {
-    if (this.displayName) {
-      FirebaseFactory.updateItem(['users', userId], {displayName: this.displayName}, true);
+    console.log("called saveUserInfo");
+    if ($scope.displayName) {
+      FirebaseFactory.updateItem(['users', userId], {displayName: $scope.displayName}, true);
+    }
+    if ($scope.phoneNumber) {
+      FirebaseFactory.updateItem(['users', userId], {phoneNumber: $scope.phoneNumber}, true);
+    }
+    if ($scope.socialInput) {
+      newSocial = {};
+      newSocial[$scope.socialSelect] = $scope.socialInput;
+      FirebaseFactory.updateItem(['users', userId], newSocial, true)
+    }
+    if ($scope.imgUrl) {
+      FirebaseFactory.updateItem(['users', userId], {imgUrl: $scope.imgUrl}, true);
     }
 
-    if (this.teamName) {
-      checkIfTeamExists(this.teamName, function(teamName, exists) {
-        if(!exists) {
-          FirebaseFactory.updateItem(['teams', teamName], {users: null}, true);
-        }
-        FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId, true);
-      });
-
-      FirebaseFactory.addToCollection(['users', userId, 'teams'], this.teamName, true);
-    }
-
-    if (this.phoneNumber) {
-      FirebaseFactory.updateItem(['users', userId], {phoneNumber: this.phoneNumber}, true);
-    }
-    if (this.imgUrl) {
-      FirebaseFactory.updateItem(['users', userId], {imgUrl: this.imgUrl}, true);
-    }
-
-    this.displayName = '';
-    this.teamName = '';
-    this.phoneNumber = '';
-    this.imgUrl = '';
+    $scope.displayName = '';
+    $scope.socialInput = '';
+    $scope.socialSelect = null;
+    $scope.phoneNumber = '';
+    $scope.imgUrl = '';
   };
 
 });
+
+
+// Old team join: 
+
+// if (this.teamName) {
+//   checkIfTeamExists(this.teamName, function(teamName, exists) {
+//     if(!exists) {
+//       FirebaseFactory.updateItem(['teams', teamName], {users: null}, true);
+//     }
+//     FirebaseFactory.addToCollection(['teams', teamName, 'users'], userId, true);
+//   });
+
+//   FirebaseFactory.addToCollection(['users', userId, 'teams'], this.teamName, true);
+// }

@@ -1,3 +1,4 @@
+
 angular.module('equip')
 
   .factory('FirebaseFactory', function($firebaseArray, $rootScope, $firebaseObject, $window, refUrl) {

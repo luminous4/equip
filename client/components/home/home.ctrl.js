@@ -12,7 +12,12 @@ angular.module('equip')
 
     $scope.usersTeams.$loaded()
       .then(function() {
-        $scope.currentTeamOption = $rootScope.selectedTeam;
+        if (!$scope.currentTeamOption) {
+          $scope.currentTeamOption = $scope.usersTeams[0];
+          $rootScope.selectedTeam = $scope.currentTeamOption;      
+        } else {
+          $scope.currentTeamOption = $rootScope.selectedTeam;
+        }
       });
 
     this.changeContext = function() {
