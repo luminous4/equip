@@ -83,23 +83,41 @@ angular.module('equip')
       return user;
     };
 
-    var getCurrentTeamUserlist = function() {
-      var that = this;
+    // var getUserListForTeam = function(teamNameOrArray) {
 
-      var teamUsers = FirebaseFactory.getCollection('users');
-      this.teamContacts = [];
-
-      var ref = new Firebase(refUrl);
+    //   if(Array.isArray(teamNameOrArray)) {
+    //     var bunchOfUserlists = [];
+    //     for(var i = 0; i < teamNameOrArray; i++) {
+    //       bunchOfUserlists.push()
+    //     }
+    //   } else {
+    //     teamName = teamNameOrArray;
+    //   }
       
-      teamUsers.$loaded().then(function(){
-          console.log(teamUsers);
-        angular.forEach(teamUsers, function(user) {
-          console.log(user);
-          that.teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
-        })
-        console.log(that.teamContacts);
-      });
-    };
+    //   var teamUsers = FirebaseFactory.getCollection(['teams', teamName, 'users']);
+    //   teamContacts = [];
+
+    //   var ref = new Firebase(refUrl);
+      
+    //   teamUsers.$loaded().then(function(){
+    //       console.log(teamUsers);
+    //     angular.forEach(teamUsers, function(user) {
+    //       console.log(user);
+    //       teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
+    //     })
+    //     console.log(teamContacts);
+    //     return teamContacts;
+    //   });      
+    // }
+
+
+    // var getCurrentTeamUserlist = function() {
+    //   return getUserListForTeam($rootScope.selectedTeam.$value);
+    // };
+
+    var getUserInfo = function(userId) {
+      return $firebaseObject(ref.child('users').child(userId));
+    }
 
     return {
       getCollection: getCollection,
@@ -107,6 +125,7 @@ angular.module('equip')
       updateItem: updateItem,
       removeItem: removeItem,
       getCurrentUser: getCurrentUser,
-      getCurrentTeamUserlist: getCurrentTeamUserlist
+      getUserInfo: getUserInfo
+
     };
   })
