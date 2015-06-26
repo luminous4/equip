@@ -21,6 +21,9 @@
     font-size:14px;
     padding:10px;
 }
+.close-contact {
+  cursor: pointer;
+}
 .chat-activity-list {
   max-height: 450px;
   overflow-y: auto;
