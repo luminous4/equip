@@ -119,6 +119,8 @@ angular.module('equip')
       }
     };
 
-    var allEvents = FirebaseFactory.getCollection('events');
+    var currTeam = JSON.parse(localStorage.selectedTeam).$value;
+
+    var allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
     this.eventSources = [allEvents];
   });
