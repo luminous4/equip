@@ -2,6 +2,7 @@ angular.module('equip')
 
 .controller('SettingsCtrl', function($scope, FirebaseFactory) {
   $scope.socialSelect = 'first';
+  $scope.success = false;
 
   var userId = FirebaseFactory.getCurrentUser().uid;
 
@@ -20,6 +21,10 @@ angular.module('equip')
   };
 
   this.getUserInfo();
+
+  this.checkSuccess = function() {
+    $scope.success = false;
+  }
 
   this.saveUserInfo = function() {
     console.log("called saveUserInfo");
@@ -40,6 +45,7 @@ angular.module('equip')
     }
 
     this.getUserInfo();
+    $scope.success = true;
     $scope.displayName = '';
     $scope.socialInput = '';
     $scope.socialSelect = 'first';
