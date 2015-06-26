@@ -15,7 +15,7 @@ angular.module('equip')
   $scope.usersTeams.$loaded()
     .then(function() {
       if (!$scope.currentTeamOption) {
-        $scope.currentTeamOption = $scope.usersTeams[0];
+        $scope.currentTeamOption = JSON.parse(localStorage.selectedTeam) || $scope.usersTeams[0];
         $rootScope.selectedTeam = $scope.currentTeamOption;      
       } else {
         $scope.currentTeamOption = $rootScope.selectedTeam;
@@ -24,6 +24,7 @@ angular.module('equip')
 
   this.changeContext = function() {
     $rootScope.selectedTeam = $scope.currentTeamOption;
+    localStorage.selectedTeam = JSON.stringify($rootScope.selectedTeam);
   };
 
 
