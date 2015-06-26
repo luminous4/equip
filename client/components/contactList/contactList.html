@@ -33,9 +33,11 @@
                         <tr ng-repeat="contact in contactCtrl.teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
                           <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" src="{{contactCtrl.getUserPicture(contact)}}"> </td>
                           <td ng-click="contactCtrl.viewContact(contact)"><a class="client-link">{{contact.displayName}}</a></td>
-                          <td ng-click="contactCtrl.viewContact(contact)">Some info could go here</td>
-                          <td ng-click="contactCtrl.viewContact(contact)">Email:{{contact.email}}</td>
-                          <td ng-click="contactCtrl.viewContact(contact)" class="client-status"><span class="label label-primary">More info?</span></td>
+                          <td class="contact-type"><i class="fa fa-phone"> </i></td>
+                          <td ng-click="contactCtrl.viewContact(contact)">{{contactCtrl.getUserPhoneNumber(contact)}}</td>
+                          <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                          <td class="client-status" ng-click="contactCtrl.viewContact(contact)">{{contact.email}}</td>
+                          <td class="client-status" ng-show="contactCtrl.currentContact === null" ng-click="contactCtrl.viewContact(contact)"><span class="label label-primary">Click for more info!</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -72,9 +74,56 @@
                   <p>
                     About Me goes here: {{contactCtrl.currentContact.aboutMe}}
                   </p>
-                  <button type="button" class="btn btn-primary btn-sm btn-block"><i
-                    class="fa fa-envelope"></i> Send Message
-                  </button>
+
+                  <a href="mailto:{{contactCtrl.currentContact.email}}">
+                    <button type="button" class="btn btn-primary btn-sm btn-block"><i
+                      class="fa fa-envelope"></i> Send Email
+                    </button>
+                  </a>
+
+                  <table>
+                    <tr>
+                      <td> 
+                         <span class="contact-type"><i class="fa fa-phone" > </i></span>
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserPhoneNumber(contactCtrl.currentContact)}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/twitter.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "twitter")}}
+                      </td>
+                    </tr>                   
+                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/linkedin.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "LinkedIn")}}
+                      </td>
+                    </tr>                    
+                    <tr>
+                      <td> 
+                          <img height="20" width="20" src="/img/facebook.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "Facebook")}}
+                      </td>
+                    </tr>                   
+                    <tr>
+                      <td> 
+                         <img height="20" width="20" src="/img/github.png"><img/>  
+                      </td>
+                      <td>
+                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "GitHub")}}
+                      </td>
+                    </tr>                  
+                  </table>
+
                 </div>
               </div>
             </div>

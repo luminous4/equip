@@ -17,6 +17,8 @@
       })
     });
 
+    console.log(that.teamContacts);
+
 
     this.currentContact = null;
 
@@ -48,6 +50,28 @@
           }
         }
       }
+    }
+    this.getUserInfoPiece = function(user, infoPiece) {
+      if(user && user[infoPiece]) {
+        return user[infoPiece];
+      } else return "Not provided";
+    }
+    this.getUserPhoneNumber = function(user) {
+      if(user && user.phoneNumber) {
+        var str = user.phoneNumber.toString();
+        var end = "";
+        for(var i = 0; i < str.length; i++) {
+          if (i === 0) {
+            end += "(";
+          } else if (i === 3) {
+            end += ") ";
+          } else if (i === 6) {
+            end += " - ";
+          }
+          end += str[i];
+        }
+        return end;
+      } else return "Not provided";
     }
 
   })

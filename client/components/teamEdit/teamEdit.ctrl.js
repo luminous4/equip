@@ -1,7 +1,8 @@
-// make a list of all people on all your teams
-// get all of those users' data and store it in allUsers
-// loop through when you add or splice 
-// when you save changes, translate it into the format teams already use
+// alternative ways to track who should be put on and off the team:
+// 1. remember everyone involved
+// 2. if they ended up in it, make sure it's in there
+// 3. if not, make sure it's not
+// 4. ugh
 
 (function() {
   angular.module('equip')
@@ -119,7 +120,12 @@
         return;
       }
 
+      for(var i = 0; i < this.allUsers.length; i++) {
+        FirebaseFactory.removeItem(['users', this.allUsers[i].$id, 'teams', this.editingTeam.$id], true);
+      }
       for(var i = 0; i < this.editingTeamUserlist.length; i++) {
+        console.log(this.editingTeamUserlist[i]);
+        FirebaseFactory.addToCollection(['users', this.editingTeamUserlist[i].$id, 'teams'], this.editingTeam.$id, true);
         usersList.push(this.editingTeamUserlist[i].$id);
       }
 
