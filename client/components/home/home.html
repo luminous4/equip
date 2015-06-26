@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="wrapper wrapper-content">
       <div class="row">
-        <div class="col-lg-4" ng-controller="HomeCtrl as home">
+        <div class="col-lg-4" ng-controller="CommonCtrl as common">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
               <h5>Choose Your Team</h5>
@@ -13,7 +13,7 @@
                 <select class="team-select btn btn-white dropdown-toggle"
                         ng-options="team.$value for team in usersTeams track by team.$id"
                         ng-model="currentTeamOption"
-                        ng-change="home.changeContext()">
+                        ng-change="common.changeContext()">
                 </select>
               </div>
             </div>
