@@ -119,7 +119,7 @@
                     <div class="input-group m-b">
                       <button type="button" ng-show="teamEditCtrl.currentTab === 'Create A Team'" ng-click="teamEditCtrl.createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
                       <button type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.editTeamSubmit()" class="btn btn-primary">Save changes!</button>   
-                      <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.editTeamSubmit(true)" class="btn btn-primary">Delete this team</button>
+                      <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.editTeamDelete()" class="btn btn-primary">Delete this team</button>
                       <button style="margin-left:20px" type="button" ng-show="teamEditCtrl.currentTab === 'Edit Team'" ng-click="teamEditCtrl.setTab(0)" class="btn btn-primary">Cancel</button>
                     </div>
                   </div>
