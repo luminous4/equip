@@ -6,7 +6,9 @@
 
     var that = this;
 
-    var teamUsers = FirebaseFactory.getCollection('users');
+    var currTeam = JSON.parse(localStorage.selectedTeam).$value;
+
+    var teamUsers = FirebaseFactory.getCollection(['teams', currTeam,'users'], true);
     this.teamContacts = [];
 
     var ref = new Firebase(refUrl);
