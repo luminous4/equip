@@ -3,7 +3,7 @@
     <h2>Team Edit Directory</h2>
     <ol class="breadcrumb">
       <li>
-        <a href="index.html">Home</a>
+         <a href="index.html#/index">Home</a>
       </li>
       <li class="active">
         <strong>{{teamEditCtrl.currentTab}}</strong>
@@ -55,7 +55,7 @@
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
                     <br/>
-                    <small>Created (created at date)</small>
+                    <small>Created at {{team.createdAt}}</small>
                   </td>
                   <td class="project-people">
                     <span ng-repeat="userId in team.users">
@@ -66,7 +66,8 @@
                   </td>
                   <td class="project-actions">
                     <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
-                    <a ng-click="teamEditCtrl.setTab(2, team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                    <a ng-click="teamEditCtrl.setTab(2, team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a> 
+                    <a ng-click="teamEditCtrl.leaveTeam(team)" class="btn btn-white btn-sm"><i class="fa fa-user-times"></i> Leave </a>
                   </td>
                 </tr>
               </tbody>
@@ -87,7 +88,6 @@
                         <td class="project-title">
                           <a ui-sref="team_detail">{{teamEditCtrl.editingTeam.$id}}</a>
                           <br/>
-                          <small>Created 14.08.2014</small>
                         </td>
                         <td class="project-people">
                           <span ng-repeat="user in teamEditCtrl.editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user.$id)}}"></a></span>
@@ -108,7 +108,7 @@
                   <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
-                        <label ng-click="teamEditCtrl.flipPresence(user)" ng-repeat="user in teamEditCtrl.allUsers" style="text-align:left;" class="project-people teamuserHover">
+                        <label ng-click="teamEditCtrl.flipPresence(user)" ng-repeat="user in teamEditCtrl.allUsers" style="text-align:left;" class="project-people teamuserHover" ng-hide="teamEditCtrl.hideOwnUser(user)">
                           <div> 
                             <img alt="image" class="img-circle" src="{{teamEditCtrl.getUserPicture(user.$id)}}"></img>
                             <span class="teamuserName">{{user.displayName}}</span>

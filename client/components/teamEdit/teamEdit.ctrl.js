@@ -8,16 +8,79 @@
   .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
                                             $firebaseArray, refUrl, $firebaseObject) {
 
-    //Initialize variables
-    this.teams = FirebaseFactory.getCollection('teams', true);
-    this.allUsers = FirebaseFactory.getCollection('users', true);
+
+      ///////////////////////////
+     // Initialized variables //
+    ///////////////////////////
+
+    // These three 'tabs' are basically routes 
     this.tabs = [
       "Team List",
       "Create A Team",
       "Edit Team"
     ];
+
+    // Defaults view to the Team List tab
     this.currentTab = "Team List";
+
+    // Tracks the original $id of a team to update it when editing
+    this.oldId = null;
+
+    // Search string used in 'teamSearch' filter (at the bottom of this file)
     this.searchString = "";
+
+    this.connectedUsers = [];
+
+    // These parts of initialization must be recalculated when you return to
+    // the team list tab
+    // This function is immediately invoked
+    this.initialize = function() {
+
+      // List of all teams the user is on
+      this.teams = FirebaseFactory.getCollection('teams', true);
+
+      // List of all users that the user is connected to (through their teams)
+      this.allUsers = FirebaseFactory.getCollection('users', true);
+
+      // Once the team information is loaded, this will pare this.teams and 
+      // this.allUsers to the actual information the user is supposed to see.
+      // NOTE: This is not scalable!!! It wouldn't be too hard to change it though
+      var that = this;
+      var currentUser = FirebaseFactory.getCurrentUser();
+      this.teams.$loaded().then(function() {
+
+
+        // Will track which users are connected to the logged in user
+        that.connectedUsers = [];
+
+        for(var i = that.teams.length-1; i >= 0; i--) {
+
+          // This case will prevent teams without any users from showing
+          if(!that.teams[i] || !that.teams[i].users) {
+            that.teams.splice(i, 1);
+            continue;
+          };
+
+          if(that.teams[i].users.indexOf(currentUser.uid) === -1) {
+            // => This user isn't on team i
+
+            // Removes the team without this user from our display list
+            that.teams.splice(i, 1);
+          } else {
+            // => This user is on team i
+
+            // Adds all the other users on this team to a list of connected users
+            for(var j = 0; j < that.teams[i].users.length; j++) {
+              that.connectedUsers.push(that.teams[i].users[j]);
+            }
+          }
+
+        }
+
+      });
+    };
+
+    this.initialize();
 
 
       //////////////////////////
@@ -35,7 +98,9 @@
       this.editingTeamListOfRemovedPeople = [];
       this.editingTeamListOfAddedPeople = [];
 
-      if(tabNumber === 1) { 
+      if (tabNumber === 0) {
+        this.initialize();
+      } else if(tabNumber === 1) { 
         // Create A Team tab
 
         // Set the team being edited to an empty team
@@ -45,11 +110,26 @@
           calendarEvents: []
         };
 
+        var currentUser = FirebaseFactory.getCurrentUser();
+        var currentUserFirebaseObject = FirebaseFactory.getObject(
+          ['users', currentUser.uid],
+          true
+        );
+        var that = this;
+        currentUserFirebaseObject.$loaded().then(function() {
+          that.flipPresence(currentUserFirebaseObject);
+        });
+
+
+
       } else if (tabNumber === 2) { 
         // Edit Team tab
-        
+
         // Set the team being edited to the clicked team
         this.editingTeam = team;
+
+        // Remember the old ID of the team so we can update it later
+        this.oldId = this.editingTeam.$id;
 
         // Get the user information of everyone on the team
         var keys = Object.keys(team.users);
@@ -65,24 +145,90 @@
           ));
         }
 
-        // Get the information of all users 
+        // Get the information of all connected users 
         // Note: this is not scalable! We should fix later
         this.allUsers = [];      
         for(var i = 0; i < allKeys.length; i++) {
+
+          // If this user is not connected, just move along
+          if(this.connectedUsers.indexOf(allKeys[i]) === -1) {
+            continue;
+          }
+
+          // Otherwise, add this user's firebase object to the list of
+          // connected users
           this.allUsers.push(
             FirebaseFactory.getObject(
               [ 'users', allKeys[i]], 
               true)
           );
         }
+      }
 
+      // Get the information of all connected users 
+      // Note: this is not scalable! We should fix later
+      if(tabNumber === 1 || tabNumber === 2) {
+        this.allUsers = [];      
+        for(var i = 0; i < allKeys.length; i++) {
+
+          // If this user is not connected, just move along
+          if(this.connectedUsers.indexOf(allKeys[i]) === -1) {
+            continue;
+          }
+
+          // Otherwise, add this user's firebase object to the list of
+          // connected users
+          this.allUsers.push(
+            FirebaseFactory.getObject(
+              [ 'users', allKeys[i]], 
+              true)
+          );
+        }
       }
     }
 
 
-      /////////////////////////
-     // List edit functions //
-    /////////////////////////
+      ////////////////////////////
+     // List editing functions //
+    ////////////////////////////
+
+
+    this.leaveTeam = function(team) {
+      var that = this;
+
+      // Removes this team from the user's team list
+      var currentUser = FirebaseFactory.getCurrentUser();
+      FirebaseFactory.removeItem(
+        ['users', currentUser.uid, 
+          'teams', team.$id], 
+        true
+      );
+      for(var i = 0; i < that.teams.length; i++) {
+        if(that.teams[i].$id === team.$id) {
+          that.teams.splice(i, 1);
+          break;
+        }
+      }
+
+      // Finds the users of the clicked on team and removes
+      // the currently logged in user
+      var teamUsers = FirebaseFactory.getCollection(
+        ['teams', team.$id, 'users'],
+        true
+      );
+      teamUsers.$loaded().then(function() {
+        var index = -1;
+        for(var i = 0; i < teamUsers.length; i++) {
+          if(teamUsers[i].$value === currentUser.uid) {
+            index = i;
+          }
+        }
+        FirebaseFactory.removeItem(
+          ['teams', team.$id, 'users', index],
+          true
+        );
+      });
+    }
 
 
     // Either adds or removes the clicked user to the
@@ -135,10 +281,13 @@
         usersList.push(this.editingTeamUserlist[i].$id);
       }
 
+      // Get createdAt date
+      var now = moment().format('MMMM Do YYYY, h:mm a');
+
       // Add this team to firebase
       FirebaseFactory.updateItem(
         ['teams', this.editingTeam.$id], 
-        {users: usersList}, 
+        {users: usersList, createdAt: now}, 
         true
       );
 
@@ -162,14 +311,13 @@
     this.editTeamDelete = function() {
 
       // Remove this team from firebase
-      FirebaseFactory.removeItem(['teams', this.editingTeam.$id], true);
+      FirebaseFactory.removeItem(['teams', this.oldId], true);
 
       // Remove this team from all its users
       for(var i = 0; i < this.editingTeamUserlist.length; i++ ){
-        console.log(this.editingTeamUserlist);
         FirebaseFactory.removeItem(
           ['users', this.editingTeamUserlist[i].$id, 
-            'teams', this.editingTeam.$id], 
+            'teams', this.oldId], 
           true
         );
       }
@@ -190,7 +338,7 @@
 
       // Updates the team in firebase
       FirebaseFactory.updateItem(
-        ['teams', this.editingTeam.$id], 
+        ['teams', this.oldId], 
         {users: usersList}, 
       true);
 
@@ -205,7 +353,6 @@
 
       // Adds this team to each user
       for(var i = 0; i < this.editingTeamListOfAddedPeople.length; i++) {
-        console.log('added people');
         var firebaseKeyIsValueObject = {};
         firebaseKeyIsValueObject[this.editingTeam.$id] = 
           this.editingTeam.$id;
@@ -252,6 +399,13 @@
           return this.allUsers[i].displayName;
         }
       }
+    }
+
+    // Hides the flipPresence label for the logged in user.
+    // This makes it so you can't remove yourself from a team
+    // in the edit menu.
+    this.hideOwnUser = function(user) {
+      return (user.$id === FirebaseFactory.getCurrentUser().uid);
     }
   })
   
