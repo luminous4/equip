@@ -9,23 +9,21 @@ angular.module('equip')
     var milToStandard = function (value) {
       if (value !== null && value !== undefined) { //If value is passed in
         if (value.length === 5) {
-        var hour = value.substring ( 0,2 ); //Extract hour
-        console.log('hour', hour);
-        var minutes = value.substring ( 3,5 ); //Extract minutes
+        var hour = value.substring ( 0,2 ); //get hour
+        var minutes = value.substring ( 3,5 ); //get minutes
         var identifier = 'AM'; //Initialize AM PM identifier
 
-        if (hour == 12){ //If hour is 12 then should set AM PM identifier to PM
+        if (hour == 12){ //If hour is 12 set identifier to PM
           identifier = 'PM';
-          console.log('set to pm', identifier);
         }
-        if (hour == 00){ //If hour is 0 then set to 12 for standard time 12 AM
+        if (hour == 00){ //If hour is 0 then set to standard time 12 AM
           hour = 12;
         }
-        if (hour > 12){ //If hour is greater than 12 then convert to standard 12 hour format and set the AM PM identifier to PM
+        if (hour > 12){ //If hour is greater than 12 then convert to standard 12 hour format and set identifier to PM
           hour = hour - 12;
           identifier = 'PM';
         }
-        return hour + ':' + minutes + ' ' + identifier; //Return the constructed standard time
+        return hour + ':' + minutes + ' ' + identifier; //Return constructed standard time
         } else { //If value is not the expected length than just return the value as is
           return value;
         }
