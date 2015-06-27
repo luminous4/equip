@@ -1,10 +1,12 @@
 angular.module('equip')
 
 .controller('SettingsCtrl', function($scope, FirebaseFactory) {
-  
+  $scope.socialSelect = 'first';
+  $scope.success = false;
+
   var userId = FirebaseFactory.getCurrentUser().uid;
 
-  (this.getUserInfo = function() {
+  this.getUserInfo = function() {
     var userInfo = FirebaseFactory.getObject(['users', userId], true);
 
     userInfo.$loaded(function() {
@@ -16,12 +18,19 @@ angular.module('equip')
       $scope.showTwitter = userInfo.Twitter;
       $scope.showOther = userInfo.Other;      
     })
-  })();
+  };
+
+  this.getUserInfo();
+
+  this.checkSuccess = function() {
+    $scope.success = false;
+  }
 
   this.saveUserInfo = function() {
     console.log("called saveUserInfo");
     if ($scope.displayName) {
       FirebaseFactory.updateItem(['users', userId], {displayName: $scope.displayName}, true);
+
     }
     if ($scope.phoneNumber) {
       FirebaseFactory.updateItem(['users', userId], {phoneNumber: $scope.phoneNumber}, true);
@@ -35,9 +44,11 @@ angular.module('equip')
       FirebaseFactory.updateItem(['users', userId], {imgUrl: $scope.imgUrl}, true);
     }
 
+    this.getUserInfo();
+    $scope.success = true;
     $scope.displayName = '';
     $scope.socialInput = '';
-    $scope.socialSelect = null;
+    $scope.socialSelect = 'first';
     $scope.phoneNumber = '';
     $scope.imgUrl = '';
   };

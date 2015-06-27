@@ -51,11 +51,11 @@
     </div>
 
     <!-- Contact Info -->
-    <div class="{{contactCtrl.sideViewClass}}" ng-show="(contactCtrl.currentContact !== null)" ng-click="contactCtrl.undisplayContact()">
+    <div class="{{contactCtrl.sideViewClass}}" ng-show="(contactCtrl.currentContact !== null)">
       <div class="ibox ">
         <div class="ibox-content">
           <div class="ibox-tools dropdown" ng-click="contactCtrl.undisplayContact()">
-            <i class="fa fa-times"></i>
+            <i class="close-contact fa fa-times"></i>
           </div>
           <div class="tab-content">
             <div id="contact-1" class="tab-pane active" >
@@ -87,41 +87,49 @@
                          <span class="contact-type"><i class="fa fa-phone" > </i></span>
                       </td>
                       <td>
-                        {{contactCtrl.getUserPhoneNumber(contactCtrl.currentContact)}}
+                          &nbsp;{{contactCtrl.getUserPhoneNumber(contactCtrl.currentContact)}}
                       </td>
                     </tr>
                     <tr>
                       <td> 
-                         <img height="20" width="20" src="/img/twitter.png"><img/>  
+                         <i class="fa fa-twitter"><i/>  
                       </td>
                       <td>
-                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "twitter")}}
+                        &nbsp;{{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "twitter")}}
                       </td>
                     </tr>                   
                     <tr>
                       <td> 
-                         <img height="20" width="20" src="/img/linkedin.png"><img/>  
+                         <i class="fa fa-linkedin"><i/>  
                       </td>
                       <td>
-                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "LinkedIn")}}
+                        &nbsp;{{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "LinkedIn")}}
                       </td>
                     </tr>                    
                     <tr>
                       <td> 
-                          <img height="20" width="20" src="/img/facebook.png"><img/>  
+                         <i class="fa fa-facebook-square"><i/>  
                       </td>
                       <td>
-                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "Facebook")}}
+                        &nbsp;{{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "Facebook")}}
                       </td>
                     </tr>                   
                     <tr>
                       <td> 
-                         <img height="20" width="20" src="/img/github.png"><img/>  
+                         <i class="fa fa-github"><i/>  
                       </td>
                       <td>
-                        {{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "GitHub")}}
+                        &nbsp;{{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "GitHub")}}
                       </td>
-                    </tr>                  
+                    </tr>  
+                    <tr>
+                      <td> 
+                         <i class="fa fa-info"><i/>  
+                      </td>
+                      <td>
+                        &nbsp;{{contactCtrl.getUserInfoPiece(contactCtrl.currentContact, "Other")}}
+                      </td>
+                    </tr>                 
                   </table>
 
                 </div>

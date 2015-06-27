@@ -24,7 +24,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Display Name <br/> <span class="display-name">{{displayName || showDisplayName}}</span></label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Emily Shenfield" ng-model="displayName">
+                <input ng-focus="settings.checkSuccess()" type="text" class="form-control" placeholder="Emily Shenfield" ng-model="displayName">
               </div>
             </div>
             
@@ -33,7 +33,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Phone Number <br/> <span class="phone-number">{{phoneNumber || showPhoneNumber}}</span></label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="(999) 999-9999" ng-model="phoneNumber">
+                <input type="text" ng-focus="settings.checkSuccess()" class="form-control" placeholder="4083180642 " ng-model="phoneNumber">
               </div>
             </div>
 
@@ -41,7 +41,7 @@
 
             <div class="form-group"><label class="col-sm-2 control-label">Social Links <br/> <span class="social-links">
               <i ng-show="showFacebook" title="{{showFacebook}}" class="fa fa-facebook-square"></i>
-              <i ng-show="showGithub" title="{{showGithub}}" class="fa fa-github"></i>
+              <i ng-show="showGitHub" title="{{showGitHub}}" class="fa fa-github"></i>
               <i ng-show="showLinkedIn" title="{{showLinkedIn}}" class="fa fa-linkedin"></i>
               <i ng-show="showTwitter" title="{{showTwitter}}" class="fa fa-twitter"></i>
               <i ng-show="showOther" title="{{showOther}}" class="fa fa-info"></i>
@@ -49,31 +49,42 @@
                 <div class="input-group m-b">
                   <div class="input-group-btn">
                     <select ng-model="socialSelect" class="social-select btn btn-white dropdown-toggle col-sm-2">
-                      <option val="facebook">Facebook</option>
-                      <option val="linkedin">LinkedIn</option>
-                      <option val="github">GitHub</option>
-                      <option val="twitter">Twitter</option>
-                      <option val="other">Other</option>
+                      <option value="first" selected>-Choose One-</option>
+                      <option>Facebook</option>
+                      <option>LinkedIn</option>
+                      <option>GitHub</option>
+                      <option>Twitter</option>
+                      <option>Other</option>
                     </select>
-                    <input type="text" ng-model="socialInput" class="form-control social-input">
+                    <input type="text" ng-model="socialInput" ng-focus="settings.checkSuccess()" placeholder="www.github.com/seal" class="form-control social-input">
                   </div>
                 </div>
 
             <div class="hr-line-dashed"></div>
 
             <div class="form-group">
-              <label class="col-sm-2 control-label">Upload a profile photo</label>
+              <label class="col-sm-2 control-label">Profile Photo URL</label>
               <div class="col-sm-10"> 
-                <input type="text" class="form-control" ng-model="imgUrl">
+                <input type="text" class="form-control" ng-focus="settings.checkSuccess()" ng-model="imgUrl">
               </div>
             </div>
 
             <div class="hr-line-dashed"></div>
 
+              <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10"> 
+                  <button class="btn team-direct"><a ui-sref="index.teamedit">Manage Your Teams</a></button>
+                </div>
+              </div>
+
+            <div class="hr-line-dashed"></div>
+
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-primary" ng-click="settings.saveUserInfo()">Save changes</button>
-              </div>
+                <h2 ng-show="success">Saved!</h2>
+                  <button class="btn btn-primary" ng-click="settings.saveUserInfo()">Save changes</button>
+                </div>
             </div>
           </form>
         </div>

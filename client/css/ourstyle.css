@@ -21,6 +21,9 @@
     font-size:14px;
     padding:10px;
 }
+.close-contact {
+  cursor: pointer;
+}
 .chat-activity-list {
   max-height: 450px;
   overflow-y: auto;
@@ -79,4 +82,10 @@
 .social-links {
   font-size: 20px;
 }
-
+.team-direct {
+  background-color: #293846;
+}
+.team-direct a {
+  text-decoration: none;
+  color: white;
+}
