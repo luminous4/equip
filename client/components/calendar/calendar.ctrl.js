@@ -1,9 +1,34 @@
 angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, $rootScope, FirebaseFactory) {
+
+  .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, FirebaseFactory) {
     // console.log('in CalendarCtrl');
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
+
+    var milToStandard = function (value) {
+      if (value !== null && value !== undefined) { //If value is passed in
+        if (value.length === 5) {
+        var hour = value.substring ( 0,2 ); //Extract hour
+        var minutes = value.substring ( 3,5 ); //Extract minutes
+        var identifier = 'AM'; //Initialize AM PM identifier
+
+        if (hour === 12){ //If hour is 12 then should set AM PM identifier to PM
+          identifier = 'PM';
+        }
+        if (hour === 0){ //If hour is 0 then set to 12 for standard time 12 AM
+          hour = 12;
+        }
+        if (hour > 12){ //If hour is greater than 12 then convert to standard 12 hour format and set the AM PM identifier to PM
+          hour = hour - 12;
+          identifier = 'PM';
+        }
+        return hour + ':' + minutes + ' ' + identifier; //Return the constructed standard time
+        } else { //If value is not the expected length than just return the value as is
+          return value;
+        }
+      }
+    };
 
     this.setInputDefaults = function() {
       this.fulldayEvent = true;
@@ -98,16 +123,23 @@ angular.module('equip')
       // custom event properties
       newEvent.userId = currentUser.uid;
       newEvent.startDate = startDate;
-      newEvent.startTime = startTime;
+      newEvent.startTime = milToStandard(startTime);
       newEvent.endDate =  endDate;
-      newEvent.endTime = endTime;
+      newEvent.endTime = milToStandard(endTime);
 
       // if events should be added to db top level, add true as third arg
       FirebaseFactory.addToCollection('events', newEvent);
       this.setInputDefaults();
     };
 
-    this.uiConfig = {
+    /* Render Tooltip */
+    $scope.eventRender = function( event, element, view ) {
+      element.attr({'tooltip': event.title + ' ' + milToStandard(this.startTime) + ' - ' + milToStandard(this.endTime),
+                     'tooltip-append-to-body': true});
+      $compile(element)($scope);
+    };
+
+    $scope.uiConfig = {
       calendar:{
         height: 600,
         editable: true,
@@ -115,7 +147,8 @@ angular.module('equip')
           left: 'month agendaWeek agendaDay',
           center: 'title',
           right: 'today prev,next'
-        }
+        },
+        eventRender: $scope.eventRender
       }
     };
 
@@ -123,11 +156,10 @@ angular.module('equip')
 
     $scope.allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
     this.eventSources = [$scope.allEvents];
-  
+
     $rootScope.$watch('selectedTeam', function() {
       if ($rootScope.selectedTeam) {
         $scope.allEvents = FirebaseFactory.getCollection(['events']);
       }
     });
-
   });

@@ -4,8 +4,9 @@
 		'firebase',
     'nouislider',
 		'summernote',
-    'ui.calendar', 
+    'ui.calendar',
     'luegg.directives',
-		'ngMessages' // Angular Messages
+		'ngMessages', // Angular Messages,
+    'ui.bootstrap'
 	])
 })();

@@ -1,4 +1,4 @@
-.team-select, 
+.team-select,
 .social-select {
   margin: 20px 0 0 20px;
   font-size: 20px;
@@ -55,7 +55,7 @@
   font-weight: 200;
   font-family: sans-serif;
 }
-.chat-display, 
+.chat-display,
 .settings-display {
   margin-top: 20px !important;
 }
@@ -88,4 +88,14 @@
 .team-direct a {
   text-decoration: none;
   color: white;
+}
+.events-form-label {
+  padding-right: 0px;
+}
+.events-form {
+  padding: 0px;
+}
+.events-form-row {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
