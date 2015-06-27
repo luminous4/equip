@@ -159,7 +159,20 @@ angular.module('equip')
 
     $rootScope.$watch('selectedTeam', function() {
       if ($rootScope.selectedTeam) {
-        $scope.allEvents = FirebaseFactory.getCollection(['events']);
+        $scope.dashboardEvents = FirebaseFactory.getCollection('events')
+          .$loaded().then(function (data) {
+            var year = moment().year();
+            var date = moment().date();
+            var month = moment().month() + 1;
+            var today = year + " " + month + " " + date;
+            var results = [];
+            angular.forEach(data, function (value) {
+              if (value.startDate === today) {
+                results.push(value);
+              }
+            });
+            $scope.dashboardEvents = results;
+          });
       }
     });
   });
