@@ -30,8 +30,8 @@
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <tbody>
-                        <tr ng-repeat="contact in contactCtrl.teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
-                          <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" src="{{contactCtrl.getUserPicture(contact)}}"> </td>
+                        <tr ng-repeat="contact in teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
+                          <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" ng-src="{{contact.imgUrl}}"> </td>
                           <td ng-click="contactCtrl.viewContact(contact)"><a class="client-link">{{contact.displayName}}</a></td>
                           <td class="contact-type"><i class="fa fa-phone"> </i></td>
                           <td ng-click="contactCtrl.viewContact(contact)">{{contactCtrl.getUserPhoneNumber(contact)}}</td>
@@ -62,7 +62,7 @@
               <div class="row m-b-lg">
                 <div class="col-lg-3 text-center">
                   <div class="m-b-sm">
-                    <img alt="image" class="img-circle" src="{{contactCtrl.getUserPicture(contactCtrl.currentContact)}}"
+                    <img alt="image" class="img-circle" ng-src="{{contactCtrl.currentContact.imgUrl}}"
                     style="width: 62px">
                   </div>
                 </div>
