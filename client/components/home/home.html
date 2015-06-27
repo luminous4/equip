@@ -48,7 +48,7 @@
             <div class="ibox-content">
 
               <div>
-                <div class="feed-activity-list" ng-controller="ChatCtrl">
+                <div class="feed-activity-list" ng-controller="ChatCtrl as chat">
 
                   <div class="feed-element" ng-repeat="message in dashboardMessages">
                     <a ui-sref="profile" class="pull-left">
@@ -80,7 +80,7 @@
               <div ibox-tools></div>
             </div>
             <!-- Calendar Controller-->
-            <div ng-controller="CalendarCtrl" class="ibox-content inspinia-timeline">
+            <div ng-controller="CalendarCtrl as calendar" class="ibox-content inspinia-timeline">
 
               <div class="timeline-item" ng-repeat="event in allEvents">
                 <div class="row">
