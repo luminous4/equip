@@ -16,38 +16,37 @@
   <div class="row chat-main">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
-
         <div class="ibox-content chat-display">
 
-            <div class="chat-activity-list" scroll-glue>
+          <!-- Chat Message Display -->
 
-              <div ng-repeat="message in messages" class="chat-element row">
-
-                <div ng-show="{{message.displayImg}}">
-                  <div class="col-sm-1">
-                    <img alt="image" class="img-circle" ng-src="{{message.userImg}}" />
-                  </div>
-                  <div class="media-body col-sm-7">
-                    <div class="chat-name">{{message.chatName}}</div>
-                    <small class="text-muted">{{message.createdAt}}</small>
-                    <p class="m-b-xs chat-text">
-                      {{message.text}}
-                    </p>
-                  </div>
+          <div class="chat-activity-list" scroll-glue>
+            <div ng-repeat="message in messages" class="chat-element row">
+              <div ng-show="{{message.displayImg}}">
+                <div class="col-sm-1">
+                  <img alt="image" class="img-circle" ng-src="{{message.userImg}}" />
                 </div>
-
-                <div ng-show="{{!message.displayImg}}">
-                  <div class="col-sm-1"></div>
-                  <div class="media-body col-sm-7" title="{{message.createdAt}}">
-                    <p class="m-b-xs chat-text">
+                <div class="media-body col-sm-7">
+                  <div class="chat-name">{{message.chatName}}</div>
+                  <small class="text-muted">{{message.createdAt}}</small>
+                  <p class="m-b-xs chat-text">
                     {{message.text}}
-                    </p>
-                  </div>
+                  </p>
                 </div>
-
-
+              </div>
+              <div ng-show="{{!message.displayImg}}">
+                <div class="col-sm-1"></div>
+                <div class="media-body col-sm-7" title="{{message.createdAt}}">
+                  <p class="m-b-xs chat-text">
+                  {{message.text}}
+                  </p>
+                </div>
               </div>
             </div>
+          </div>
+
+            <!-- Chat Send Form -->
+
           <div class="chat-form">
             <form role="form" class="chat-add" ng-submit="addMessage()">
               <div class="form-group">
