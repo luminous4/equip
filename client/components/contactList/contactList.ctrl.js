@@ -53,11 +53,6 @@
         }
       }
     }
-    this.getUserInfoPiece = function(user, infoPiece) {
-      if(user && user[infoPiece]) {
-        return user[infoPiece];
-      } else return "Not provided";
-    }
     this.provided = function(infoPiece) {
       if (this.currentContact && this.currentContact[infoPiece]) {
         return true;
