@@ -13,15 +13,15 @@ angular.module('equip')
   $scope.usersTeams.$loaded()
     .then(function() {
       if (!$scope.currentTeamOption) {
-        if (localStorage.selectedTeam !== "undefined") {
+        if (localStorage.selectedTeam !== "null") {
           $scope.currentTeamOption = JSON.parse(localStorage.selectedTeam)
         } else {
           $scope.currentTeamOption = $scope.usersTeams[0];
+          localStorage.selectedTeam = JSON.stringify($scope.currentTeamOption);
         }
         $rootScope.selectedTeam = $scope.currentTeamOption;      
       } else {
         $scope.currentTeamOption = $rootScope.selectedTeam;
-        localStorage.selectedTeam = JSON.stringify($rootScope.selectedTeam);
       }
     });
 
