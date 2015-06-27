@@ -4,23 +4,16 @@
   .controller('ContactController', function($scope, $state, $stateParams, FirebaseFactory,
                                             $firebaseArray, refUrl, $firebaseObject) {
 
-    var that = this;
-
     var currTeam = JSON.parse(localStorage.selectedTeam).$value;
 
     var teamUsers = FirebaseFactory.getCollection(['teams', currTeam,'users'], true);
-    this.teamContacts = [];
-
-    var ref = new Firebase(refUrl);
+    $scope.teamContacts = [];
     
     teamUsers.$loaded().then(function(){
       angular.forEach(teamUsers, function(user) {
-        that.teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
+        $scope.teamContacts.push(FirebaseFactory.getObject(['users', user.$value], true));
       })
     });
-
-    console.log(that.teamContacts);
-
 
     this.currentContact = null;
 
@@ -38,20 +31,6 @@
       this.mainPageClass = "col-sm-12";
       this.sideViewClass = "col-sm-0";
       this.currentContact = null;
-    }
-
-    this.getUserPicture = function(userId) {
-      if(userId === null || userId === undefined) return 'img/user.png';
-      if(userId.imgUrl !== undefined) return userId.imgUrl;
-      for(var i = 0; i < this.teamContacts.length; i++) {
-        if(this.teamContacts[i].$id.toString() === userId.toString()) {
-          if(this.teamContacts[i].imgUrl) {
-            return this.teamContacts[i].imgUrl;
-          } else {
-            return 'img/user.png';
-          }
-        }
-      }
     }
     this.provided = function(infoPiece) {
       if (this.currentContact && this.currentContact[infoPiece]) {

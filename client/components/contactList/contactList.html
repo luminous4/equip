@@ -30,8 +30,8 @@
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <tbody>
-                        <tr ng-repeat="contact in contactCtrl.teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
-                          <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" src="{{contactCtrl.getUserPicture(contact)}}"> </td>
+                        <tr ng-repeat="contact in teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
+                          <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" ng-src="{{contact.imgUrl}}"> </td>
                           <td ng-click="contactCtrl.viewContact(contact)"><a class="client-link">{{contact.displayName}}</a></td>
                           <td class="contact-type"><i class="fa fa-phone"> </i></td>
                           <td ng-click="contactCtrl.viewContact(contact)">{{contactCtrl.getUserPhoneNumber(contact)}}</td>
@@ -62,7 +62,7 @@
               <div class="row m-b-lg">
                 <div class="col-lg-3 text-center">
                   <div class="m-b-sm">
-                    <img alt="image" class="img-circle" src="{{contactCtrl.getUserPicture(contactCtrl.currentContact)}}"
+                    <img alt="image" class="img-circle" ng-src="{{contactCtrl.currentContact.imgUrl}}"
                     style="width: 62px">
                   </div>
                 </div>
@@ -88,7 +88,7 @@
                          <i class="fa fa-twitter"><i/>  
                       </td>
                       <td>
-                        &nbsp;<a href="http://{{contactCtrl.currentContact.Twitter}}">{{contactCtrl.currentContact.Twitter}}</a>
+                        &nbsp;<a target="_blank" href="http://{{contactCtrl.currentContact.Twitter}}">{{contactCtrl.currentContact.Twitter}}</a>
                       </td>
                     </tr>                   
                     <tr ng-show="contactCtrl.provided('LinkedIn')">
@@ -96,7 +96,7 @@
                          <i class="fa fa-linkedin"><i/>  
                       </td>
                       <td>
-                        &nbsp;<a href="http://{{contactCtrl.currentContact.LinkedIn}}">{{contactCtrl.currentContact.LinkedIn}}</a>
+                        &nbsp;<a target="_blank" href="http://{{contactCtrl.currentContact.LinkedIn}}">{{contactCtrl.currentContact.LinkedIn}}</a>
                       </td>
                     </tr>                    
                     <tr ng-show="contactCtrl.provided('Facebook')">
@@ -104,7 +104,7 @@
                          <i class="fa fa-facebook-square"><i/>  
                       </td>
                       <td>
-                        &nbsp;<a href="http://{{contactCtrl.currentContact.Facebook}}">{{contactCtrl.currentContact.Facebook}}</a>
+                        &nbsp;<a target="_blank" href="http://{{contactCtrl.currentContact.Facebook}}">{{contactCtrl.currentContact.Facebook}}</a>
                       </td>
                     </tr>                   
                     <tr ng-show="contactCtrl.provided('GitHub')">
@@ -112,7 +112,7 @@
                          <i class="fa fa-github"><i/>  
                       </td>
                       <td>
-                        &nbsp;<a href="http://{{contactCtrl.currentContact.GitHub}}">{{contactCtrl.currentContact.GitHub}}</a>
+                        &nbsp;<a target="_blank" href="http://{{contactCtrl.currentContact.GitHub}}">{{contactCtrl.currentContact.GitHub}}</a>
                       </td>
                     </tr>  
                     <tr ng-show="contactCtrl.provided('Other')">
@@ -120,7 +120,7 @@
                          <i class="fa fa-info"><i/>  
                       </td>
                       <td>
-                        &nbsp;<a href="http://{{contactCtrl.currentContact.Other}}">{{contactCtrl.currentContact.Other}}</a>
+                        &nbsp;<a target="_blank" href="http://{{contactCtrl.currentContact.Other}}">{{contactCtrl.currentContact.Other}}</a>
                       </td>
                     </tr>                 
                   </table>
