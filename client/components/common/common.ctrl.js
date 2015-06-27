@@ -4,8 +4,6 @@ angular.module('equip')
 
   var userId = FirebaseFactory.getCurrentUser().uid;
 
-  var ref = new Firebase(refUrl);
-
   if($rootScope.selectedTeam) {
     $scope.currentTeamOption = $rootScope.selectedTeam;
   }
@@ -15,15 +13,15 @@ angular.module('equip')
   $scope.usersTeams.$loaded()
     .then(function() {
       if (!$scope.currentTeamOption) {
-        if (localStorage.selectedTeam !== "undefined") {
+        if (localStorage.selectedTeam !== "null") {
           $scope.currentTeamOption = JSON.parse(localStorage.selectedTeam)
         } else {
           $scope.currentTeamOption = $scope.usersTeams[0];
+          localStorage.selectedTeam = JSON.stringify($scope.currentTeamOption);
         }
         $rootScope.selectedTeam = $scope.currentTeamOption;      
       } else {
         $scope.currentTeamOption = $rootScope.selectedTeam;
-        localStorage.selectedTeam = JSON.stringify($rootScope.selectedTeam);
       }
     });
 
@@ -32,20 +30,13 @@ angular.module('equip')
     localStorage.selectedTeam = JSON.stringify($rootScope.selectedTeam);
   };
 
+  var userData = FirebaseFactory.getObject(['users', userId], true);
 
-  var getFromFirebase = function(collection, firebase, cb) {
-    firebase.child(collection).child(userId).once('value', function(data) {
-      cb(data.val());
-    });
-  };
+  userData.$watch(function() {
+    $scope.name = userData.displayName;
+    $scope.img = userData.imgUrl;
+  });
 
-  if (!$scope.name && !$scope.img) {
-    getFromFirebase('users', ref, function(data) {
-      $scope.name = data.displayName;
-      $scope.img = data.imgUrl;
-      $scope.$apply();
-    });
-  }
 
   this.signOut = function() {
     $window.localStorage.removeItem('equipAuth');
