@@ -16,63 +16,63 @@
   <div class="row">
 
     <div class="col-lg-12">
-      <div class="ibox float-e-margins col-sm-8">
+      <div class="ibox float-e-margins col-sm-9">
 
         <div class="ibox-content ui-calendar">
-          <div ui-calendar="calendar.uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="calendar.eventSources"></div>
+          <div ui-calendar="uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="calendar.eventSources"></div>
         </div>
       </div>
 
-      <div name="userForm" class="calendarForm col-sm-4">
+      <div name="userForm" class="calendarForm col-sm-3">
         <p>
           <div class="row event">
-            <label class="col-sm-4 control-label">Event Title</label>
-            <div class="col-sm-8">
+            <label class="col-sm-5 control-label events-form-label">Event Title</label>
+            <div class="col-sm-7 events-form">
               <input type="text" class="form-control" placeholder="Your Event Title" ng-model="calendar.title">
             </div>
           </div>
 
-          <div class="row event">
-            <label class="col-sm-4 control-label">Date</label>
-            <div class="col-sm-8">
+          <div class="row event events-form-row">
+            <label class="col-sm-5 control-label events-form-label">Date</label>
+            <div class="col-sm-7 events-form">
               <input type="date" class="form-control" placeholder="20" ng-model="calendar.startDate">
             </div>
           </div>
 
-          <div class="row event">
-            <label class="col-sm-4 control-label">Full Day Event</label>
-            <div class="col-sm-8">
+          <div class="row event events-form-row">
+            <label class="col-sm-5 control-label events-form-label">Full Day</label>
+            <div class="col-sm-7 events-form">
               <input type="checkbox" ng-model="calendar.fulldayEvent">
             </div>
           </div>
         </p>
 
         <div ng-hide="calendar.fulldayEvent">
-          <div class="row event">
-            <label class="col-sm-4 control-label">Begin</label>
-            <div class="col-sm-8">
+          <div class="row event events-form-row">
+            <label class="col-sm-5 control-label events-form-label">Begin</label>
+            <div class="col-sm-7 events-form">
               <input type="time" class="form-control" placeholder="16" ng-model="calendar.startTime">
             </div>
           </div>
 
-          <div class="row event">
-            <label class="col-sm-4 control-label">End</label>
-            <div class="col-sm-8">
+          <div class="row event events-form-row">
+            <label class="col-sm-5 control-label events-form-label">End</label>
+            <div class="col-sm-7 events-form">
               <input type="time" class="form-control" placeholder="16" ng-model="calendar.endTime">
             </div>
           </div>
 
-          <div class="row event">
-            <label class="col-sm-4 control-label">Same Day</label>
-            <div class="col-sm-8">
+          <div class="row event events-form-row">
+            <label class="col-sm-5 control-label events-form-label">Same Day</label>
+            <div class="col-sm-7 events-form">
               <input type="checkbox" ng-model="calendar.sameDay">
             </div>
           </div>
 
           <div ng-hide="calendar.sameDay">
-            <div class="row event">
-              <label class="col-sm-4 control-label">End Date</label>
-              <div class="col-sm-8">
+            <div class="row event events-form-row">
+              <label class="col-sm-5 control-label events-form-label">End Date</label>
+              <div class="col-sm-7 events-form">
                 <input type="date" class="form-control" placeholder="20" ng-model="calendar.endDate">
               </div>
             </div>
@@ -81,21 +81,18 @@
 
         <p>
           <div class="row event">
-            <div class="col-sm-offset-4">
-              <div class="col-sm-4">
-                <button class="btn btn-primary btn-sm" ng-click="calendar.saveNewEvent()">Add Event</button>
+            <div class="col-sm-offset-5 events-form-label">
+              <div class="col-sm-4 events-form">
+                <button class="btn btn-primary btn-sm" ng-click="calendar.saveNewEvent()">Add</button>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-8 events-form">
                 <button class="btn btn-white btn-sm" ng-click="calendar.setInputDefaults()">Cancel</button>
               </div>
             </div>
           </div>
         </p>
       </div> <!-- userForm -->
+
     </div> <!-- col-lg-12 -->
   </div> <!-- row -->
 </div> <!-- wrapper -->
-
-
-
-
