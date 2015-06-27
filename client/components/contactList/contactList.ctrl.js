@@ -58,6 +58,13 @@
         return user[infoPiece];
       } else return "Not provided";
     }
+    this.provided = function(infoPiece) {
+      if (this.currentContact && this.currentContact[infoPiece]) {
+        return true;
+      } else {
+        return false;
+      }
+    }
     this.getUserPhoneNumber = function(user) {
       if(user && user.phoneNumber) {
         var str = user.phoneNumber.toString();

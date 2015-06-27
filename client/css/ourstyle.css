@@ -104,3 +104,15 @@
   min-height: 70px !important;
   border-bottom: 1px solid #e7eaec;
 }
+.email {
+  margin-bottom: 10px !important;
+}
+.contact-table td {
+  padding-top: 3px;
+}
+.contact-table a {
+  color: #23c6c8;
+}
+.contact-table a:hover {
+  color: #245269;
+}
