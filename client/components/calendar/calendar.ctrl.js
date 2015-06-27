@@ -164,7 +164,7 @@ angular.module('equip')
             var year = moment().year();
             var date = moment().date();
             var month = moment().month() + 1;
-            var today = "" + year + " " + +month + " " + date;
+            var today = year + " " + month + " " + date;
             var results = [];
             angular.forEach(data, function (value) {
               if (value.startDate === today) {
