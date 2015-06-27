@@ -28,7 +28,7 @@
               <div id="tab-1" class="tab-pane active">
                 <div class="full-height-scroll" full-scroll>
                   <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover">
                       <tbody>
                         <tr ng-repeat="contact in contactCtrl.teamContacts | contactSearch:contactCtrl.searchString" style="cursor:pointer">
                           <td class="client-avatar" ng-click="contactCtrl.viewContact(contact)"><img alt="image" src="{{contactCtrl.getUserPicture(contact)}}"> </td>
