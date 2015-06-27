@@ -123,4 +123,8 @@ angular.module('equip')
 
     var allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
     this.eventSources = [allEvents];
+    /* Scope.events for the dashboard */
+    $scope.allEvents = allEvents.$loaded().then(function(data){
+      $scope.allEvents = data;
+    });
   });
