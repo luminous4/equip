@@ -38,7 +38,7 @@ angular.module('equip')
         ref.child('users').child(userData.uid).set({
           email: email,
           displayName: email.replace(/@.*/, ''),
-          imgUrl: 'http://bioweb.uwlax.edu/bio203/s2009/aschenbr_rach/cat%20eyes%20and%20ears.jpg'
+          imgUrl: 'http://www.gravatar.com/avatar/' + hashEmail(email) + '.jpg'
         });
 
         $location.path('/login');
@@ -53,6 +53,10 @@ angular.module('equip')
     var isAuth = function() {
       return !!$window.localStorage.getItem('equipAuth');
     };
+
+    var hashEmail = function(email) {
+      return md5(email.trim());
+    }
 
     return {
       login: login,
