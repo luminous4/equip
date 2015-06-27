@@ -44,7 +44,7 @@ function config($stateProvider, $urlRouterProvider) {
 		.state('index.teamedit', {
 			url: '/team',
 			templateUrl: 'components/teamEdit/teamEdit.html',
-			controller: 'TeamController as teamEditCtrl',
+			controller: 'TeamController',
 			data: { pageTitle: 'Edit Your Teams' },
 			authenticate: true
 		})

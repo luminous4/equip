@@ -9,17 +9,6 @@
                                             $firebaseArray, refUrl, $firebaseObject) {
 
 
-      ///////////////////////////
-     // Initialized variables //
-    ///////////////////////////
-
-    // These three 'tabs' are basically routes 
-    $scope.tabs = [
-      "Team List",
-      "Create A Team",
-      "Edit Team"
-    ];
-
     $scope.currentTab = "Team List";
 
     // Tracks the original $id of a team to update it when editing
@@ -33,6 +22,7 @@
       $scope.teams = FirebaseFactory.getCollection('teams', true);
 
       $scope.allUsers = FirebaseFactory.getCollection('users', true);
+      
       /**
        *  Once the team information is loaded, $scope will pare $scope.teams and 
        *  $scope.allUsers to the actual information the user is supposed to see.
@@ -72,19 +62,19 @@
     //////////////////////////
 
 
-    $scope.setTab = function(tabNumber, team) {
+    $scope.setTab = function(newTab, team) {
       
       // Set the current tab 
-      $scope.currentTab = $scope.tabs[tabNumber];
+      $scope.currentTab = newTab;
 
       // Reset these variables
       $scope.editingTeamUserlist = [];
       $scope.editingTeamListOfRemovedPeople = [];
       $scope.editingTeamListOfAddedPeople = [];
 
-      if (tabNumber === 0) {
+      if (newTab === 'Team List') {
         $scope.initialize();
-      } else if (tabNumber === 1) { 
+      } else if (newTab === 'Create A Team') { 
         // Create A Team tab
 
         // Set the team being edited to an empty team
@@ -99,14 +89,13 @@
           ['users', currentUser.uid],
           true
         );
-        var $scope = $scope;
         currentUserFirebaseObject.$loaded().then(function() {
           $scope.flipPresence(currentUserFirebaseObject);
         });
 
 
 
-      } else if (tabNumber === 2) { 
+      } else if (newTab === 'Edit Team') { 
         // Edit Team tab
 
         // Set the team being edited to the clicked team
@@ -151,7 +140,7 @@
 
       // Get the information of all connected users 
       // Note: $scope is not scalable! We should fix later
-      if (tabNumber === 1 || tabNumber === 2) {
+      if (newTab === 'Create A Team' || newTab === 'Edit Team') {
         $scope.allUsers = [];      
         for (var i = 0; i < allKeys.length; i++) {
 
@@ -178,7 +167,6 @@
 
 
     $scope.leaveTeam = function(team) {
-      var $scope = $scope;
 
       // Removes $scope team from the user's team list
       var currentUser = FirebaseFactory.getCurrentUser();
@@ -287,7 +275,7 @@
       }
 
       // Return to the team selection menu
-      $scope.setTab(0);
+      $scope.setTab('Team List');
     }
 
 
@@ -307,7 +295,7 @@
       }
 
       // Return to the team selection menu
-      $scope.setTab(0);
+      $scope.setTab('Team List');
     }
 
 
@@ -348,7 +336,7 @@
       }
 
       // Return to the team selection menu
-      $scope.setTab(0);
+      $scope.setTab('Team List');
     }
 
 

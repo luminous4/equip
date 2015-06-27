@@ -1,46 +1,46 @@
 (function() {
   angular.module('equip')
 
-  .controller('ContactController', function($scope, $state, $stateParams, FirebaseFactory,
-                                            $firebaseArray, refUrl, $firebaseObject) {
+  .controller('ContactController', function($scope, $state, $stateParams, $firebaseObject,
+                                            $firebaseArray, refUrl, FirebaseFactory) {
 
+    $scope.currentContact = null;
+    $scope.searchString = '';
+    $scope.mainPageClass = "col-sm-12";
+    $scope.sideViewClass = "col-sm-0";
     var currTeam = JSON.parse(localStorage.selectedTeam).$value;
-
     var teamUsers = FirebaseFactory.getCollection(['teams', currTeam,'users'], true);
     $scope.teamContacts = [];
-    
-    teamUsers.$loaded().then(function(){
+    teamUsers.$loaded().then(function() {
       angular.forEach(teamUsers, function(user) {
         $scope.teamContacts.push(FirebaseFactory.getObject(['users', user.$value], true));
       })
     });
 
-    this.currentContact = null;
-
-    this.searchString = '';
-
-    this.mainPageClass = "col-sm-12";
-    this.sideViewClass = "col-sm-0";
-
-    this.viewContact = function(contact) {
-      this.mainPageClass = "col-sm-8";
-      this.sideViewClass = "col-sm-4";
-      this.currentContact = contact;
+    // Displays a contact on the side and shrinks list
+    $scope.viewContact = function(contact) {
+      $scope.mainPageClass = "col-sm-8";
+      $scope.sideViewClass = "col-sm-4";
+      $scope.currentContact = contact;
     }
-    this.undisplayContact = function() {
-      this.mainPageClass = "col-sm-12";
-      this.sideViewClass = "col-sm-0";
-      this.currentContact = null;
+
+    // Removes contact on the side from being displayed and makes the list larger
+    $scope.undisplayContact = function() {
+      $scope.mainPageClass = "col-sm-12";
+      $scope.sideViewClass = "col-sm-0";
+      $scope.currentContact = null;
     }
-    this.provided = function(infoPiece) {
-      if (this.currentContact && this.currentContact[infoPiece]) {
+
+    $scope.provided = function(infoPiece) {
+      if ($scope.currentContact && $scope.currentContact[infoPiece]) {
         return true;
       } else {
         return false;
       }
     }
-    this.getUserPhoneNumber = function(user) {
-      if(user && user.phoneNumber) {
+
+    $scope.getUserPhoneNumber = function(user) {
+      if (user && user.phoneNumber) {
         var str = user.phoneNumber.toString();
         var end = "";
         for(var i = 0; i < str.length; i++) {
@@ -56,30 +56,22 @@
         return end;
       } else return "Not provided";
     }
-
   })
 
-  .filter('contactSearch', function(){
-
-    return function(arr, searchString){
-
-      if(!searchString){
+  .filter('contactSearch', function() {
+    return function(arr, searchString) {
+      if (!searchString) {
         return arr;
       }
-
       var result = [];
-
       searchString = searchString.toLowerCase();
-
       // Using the forEach helper method to loop through the array
-      angular.forEach(arr, function(item){
+      angular.forEach(arr, function(item) {
         console.log(item);
-        if(item !== null && item !== undefined && item.displayName.toLowerCase().indexOf(searchString) !== -1){
+        if (item !== null && item !== undefined && item.displayName.toLowerCase().indexOf(searchString) !== -1) {
           result.push(item);
         }
-
       });
-
       return result;
     }
   });
