@@ -15,10 +15,15 @@ angular.module('equip')
   $scope.usersTeams.$loaded()
     .then(function() {
       if (!$scope.currentTeamOption) {
-        $scope.currentTeamOption = JSON.parse(localStorage.selectedTeam) || $scope.usersTeams[0];
+        if (localStorage.selectedTeam !== "undefined") {
+          $scope.currentTeamOption = JSON.parse(localStorage.selectedTeam)
+        } else {
+          $scope.currentTeamOption = $scope.usersTeams[0];
+        }
         $rootScope.selectedTeam = $scope.currentTeamOption;      
       } else {
         $scope.currentTeamOption = $rootScope.selectedTeam;
+        localStorage.selectedTeam = JSON.stringify($rootScope.selectedTeam);
       }
     });
 
@@ -44,6 +49,7 @@ angular.module('equip')
 
   this.signOut = function() {
     $window.localStorage.removeItem('equipAuth');
+    localStorage.selectedTeam = undefined;
     $rootScope.selectedTeam = undefined;
     $location.path('/login');
   };

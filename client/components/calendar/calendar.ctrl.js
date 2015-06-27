@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, FirebaseFactory) {
+  .controller('CalendarCtrl', function($scope, $rootScope, FirebaseFactory) {
     // console.log('in CalendarCtrl');
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
@@ -121,10 +121,13 @@ angular.module('equip')
 
     var currTeam = JSON.parse(localStorage.selectedTeam).$value;
 
-    var allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
-    this.eventSources = [allEvents];
-    /* Scope.events for the dashboard */
-    $scope.allEvents = allEvents.$loaded().then(function(data){
-      $scope.allEvents = data;
+    $scope.allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
+    this.eventSources = [$scope.allEvents];
+  
+    $rootScope.$watch('selectedTeam', function() {
+      if ($rootScope.selectedTeam) {
+        $scope.allEvents = FirebaseFactory.getCollection(['events']);
+      }
     });
+
   });
