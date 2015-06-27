@@ -1,6 +1,6 @@
 angular.module('equip')
 
-  .factory('User', function($location, $state, $window, refUrl) {
+  .factory('User', function($location, $state, $window, refUrl, FirebaseFactory) {
     var login = function(email, password, firebaseLoginObj, callback) {
       console.log('inside login func in factory');
 
@@ -21,9 +21,11 @@ angular.module('equip')
         });
     };
 
-    var register = function(email, password, firebaseAuthObj, callback) {
-      console.log('inside register func in factory');
-      console.log('email in register func in factory', email);
+    var register = function(email, password, teamName, teamAction, firebaseAuthObj, callback) {
+      // console.log('inside register func in factory');
+      // console.log('email in register func in factory', email);
+      console.log('teamName in user factory', teamName);
+      console.log('teamAction', teamAction);
 
       firebaseAuthObj.$createUser({
         email: email,
@@ -40,6 +42,20 @@ angular.module('equip')
           displayName: email.replace(/@.*/, ''),
           imgUrl: 'http://www.gravatar.com/avatar/' + hashEmail(email) + '.jpg'
         });
+
+        // if teamAction === join
+        if (teamAction === join) {
+          console.log('in join');
+          // get target team by name teamName
+          // get current user
+          // add current user to target team
+          // add target team to current user 'team list'
+        } else {
+          // add new team with teamName to collection teams
+          // get current user
+          // add current user to new team
+          // add new team to current user 'team list'
+        }
 
         $location.path('/login');
         callback(true);
