@@ -120,6 +120,8 @@
           that.flipPresence(currentUserFirebaseObject);
         });
 
+
+
       } else if (tabNumber === 2) { 
         // Edit Team tab
 
@@ -161,7 +163,27 @@
               true)
           );
         }
+      }
 
+      // Get the information of all connected users 
+      // Note: this is not scalable! We should fix later
+      if(tabNumber === 1 || tabNumber === 2) {
+        this.allUsers = [];      
+        for(var i = 0; i < allKeys.length; i++) {
+
+          // If this user is not connected, just move along
+          if(this.connectedUsers.indexOf(allKeys[i]) === -1) {
+            continue;
+          }
+
+          // Otherwise, add this user's firebase object to the list of
+          // connected users
+          this.allUsers.push(
+            FirebaseFactory.getObject(
+              [ 'users', allKeys[i]], 
+              true)
+          );
+        }
       }
     }
 
