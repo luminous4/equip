@@ -166,7 +166,7 @@ angular.module('equip')
             var month = moment().month() + 1;
             var today = "" + year + " " + +month + " " + date;
             var results = [];
-            _.each(data, function (value) {
+            angular.forEach(data, function (value) {
               if (value.startDate === today) {
                 results.push(value);
               }
