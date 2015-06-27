@@ -1,42 +1,53 @@
 
 angular.module('equip')
 
-  .factory('FirebaseFactory', function($firebaseArray, $rootScope, $firebaseObject, $window, refUrl) {
+  .factory('FirebaseFactory', function($firebaseArray, $rootScope, 
+           $firebaseObject, $window, refUrl) {
+
     var ref = new Firebase(refUrl);
 
+    // Decorator function which prepares data to be inserted into firebase
     var firebaseSterilization = function(input) {
 
-      //returns primitive types and arrays
-      if(Object.keys(input).length < 1) return input;
+      // Returns primitive types and arrays
+      if (Object.keys(input).length < 1) {
+        return input;
+      }
 
-      if(input['$$hashKey'] !== undefined) {
+      // Removes properties which firebase doesn't allow
+      if (input['$$hashKey'] !== undefined) {
         delete input['$$hashKey'];
       }
-
-      if(input['$id'] !== undefined) {
+      if (input['$id'] !== undefined) {
         delete input['$id'];
       }
-
-      if(input['$priority'] !== undefined) {
+      if (input['$priority'] !== undefined) {
         delete input['$priority'];
       }
-
-      for(var key in input) {
-        if(input[key] === undefined) {
+      for (var key in input) {
+        if (input[key] === undefined) {
           delete(input[key]);
         }
       }
+
       return input;
     };
 
+    /*
+    *  Returns a firebase reference.
+    *  If topLevel is falsy, it traverses the tree from the root;
+    *  otherwise, it will traverse starting at the currently selected team.
+    *  Input takes an array or string. If input is an array, it will traverse
+    *  down the tree using each member as the next child node to visit.
+    */
     var translateReference = function(input, topLevel) {
       topLevel = !!topLevel;
-      if(Array.isArray(input)) {
+      if (Array.isArray(input)) {
         var result = ref;
         if (!topLevel){
           result = ref.child('teams').child($rootScope.selectedTeam.$value);
         }
-        for(var i = 0; i < input.length; i++) {
+        for (var i = 0; i < input.length; i++) {
           result = result.child(input[i]);
         }
         return result;
@@ -46,7 +57,7 @@ angular.module('equip')
           }
           return ref.child(input);
       } else {
-        return input; // input is a Firebase Reference Object
+        return input; 
       }
     };
 
@@ -63,74 +74,39 @@ angular.module('equip')
       var targetCollection = translateReference(path, topLevel);
       var addedItem = targetCollection.push(newItem);
       addedItem = $firebaseObject(addedItem);
-      console.log('added to:', path);
-      console.log('added item from firebase factory', addedItem);
       return addedItem;
     };
 
     var updateItem = function(path, newObject, topLevel) {
       newObject = firebaseSterilization(newObject);
-      // console.log(newObject);
       var targetItem = translateReference(path, topLevel);
       targetItem.update(newObject);
-      console.log('just edited:', targetItem);
     };
 
     var removeItem = function (path, topLevel) {
       var targetItem = translateReference(path, topLevel);
       targetItem.remove();
-      console.log('removed:', targetItem);
     };
 
+    // This will go in user factory
     var getCurrentUser = function() {
       var userObj = $window.localStorage.getItem('firebase:session::mksequip');
       var user = JSON.parse(userObj);
       return user;
     };
 
-    // var getUserListForTeam = function(teamNameOrArray) {
-
-    //   if(Array.isArray(teamNameOrArray)) {
-    //     var bunchOfUserlists = [];
-    //     for(var i = 0; i < teamNameOrArray; i++) {
-    //       bunchOfUserlists.push()
-    //     }
-    //   } else {
-    //     teamName = teamNameOrArray;
-    //   }
-      
-    //   var teamUsers = FirebaseFactory.getCollection(['teams', teamName, 'users']);
-    //   teamContacts = [];
-
-    //   var ref = new Firebase(refUrl);
-      
-    //   teamUsers.$loaded().then(function(){
-    //       console.log(teamUsers);
-    //     angular.forEach(teamUsers, function(user) {
-    //       console.log(user);
-    //       teamContacts.push($firebaseObject(ref.child('users').child(user.$value)));
-    //     })
-    //     console.log(teamContacts);
-    //     return teamContacts;
-    //   });      
-    // }
-
-
-    // var getCurrentTeamUserlist = function() {
-    //   return getUserListForTeam($rootScope.selectedTeam.$value);
-    // };
-
+    // This won't
     var getUserInfo = function(userId) {
       return $firebaseObject(ref.child('users').child(userId));
     }
 
     return {
-      getCollection: getCollection,
       addToCollection: addToCollection,
-      updateItem: updateItem,
-      removeItem: removeItem,
+      getCollection: getCollection,
       getCurrentUser: getCurrentUser,
       getUserInfo: getUserInfo,
-      getObject: getObject
+      getObject: getObject,
+      removeItem: removeItem,
+      updateItem: updateItem
     };
   })
