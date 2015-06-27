@@ -99,3 +99,8 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+/* Dashboard Calendar */
+.timeline-item .content {
+  min-height: 70px !important;
+  border-bottom: 1px solid #e7eaec;
+}

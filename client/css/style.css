@@ -4264,7 +4264,7 @@ ul.clear-list:first-child {
     text-align: right;
     width: 110px;
     position: relative;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 .timeline-item .content {
     border-left: 1px solid #e7eaec;
@@ -4272,9 +4272,9 @@ ul.clear-list:first-child {
     padding-top: 10px;
     min-height: 100px;
 }
-.timeline-item .content:hover {
-    background: #f6f6f6;
-}
+/*.timeline-item .content:hover {*/
+    /*background: #f6f6f6;*/
+/*}*/
 /* PIN BOARD */
 ul.notes li,
 ul.tag-list li {
