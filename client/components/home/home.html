@@ -5,7 +5,7 @@
         <div class="col-lg-4" ng-controller="CommonCtrl as common">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Choose Your Team</h5>
+              <h5><i class="fa fa-group"></i>&nbsp;&nbsp;&nbsp;Choose Your Team</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content">
@@ -21,7 +21,7 @@
           <!-- Documents Widget -->
           <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Recent Documents</h5>
+              <h5><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;Recent Documents</h5>
               <a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>
               <div ibox-tools></div>
             </div>
@@ -40,7 +40,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Recent Chat Messages</h5>
+              <h5><i class="fa fa-comments-o"></i>&nbsp;&nbsp;&nbsp;Chat</h5>
 
               <div class="ibox-tools">
               </div>
@@ -76,7 +76,7 @@
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5>Calendar</h5>
+              <h5><i class="fa fa-calendar-o"></i>&nbsp;&nbsp;&nbsp;Today's Events</h5>
               <div ibox-tools></div>
             </div>
             <!-- Calendar Controller-->
@@ -85,13 +85,13 @@
               <div class="timeline-item" ng-repeat="event in dashboardEvents">
                 <div class="row">
                   <div class="col-xs-3 date">
-                    <i class="fa fa-calendar-o"></i>
                     {{event.startTime}}
-                    <br/>
-                    {{event.endTime}}
+                    <br>
+                    {{event.endTime}}&nbsp;
                   </div>
                   <div class="col-xs-7 content no-top-border">
-                    <p class="m-b-xs"><strong>{{event.title}}</strong></p>
+                    <p class="m-b-xs">
+                      <strong>{{event.title}}</strong></p>
 
 
                   </div>
