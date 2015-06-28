@@ -24,7 +24,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Display Name <br/> <span class="display-name">{{displayName || showDisplayName}}</span></label>
               <div class="col-sm-10">
-                <input ng-focus="settings.checkSuccess()" type="text" class="form-control" placeholder="Emily Shenfield" ng-model="displayName">
+                <input ng-focus="checkSuccess()" type="text" class="form-control" placeholder="Emily Shenfield" ng-model="displayName">
               </div>
             </div>
             
@@ -33,7 +33,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Phone Number <br/> <span class="phone-number">{{phoneNumber || showPhoneNumber}}</span></label>
               <div class="col-sm-10">
-                <input type="text" ng-focus="settings.checkSuccess()" class="form-control" placeholder="4083180642 " ng-model="phoneNumber">
+                <input type="text" ng-focus="checkSuccess()" class="form-control" placeholder="4083180642 " ng-model="phoneNumber">
               </div>
             </div>
 
@@ -65,7 +65,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Profile Photo URL</label>
               <div class="col-sm-10"> 
-                <input type="text" class="form-control" ng-focus="settings.checkSuccess()" ng-model="imgUrl">
+                <input type="text" class="form-control" ng-focus="checkSuccess()" ng-model="imgUrl">
               </div>
             </div>
 
@@ -83,7 +83,7 @@
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
                 <h2 ng-show="success">Saved!</h2>
-                  <button class="btn btn-primary" ng-click="settings.saveUserInfo()">Save changes</button>
+                  <button class="btn btn-primary" ng-click="saveUserInfo()">Save changes</button>
                 </div>
             </div>
           </form>

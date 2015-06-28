@@ -1,42 +1,38 @@
-angular.module('equip')
+(function() {
 
-.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, $location, $window, User, refUrl, FirebaseFactory) {
+angular.module('equip')
+.controller('ChatCtrl', function($scope, $rootScope, FirebaseFactory) {
 
   var userId = FirebaseFactory.getCurrentUser().uid;
-  var ref = new Firebase(refUrl);
-  this.canSend = true;
   var lastMessageDate = 0;
+  var userData = FirebaseFactory.getObject(['users', userId], true);
+  $scope.canSend = true;
 
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
       $scope.messages = FirebaseFactory.getCollection('messages');
-      /*Start Dashboard Specific Functions*/
-      $scope.dashboardMessages = $scope.messages.$loaded().then(function(data) {
+      $scope.messages.$loaded()
+      .then(function(data) {
         $scope.dashboardMessages = data.slice(data.length - 5, data.length);
-      });
-      /*End Dashboard Specific Functions*/
+      })
       lastMessageDate = 0;
     }
   });
 
-  var getFromFirebase = function(collection, firebase, cb) {
-    firebase.child(collection).child(userId).once('value', function(data) {
-      cb(data.val());
-    });
-  };
-
-  getFromFirebase('users', ref, function(data) {
-    $scope.user = data.displayName;
-    $scope.img = data.imgUrl;
+  userData.$loaded()
+  .then(function() {
+    $scope.user = userData.displayName;
+    $scope.img = userData.imgUrl;
   });
 
-  this.addMessage = function() {
+  $scope.addMessage = function() {
     var currentDate = new Date();
+    var date = moment().format('YYYY-MM-DD hh:mm');
     var showImg = true;
+
     if (currentDate - lastMessageDate < 20000) {
       showImg = false;
     }
-    var date = moment().format('YYYY-MM-DD hh:mm');
     if (!$rootScope.selectedTeam) {
       this.canSend = false;
     } else {
@@ -45,11 +41,13 @@ angular.module('equip')
         displayImg: showImg,
         chatName: $scope.user,
         userImg: $scope.img,
-        text: this.message,
+        text: $scope.message,
         createdAt: date,
       });      
       lastMessageDate = currentDate;
     }
+
     this.message = '';
   };
 });
+})();
