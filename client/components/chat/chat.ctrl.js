@@ -1,5 +1,6 @@
-angular.module('equip')
+(function() {
 
+angular.module('equip')
 .controller('ChatCtrl', function($scope, $rootScope, FirebaseFactory) {
 
   var userId = FirebaseFactory.getCurrentUser().uid;
@@ -49,3 +50,4 @@ angular.module('equip')
     this.message = '';
   };
 });
+})();
