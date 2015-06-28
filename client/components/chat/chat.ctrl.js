@@ -5,6 +5,7 @@ angular.module('equip')
 
   var userId = FirebaseFactory.getCurrentUser().uid;
   var lastMessageDate = 0;
+  var lastMessage;
   var userData = FirebaseFactory.getObject(['users', userId], true);
   $scope.canSend = true;
 
@@ -15,6 +16,11 @@ angular.module('equip')
       .then(function(data) {
         $scope.dashboardMessages = data.slice(data.length - 5, data.length);
       })
+
+      $scope.messages.$watch(function(event) {
+        lastMessage = FirebaseFactory.getObject(['messages', event.key]);
+      });
+
       lastMessageDate = 0;
     }
   });
@@ -30,7 +36,7 @@ angular.module('equip')
     var date = moment().format('YYYY-MM-DD hh:mm');
     var showImg = true;
 
-    if (currentDate - lastMessageDate < 20000) {
+    if (currentDate - lastMessageDate < 20000 && lastMessage.chatName === $scope.user) {
       showImg = false;
     }
     if (!$rootScope.selectedTeam) {
