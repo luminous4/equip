@@ -2,14 +2,14 @@
 <div id="wrapper">
 
   <!-- Navigation -->
-  <div ng-include="'components/common/navigation.html'" ng-controller="CommonCtrl as common"></div>
+  <div ng-include="'components/common/navigation.html'" ng-controller="CommonCtrl"></div>
 
   <!-- Page wraper -->
   <!-- ng-class with current state name give you the ability to extended customization your view -->
   <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
 
     <!-- Page wrapper -->
-    <div ng-include="'components/common/topnavbar.html'" ng-controller="CommonCtrl as common"></div>
+    <div ng-include="'components/common/topnavbar.html'" ng-controller="CommonCtrl"></div>
 
     <!-- Main view  -->
     <div ui-view></div>
