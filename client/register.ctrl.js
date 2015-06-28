@@ -1,4 +1,5 @@
-angular.module('equip')
+(function() {
+   angular.module('equip')
 
   .controller('RegisterCtrl', function($scope, $firebaseAuth, $location, FirebaseFactory, User, refUrl) {
     var ref = new Firebase(refUrl);
@@ -9,8 +10,8 @@ angular.module('equip')
     $scope.teamCreate = true;
 
     $scope.register = function() {
-      // console.log('just clicked register button');
       var teamAction;
+
       if ($scope.teamJoin === true){
         teamAction = 'join';
       } else {
@@ -42,4 +43,5 @@ angular.module('equip')
           $scope.teamJoin = true;
         }
     });
-  })
+  });
+})();
