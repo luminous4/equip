@@ -1,34 +1,11 @@
-angular.module('equip')
-
+(function() {
+   angular.module('equip')
 
   .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, FirebaseFactory) {
-    // console.log('in CalendarCtrl');
+
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = FirebaseFactory.getCurrentUser();
-
-    var milToStandard = function (value) {
-      if (value !== null && value !== undefined) { //If value is passed in
-        if (value.length === 5) {
-        var hour = value.substring ( 0,2 ); //get hour
-        var minutes = value.substring ( 3,5 ); //get minutes
-        var identifier = 'AM'; //Initialize AM PM identifier
-
-        if (hour == 12){ //If hour is 12 set identifier to PM
-          identifier = 'PM';
-        }
-        if (hour == 00){ //If hour is 0 then set to standard time 12 AM
-          hour = 12;
-        }
-        if (hour > 12){ //If hour is greater than 12 then convert to standard 12 hour format and set identifier to PM
-          hour = hour - 12;
-          identifier = 'PM';
-        }
-        return hour + ':' + minutes + ' ' + identifier; //Return constructed standard time
-        } else { //If value is not the expected length than just return the value as is
-          return value;
-        }
-      }
-    };
+    var currentTeam = JSON.parse(localStorage.selectedTeam).$value;
 
     this.setInputDefaults = function() {
       this.fulldayEvent = true;
@@ -40,11 +17,37 @@ angular.module('equip')
       this.endTime = '';
     }
 
+    // on page load
     this.setInputDefaults();
+
+    var milToStandard = function (value) {
+      // if value is passed in
+      if (value !== null && value !== undefined) {
+        if (value.length === 5) {
+          var hour = value.substring ( 0,2 );
+          var minutes = value.substring ( 3,5 );
+          var identifier = 'AM';
+
+          if (hour == 12){
+            identifier = 'PM';
+          }
+          if (hour == 00){
+            // identifier remains AM
+            hour = 12;
+          }
+          if (hour > 12){
+            hour = hour - 12;
+            identifier = 'PM';
+          }
+          return hour + ':' + minutes + ' ' + identifier;
+        } else {
+          return value;
+        }
+      }
+    };
 
     var getDate = function(dateObj) {
       var date;
-      console.log('in getDate: dateObj', dateObj);
       var year = dateObj.getFullYear();
       var month = dateObj.getMonth() + 1;
       var day = dateObj.getDate();
@@ -53,15 +56,8 @@ angular.module('equip')
       return date;
     };
 
-    var getTime = function(timeObj, isDefault) {
-      isDefault = isDefault || false;
+    var getTime = function(timeObj) {
       var time;
-
-      // TODO
-      // if (isDefault) {
-      //   // add 30 min to current hours:time
-      // }
-
       var hours = timeObj.getHours();
       var minutes = timeObj.getMinutes();
 
@@ -77,9 +73,6 @@ angular.module('equip')
     };
 
     this.saveNewEvent = function() {
-      console.log('add event clicked');
-      console.log('this.startTime', this.startTime);
-
       var newEvent = {};
 
       var startDate = getDate(this.startDate);
@@ -99,10 +92,6 @@ angular.module('equip')
         startTime = getTime(this.startTime);
         endTime = getTime(this.endTime);
       }
-
-      console.log('startTime', startTime);
-      var x = milToStandard(startTime);
-      console.log('milToStandard(startTime)', x);
 
       eventStart = startDate + ' ' + startTime;
 
@@ -133,13 +122,12 @@ angular.module('equip')
       newEvent.endDate =  endDate;
       newEvent.endTime = milToStandard(endTime);
 
-      // if events should be added to db top level, add true as third arg
       FirebaseFactory.addToCollection('events', newEvent);
       this.setInputDefaults();
     };
 
-    /* Render Tooltip */
-    $scope.eventRender = function( event, element, view ) {
+    /* event entry on mouseover*/
+    $scope.eventRender = function(event, element, view) {
       element.attr({'tooltip': event.title + ' ' + milToStandard(this.startTime) + ' - ' + milToStandard(this.endTime),
                      'tooltip-append-to-body': true});
       $compile(element)($scope);
@@ -158,10 +146,10 @@ angular.module('equip')
       }
     };
 
-    var currTeam = JSON.parse(localStorage.selectedTeam).$value;
+    $scope.allEvents = FirebaseFactory.getCollection(['teams', currentTeam, 'events'], true);
 
-    $scope.allEvents = FirebaseFactory.getCollection(['teams', currTeam, 'events'], true);
-    this.eventSources = [$scope.allEvents];
+    // events on calendar
+    $scope.eventSources = [$scope.allEvents];
 
     $rootScope.$watch('selectedTeam', function() {
       if ($rootScope.selectedTeam) {
@@ -172,6 +160,7 @@ angular.module('equip')
             var month = moment().month() + 1;
             var today = year + " " + month + " " + date;
             var results = [];
+
             angular.forEach(data, function (value) {
               if (value.startDate === today) {
                 results.push(value);
@@ -182,3 +171,4 @@ angular.module('equip')
       }
     });
   });
+})();

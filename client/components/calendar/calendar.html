@@ -19,7 +19,7 @@
       <div class="ibox float-e-margins col-sm-9">
 
         <div class="ibox-content ui-calendar">
-          <div ui-calendar="uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="calendar.eventSources"></div>
+          <div ui-calendar="uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" class="calendar" ng-model="eventSources"></div>
         </div>
       </div>
 
@@ -86,13 +86,12 @@
                 <button class="btn btn-primary btn-sm" ng-click="calendar.saveNewEvent()">Add</button>
               </div>
               <div class="col-sm-8 events-form">
-                <button class="btn btn-white btn-sm" ng-click="calendar.setInputDefaults()">Cancel</button>
+                <button class="btn btn-white btn-sm" ng-click="this.setInputDefaults()">Cancel</button>
               </div>
             </div>
           </div>
         </p>
       </div> <!-- userForm -->
-
     </div> <!-- col-lg-12 -->
   </div> <!-- row -->
 </div> <!-- wrapper -->
