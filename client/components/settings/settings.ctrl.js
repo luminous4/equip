@@ -4,7 +4,7 @@ angular.module('equip')
 .controller('SettingsCtrl', function($scope, FirebaseFactory) {
   
   var userId = FirebaseFactory.getCurrentUser().uid;
-  $scope.socialSelect = 'first';
+  $scope.socialSelect = 'Facebook';
   $scope.success = false;
 
   $scope.getUserInfo = function() {
@@ -48,7 +48,7 @@ angular.module('equip')
     $scope.success = true;
     $scope.displayName = '';
     $scope.socialInput = '';
-    $scope.socialSelect = 'first';
+    $scope.socialSelect = 'Facebook';
     $scope.phoneNumber = '';
     $scope.imgUrl = '';
   };
