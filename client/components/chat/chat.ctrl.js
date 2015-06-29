@@ -19,8 +19,6 @@ angular.module('equip')
 
       $scope.messages.$watch(function(event) {
         lastMessage = FirebaseFactory.getObject(['messages', event.key]);
-        lastMessage.$loaded(function() {
-        });
       });
 
       lastMessageDate = 0;

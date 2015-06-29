@@ -361,8 +361,12 @@
 
     // Gets the user's picture from firebase
     $scope.getUserPicture = function(userId) {
-      if (userId === null || userId === undefined) return "img/user.png";
-        if (userId.imgUrl !== undefined) return userId.imgUrl;
+      if (userId === null || userId === undefined) {
+        return "img/user.png";
+      }
+      if (userId.imgUrl !== undefined) {
+        return userId.imgUrl;
+      }
 
       for (var i = 0; i < $scope.allUsers.length; i++) {
         if ($scope.allUsers[i].$id === userId) {
@@ -397,15 +401,11 @@
     // Make sure the user isn't deleting their last team
     $scope.checkTeamsLeft = function() {
       if($scope.teams.length < 2) {
-
         var removeErrorMessage = function() {
           $scope.triedToLeave = false;
         }
-        
         $scope.triedToLeave = true;
-        
         $timeout(removeErrorMessage, 4000);
-        
         return false;
       }
 
@@ -415,26 +415,19 @@
   
   // Filter for searching team names
   .filter('teamSearch', function(){
-
     return function(arr, searchString){
-
       if (!searchString){
         return arr;
       }
-
       var result = [];
-
       searchString = searchString.toLowerCase();
-
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item){
         if (item !== null && item !== undefined && 
            item.$id.toLowerCase().indexOf(searchString) !== -1) {
           result.push(item);
         }
-
       });
-
       return result;
     }
   });
