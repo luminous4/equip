@@ -49,14 +49,13 @@
                 <div class="input-group m-b">
                   <div class="input-group-btn">
                     <select ng-model="socialSelect" class="social-select btn btn-white dropdown-toggle col-sm-2">
-                      <option value="first" selected>-Choose One-</option>
-                      <option>Facebook</option>
+                      <option value="Facebook">Facebook</option>
                       <option>LinkedIn</option>
                       <option>GitHub</option>
                       <option>Twitter</option>
                       <option>Other</option>
                     </select>
-                    <input type="text" ng-model="socialInput" ng-focus="settings.checkSuccess()" placeholder="www.{{socialSelect.toLowerCase()}}.com/{{displayName || showDisplayName}}" class="form-control social-input">
+                    <input type="text" ng-model="socialInput" ng-focus="checkSuccess()" placeholder="www.{{socialSelect.toLowerCase()}}.com/{{displayName || showDisplayName}}" class="form-control social-input">
                   </div>
                 </div>
 
