@@ -27,6 +27,7 @@
               <div id="tab-1" class="tab-pane active">
                 <div class="full-height-scroll" full-scroll>
                   <div class="table-responsive">
+                    <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
                     <table class="table table-hover">
                       <tbody>
                         <tr ng-repeat="contact in teamContacts | contactSearch:searchString" style="cursor:pointer">

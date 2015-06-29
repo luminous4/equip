@@ -1,3 +1,9 @@
+.center{
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  min-height: 65px;
+}
 .team-select,
 .social-select {
   margin: 20px 0 0 20px;

@@ -57,3 +57,4 @@ angular.module('equip')
   };
 });
 })();
+
