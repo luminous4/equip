@@ -6,7 +6,7 @@
   angular.module('equip')
 
   .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
-                                            $firebaseArray, refUrl, $firebaseObject) {
+                                            $firebaseArray, $timeout,   refUrl, $firebaseObject) {
 
 
     $scope.currentTab = "Team List";
@@ -16,6 +16,9 @@
 
     // Search string used in 'teamSearch' filter (at the bottom of $scope file)
     $scope.searchString = "";
+
+    $scope.loading = true;
+    $scope.triedToLeave = false;
 
     $scope.initialize = function() {
 
@@ -30,6 +33,8 @@
        */
       var currentUser = FirebaseFactory.getCurrentUser();
       $scope.teams.$loaded().then(function() {
+
+        $scope.loading = false;
 
         // Will track which users are connected to the logged in user
         $scope.connectedUserIds = [];
@@ -71,6 +76,7 @@
       $scope.editingTeamUserlist = [];
       $scope.editingTeamListOfRemovedPeople = [];
       $scope.editingTeamListOfAddedPeople = [];
+      $scope.triedToLeave = false;
 
       if (newTab === 'Team List') {
         $scope.initialize();
@@ -167,6 +173,10 @@
 
 
     $scope.leaveTeam = function(team) {
+
+      if(!$scope.checkTeamsLeft()) {
+        return;
+      }
 
       // Removes $scope team from the user's team list
       var currentUser = FirebaseFactory.getCurrentUser();
@@ -282,6 +292,10 @@
     // Deletes $scope team from firebase
     $scope.editTeamDelete = function() {
 
+      if(!$scope.checkTeamsLeft()) {
+        return;
+      }
+
       // Remove $scope team from firebase
       FirebaseFactory.removeItem(['teams', $scope.editingTeamPreviousId], true);
 
@@ -378,6 +392,24 @@
     // in the edit menu.
     $scope.hideOwnUser = function(user) {
       return (user.$id === FirebaseFactory.getCurrentUser().uid);
+    }
+
+    // Make sure the user isn't deleting their last team
+    $scope.checkTeamsLeft = function() {
+      if($scope.teams.length < 2) {
+
+        var removeErrorMessage = function() {
+          $scope.triedToLeave = false;
+        }
+        
+        $scope.triedToLeave = true;
+        
+        $timeout(removeErrorMessage, 4000);
+        
+        return false;
+      }
+
+      return true;
     }
   })
   

@@ -5,6 +5,7 @@
                                             $firebaseArray, refUrl, FirebaseFactory) {
 
     $scope.currentContact = null;
+    $scope.loading = true;
     $scope.searchString = '';
     $scope.mainPageClass = "col-sm-12";
     $scope.sideViewClass = "col-sm-0";
@@ -12,6 +13,7 @@
     var teamUsers = FirebaseFactory.getCollection(['teams', currTeam,'users'], true);
     $scope.teamContacts = [];
     teamUsers.$loaded().then(function() {
+      $scope.loading = false;
       angular.forEach(teamUsers, function(user) {
         $scope.teamContacts.push(FirebaseFactory.getObject(['users', user.$value], true));
       })

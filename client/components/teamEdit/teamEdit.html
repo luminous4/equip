@@ -35,7 +35,7 @@
 
         <!-- Team List tab -->
 
-        <div class="ibox-content" ng-show="currentTab === 'Team List'">
+        <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
 
           <!-- Search bar -->
 
@@ -52,6 +52,11 @@
           <div class="project-list">
             <table class="table table-hover" >
               <tbody>
+                <tr>
+                  <div class="center">
+                    <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
+                  </div>
+                </tr>
                 <tr ng-repeat="team in teams | teamSearch:searchString">
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
@@ -61,7 +66,7 @@
                   <td class="project-people">
                     <span ng-repeat="userId in team.users">
                       <a href="google.com">
-                        <img alt="image" class="img-circle" src="{{getUserPicture(userId)}}">
+                        <img alt="image" class="img-circle" ng-src="{{getUserPicture(userId)}}">
                       </a>
                     </span>
                   </td>
@@ -73,6 +78,10 @@
                 </tr>
               </tbody>
             </table>
+            <div ng-show="triedToLeave">
+              You can't leave your last team. <br/>
+              In order to leave this team, make another team first.
+            </div>
           </div>
         </div>
 
@@ -94,7 +103,7 @@
                           <br/>
                         </td>
                         <td class="project-people">
-                          <span ng-repeat="user in editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" src="{{getUserPicture(user.$id)}}"></a></span>
+                          <span ng-repeat="user in editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></a></span>
                         </td>
                       </tr>
                     </tbody>
@@ -114,11 +123,15 @@
                       <div class="ibox-content">
                         <label ng-click="flipPresence(user)" ng-repeat="user in allUsers" style="text-align:left;" class="project-people teamuserHover" ng-hide="hideOwnUser(user)">
                           <div> 
-                            <img alt="image" class="img-circle" src="{{getUserPicture(user.$id)}}"></img>
+                            <img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></img>
                             <span class="teamuserName">{{user.displayName}}</span>
                           </div>
                         </label>
                       </div>
+                    </div>
+                    <div ng-show="triedToLeave" style="padding-bottom:20px">
+                        You can't leave your last team. <br/>
+                        In order to leave this team, make another team first.
                     </div>
                     <div class="input-group m-b">
                       <button type="button" ng-show="currentTab === 'Create A Team'" ng-click="createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
