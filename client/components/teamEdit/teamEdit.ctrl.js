@@ -6,7 +6,7 @@
   angular.module('equip')
 
   .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
-                                            $firebaseArray, $timeout,   refUrl, $firebaseObject) {
+                                            $firebaseArray, $timeout,  $rootScope, refUrl, $firebaseObject) {
 
 
     $scope.currentTab = "Team List";
@@ -77,6 +77,7 @@
       $scope.editingTeamListOfRemovedPeople = [];
       $scope.editingTeamListOfAddedPeople = [];
       $scope.triedToLeave = false;
+      var allKeys = [];
 
       if (newTab === 'Team List') {
         $scope.initialize();
@@ -112,7 +113,6 @@
 
         // Get the user information of everyone on the team
         var keys = Object.keys(team.users);
-        var allKeys = [];
         for (var i = 0; i < $scope.allUsers.length; i++) {
           allKeys.push($scope.allUsers[i].$id);
         }
@@ -177,6 +177,8 @@
       if(!$scope.checkTeamsLeft()) {
         return;
       }
+
+      $scope.checkTeamContext(team);
 
       // Removes $scope team from the user's team list
       var currentUser = FirebaseFactory.getCurrentUser();
@@ -391,6 +393,7 @@
       }
     }
 
+
     // Hides the flipPresence label for the logged in user.
     // $scope makes it so you can't remove yourself from a team
     // in the edit menu.
@@ -398,9 +401,15 @@
       return (user.$id === FirebaseFactory.getCurrentUser().uid);
     }
 
+
+      ///////////////////////
+     // Utility functions //
+    ///////////////////////
+
+
     // Make sure the user isn't deleting their last team
     $scope.checkTeamsLeft = function() {
-      if($scope.teams.length < 2) {
+      if($scope.teams.length < 2 && !$scope.triedToLeave) {
         var removeErrorMessage = function() {
           $scope.triedToLeave = false;
         }
@@ -410,6 +419,16 @@
       }
 
       return true;
+    }
+
+
+    $scope.checkTeamContext = function(checkingTeam) {
+      for(var i = 0; i < checkingTeam.users.length; i++) {
+        if(checkingTeam.users[i] === FirebaseFactory.getCurrentUser().uid) {
+          localStorage.selectedTeam = "null";
+          $rootScope.selectedTeam = null;
+        }
+      }
     }
   })
   
