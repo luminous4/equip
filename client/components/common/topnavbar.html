@@ -1,7 +1,10 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-    <ul class="nav navbar-top-links navbar-right">
-      <li>
+    <ul class="nav navbar-top-links navbar-right" style="width:100%">
+      <li style="width:400px" style="text-align:left">
+        <h2 class="navbar-teamname">Equip - {{JSON.parse(localStorage.selectedTeam).$value}}</h2>
+      </li>
+      <li style="text-al">
         <a ng-click="signOut()">
           <i class="fa fa-sign-out"></i> Log out
         </a>

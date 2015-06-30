@@ -1,7 +1,3 @@
-// to do later:
-// when you click submit, change all the users 
-// when you delete a team, remove $scope team from all the users' team lists
-
 (function() {
   angular.module('equip')
 
@@ -40,6 +36,7 @@
         $scope.connectedUserIds = [];
 
         for (var i = $scope.teams.length-1; i >= 0; i--) {
+
           // this case will prevent teams without any users from showing
           if (!$scope.teams[i] || !$scope.teams[i].users) {
             $scope.teams.splice(i, 1);
@@ -100,8 +97,6 @@
           $scope.flipPresence(currentUserFirebaseObject);
         });
 
-
-
       } else if (newTab === 'Edit Team') { 
         // Edit Team tab
 
@@ -113,39 +108,26 @@
 
         // Get the user information of everyone on the team
         var keys = Object.keys(team.users);
-        for (var i = 0; i < $scope.allUsers.length; i++) {
-          allKeys.push($scope.allUsers[i].$id);
-        }
-        for (var i = 0; i < keys.length; i++) {
-          $scope.editingTeamUserlist.push(
-            FirebaseFactory.getObject(
-              [ 'users', team.users[keys[i]] ], 
-              true
-          ));
-        }
+      }
 
-        // Get the information of all connected users 
-        // Note: $scope is not scalable! We should fix later
-        $scope.allUsers = [];      
-        for (var i = 0; i < allKeys.length; i++) {
+      //???
+      if(!keys) {
+        var keys = [];
+      }
 
-          // If $scope user is not connected, just move along
-          if ($scope.connectedUserIds.indexOf(allKeys[i]) === -1) {
-            continue;
-          }
-
-          // Otherwise, add $scope user's firebase object to the list of
-          // connected users
-          $scope.allUsers.push(
-            FirebaseFactory.getObject(
-              [ 'users', allKeys[i]], 
-              true)
-          );
-        }
+      for (var i = 0; i < $scope.allUsers.length; i++) {
+        allKeys.push($scope.allUsers[i].$id);
+      }
+      for (var i = 0; i < keys.length; i++) {
+        $scope.editingTeamUserlist.push(
+          FirebaseFactory.getObject(
+            [ 'users', team.users[keys[i]] ], 
+            true
+        ));
       }
 
       // Get the information of all connected users 
-      // Note: $scope is not scalable! We should fix later
+      // Note: this is not scalable! We should fix later
       if (newTab === 'Create A Team' || newTab === 'Edit Team') {
         $scope.allUsers = [];      
         for (var i = 0; i < allKeys.length; i++) {
@@ -418,7 +400,7 @@
         return false;
       }
 
-      return true;
+      return !$scope.triedToLeave;
     }
 
 
