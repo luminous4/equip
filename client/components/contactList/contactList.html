@@ -13,12 +13,17 @@
 </div>
 <div class="wrapper wrapper-content">
   <div class="row">
-    <div class="{{mainPageClass}}">
+    <div class="col-lg-12">
+    <div class="{{contactCtrl.mainPageClass}}">
       <div class="ibox">
         <div class="ibox-content">
-          <div class="input-group">
-            <input type="text" placeholder="Search for contacts" class="input col-sm-6 form-control" ng-model="searchString">
+          <div class="form-group">
+            <form class="form-horizontal">
+              <input type="text" placeholder="Search for contacts" class="form-control" ng-model="contactCtrl.searchString">
+            </form>
           </div>
+
+
           <div class="clients-list">
 
             <!-- Contact List -->
@@ -48,7 +53,7 @@
           </div>
         </div>
       </div>
-    </div>
+      </div>
 
     <!-- Contact Info -->
     

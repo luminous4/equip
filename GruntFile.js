@@ -1,37 +1,3 @@
-// Commands:
-
-  // Primary commands -- use these!
-
-    // grunt rebase
-      // 1. runs the command 'git pull --rebase upstream development'
-      // 2. 'grunt build'
-
-    // grunt push
-      // 1. 'grunt rebase' (see above)
-      // 2. runs the command 'git push heroku master'
-      // 3. runs the command 'git push origin'
-  
-    // grunt serve
-      // 1. 'grunt test'
-      // 2. 'grunt build'
-      // 3. nodemon 
-      // 4. watch for changes. 
-        // a. on javascript file change, concat + uglify
-        // b. on css file change, cssmin
-
-
-  // Secondary commands -- ideally you should not have to use these directly
-
-    // grunt build
-      // 1. concat
-      // 2. uglify
-      // 3. cssmin
-
-    // grunt test
-      // 1. mocha
-      // 2. jshint
-
-
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -90,12 +56,15 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/**/*.js']
+        src: ['test/example.js']
       }
     },
 
-    // Watching
+    casperjs: {
+      files: ['test/e2e/appSpec.js']
+    },
 
+    // Watching
     watch: {
       scripts: {
         files: [
@@ -112,15 +81,12 @@ module.exports = function(grunt) {
         tasks: ['cssmin']
       }
     },
-
     nodemon: {
       dev: {
         script: 'server/server.js'
       }
     },
-
     // Deploying
-
     shell: {
       rebase: {
         command: 'git pull --rebase upstream development',
@@ -129,7 +95,6 @@ module.exports = function(grunt) {
             stderr: true
         }
       },
-
       herokuDeploy: {
         command: 'git push heroku master',
         options: {
@@ -137,7 +102,6 @@ module.exports = function(grunt) {
             stderr: true
         }
       },
-
       push: {
         command: 'git push origin',
         options: {
@@ -146,7 +110,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
   });
 
   // Loads all grunt tasks
@@ -191,8 +154,9 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'jshint',
-    'mochaTest'
+    //'jshint',
+    //'mochaTest'
+    'casperjs'
   ]);
 
 
