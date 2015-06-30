@@ -21,6 +21,11 @@ function config($stateProvider, $urlRouterProvider) {
 			templateUrl: 'components/common/content.html',
 			authenticate: true
 		})
+		.state('index.todo', {
+			url: '/todo',
+			templateUrl: 'components/todo/todo.html',
+			authenticate: true
+		})
 		.state('index.home', {
 			url: '',
 			templateUrl: 'components/home/home.html',

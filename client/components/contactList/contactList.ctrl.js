@@ -10,7 +10,7 @@
     $scope.mainPageClass = "col-sm-12";
     $scope.sideViewClass = "col-sm-0";
     var currTeam = JSON.parse(localStorage.selectedTeam).$value;
-    var teamUsers = FirebaseFactory.getCollection(['teams', currTeam,'users'], true);
+    var teamUsers = FirebaseFactory.getCollection(['teams', currTeam, 'users'], true);
     $scope.teamContacts = [];
     teamUsers.$loaded().then(function() {
       $scope.loading = false;

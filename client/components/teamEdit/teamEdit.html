@@ -78,10 +78,9 @@
                 </tr>
               </tbody>
             </table>
-            <div ng-show="triedToLeave">
-              You can't leave your last team. <br/>
-              In order to leave this team, make another team first.
-            </div>
+            <h2 ng-show="triedToLeave">
+              You can't leave your last team! 
+            </h2>
           </div>
         </div>
 
@@ -129,10 +128,9 @@
                         </label>
                       </div>
                     </div>
-                    <div ng-show="triedToLeave" style="padding-bottom:20px">
-                        You can't leave your last team. <br/>
-                        In order to leave this team, make another team first.
-                    </div>
+                    <h2 ng-show="triedToLeave" style="padding-bottom:20px">
+                        You can't leave your last team!
+                    </h2>
                     <div class="input-group m-b">
                       <button type="button" ng-show="currentTab === 'Create A Team'" ng-click="createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
                       <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamSubmit()" class="btn btn-primary">Save changes!</button>   

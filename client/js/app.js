@@ -7,6 +7,7 @@
     'ui.calendar',
     'luegg.directives',
 		'ngMessages', // Angular Messages,
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'sticky'
 	])
 })();

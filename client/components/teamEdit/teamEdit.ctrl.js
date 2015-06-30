@@ -1,12 +1,8 @@
-// to do later:
-// when you click submit, change all the users 
-// when you delete a team, remove $scope team from all the users' team lists
-
 (function() {
   angular.module('equip')
 
   .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
-                                            $firebaseArray, $timeout,   refUrl, $firebaseObject) {
+                                            $firebaseArray, $timeout,  $rootScope, refUrl, $firebaseObject) {
 
 
     $scope.currentTab = "Team List";
@@ -40,6 +36,7 @@
         $scope.connectedUserIds = [];
 
         for (var i = $scope.teams.length-1; i >= 0; i--) {
+
           // this case will prevent teams without any users from showing
           if (!$scope.teams[i] || !$scope.teams[i].users) {
             $scope.teams.splice(i, 1);
@@ -77,6 +74,7 @@
       $scope.editingTeamListOfRemovedPeople = [];
       $scope.editingTeamListOfAddedPeople = [];
       $scope.triedToLeave = false;
+      var allKeys = [];
 
       if (newTab === 'Team List') {
         $scope.initialize();
@@ -99,8 +97,6 @@
           $scope.flipPresence(currentUserFirebaseObject);
         });
 
-
-
       } else if (newTab === 'Edit Team') { 
         // Edit Team tab
 
@@ -112,40 +108,26 @@
 
         // Get the user information of everyone on the team
         var keys = Object.keys(team.users);
-        var allKeys = [];
-        for (var i = 0; i < $scope.allUsers.length; i++) {
-          allKeys.push($scope.allUsers[i].$id);
-        }
-        for (var i = 0; i < keys.length; i++) {
-          $scope.editingTeamUserlist.push(
-            FirebaseFactory.getObject(
-              [ 'users', team.users[keys[i]] ], 
-              true
-          ));
-        }
+      }
 
-        // Get the information of all connected users 
-        // Note: $scope is not scalable! We should fix later
-        $scope.allUsers = [];      
-        for (var i = 0; i < allKeys.length; i++) {
+      //???
+      if(!keys) {
+        var keys = [];
+      }
 
-          // If $scope user is not connected, just move along
-          if ($scope.connectedUserIds.indexOf(allKeys[i]) === -1) {
-            continue;
-          }
-
-          // Otherwise, add $scope user's firebase object to the list of
-          // connected users
-          $scope.allUsers.push(
-            FirebaseFactory.getObject(
-              [ 'users', allKeys[i]], 
-              true)
-          );
-        }
+      for (var i = 0; i < $scope.allUsers.length; i++) {
+        allKeys.push($scope.allUsers[i].$id);
+      }
+      for (var i = 0; i < keys.length; i++) {
+        $scope.editingTeamUserlist.push(
+          FirebaseFactory.getObject(
+            [ 'users', team.users[keys[i]] ], 
+            true
+        ));
       }
 
       // Get the information of all connected users 
-      // Note: $scope is not scalable! We should fix later
+      // Note: this is not scalable! We should fix later
       if (newTab === 'Create A Team' || newTab === 'Edit Team') {
         $scope.allUsers = [];      
         for (var i = 0; i < allKeys.length; i++) {
@@ -177,6 +159,8 @@
       if(!$scope.checkTeamsLeft()) {
         return;
       }
+
+      $scope.checkTeamContext(team);
 
       // Removes $scope team from the user's team list
       var currentUser = FirebaseFactory.getCurrentUser();
@@ -391,6 +375,7 @@
       }
     }
 
+
     // Hides the flipPresence label for the logged in user.
     // $scope makes it so you can't remove yourself from a team
     // in the edit menu.
@@ -398,9 +383,15 @@
       return (user.$id === FirebaseFactory.getCurrentUser().uid);
     }
 
+
+      ///////////////////////
+     // Utility functions //
+    ///////////////////////
+
+
     // Make sure the user isn't deleting their last team
     $scope.checkTeamsLeft = function() {
-      if($scope.teams.length < 2) {
+      if($scope.teams.length < 2 && !$scope.triedToLeave) {
         var removeErrorMessage = function() {
           $scope.triedToLeave = false;
         }
@@ -409,7 +400,17 @@
         return false;
       }
 
-      return true;
+      return !$scope.triedToLeave;
+    }
+
+
+    $scope.checkTeamContext = function(checkingTeam) {
+      for(var i = 0; i < checkingTeam.users.length; i++) {
+        if(checkingTeam.users[i] === FirebaseFactory.getCurrentUser().uid) {
+          localStorage.selectedTeam = "null";
+          $rootScope.selectedTeam = null;
+        }
+      }
     }
   })
   
