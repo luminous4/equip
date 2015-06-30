@@ -35,7 +35,8 @@
     "angular-messages": "~1.4.1",
     "angular-bootstrap": "~0.13.0",
     "ui-bootstrap": "~0.13.0",
-    "ngSticky": "~1.7.9"
+    "ngSticky": "~1.7.9",
+    "angular-ui-sortable": "~0.13.4"
   },
   "resolutions": {
     "angular": "~1.3.0"

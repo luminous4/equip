@@ -85,3 +85,4 @@ angular
     .directive('iboxTools', iboxTools)
     .directive('fitHeight', fitHeight)
     // .directive('minimalizaSidebar', minimalizaSidebar)
+ 
