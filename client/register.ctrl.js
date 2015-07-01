@@ -9,8 +9,10 @@
     $scope.teamSuccess = true;
     $scope.teamJoin = true;
     $scope.teamCreate = true;
+    $scope.loading = false;
 
     $scope.register = function() {
+      $scope.loading = true;
       var teamAction;
 
       if ($scope.teamJoin === true){
@@ -20,6 +22,7 @@
       }
 
       User.register($scope.email, $scope.password, $scope.teamName, teamAction, authObj, function(userSaved, teamNotFound, teamAlreadyExists) {
+        $scope.loading = false;
 
         if (!userSaved) {
           $scope.userSuccess = false;
@@ -39,6 +42,7 @@
           $scope.msg = ('Team already exists');
           $scope.teamName = '';
         }
+
       });
     };
 
