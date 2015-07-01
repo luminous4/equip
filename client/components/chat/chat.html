@@ -22,7 +22,7 @@
 
           <div class="chat-activity-list" scroll-glue>
             <div ng-repeat="message in messages" class="chat-element row">
-              <div ng-show="showImg(message.createdAt, message.chatName)">
+              <div ng-show="{{message.showImg}}">
                 <div class="col-sm-1">
                   <img alt="image" class="img-circle" ng-src="{{message.userImg}}" />
                 </div>
@@ -33,7 +33,7 @@
                   </p>
                 </div>
               </div>
-              <div ng-show="!showedPic">
+              <div ng-show="{{!message.showImg}}">
                 <div class="col-sm-1"></div>
                 <div class="media-body col-sm-7" title="{{message.createdAt}}">
                   <p class="m-b-xs chat-text" ng-bind-html="message.text | linky">

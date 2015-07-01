@@ -1,21 +1,49 @@
 (function() {
 
 angular.module('equip')
-.controller('ChatCtrl', function($scope, $rootScope, User,FirebaseFactory) {
+.factory('Messages', function($firebaseArray) {
+  return $firebaseArray.$extend({
+    formatMessages: function() {
+      if (this.$list.length) {
+        var lastAuthor = this.$list[0].chatName;
+      }
+      var lastChatTime = 0;
+      for (var i = 0; i < this.$list.length; i++) {
+        var messageTime = new Date(this.$list[i].createdAt);
+        console.log('interval: ', messageTime - lastChatTime);
+        console.log('this messages author: ', this.$list[i].chatName);
+        console.log('last Author: ', lastAuthor);
+        if (messageTime - lastChatTime < 20000 && this.$list[i].chatName === lastAuthor) {
+          this.$list[i]['showImg'] = false;
+        } else {
+          this.$list[i]['showImg'] = true;
+        }
+        lastAuthor = this.$list[i].chatName;
+        lastChatTime = this.$list[i].createdAt;
+      }
+    }
+  });
+})
+
+.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, Messages, User, FirebaseFactory) {
 
   var userId = User.getCurrentUser().uid;
   var userData = FirebaseFactory.getObject(['users', userId], true);
   $scope.canSend = true;
-    $scope.lastAuthor = $scope.user;
+  $scope.lastAuthor = $scope.user;
   $scope.showedPic = false;
 
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
-      $scope.messages = FirebaseFactory.getCollection('messages');
+      var ref = new Firebase('https://mksequip.firebaseio.com/teams/');
+      $scope.messages = new Messages(ref.child($rootScope.selectedTeam.$value).child('messages'));
       $scope.messages.$loaded()
-      .then(function(data) {
-        $scope.dashboardMessages = data.slice(data.length - 5, data.length);
-      })
+      .then(function() {
+        $scope.messages.formatMessages();
+        $scope.messages.$watch(function() {
+          $scope.messages.formatMessages();
+        });
+      });
     }
   });
 
@@ -24,23 +52,6 @@ angular.module('equip')
     $scope.user = userData.displayName;
     $scope.img = userData.imgUrl;
   });
-
-  $scope.showImg = function(currMessageDate, currMessageName) {
-    var messageDate = new Date(currMessageDate);
-    var showPic = true;
-    var interval = messageDate - $scope.lastMessageDate;
-    if (interval < 20000 && $scope.lastAuthor === currMessageName) {
-      $scope.showedPic = false;
-      showPic = false;
-    } else {
-      $scope.showedPic = true;
-      showPic = true;
-    }
-    $scope.lastAuthor = currMessageName;
-    $scope.lastMessageDate = new Date(currMessageDate);
-    return showPic;
-  }
-
 
   $scope.addMessage = function() {
     if (!$rootScope.selectedTeam) {
