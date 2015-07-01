@@ -14,18 +14,19 @@
   $scope.tags = ['In progress', 'Urgent', 'Danger', 'Done'];
   $scope.statuses = ['success', 'warning', 'danger', 'info'];
 
-  $scope.addTask = function(taskNum) {
-    if($scope.inputFields[taskNum] === '') return;
+  $scope.addTask = function(listNum) {
+    if($scope.inputFields[listNum] === '') return;
 
     var now = moment().format('MMMM Do YYYY, h:mm a');
 
-    $scope.lists[taskNum] = [{
-      content: $scope.inputFields[taskNum],
+    $scope.lists[listNum] = [{
+      content: $scope.inputFields[listNum],
       date: now,
       statusClass: 'success',
       tagName: 'Tag!!!'
-    }].concat($scope.lists[taskNum]);
-    $scope.inputFields[taskNum] = '';
+    }].concat($scope.lists[listNum]);
+
+    $scope.inputFields[listNum] = '';
   }
 
   $scope.cycleTag = function(task) {
@@ -42,7 +43,7 @@
 
   $scope.lists = [];
 
-  $scope.sometext = "hi"
+  $scope.sometext = "hi";
 
   if ($rootScope.selectedTeam) {
     $scope.lists[0] = FirebaseFactory.getCollection(['todo', 0]);
@@ -51,7 +52,19 @@
   }
 
   $scope.sortableOptions = {
-    connectWith: ".connectList"
+    connectWith: ".connectList",
+    update: function(e, ui) {
+      var thisTeam = $rootScope.selectedTeam;
+      for(var i = 0; i < 5; i++) {
+        console.log(thisTeam);
+        var path = refUrl + '/teams/' + thisTeam.$value + '/todo/' + i;
+        console.log(path)
+        var ref = new Firebase(path);
+
+        console.log('the new object is', $scope.lists[i]);
+        
+      }
+    }
   };
   });
 })();

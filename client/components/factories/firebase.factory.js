@@ -93,6 +93,7 @@ angular.module('equip')
       getCollection: getCollection,
       getObject: getObject,
       removeItem: removeItem,
-      updateItem: updateItem
+      updateItem: updateItem,
+      firebaseSterilization: firebaseSterilization
     };
   })
