@@ -1,4 +1,4 @@
-.center{
+.center {
   position: absolute;
   left: 50%;
   margin-left: -10px;
@@ -16,7 +16,7 @@
 .teamuserHover:hover {
   background-color: #f1f1f1;
 }
-.teamuserHover:active{
+.teamuserHover:active {
   background-color: #ccc;
 }
 .teamuserHover {
@@ -125,10 +125,20 @@
 .loginscreen, .notification {
   color: white;
 }
-.input-group-addon, 
+.input-group-addon,
 .form-control {
   color: #555 !important;
 }
 .register-link {
   color: black !important;
+}
+.notification {
+  color: white;
+}
+.centerRegistration {
+  position: absolute;
+  left: 45%;
+  margin-left: -10px;
+  min-height: 65px;
+  color: white;
 }
