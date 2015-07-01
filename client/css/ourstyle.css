@@ -126,3 +126,10 @@
 .contact-table a:hover {
   color: #245269;
 }
+
+.loginscreen h3, p {
+  color: white;
+}
+.notification {
+  color: white;
+}

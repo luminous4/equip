@@ -5,7 +5,8 @@
     var ref = new Firebase(refUrl);
     var authObj = $firebaseAuth(ref);
 
-    $scope.success = true;
+    $scope.userSuccess = true;
+    $scope.teamSuccess = true;
     $scope.teamJoin = true;
     $scope.teamCreate = true;
 
@@ -18,11 +19,24 @@
         teamAction = 'create';
       }
 
-      User.register($scope.email, $scope.password, $scope.teamName, teamAction, authObj, function(success) {
-        if (!success) {
-          $scope.success = false;
+      User.register($scope.email, $scope.password, $scope.teamName, teamAction, authObj, function(userSaved, teamNotFound, teamAlreadyExists) {
+
+        if (!userSaved) {
+          $scope.userSuccess = false;
           $scope.email = '';
           $scope.password = '';
+          $scope.teamName = '';
+        }
+
+        if (teamNotFound) {
+          $scope.teamSuccess = false;
+          $scope.msg = ('Team not found');
+          $scope.teamName = '';
+        }
+
+        if (teamAlreadyExists) {
+          $scope.teamSuccess = false;
+          $scope.msg = ('Team already exists');
           $scope.teamName = '';
         }
       });

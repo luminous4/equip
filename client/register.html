@@ -22,7 +22,7 @@
       </div>
       <h3>Welcome to Equip+</h3>
       <p>Please register</p>
-      <form class="m-t" role="form" name="registerForm">
+      <form class="m-t" role="form" name="registerForm" novalidate>
         <div class="form-group">
           <div class="input-group m-b">
           <span class="input-group-addon">
@@ -31,8 +31,8 @@
             <input ng-model="email" name="email" type="email" class="form-control" placeholder="Email Address" required="">
           </div>
         </div>
-        <div ng-if="!(success)">
-          <p>Your email is already taken. Please try again.</p>
+        <div ng-if="!(userSuccess)">
+          <p class="notification">Your email is already taken. Please try again.</p>
         </div>
         <div class="form-group">
           <div class="input-group m-b">
@@ -46,20 +46,26 @@
         <div class="form-group">
           <div class="row">
             <div class="col-sm-6">
-              <input class="register-checkbox" type="checkbox" ng-model="teamJoin">Join A Team
+              <input class="register-checkbox" type="checkbox" ng-model="teamJoin"><span class="notification"> Join A Team</span>
             </div>
             <div class="col-sm-6">
-              <input class="register-checkbox" type="checkbox" ng-model="teamCreate">Create New Team
+              <input class="register-checkbox" type="checkbox" ng-model="teamCreate"><span class="notification"> Create New Team</span>
             </div>
           </div>
         </div>
          <div class="form-group">
           <div class="input-group m-b">
+             <span class="input-group-addon">
+              <i class="fa fa-users"></i>
+            </span>
             <input ng-model="teamName" type="text" class="form-control" placeholder="Team Name" required="">
           </div>
         </div>
+        <div ng-if="!(teamSuccess)">
+          <p class="notification">{{ msg }}</p>
+        </div>
 
-        <button ng-click="register()" ng-disabled="!(success)" class="btn btn-primary block full-width m-b">Register</button>
+        <button ng-click="register()" class="btn btn-primary block full-width m-b">Register</button>
       </form>
       <p class="m-t"> <small>&copy; 2015 Luminous4</small> </p>
     </div>
