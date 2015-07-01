@@ -126,10 +126,13 @@
 .contact-table a:hover {
   color: #245269;
 }
-
-.loginscreen h3, p {
+.loginscreen, .notification {
   color: white;
 }
-.notification {
-  color: white;
+.input-group-addon, 
+.form-control {
+  color: #555 !important;
+}
+.register-link {
+  color: black !important;
 }
