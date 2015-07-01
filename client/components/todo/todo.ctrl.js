@@ -9,71 +9,46 @@
     handler: ".ibox-title"
   };
 
+  $scope.listBools = [true,true,true,false,false];
+  $scope.inputFields = ['','','','',''];
+  $scope.tags = ['In progress', 'Urgent', 'Danger', 'Done'];
+  $scope.statuses = ['success', 'warning', 'danger', 'info'];
 
-  $scope.lists = [
-    [
-      {
-        content: 'Packages and web page editors now use Lorem Ipsum as',
-        date: '08.04.2015',
-        statusClass: 'warning',
-        tagName: 'Mark'
-      },
-      {
-        content: 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default.',
-        date: '05.04.2015',
-        statusClass: 'success',
-        tagName: 'Tag'
-      },
-      {
-        content: 'Sometimes by accident, sometimes on purpose (injected humour and the like).',
-        date: '16.11.2015',
-        statusClass: 'info',
-        tagName: 'Tag'
-      }
-    ], [
-      {
-        content: 'Quisque lacinia tellus et odio ornare maximus.',
-        date: '05.04.2015',
-        statusClass: 'success',
-        tagName: 'Mark'
-      },
-      {
-        content: 'Enim mollis accumsan in consequat orci.',
-        date: '11.04.2015',
-        statusClass: 'danger',
-        tagName: 'Tag'
-      }
-    ], [
-      {
-        content: 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default.',
-        date: '05.04.2015',
-        statusClass: 'success',
-        tagName: 'Mark'
-      },
-      {
-        content: 'Sometimes by accident, sometimes on purpose (injected humour and the like).',
-        date: '16.11.2015',
-        statusClass: 'info',
-        tagName: 'Tag'
-      },
-      {
-        content: 'Simply dummy text of the printing and typesetting industry.',
-        date: '12.10.2015',
-        statusClass: 'warning',
-        tagName: 'Mark'
-      },
-      {
-        content: 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default.',
-        date: '05.04.2015',
-        statusClass: 'success',
-        tagName: 'Mark'
-      }
-    ], [
+  $scope.addTask = function(taskNum) {
+    if($scope.inputFields[taskNum] === '') return;
 
-    ], [
+    var now = moment().format('MMMM Do YYYY, h:mm a');
 
-    ]
-  ];
+    $scope.lists[taskNum] = [{
+      content: $scope.inputFields[taskNum],
+      date: now,
+      statusClass: 'success',
+      tagName: 'Tag!!!'
+    }].concat($scope.lists[taskNum]);
+    $scope.inputFields[taskNum] = '';
+  }
+
+  $scope.cycleTag = function(task) {
+    var newIndex = 0;
+    for(var i = 0; i < $scope.statuses.length-1; i++) {
+      if(task.statusClass === $scope.statuses[i]) {
+        newIndex = i+1;
+        break;
+      }
+    }
+    task.tagName = $scope.tags[newIndex];
+    task.statusClass = $scope.statuses[newIndex];
+  }
+
+  $scope.lists = [];
+
+  $scope.sometext = "hi"
+
+  if ($rootScope.selectedTeam) {
+    $scope.lists[0] = FirebaseFactory.getCollection(['todo', 0]);
+    $scope.lists[1] = FirebaseFactory.getCollection(['todo', 1]);
+    $scope.lists[2] = FirebaseFactory.getCollection(['todo', 2]);
+  }
 
   $scope.sortableOptions = {
     connectWith: ".connectList"
