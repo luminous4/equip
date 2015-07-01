@@ -9,7 +9,6 @@
     handler: ".ibox-title"
   };
 
-  
 
   $scope.lists = [
     [
