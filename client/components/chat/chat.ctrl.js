@@ -27,7 +27,6 @@ angular.module('equip')
 
   $scope.showImg = function(currMessageDate, currMessageName) {
     var messageDate = new Date(currMessageDate);
-    console.log('messageDate', messageDate);
     var showPic = true;
     var interval = messageDate - $scope.lastMessageDate;
     if (interval < 20000 && $scope.lastAuthor === currMessageName) {
@@ -44,7 +43,6 @@ angular.module('equip')
 
 
   $scope.addMessage = function() {
-
     if (!$rootScope.selectedTeam) {
       this.canSend = false;
     } else {
