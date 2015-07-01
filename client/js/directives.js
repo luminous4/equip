@@ -69,8 +69,19 @@ function iboxTools($timeout) {
 //     };
 // };
 
+function fitHeight(){
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            element.css("height", $(window).height() + "px");
+            element.css("min-height", $(window).height() + "px");
+        }
+    };
+}
+
 angular
     .module('equip')
     // .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)
+    .directive('fitHeight', fitHeight)
     // .directive('minimalizaSidebar', minimalizaSidebar)
