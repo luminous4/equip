@@ -1,10 +1,10 @@
 (function() {
    angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, FirebaseFactory) {
+  .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, User, FirebaseFactory) {
 
     var allUsers = FirebaseFactory.getCollection('users', true);
-    var currentUser = FirebaseFactory.getCurrentUser();
+    var currentUser = User.getCurrentUser();
     var currentTeam = JSON.parse(localStorage.selectedTeam).$value;
 
     this.setInputDefaults = function() {

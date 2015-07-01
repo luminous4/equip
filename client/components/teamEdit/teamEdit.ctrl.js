@@ -1,9 +1,7 @@
 (function() {
   angular.module('equip')
 
-  .controller('TeamController', function($scope, $state, $stateParams, FirebaseFactory,
-                                            $firebaseArray, $timeout,  $rootScope, refUrl, $firebaseObject) {
-
+  .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
 
     $scope.currentTab = "Team List";
 
@@ -21,13 +19,13 @@
       $scope.teams = FirebaseFactory.getCollection('teams', true);
 
       $scope.allUsers = FirebaseFactory.getCollection('users', true);
-      
+
       /**
-       *  Once the team information is loaded, $scope will pare $scope.teams and 
+       *  Once the team information is loaded, $scope will pare $scope.teams and
        *  $scope.allUsers to the actual information the user is supposed to see.
        *  NOTE: this is not scalable!!! It wouldn't be too hard to change it though
        */
-      var currentUser = FirebaseFactory.getCurrentUser();
+      var currentUser = User.getCurrentUser();
       $scope.teams.$loaded().then(function() {
 
         $scope.loading = false;
@@ -65,8 +63,8 @@
 
 
     $scope.setTab = function(newTab, team) {
-      
-      // Set the current tab 
+
+      // Set the current tab
       $scope.currentTab = newTab;
 
       // Reset these variables
@@ -78,7 +76,7 @@
 
       if (newTab === 'Team List') {
         $scope.initialize();
-      } else if (newTab === 'Create A Team') { 
+      } else if (newTab === 'Create A Team') {
         // Create A Team tab
 
         // Set the team being edited to an empty team
@@ -88,7 +86,7 @@
           calendarEvents: []
         };
 
-        var currentUser = FirebaseFactory.getCurrentUser();
+        var currentUser = User.getCurrentUser();
         var currentUserFirebaseObject = FirebaseFactory.getObject(
           ['users', currentUser.uid],
           true
@@ -97,7 +95,7 @@
           $scope.flipPresence(currentUserFirebaseObject);
         });
 
-      } else if (newTab === 'Edit Team') { 
+      } else if (newTab === 'Edit Team') {
         // Edit Team tab
 
         // Set the team being edited to the clicked team
@@ -121,15 +119,15 @@
       for (var i = 0; i < keys.length; i++) {
         $scope.editingTeamUserlist.push(
           FirebaseFactory.getObject(
-            [ 'users', team.users[keys[i]] ], 
+            [ 'users', team.users[keys[i]] ],
             true
         ));
       }
 
-      // Get the information of all connected users 
+      // Get the information of all connected users
       // Note: this is not scalable! We should fix later
       if (newTab === 'Create A Team' || newTab === 'Edit Team') {
-        $scope.allUsers = [];      
+        $scope.allUsers = [];
         for (var i = 0; i < allKeys.length; i++) {
 
           // If $scope user is not connected, just move along
@@ -141,7 +139,7 @@
           // connected users
           $scope.allUsers.push(
             FirebaseFactory.getObject(
-              [ 'users', allKeys[i]], 
+              [ 'users', allKeys[i]],
               true)
           );
         }
@@ -163,10 +161,10 @@
       $scope.checkTeamContext(team);
 
       // Removes $scope team from the user's team list
-      var currentUser = FirebaseFactory.getCurrentUser();
+      var currentUser = User.getCurrentUser();
       FirebaseFactory.removeItem(
-        ['users', currentUser.uid, 
-          'teams', team.$id], 
+        ['users', currentUser.uid,
+          'teams', team.$id],
         true
       );
       for (var i = 0; i < $scope.teams.length; i++) {
@@ -201,7 +199,7 @@
     // working list of users on $scope team
     $scope.flipPresence = function(user) {
 
-      // Find out if $scope user is on the list 
+      // Find out if $scope user is on the list
       var $scopeUserIndex = -1;
       for (var i = 0; i < $scope.editingTeamUserlist.length; i++) {
         if (user.$id === $scope.editingTeamUserlist[i].$id) {
@@ -210,7 +208,7 @@
       }
 
       if ($scopeUserIndex !== -1) {
-        // The clicked user is on the list of users on the team 
+        // The clicked user is on the list of users on the team
 
         // Remember $scope $scope user was removed from the team
         $scope.editingTeamListOfRemovedPeople.push(user);
@@ -231,7 +229,7 @@
         if (removedIndex > -1) {
           $scope.editingTeamListOfRemovedPeople.splice(removedIndex, 1);
         }
-        
+
         // Add $scope user to the list
         $scope.editingTeamUserlist.push(user);
       }
@@ -252,18 +250,18 @@
 
       // Add $scope team to firebase
       FirebaseFactory.updateItem(
-        ['teams', $scope.editingTeam.$id], 
-        {users: usersList, createdAt: now}, 
+        ['teams', $scope.editingTeam.$id],
+        {users: usersList, createdAt: now},
         true
       );
 
-      // Add the team to each user's team list 
+      // Add the team to each user's team list
       for (var i = 0; i < usersList.length; i++) {
         var firebaseKeyIsValueObject = {};
         firebaseKeyIsValueObject[$scope.editingTeam.$id] = $scope.editingTeam.$id;
         FirebaseFactory.updateItem(
-          ['users', usersList[i], 'teams'], 
-          firebaseKeyIsValueObject, 
+          ['users', usersList[i], 'teams'],
+          firebaseKeyIsValueObject,
           true
         );
       }
@@ -286,8 +284,8 @@
       // Remove $scope team from all its users
       for (var i = 0; i < $scope.editingTeamUserlist.length; i++ ){
         FirebaseFactory.removeItem(
-          ['users', $scope.editingTeamUserlist[i].$id, 
-            'teams', $scope.editingTeamPreviousId], 
+          ['users', $scope.editingTeamUserlist[i].$id,
+            'teams', $scope.editingTeamPreviousId],
           true
         );
       }
@@ -308,15 +306,15 @@
 
       // Updates the team in firebase
       FirebaseFactory.updateItem(
-        ['teams', $scope.editingTeamPreviousId], 
-        {users: usersList}, 
+        ['teams', $scope.editingTeamPreviousId],
+        {users: usersList},
       true);
 
-      // Removes $scope team from each user who has been been removed 
+      // Removes $scope team from each user who has been been removed
       for (var i = 0; i < $scope.editingTeamListOfRemovedPeople.length; i++) {
         FirebaseFactory.removeItem(
-          ['users', $scope.editingTeamListOfRemovedPeople[i].$id, 
-            'teams', $scope.editingTeam.$id], 
+          ['users', $scope.editingTeamListOfRemovedPeople[i].$id,
+            'teams', $scope.editingTeam.$id],
           true
         );
       }
@@ -324,11 +322,11 @@
       // Adds $scope team to each user
       for (var i = 0; i < $scope.editingTeamListOfAddedPeople.length; i++) {
         var firebaseKeyIsValueObject = {};
-        firebaseKeyIsValueObject[$scope.editingTeam.$id] = 
+        firebaseKeyIsValueObject[$scope.editingTeam.$id] =
           $scope.editingTeam.$id;
         FirebaseFactory.updateItem(
-          ['users', $scope.editingTeamListOfAddedPeople[i].$id, 'teams'], 
-          firebaseKeyIsValueObject, 
+          ['users', $scope.editingTeamListOfAddedPeople[i].$id, 'teams'],
+          firebaseKeyIsValueObject,
           true
         );
       }
@@ -380,7 +378,7 @@
     // $scope makes it so you can't remove yourself from a team
     // in the edit menu.
     $scope.hideOwnUser = function(user) {
-      return (user.$id === FirebaseFactory.getCurrentUser().uid);
+      return (user.$id === User.getCurrentUser().uid);
     }
 
 
@@ -406,14 +404,14 @@
 
     $scope.checkTeamContext = function(checkingTeam) {
       for(var i = 0; i < checkingTeam.users.length; i++) {
-        if(checkingTeam.users[i] === FirebaseFactory.getCurrentUser().uid) {
+        if(checkingTeam.users[i] === User.getCurrentUser().uid) {
           localStorage.selectedTeam = "null";
           $rootScope.selectedTeam = null;
         }
       }
     }
   })
-  
+
   // Filter for searching team names
   .filter('teamSearch', function(){
     return function(arr, searchString){
@@ -424,7 +422,7 @@
       searchString = searchString.toLowerCase();
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item){
-        if (item !== null && item !== undefined && 
+        if (item !== null && item !== undefined &&
            item.$id.toLowerCase().indexOf(searchString) !== -1) {
           result.push(item);
         }
