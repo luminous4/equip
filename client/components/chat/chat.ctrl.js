@@ -27,6 +27,7 @@ angular.module('equip')
 
   $scope.showImg = function(currMessageDate, currMessageName) {
     var messageDate = new Date(currMessageDate);
+    console.log('messageDate', messageDate);
     var showPic = true;
     var interval = messageDate - $scope.lastMessageDate;
     if (interval < 20000 && $scope.lastAuthor === currMessageName) {
@@ -43,8 +44,7 @@ angular.module('equip')
 
 
   $scope.addMessage = function() {
-    var currentDate = new Date();
-    currentDate = currentDate.toString();
+
     if (!$rootScope.selectedTeam) {
       this.canSend = false;
     } else {
@@ -53,8 +53,8 @@ angular.module('equip')
         chatName: $scope.user,
         userImg: $scope.img,
         text: $scope.message,
-        createdAt: currentDate,
-      });
+        createdAt: Firebase.ServerValue.TIMESTAMP
+      });      
     }
 
     this.message = '';
