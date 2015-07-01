@@ -9,6 +9,7 @@
 		'ngMessages', // Angular Messages,
     'ui.bootstrap',
     'sticky',
-    'ui.sortable'
+    'ui.sortable',
+    'ngSanitize'
 	])
 })();
