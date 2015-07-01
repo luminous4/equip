@@ -1,8 +1,10 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-      <h2 class="navbar-teamname">Equip - {{selectedTeam.$value}}</h2>
-    </div>
+    <ul class="nav navbar-top-links navbar-left">
+      <li>
+        <a href="index.home"><i class="fa fa-group"></i> {{selectedTeam.$value}}</a>
+      </li>
+    </ul>
     <ul class="nav navbar-top-links navbar-right">
       <li style="text-al">
         <a ng-click="signOut()">
