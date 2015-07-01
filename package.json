@@ -50,6 +50,11 @@
     "serve-favicon": "^2.2.1"
   },
   "devDependencies": {
-    "grunt-casperjs": "^2.1.0"
+    "chai": "^3.0.0",
+    "grunt-casperjs": "^2.1.0",
+    "karma": "^0.12.37",
+    "karma-chai": "^0.1.0",
+    "karma-story-reporter": "^0.3.1",
+    "mocha": "^2.2.5"
   }
 }
