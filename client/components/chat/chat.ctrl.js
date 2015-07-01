@@ -1,9 +1,9 @@
 (function() {
 
 angular.module('equip')
-.controller('ChatCtrl', function($scope, $rootScope, FirebaseFactory) {
+.controller('ChatCtrl', function($scope, $rootScope, User,FirebaseFactory) {
 
-  var userId = FirebaseFactory.getCurrentUser().uid;
+  var userId = User.getCurrentUser().uid;
   var userData = FirebaseFactory.getObject(['users', userId], true);
   $scope.canSend = true;
     $scope.lastAuthor = $scope.user;
@@ -34,7 +34,7 @@ angular.module('equip')
       showPic = false;
     } else {
       $scope.showedPic = true;
-      showPic = true;      
+      showPic = true;
     }
     $scope.lastAuthor = currMessageName;
     $scope.lastMessageDate = new Date(currMessageDate);
@@ -54,7 +54,7 @@ angular.module('equip')
         userImg: $scope.img,
         text: $scope.message,
         createdAt: currentDate,
-      });      
+      });
     }
 
     this.message = '';

@@ -1,14 +1,14 @@
 (function() {
 
 angular.module('equip')
-.controller('SettingsCtrl', function($scope, FirebaseFactory) {
-  
-  var userId = FirebaseFactory.getCurrentUser().uid;
+.controller('SettingsCtrl', function($scope, User, FirebaseFactory) {
+
+  var userId = User.getCurrentUser().uid;
   $scope.socialSelect = 'Facebook';
   $scope.success = false;
 
   $scope.getUserInfo = function() {
-    var userInfo = FirebaseFactory.getObject(['users', userId], true);
+    var userInfo = User.getUserInfo(userId);
 
     userInfo.$loaded(function() {
       $scope.showDisplayName = userInfo.displayName;
@@ -17,7 +17,7 @@ angular.module('equip')
       $scope.showGitHub = userInfo.GitHub;
       $scope.showLinkedIn = userInfo.LinkedIn;
       $scope.showTwitter = userInfo.Twitter;
-      $scope.showOther = userInfo.Other;      
+      $scope.showOther = userInfo.Other;
     })
   };
 

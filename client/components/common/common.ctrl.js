@@ -1,9 +1,9 @@
-(function() { 
+(function() {
 
 angular.module('equip')
-.controller('CommonCtrl', function($scope, $rootScope, $location, $window, FirebaseFactory) {
+.controller('CommonCtrl', function($scope, $rootScope, $location, $window, User, FirebaseFactory) {
 
-  var userId = FirebaseFactory.getCurrentUser().uid;
+  var userId = User.getCurrentUser().uid;
   $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams'], true);
   var userData = FirebaseFactory.getObject(['users', userId], true);
 
@@ -14,14 +14,14 @@ angular.module('equip')
 
   // set the context for the team select element in the home view
 
-  // if there's already a team on the rootScope, set it to the selected team in the home view 
+  // if there's already a team on the rootScope, set it to the selected team in the home view
   if ($rootScope.selectedTeam) {
     $scope.currentTeamOption = $rootScope.selectedTeam;
   }
 
 /*
- * Once the user's teams are loaded, check for a selected team in the local scope, 
- * then check local storage, then check the rootScope. Adjust local scope, rootScope, 
+ * Once the user's teams are loaded, check for a selected team in the local scope,
+ * then check local storage, then check the rootScope. Adjust local scope, rootScope,
  * and storage accordingly
  **/
   $scope.usersTeams.$loaded()
@@ -33,7 +33,7 @@ angular.module('equip')
           $scope.currentTeamOption = $scope.usersTeams[0];
           localStorage.selectedTeam = JSON.stringify($scope.currentTeamOption);
         }
-        $rootScope.selectedTeam = $scope.currentTeamOption;      
+        $rootScope.selectedTeam = $scope.currentTeamOption;
       } else {
         $scope.currentTeamOption = $rootScope.selectedTeam;
       }

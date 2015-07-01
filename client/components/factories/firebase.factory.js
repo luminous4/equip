@@ -1,7 +1,7 @@
 
 angular.module('equip')
 
-  .factory('FirebaseFactory', function($firebaseArray, $rootScope, 
+  .factory('FirebaseFactory', function($firebaseArray, $rootScope,
            $firebaseObject, $window, refUrl) {
 
     var ref = new Firebase(refUrl);
@@ -57,7 +57,7 @@ angular.module('equip')
           }
           return ref.child(input);
       } else {
-        return input; 
+        return input;
       }
     };
 
@@ -88,23 +88,9 @@ angular.module('equip')
       targetItem.remove();
     };
 
-    // This will go in user factory
-    var getCurrentUser = function() {
-      var userObj = $window.localStorage.getItem('firebase:session::mksequip');
-      var user = JSON.parse(userObj);
-      return user;
-    };
-
-    // This won't
-    var getUserInfo = function(userId) {
-      return $firebaseObject(ref.child('users').child(userId));
-    }
-
     return {
       addToCollection: addToCollection,
       getCollection: getCollection,
-      getCurrentUser: getCurrentUser,
-      getUserInfo: getUserInfo,
       getObject: getObject,
       removeItem: removeItem,
       updateItem: updateItem

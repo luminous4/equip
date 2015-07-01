@@ -1,7 +1,7 @@
 (function() {
    angular.module('equip')
 
-  .factory('User', function($location, $state, $window, refUrl, FirebaseFactory) {
+  .factory('User', function($location, $state, $window, $firebaseObject, refUrl, FirebaseFactory) {
     var ref = new Firebase(refUrl);
 
     var login = function(email, password, firebaseLoginObj, callback) {
@@ -97,7 +97,6 @@
 
         // save new user to db
         ref.child('users').child(newUserId).set(newUserDetails);
-        // FirebaseFactory.addToCollection(['users', newUserId], newUserDetails, true);
 
         // add new user to targetTeam's user list
         var tempUsers = [];
@@ -106,6 +105,7 @@
         }
         tempUsers.push(newUserId);
 
+        // creates new team
         if (addsTargetTeam) {
           var now = moment().format('MMMM Do YYYY, h:mm a');
           FirebaseFactory.updateItem(['teams', targetTeamId], {users: tempUsers, createdAt: now}, true);
@@ -123,6 +123,16 @@
       });
     };
 
+    var getCurrentUser = function() {
+      var userObj = $window.localStorage.getItem('firebase:session::mksequip');
+      var user = JSON.parse(userObj);
+      return user;
+    };
+
+    var getUserInfo = function(userId) {
+      return $firebaseObject(ref.child('users').child(userId));
+    };
+
     var isAuth = function() {
       return !!$window.localStorage.getItem('equipAuth');
     };
@@ -134,6 +144,8 @@
     return {
       login: login,
       register: register,
+      getCurrentUser: getCurrentUser,
+      getUserInfo: getUserInfo,
       isAuth: isAuth
     };
   });
