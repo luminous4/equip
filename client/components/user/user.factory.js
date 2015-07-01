@@ -1,7 +1,7 @@
 (function() {
    angular.module('equip')
 
-  .factory('User', function($location, $state, $window, $rootScope, refUrl, FirebaseFactory) {
+  .factory('User', function($location, $state, $window, refUrl, FirebaseFactory) {
     var ref = new Firebase(refUrl);
 
     var login = function(email, password, firebaseLoginObj, callback) {
@@ -53,7 +53,8 @@
 
           //TODO: display info to user
           if (!foundTeam && (teamAction === 'join')) {
-            console.log('Team to join not found');
+            callback(true, true, false)
+            // console.log('Team to join not found');
           }
 
           if (!foundTeam && (teamAction === 'create')) {
@@ -68,7 +69,8 @@
 
           //TODO: display info to user
           if (foundTeam && (teamAction === 'create')) {
-            console.log('Team to create already exists');
+            callback(true, false, true);
+            // console.log('Team to create already exists');
           }
         });
       };
@@ -112,12 +114,12 @@
         }
 
         $location.path('/login');
-        callback(true);
+        callback(true, false, false);
       })
       // error saving user
       .catch(function(error) {
         console.log('error:', + error);
-        callback(false);
+        callback(false, false, false);
       });
     };
 
