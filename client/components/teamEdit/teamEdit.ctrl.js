@@ -3,6 +3,7 @@
 
   .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
 
+    var currentUser;
     $scope.currentTab = "Team List";
 
     // Tracks the original $id of a team to update it when editing
@@ -10,14 +11,12 @@
 
     // Search string used in 'teamSearch' filter (at the bottom of $scope file)
     $scope.searchString = "";
-
     $scope.loading = true;
     $scope.triedToLeave = false;
 
     $scope.initialize = function() {
-
+      currentUser = User.getCurrentUser();
       $scope.teams = FirebaseFactory.getCollection('teams', true);
-
       $scope.allUsers = FirebaseFactory.getCollection('users', true);
 
       /**
@@ -25,7 +24,7 @@
        *  $scope.allUsers to the actual information the user is supposed to see.
        *  NOTE: this is not scalable!!! It wouldn't be too hard to change it though
        */
-      var currentUser = User.getCurrentUser();
+
       $scope.teams.$loaded().then(function() {
 
         $scope.loading = false;
@@ -56,7 +55,6 @@
 
     $scope.initialize();
 
-
       //////////////////////////
      // Navigation functions //
     //////////////////////////
@@ -86,7 +84,6 @@
           calendarEvents: []
         };
 
-        var currentUser = User.getCurrentUser();
         var currentUserFirebaseObject = FirebaseFactory.getObject(
           ['users', currentUser.uid],
           true
@@ -161,7 +158,6 @@
       $scope.checkTeamContext(team);
 
       // Removes $scope team from the user's team list
-      var currentUser = User.getCurrentUser();
       FirebaseFactory.removeItem(
         ['users', currentUser.uid,
           'teams', team.$id],
@@ -378,7 +374,7 @@
     // $scope makes it so you can't remove yourself from a team
     // in the edit menu.
     $scope.hideOwnUser = function(user) {
-      return (user.$id === User.getCurrentUser().uid);
+      return (user.$id === currentUser.uid);
     }
 
 
@@ -404,7 +400,7 @@
 
     $scope.checkTeamContext = function(checkingTeam) {
       for(var i = 0; i < checkingTeam.users.length; i++) {
-        if(checkingTeam.users[i] === User.getCurrentUser().uid) {
+        if(checkingTeam.users[i] === currentUser.uid) {
           localStorage.selectedTeam = "null";
           $rootScope.selectedTeam = null;
         }
