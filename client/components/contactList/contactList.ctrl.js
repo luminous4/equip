@@ -1,7 +1,7 @@
 (function() {
   angular.module('equip')
 
-  .controller('ContactController', function($scope, $state, $stateParams, $firebaseObject,
+  .controller('ContactController', function($scope, $rootScope, $state, $stateParams, $firebaseObject,
                                             $firebaseArray, refUrl, FirebaseFactory) {
 
     $scope.currentContact = null;
@@ -9,15 +9,20 @@
     $scope.searchString = '';
     $scope.mainPageClass = "col-sm-12";
     $scope.sideViewClass = "col-sm-0";
-    var currTeam = JSON.parse(localStorage.selectedTeam).$value;
-    var teamUsers = FirebaseFactory.getCollection(['teams', currTeam, 'users'], true);
-    $scope.teamContacts = [];
-    teamUsers.$loaded().then(function() {
-      $scope.loading = false;
-      angular.forEach(teamUsers, function(user) {
-        $scope.teamContacts.push(FirebaseFactory.getObject(['users', user.$value], true));
-      })
-    });
+
+     $rootScope.$watch('selectedTeam', function() {
+    if ($rootScope.selectedTeam) {
+      var currTeam = JSON.parse(localStorage.selectedTeam).$value;
+      var teamUsers = FirebaseFactory.getCollection(['teams', currTeam, 'users'], true);
+      $scope.teamContacts = [];
+      teamUsers.$loaded().then(function() {
+        $scope.loading = false;
+        angular.forEach(teamUsers, function(user) {
+          $scope.teamContacts.push(FirebaseFactory.getObject(['users', user.$value], true));
+        })
+      });
+    }
+  });
 
     // Displays a contact on the side and shrinks list
     $scope.viewContact = function(contact) {
