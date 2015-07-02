@@ -1,7 +1,7 @@
 (function() {
    angular.module('equip')
 
-  .controller('RegisterCtrl', function($scope, $firebaseAuth, $location, FirebaseFactory, User, refUrl) {
+  .controller('RegisterCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
     var ref = new Firebase(refUrl);
     var authObj = $firebaseAuth(ref);
 
