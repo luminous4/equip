@@ -10,6 +10,7 @@ angular.module('equip')
       var lastChatTime = 0;
       for (var i = 0; i < this.$list.length; i++) {
         var messageTime = new Date(this.$list[i].createdAt);
+        this.$list[i]['displayDate'] = moment(messageTime).fromNow();
         if (messageTime - lastChatTime < 20000 && this.$list[i].chatName === lastAuthor) {
           this.$list[i]['showImg'] = false;
         } else {
