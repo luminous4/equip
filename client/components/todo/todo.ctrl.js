@@ -13,7 +13,9 @@
   $scope.inputFields = ['','','','',''];
   $scope.tags = ['In progress', 'Urgent', 'Danger', 'Done'];
   $scope.statuses = ['success', 'warning', 'danger', 'info'];
+  $scope.lists = [];
 
+  // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
     if($scope.inputFields[listNum] === '') return;
 
@@ -28,10 +30,10 @@
 
     $scope.inputFields[listNum] = '';
 
-    updateFirebaseTodos();
-
+    // updateFirebaseTodos();
   }
 
+  // Changes the current tag to the next tag. Also changes color
   $scope.cycleTag = function(task) {
     var newIndex = 0;
     for(var i = 0; i < $scope.statuses.length-1; i++) {
@@ -44,23 +46,29 @@
     task.statusClass = $scope.statuses[newIndex];
   }
 
-  $scope.lists = [];
-
-  $scope.sometext = "hi";
-
+  // Loads stuff from firebase once
   if ($rootScope.selectedTeam) {
-    $scope.lists[0] = FirebaseFactory.getCollection(['todo', 0]);
+    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
+    tempList0.$loaded().then(function() {
+      $scope.lists[0] = furtherSterilization(tempList0);
+    });
     $scope.lists[1] = FirebaseFactory.getCollection(['todo', 1]);
     $scope.lists[2] = FirebaseFactory.getCollection(['todo', 2]);
-  }
+  } 
 
+  // Options for sortableui directive
   $scope.sortableOptions = {
     connectWith: ".connectList",
-    update: function(e, ui) {
-      updateFirebaseTodos();
-    }
+    // update: function(e, ui) {
+    //   updateFirebaseTodos();
+    // }
   };
 
+    /////////////////////////
+    /// Utility functions ///
+    /////////////////////////
+
+  // Updates firebase with the entire todo list dataset
   var updateFirebaseTodos = function() {
     var thisTeam = $rootScope.selectedTeam;
 
@@ -75,6 +83,7 @@
       var ref = new Firebase(path);
       var repeatHash = {};
       var newestList = [];
+
       for(var j = 0; j < newList.length; j++) {
         newList[j] = furtherSterilization(newList[j]);
         if(!duplicatesHash[newList[j].content]) {
@@ -82,11 +91,14 @@
           newestList.push(newList[j]);
         } 
       }
+
       // newList = furtherSterilization(newList);
       ref.set(newestList);
     }
   }
 
+  // Sterilization method which could definitely go into the 
+  // FirebaseFactory 
   var furtherSterilization = function(input) {
     if (input['$$added'] !== undefined)     delete input['$$added'];
     if (input['$$error'] !== undefined)     delete input['$$error'];
