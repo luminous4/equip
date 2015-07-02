@@ -36,7 +36,8 @@ angular.module('equip')
       var ref = new Firebase('https://mksequip.firebaseio.com/teams/');
       $scope.messages = new Messages(ref.child($rootScope.selectedTeam.$value).child('messages'));
       $scope.messages.$loaded()
-      .then(function() {
+      .then(function(data) {
+        $scope.dashboardMessages = data.slice(data.length - 5, data.length);
         setInterval($scope.messages.formatMessages.bind($scope.messages), 10000);
         $scope.messages.formatMessages();
         $scope.messages.$watch(function() {
