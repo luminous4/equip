@@ -8,6 +8,7 @@
     'luegg.directives',
 		'ngMessages', // Angular Messages,
     'ui.bootstrap',
-    'sticky'
+    'sticky',
+    'ui.sortable'
 	])
 })();
