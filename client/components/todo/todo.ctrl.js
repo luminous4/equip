@@ -73,11 +73,17 @@
 
       var path = refUrl + '/teams/' + thisTeam.$value + '/todo/' + i;
       var ref = new Firebase(path);
+      var repeatHash = {};
+      var newestList = [];
       for(var j = 0; j < newList.length; j++) {
         newList[j] = furtherSterilization(newList[j]);
+        if(!duplicatesHash[newList[j].content]) {
+          duplicatesHash[newList[j].content] = true;
+          newestList.push(newList[j]);
+        } 
       }
-      newList = furtherSterilization(newList);
-      ref.set(newList);
+      // newList = furtherSterilization(newList);
+      ref.set(newestList);
     }
   }
 
