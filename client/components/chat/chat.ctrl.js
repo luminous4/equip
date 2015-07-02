@@ -1,7 +1,7 @@
 (function() {
 
 angular.module('equip')
-.factory('Messages', function($firebaseArray) {
+.factory('Messages', function($firebaseArray, $rootScope) {
   return $firebaseArray.$extend({
     formatMessages: function() {
       if (this.$list.length) {
@@ -37,6 +37,7 @@ angular.module('equip')
       $scope.messages = new Messages(ref.child($rootScope.selectedTeam.$value).child('messages'));
       $scope.messages.$loaded()
       .then(function() {
+        setInterval($scope.messages.formatMessages.bind($scope.messages), 10000);
         $scope.messages.formatMessages();
         $scope.messages.$watch(function() {
           $scope.messages.formatMessages();
