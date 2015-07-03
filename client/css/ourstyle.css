@@ -202,3 +202,9 @@
   width: 70px;
   height: 70px;
 }
+.message-alert {
+  position: fixed;
+  z-index: 99999;
+  top: 12px !important;
+  right: 30px !important;
+}
