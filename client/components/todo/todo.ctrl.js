@@ -47,8 +47,17 @@
     task.statusClass = $scope.statuses[newIndex];
   }
 
-  $scope.deleteTask = function(task) {
-    
+  $scope.deleteTask = function(task, columnNumber) {
+    console.log(task);
+    console.log($scope.lists[columnNumber]);
+    for(var i = 0; i < $scope.lists[columnNumber].length; i++) {
+      if($scope.lists[columnNumber][i].$$hashKey === task.$$hashKey) {
+        console.log('found it');
+        $scope.lists[columnNumber].splice(i, 1);
+        break;
+      }
+    }
+    console.log($scope.lists[columnNumber]);
   }
 
   // Loads stuff from firebase once
