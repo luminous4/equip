@@ -68,7 +68,8 @@ angular.module('equip')
   $scope.$watch('allFriendsIds', getAllFriendObjects);
 
   $scope.loadMessages = function(event) {
-    $scope.clickedUser = event.target.dataset.clickName;
+    $scope.clickedUser = event.target.dataset.clickId;
+    $scope.clickedUserName = event.target.dataset.clickName;
     $scope.tab2 = true; 
     $scope.tab1 = false;
     $scope.myMessages = FirebaseFactory.getCollection(['users', userId, 'instantMessages', $scope.clickedUser], true);

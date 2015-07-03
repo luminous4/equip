@@ -15,11 +15,11 @@
       <div class="tab-pane" ng-class="{active: tab1}">
         <div>
           <div class="sidebar-message" ng-repeat="friend in allFriends">
-            <a data-click-name="{{friend.$id}}" ng-click="loadMessages($event)">
+            <a data-click-id="{{friend.$id}}" data-click-name="{{friend.displayName}}" ng-click="loadMessages($event)">
               <div class="pull-left text-center">
-                <img alt="image" class="img-circle message-avatar" data-click-name="{{friend.$id}}" ng-src="{{friend.imgUrl}}">
+                <img alt="image" class="img-circle message-avatar" data-click-id="{{friend.$id}}" data-click-name="{{friend.displayName}}" ng-src="{{friend.imgUrl}}">
               </div>
-              <div class="media-body" data-click-name="{{friend.$id}}">
+              <div class="media-body" data-click-id="{{friend.$id}}" data-click-name="{{friend.displayName}}">
                 {{friend.displayName}}
               </div>
             </a>
@@ -28,8 +28,8 @@
       </div>
 
       <div class="tab-pane" ng-class="{active: tab2}">
-        <div class="heading">
-          {{clickedUser}}
+        <div class="im-heading">
+          {{clickedUserName}}
         </div>
         <div class="small-chat-box ng-small-chat">
           <div class="content">
