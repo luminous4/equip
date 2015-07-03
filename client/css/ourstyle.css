@@ -156,19 +156,21 @@
   height: 28px !important;
 }
 .navbar-brand {
-    position: absolute;
-    width: 100%;
     left: 0;
     text-align: center;
     margin: auto;
     color: #999c9e;
-
 }
 .nav > li > a {
     color: #999c9e;
 }
 .logo {
     width: 35px; height: 35px; display: inline !important;
+}
+.logo-wrapper {
+  position: absolute;
+  min-height: 50px;
+  left: 45%;
 }
 .navbar-brand {
     color: #2f4050;

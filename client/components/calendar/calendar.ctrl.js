@@ -66,12 +66,12 @@
       var hours = timeObj.getHours();
       var minutes = timeObj.getMinutes();
 
-      // check if is padding neccessary
+      // check if padding is neccessary
       if (hours < 10) {
         hours = '0' + hours;
       }
       if (minutes < 10) {
-        minutes = '0' + minutes
+        minutes = '0' + minutes;
       }
       time = hours + ':' + minutes;
       return time;

@@ -37,7 +37,8 @@
     "ui-bootstrap": "~0.13.0",
     "ngSticky": "~1.7.9",
     "angular-ui-sortable": "~0.13.4",
-    "angular-sanitize": "~1.4.1"
+    "angular-sanitize": "~1.4.1",
+    "metisMenu": "~2.0.2"
   },
   "resolutions": {
     "angular": "1.4.1"

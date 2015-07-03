@@ -1,17 +1,20 @@
-  <nav  class="navbar-default navbar-static-side" role="navigation">
-    <div sticky class="sidebar-collapse">
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+
       <ul side-navigation class="nav metismenu" id="side-menu">
         <li class="nav-header prof-info">
-          
-          <img alt="image" class="img-circle prof-pic" ng-src="{{img}}" />
-          <h5 class="welcome">Welcome {{name}}</h5>
+          <div class="dropdown profile-element">
+            <img alt="image" class="img-circle prof-pic" ng-src="{{img}}" />
+            <h5 class="welcome">Welcome {{name}}</h5>
+          </div>
+          <div class="logo-element"></div>
         </li>
         <!-- Navigation Items-->
         <li ui-sref-active="active">
           <a ui-sref="index.home"><i class="fa fa fa-home"></i> <span class="nav-label">Home</span> </a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="index.todo"><i class="fa fa fa-home"></i> <span class="nav-label">Todo</span> </a>
+          <a ui-sref="index.todo"><i class="fa fa-table"></i> <span class="nav-label">Todo</span> </a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="index.calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>

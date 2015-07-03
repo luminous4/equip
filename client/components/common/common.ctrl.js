@@ -2,7 +2,7 @@
 
 angular.module('equip')
 .controller('CommonCtrl', function($scope, $rootScope, $location, $window, User, FirebaseFactory) {
-  
+
   var userId = User.getCurrentUser().uid;
   $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams'], true);
   var userData = FirebaseFactory.getObject(['users', userId], true);
@@ -50,6 +50,5 @@ angular.module('equip')
     $rootScope.selectedTeam = null;
     $location.path('/login');
   };
-
 });
 })();

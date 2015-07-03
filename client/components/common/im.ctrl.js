@@ -70,7 +70,7 @@ angular.module('equip')
   $scope.loadMessages = function(event) {
     $scope.clickedUser = event.target.dataset.clickId;
     $scope.clickedUserName = event.target.dataset.clickName;
-    $scope.tab2 = true; 
+    $scope.tab2 = true;
     $scope.tab1 = false;
     $scope.myMessages = FirebaseFactory.getCollection(['users', userId, 'instantMessages', $scope.clickedUser], true);
     $scope.theirMessages = FirebaseFactory.getCollection(['users', $scope.clickedUser, 'instantMessages', userId], true)
@@ -83,7 +83,7 @@ angular.module('equip')
       displayName: $scope.currentUser,
       sender: userId,
       text: $scope.message,
-      displayDate: formattedDate, 
+      displayDate: formattedDate,
       createdAt: Firebase.ServerValue.TIMESTAMP
     });
     $scope.theirMessages.$add({
