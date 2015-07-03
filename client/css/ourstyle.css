@@ -173,3 +173,12 @@
 .navbar-brand {
     color: #2f4050;
 }
+.imSend {
+  position: fixed;
+  bottom: 10px;
+}
+.small-chat-box .content {
+  height: 80%;
+  width: 268px;
+  overflow: auto;
+}

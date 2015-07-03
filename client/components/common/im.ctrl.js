@@ -76,16 +76,20 @@ angular.module('equip')
   }
 
   $scope.addMessage = function() {
+    var currentDate = new Date();
+    var formattedDate = moment(currentDate).format('h:mm a');
     $scope.myMessages.$add({
       displayName: $scope.currentUser,
       sender: userId,
       text: $scope.message,
+      displayDate: formattedDate, 
       createdAt: Firebase.ServerValue.TIMESTAMP
     });
     $scope.theirMessages.$add({
       displayName: $scope.currentUser,
       sender: userId,
       text: $scope.message,
+      displayDate: formattedDate,
       createdAt: Firebase.ServerValue.TIMESTAMP
     });
 
