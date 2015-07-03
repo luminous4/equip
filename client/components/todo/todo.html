@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>Agile board {{sometext}}</h2>
+    <h2>Agile board</h2>
     <ol class="breadcrumb">
       <li>
         <a href="index.html">Home</a>
@@ -20,6 +20,10 @@
 
 
   <!-- First column -->
+
+  <div>
+    <button ng-click="updateFirebaseTodos()">Save!</button>
+  </div>
 
     <div class="col-lg-4" ng-show="listBools[0]">
       <div class="ibox">
