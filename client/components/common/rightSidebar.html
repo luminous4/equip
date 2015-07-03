@@ -1,0 +1,61 @@
+<div id="right-sidebar" ng-show="rightSidebar" class="sidebar-open">
+  <div class="sidebar-container" full-scroll>
+
+    <ul class="nav nav-tabs navs-2">
+
+      <li ng-class="{active: tab1}"><a ng-click="tab1 = true; tab2 = false" ng-init="tab1 = true">
+        Contacts
+      </a></li>
+      <li ng-class="{active: tab2}"><a ng-click="tab2 = true; tab1 = false">
+        Messages
+      </a></li>
+    </ul>
+
+    <div class="tab-content">
+      
+      <div class="tab-pane" ng-class="{active: tab1}"  ng-controller="ContactController">
+        <div>
+          <div class="sidebar-message" ng-repeat="contact in teamContacts">
+            <a href="#">
+              <div class="pull-left text-center">
+                <img alt="image" class="img-circle message-avatar" ng-src="{{contact.imgUrl}}">
+              </div>
+              <div class="media-body">
+                {{contact.displayName}}
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" ng-class="{active: tab2}" ng-controller="IMCtrl">
+        <div class="small-chat-box ng-small-chat">
+
+          <div class="content">
+            <div class="left">
+              <div class="author-name">
+                {{currentUser}} 
+                <small class="chat-date">
+                10:02 am
+              </small>
+            </div>
+            <div class="chat-message active">
+              {{message}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-chat">
+          <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
+            class="btn btn-primary" type="button">Send
+          </button> </span></div>
+        </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
