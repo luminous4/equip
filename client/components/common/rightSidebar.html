@@ -11,9 +11,9 @@
       </a></li>
     </ul>
 
-    <div class="tab-content" ng-controller="ContactController">
+    <div class="tab-content">
       
-      <div class="tab-pane" ng-class="{active: tab1}">
+      <div class="tab-pane" ng-class="{active: tab1}"  ng-controller="ContactController">
         <div>
           <div class="sidebar-message" ng-repeat="contact in teamContacts">
             <a href="#">
@@ -28,18 +28,10 @@
         </div>
       </div>
 
-      <div class="tab-pane" ng-class="{active: tab2}">
-        <div class="ng-small-chat">
-
-          <div class="heading">
-            <small class="chat-date pull-right">
-              02.19.2015
-            </small>
-            Small chat
-          </div>
+      <div class="tab-pane" ng-class="{active: tab2}" ng-controller="IMCtrl">
+        <div class="small-chat-box ng-small-chat">
 
           <div class="content">
-
             <div class="left">
               <div class="author-name">
                 Monica Jackson <small class="chat-date">
@@ -49,55 +41,9 @@
             <div class="chat-message active">
               Lorem Ipsum is simply dummy text input.
             </div>
-
           </div>
-          <div class="right">
-            <div class="author-name">
-              Mick Smith
-              <small class="chat-date">
-                11:24 am
-              </small>
-            </div>
-            <div class="chat-message">
-              Lorem Ipsum is simpl.
-            </div>
-          </div>
-          <div class="left">
-            <div class="author-name">
-              Alice Novak
-              <small class="chat-date">
-                08:45 pm
-              </small>
-            </div>
-            <div class="chat-message active">
-              Check this stock char.
-            </div>
-          </div>
-          <div class="right">
-            <div class="author-name">
-              Anna Lamson
-              <small class="chat-date">
-                11:24 am
-              </small>
-            </div>
-            <div class="chat-message">
-              The standard chunk of Lorem Ipsum
-            </div>
-          </div>
-          <div class="left">
-            <div class="author-name">
-              Mick Lane
-              <small class="chat-date">
-                08:45 pm
-              </small>
-            </div>
-            <div class="chat-message active">
-              I belive that. Lorem Ipsum is simply dummy text.
-            </div>
-          </div>
-
-
         </div>
+
         <div class="form-chat">
           <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
             class="btn btn-primary" type="button">Send

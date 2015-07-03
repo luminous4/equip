@@ -5089,20 +5089,15 @@ del {
 .small-chat-box {
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 75px;
     background: #fff;
     border: 1px solid #e7eaec;
-    width: 230px;
-    height: 320px;
+/*    width: 230px;
+    height: 320px;*/
+    height: 100%;
     border-radius: 4px;
 }
 .small-chat-box.ng-small-chat {
     display: block;
-}
-.body-small .small-chat-box {
-    bottom: 70px;
-    right: 20px;
 }
 .small-chat-box.active {
     display: block;
