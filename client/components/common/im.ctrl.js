@@ -103,6 +103,14 @@ angular.module('equip')
     }
   }
 
+  $scope.rightOrLeft = function(sender) {
+    if (sender === userId) {
+      return 'right';
+    } else {
+      return 'left';
+    }
+  }
+
 
 
 })

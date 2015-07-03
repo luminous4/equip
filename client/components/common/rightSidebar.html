@@ -31,7 +31,7 @@
         <div class="small-chat-box ng-small-chat">
 
           <div class="content" ng-repeat="message in myMessages">
-            <div ng-class-odd="'left'" ng-class-even="'right'">
+            <div ng-class="rightOrLeft(message.sender)">
               <div class="author-name">
                 {{message.displayName}} 
                 <small class="chat-date">
