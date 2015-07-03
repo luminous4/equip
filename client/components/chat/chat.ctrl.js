@@ -23,7 +23,7 @@ angular.module('equip')
   });
 })
 
-.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, Messages, User, FirebaseFactory) {
+.controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, refUrl, Messages, User, FirebaseFactory) {
 
   var userId = User.getCurrentUser().uid;
   var userData = FirebaseFactory.getObject(['users', userId], true);
@@ -33,7 +33,7 @@ angular.module('equip')
 
   $rootScope.$watch('selectedTeam', function() {
     if ($rootScope.selectedTeam) {
-      var ref = new Firebase('https://mksequip.firebaseio.com/teams/');
+      var ref = new Firebase(refUrl + '/teams/');
       $scope.messages = new Messages(ref.child($rootScope.selectedTeam.$value).child('messages'));
       $scope.messages.$loaded()
       .then(function(data) {
@@ -63,7 +63,7 @@ angular.module('equip')
         userImg: $scope.img,
         text: $scope.message,
         createdAt: Firebase.ServerValue.TIMESTAMP
-      });      
+      });
     }
 
     this.message = '';
