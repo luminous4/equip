@@ -21,9 +21,6 @@
 
   <!-- First column -->
 
-  <div>
-    <button ng-click="updateFirebaseTodos()">Save!</button>
-  </div>
 
     <div class="col-lg-4" ng-show="listBools[0]">
       <div class="ibox">
@@ -32,23 +29,35 @@
           <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
 
           <div class="input-group">
-            <form ng-submit="addTask(0)">
-              <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[0]" class="input input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-s0)m btn-white"> <i class="fa fa-plus"></i> Add task</button>
-              </span>
-            </form>
+            <div class="col-sm-10">
+              <form ng-submit="addTask(0)">
+                <div class="input-group m-b">
+                  <span class="input-group-btn">
+                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[0]" class="input input-sm form-control">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
+                  </span> 
+                  </div>
+              </form>
+            </div>
           </div>
 
-          <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[0].$save()" ng-change="lists[0].$save()" ng-model="lists[0]">
+          <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[0].$save()" ng-model="lists[0]">
             <li class="{{task.statusClass}}-element" ng-repeat="task in lists[0]">
               {{task.content}}
               <div class="agile-detail">
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                <a ng-click="deleteTask(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <i class="fa fa-times"></i>&nbsp;
+                </a>
+                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  {{task.tagName}}
+                </a>
+                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
         </div>
       </div>
     </div>
@@ -62,23 +71,35 @@
           <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
 
           <div class="input-group">
-            <form ng-submit="addTask(1)">
-              <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[1]"  class="input input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> Add task</button>
-              </span>
-            </form>
+            <div class="col-sm-10">
+              <form ng-submit="addTask(1)">
+                <div class="input-group m-b">
+                  <span class="input-group-btn">
+                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[1]" class="input input-sm form-control">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
+                  </span> 
+                </div>
+              </form>
+            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[1].$save()" ng-model="lists[1]">
             <li class="{{task.statusClass}}-element" ng-repeat="task in lists[1]">
               {{task.content}}
               <div class="agile-detail">
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                <a ng-click="deleteTask(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <i class="fa fa-times"></i>&nbsp;
+                </a>
+                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  {{task.tagName}}
+                </a>
+                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
         </div>
       </div>
     </div>
@@ -92,23 +113,35 @@
           <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
 
           <div class="input-group">
-            <form ng-submit="addTask(2)">
-              <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[2]"  class="input input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> Add task</button>
-              </span>
-            </form>
+            <div class="col-sm-10">
+              <form ng-submit="addTask(2)">
+                <div class="input-group m-b">
+                  <span class="input-group-btn">
+                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[2]" class="input input-sm form-control">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
+                  </span> 
+                </div>
+              </form>
+            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[2].$save()" ng-model="lists[2]">
             <li class="{{task.statusClass}}-element" ng-repeat="task in lists[2]">
               {{task.content}}
               <div class="agile-detail">
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                <a ng-click="deleteTask(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <i class="fa fa-times"></i>&nbsp;
+                </a>
+                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  {{task.tagName}}
+                </a>
+                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
         </div>
       </div>
     </div>
@@ -122,23 +155,35 @@
           <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
 
           <div class="input-group">
-            <form ng-submit="addTask(3)">
-              <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[3]"  class="input input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> Add task</button>
-              </span>
-            </form>
+            <div class="col-sm-10">
+              <form ng-submit="addTask(3)">
+                <div class="input-group m-b">
+                  <span class="input-group-btn">
+                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[3]" class="input input-sm form-control">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
+                  </span> 
+                </div>
+              </form>
+            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[3].$save()" ng-model="lists[3]">
             <li class="{{task.statusClass}}-element" ng-repeat="task in lists[3]">
               {{task.content}}
               <div class="agile-detail">
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                <a ng-click="deleteTask(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <i class="fa fa-times"></i>&nbsp;
+                </a>
+                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  {{task.tagName}}
+                </a>
+                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
         </div>
       </div>
     </div>
@@ -152,23 +197,35 @@
           <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
 
           <div class="input-group">
-            <form ng-submit="addTask(4)">
-              <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[4]"  class="input input-sm form-control">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> Add task</button>
-              </span>
-            </form>
+            <div class="col-sm-10">
+              <form ng-submit="addTask(4)">
+                <div class="input-group m-b">
+                  <span class="input-group-btn">
+                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[4]" class="input input-sm form-control">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
+                  </span> 
+                </div>
+              </form>
+            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[4].$save()" ng-model="lists[4]">
             <li class="{{task.statusClass}}-element" ng-repeat="task in lists[4]">
               {{task.content}}
               <div class="agile-detail">
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                <a ng-click="deleteTask(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <i class="fa fa-times"></i>&nbsp;
+                </a>
+                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  {{task.tagName}}
+                </a>
+                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
         </div>
       </div>
     </div>

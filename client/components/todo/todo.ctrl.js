@@ -9,9 +9,10 @@
     handler: ".ibox-title"
   };
 
+  $scope.savedDisplay = "";
   $scope.listBools = [true,true,true,false,false];
-  $scope.inputFields = ['','','','',''];
-  $scope.tags = ['In progress', 'Urgent', 'Danger', 'Done'];
+  $scope.inputFields = ['Backlog','Ready to start','In progress','Done',''];
+  $scope.tags = ['Nonessential', 'Important', 'Urgent', 'Info'];
   $scope.statuses = ['success', 'warning', 'danger', 'info'];
   $scope.lists = [];
 
@@ -44,6 +45,10 @@
     }
     task.tagName = $scope.tags[newIndex];
     task.statusClass = $scope.statuses[newIndex];
+  }
+
+  $scope.deleteTask = function(task) {
+    
   }
 
   // Loads stuff from firebase once
@@ -113,18 +118,38 @@
 
     // show loading symbol while you refetch crap from the database
 
+    var counter = 0;
+    var whenEverythingIsLoaded = function() {
+      counter++;
+      if(counter === 3) {
+        $scope.showSavedDisplay();
+      }
+    }
+
     var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
     tempList0.$loaded().then(function() {
       $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+      whenEverythingIsLoaded();
     });
     var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
     tempList1.$loaded().then(function() {
       $scope.lists[1] = arrayify(furtherSterilization(tempList1));
+      whenEverythingIsLoaded();
     });
     var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
     tempList2.$loaded().then(function() {
       $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+      whenEverythingIsLoaded();
     });
+  }
+
+  $scope.showSavedDisplay = function() {
+    if($scope.savedDisplay === "")
+    var removeErrorMessage = function() {
+      $scope.savedDisplay = "";
+    }
+    $scope.savedDisplay = "Saved!";
+    $timeout(removeErrorMessage, 2000);
   }
 
   // Sterilization method which could definitely go into the 
