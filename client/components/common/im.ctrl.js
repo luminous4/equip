@@ -10,6 +10,8 @@ angular.module('equip')
   var interimFriends = [];
   $scope.allFriendsIds = [];
   $scope.allFriends = [];
+  $scope.selectedFriend = null;
+  $scope.messages = [];
 
   userData.$loaded().then(function() {
     $scope.currentUser = userData.displayName;
@@ -66,22 +68,24 @@ angular.module('equip')
 
   $scope.$watch('allFriendsIds', getAllFriendObjects);
 
+  $scope.loadMessages = function(event) {
+    clickedUser = event.target.dataset.clickName;
+    $scope.tab2 = true; 
+    $scope.tab1 = false;
+  }
 
-  // $scope.addMessage = function() {
-  //   if (!$rootScope.selectedTeam) {
-  //     this.canSend = false;
-  //   } else {
-  //     this.canSend = true;
-  //     $scope.messages.$add({
-  //       chatName: $scope.user,
-  //       userImg: $scope.img,
-  //       text: $scope.message,
-  //       createdAt: Firebase.ServerValue.TIMESTAMP
-  //     });      
-  //   }
+  $scope.switchTabs = function(event) {
+    clickedTabNumber = event.target.dataset.tabNumber;
+    if (clickedTabNumber === '1') {
+      $scope.tab1 = true;
+      $scope.tab2 = false;
+    } else {
+      $scope.tab1 = false;
+      $scope.tab2 = true;
+    }
+  }
 
-  //   this.message = '';
-  // };
+
 
 })
 })();

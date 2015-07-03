@@ -1,25 +1,25 @@
-<div id="right-sidebar" ng-show="rightSidebar" class="sidebar-open">
+<div id="right-sidebar" ng-show="rightSidebar" class="sidebar-open"  ng-controller="IMCtrl">
   <div class="sidebar-container" full-scroll>
 
     <ul class="nav nav-tabs navs-2">
 
-      <li ng-class="{active: tab1}"><a ng-click="tab1 = true; tab2 = false" ng-init="tab1 = true">
+      <li ng-class="{active: tab1}"><a data-tab-number="1" ng-click="switchTabs($event)" ng-init="tab1 = true">
         Contacts
       </a></li>
-      <li ng-class="{active: tab2}"><a ng-click="tab2 = true; tab1 = false">
+      <li ng-class="{active: tab2}"><a  data-tab-number="2" ng-click="switchTabs($event)">
         Messages
       </a></li>
     </ul>
 
-    <div class="tab-content" ng-controller="IMCtrl">
+    <div class="tab-content">
       <div class="tab-pane" ng-class="{active: tab1}">
         <div>
           <div class="sidebar-message" ng-repeat="friend in allFriends">
-            <a href="#">
+            <a data-click-name="{{friend.$id}}" ng-click="loadMessages($event)">
               <div class="pull-left text-center">
-                <img alt="image" class="img-circle message-avatar" ng-src="{{friend.imgUrl}}">
+                <img alt="image" class="img-circle message-avatar" data-click-name="{{friend.$id}}" ng-src="{{friend.imgUrl}}">
               </div>
-              <div class="media-body">
+              <div class="media-body" data-click-name="{{friend.$id}}">
                 {{friend.displayName}}
               </div>
             </a>
