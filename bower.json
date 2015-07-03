@@ -39,7 +39,6 @@
     "angular-ui-sortable": "~0.13.4",
     "angular-sanitize": "~1.4.1",
     "metisMenu": "~2.0.2",
-    "ng-transloadit": "*",
     "oclazyload": "~1.0.1"
   },
   "resolutions": {
