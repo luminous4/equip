@@ -16,8 +16,11 @@
   <div>
   </div>
 
-  <div class="row">
+  <div ng-show="loading" class="center">
+    <i class="center fa fa-spinner fa-spin fa-5x"></i>
+  </div>
 
+  <div class="row" ng-hide="loading">
 
   <!-- First column -->
 
@@ -25,8 +28,13 @@
     <div class="col-lg-4" ng-show="listBools[0]">
       <div class="ibox">
         <div class="ibox-content">
-          <h3>To-do</h3>
-          <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
+          <h2>
+            <form ng-submit="submitNewColumnName(0)">
+              <span ng-hide="columnNameEdit[0]">{{columnNames[0]}}</span>
+              <input type="text" ng-show="columnNameEdit[0]" ng-model="columnNames[0]" class="input input-sm form-control"> 
+              <span class="text-right"><i ng-hide="columnNameEdit[0]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(0)"></i>
+            </form>
+          </h2>
 
           <div class="input-group">
             <div class="col-sm-10">
@@ -67,8 +75,13 @@
     <div class="col-lg-4" ng-show="listBools[1]">
       <div class="ibox">
         <div class="ibox-content">
-          <h3>To-do</h3>
-          <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
+          <h2>
+            <form ng-submit="submitNewColumnName(1)">
+              <span ng-hide="columnNameEdit[1]">{{columnNames[1]}}</span>
+              <input type="text" ng-show="columnNameEdit[1]" ng-model="columnNames[1]" class="input input-sm form-control"> 
+              <span class="text-right"><i ng-hide="columnNameEdit[1]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(1)"></i>
+            </form>
+          </h2>
 
           <div class="input-group">
             <div class="col-sm-10">
@@ -109,8 +122,13 @@
     <div class="col-lg-4" ng-show="listBools[2]">
       <div class="ibox">
         <div class="ibox-content">
-          <h3>To-do</h3>
-          <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
+          <h2>
+            <form ng-submit="submitNewColumnName(2)">
+              <span ng-hide="columnNameEdit[2]">{{columnNames[2]}}</span>
+              <input type="text" ng-show="columnNameEdit[2]" ng-model="columnNames[2]" class="input input-sm form-control"> 
+              <span class="text-right"><i ng-hide="columnNameEdit[2]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(2)"></i>
+            </form>
+          </h2>
 
           <div class="input-group">
             <div class="col-sm-10">
@@ -151,8 +169,13 @@
     <div class="col-lg-4" ng-show="listBools[3]">
       <div class="ibox">
         <div class="ibox-content">
-          <h3>To-do</h3>
-          <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
+          <h3>
+            <form ng-submit="submitNewColumnName(3)">
+              <span ng-hide="columnNameEdit[3]">{{columnNames[3]}}</span>
+              <input type="text" ng-show="columnNameEdit[3]" ng-model="columnNames[3]" class="input input-sm form-control"> 
+              <span class="text-right"><i ng-hide="columnNameEdit[3]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(3)"></i>
+            </form>
+          </h3>
 
           <div class="input-group">
             <div class="col-sm-10">
@@ -188,46 +211,5 @@
       </div>
     </div>
 
-  <!-- Fifth column -->
-
-    <div class="col-lg-4" ng-show="listBools[4]">
-      <div class="ibox">
-        <div class="ibox-content">
-          <h3>To-do</h3>
-          <!-- <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p> -->
-
-          <div class="input-group">
-            <div class="col-sm-10">
-              <form ng-submit="addTask(4)">
-                <div class="input-group m-b">
-                  <span class="input-group-btn">
-                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[4]" class="input input-sm form-control">
-                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
-                  </span> 
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[4].$save()" ng-model="lists[4]">
-            <li class="{{task.statusClass}}-element" ng-repeat="task in lists[4]">
-              {{task.content}}
-              <div class="agile-detail">
-                <a ng-click="deleteTask(task, 4)" href="#" class="pull-right btn btn-xs btn-white">
-                  <i class="fa fa-times"></i>
-                </a>
-                <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
-                  {{task.tagName}}
-                </a>
-                &nbsp;&nbsp;
-                <i class="fa fa-clock-o"></i> {{task.date}}
-              </div>
-            </li>
-          </ul>
-          <button class="btn btn-primary" ng-click="updateFirebaseTodos()">Save</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;{{savedDisplay}}
-        </div>
-      </div>
-    </div>
   </div>
 </div>

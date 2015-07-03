@@ -10,11 +10,59 @@
   };
 
   $scope.savedDisplay = "";
-  $scope.listBools = [true,true,true,false,false];
-  $scope.inputFields = ['Backlog','Ready to start','In progress','Done',''];
+  $scope.listBools = [true,true,true,false];
+  $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
+  $scope.inputFields = ['','','',''];
+  $scope.columnNameEdit = [false, false, false, false]
   $scope.tags = ['Nonessential', 'Important', 'Urgent', 'Info'];
   $scope.statuses = ['success', 'warning', 'danger', 'info'];
   $scope.lists = [];
+  $scope.loading = true;
+  $scope.firstLoad = true;
+
+
+  $scope.loadEverything = function() {
+    // all this should be one function that gets called on save and also on load
+    var counter = 0;
+    var whenEverythingIsLoaded = function() {
+      counter++;
+      if(counter === 3) {
+        if($scope.firstLoad) {
+          $scope.firstLoad = false;
+          $scope.loading = false;
+        } else {
+          $scope.showSavedDisplay();
+        }
+      }
+    }
+
+    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
+    tempList0.$loaded().then(function() {
+      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+      whenEverythingIsLoaded();
+    });
+    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
+    tempList1.$loaded().then(function() {
+      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
+      whenEverythingIsLoaded();
+    });
+    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
+    tempList2.$loaded().then(function() {
+      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+      whenEverythingIsLoaded();
+    });
+    var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
+    columnNames.$loaded().then(function() {
+      $scope.columnNames[0] = columnNames[0].$value;
+      $scope.columnNames[1] = columnNames[1].$value;
+      $scope.columnNames[2] = columnNames[2].$value;
+    });
+  }
+  // $rootScope.$watch('selectedTeam', function() {
+    // if ($rootScope.selectedTeam) {
+      $scope.loadEverything();
+    // }
+  // });
 
   // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
@@ -60,21 +108,17 @@
     console.log($scope.lists[columnNumber]);
   }
 
+  $scope.editColumnName = function(columnNumber) {
+    $scope.columnNameEdit[columnNumber] = true;
+  }
+
+  $scope.submitNewColumnName = function(columnNumber) {
+    $scope.columnNameEdit[columnNumber] = false;
+  }
+
   // Loads stuff from firebase once
-  if ($rootScope.selectedTeam) {
-    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
-    tempList0.$loaded().then(function() {
-      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
-    });
-    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
-    tempList1.$loaded().then(function() {
-      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
-    });
-    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
-    tempList2.$loaded().then(function() {
-      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
-    });
-  } 
+  $scope.loadEverything();
+
 
   // Options for sortableui directive
   $scope.sortableOptions = {
@@ -92,7 +136,7 @@
   $scope.updateFirebaseTodos = function() {
     var thisTeam = $rootScope.selectedTeam;
 
-    var endResult = {};
+    var endResult = {names:[]};
 
     for(var i = 0; i < 5; i++) {
 
@@ -109,47 +153,16 @@
         j++;
       }
 
-      console.log('newList');
-      console.log(newList);
-
       endResult[i] = newList;
+
+      endResult.names[i] = $scope.columnNames[i];
     }
+
+    console.log(endResult);
 
     FirebaseFactory.updateItem(['todo'], endResult);
 
-    // var path = refUrl + '/teams/' + thisTeam.$value + '/todo/' + i;
-    // var ref = new Firebase(path);
-
-    // ref.update(endResult);
-
-    console.log('endResult');
-    console.log(endResult);
-
-    // show loading symbol while you refetch crap from the database
-
-    var counter = 0;
-    var whenEverythingIsLoaded = function() {
-      counter++;
-      if(counter === 3) {
-        $scope.showSavedDisplay();
-      }
-    }
-
-    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
-    tempList0.$loaded().then(function() {
-      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
-      whenEverythingIsLoaded();
-    });
-    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
-    tempList1.$loaded().then(function() {
-      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
-      whenEverythingIsLoaded();
-    });
-    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
-    tempList2.$loaded().then(function() {
-      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
-      whenEverythingIsLoaded();
-    });
+    $scope.loadEverything();
   }
 
   $scope.showSavedDisplay = function() {
