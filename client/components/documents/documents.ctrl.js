@@ -1,6 +1,9 @@
 (function() {
 	angular.module('equip')
-		.controller('DocumentCtrl', function ($scope, $rootScope, FirebaseFactory) {
+		.controller('DocumentCtrl', function ($scope, $rootScope, $http, FirebaseFactory, Transloadit, $ocLazyLoad) {
+			// Load Jquery Plugin
+			$ocLazyLoad.load('components/documents/documents.jq.js');
+			// Teams
 			$rootScope.$watch('selectedTeam', function () {
 				if ($rootScope.selectedTeam) {
 					var documentList = FirebaseFactory.getCollection('documents');

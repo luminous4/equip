@@ -20,6 +20,11 @@
           <div class="file-manager">
             <a ui-sref="index.texteditor"><button class="btn btn-primary btn-block">New Document</button></a>
             <div class="clearfix"></div>
+              <form id="upload-form" enctype="multipart/form-data" method="POST">
+                  <input type="file" name="my_file" multiple="multiple" />
+                  <input type="submit" value="Upload">
+                  <!--<input type="hidden" name="username" value="usernamehere">-->
+              </form>
             </div>
           </div>
         </div>
@@ -46,14 +51,14 @@
                     </div>
                   </div>
                   <!--<h5>Files</h5>-->
-
                   <!--<div ibox-tools></div>-->
                 <!--</div>-->
                 <!--<div class="ibox-content">-->
                   <!--Your files will appear here as you create them.-->
-
                 <!--</div>-->
               </div>
               </div>
               <!--End File Content-->
           </div>
+      </div>
+    </div>
