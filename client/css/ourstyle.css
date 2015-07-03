@@ -33,6 +33,12 @@
 .chat-activity-list {
   max-height: 450px;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+.small-chat-box {
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .prof-pic {
   width: 50px;
@@ -142,11 +148,13 @@
   min-height: 65px;
   color: white;
 }
-
 .btn-calendar {
   margin-bottom: 2.5px;
 }
-
+.message-avatar {
+  width: 28px !important;
+  height: 28px !important;
+}
 .navbar-brand {
     position: absolute;
     width: 100%;
@@ -159,11 +167,9 @@
 .nav > li > a {
     color: #999c9e;
 }
-
 .logo {
     width: 35px; height: 35px; display: inline !important;
 }
-
 .navbar-brand {
     color: #2f4050;
 }

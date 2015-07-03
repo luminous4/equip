@@ -1,55 +1,55 @@
-<div id="right-sidebar" ng-show="rightSidebar" class="sidebar-open">
+<div id="right-sidebar" ng-show="rightSidebar" class="sidebar-open"  ng-controller="IMCtrl">
   <div class="sidebar-container" full-scroll>
 
     <ul class="nav nav-tabs navs-2">
 
-      <li ng-class="{active: tab1}"><a ng-click="tab1 = true; tab2 = false" ng-init="tab1 = true">
+      <li ng-class="{active: tab1}"><a data-tab-number="1" ng-click="switchTabs($event)" ng-init="tab1 = true">
         Contacts
       </a></li>
-      <li ng-class="{active: tab2}"><a ng-click="tab2 = true; tab1 = false">
+      <li ng-class="{active: tab2}"><a  data-tab-number="2" ng-click="switchTabs($event)">
         Messages
       </a></li>
     </ul>
 
     <div class="tab-content">
-      
-      <div class="tab-pane" ng-class="{active: tab1}"  ng-controller="ContactController">
+      <div class="tab-pane" ng-class="{active: tab1}">
         <div>
-          <div class="sidebar-message" ng-repeat="contact in teamContacts">
-            <a href="#">
+          <div class="sidebar-message" ng-repeat="friend in allFriends">
+            <a data-click-name="{{friend.$id}}" ng-click="loadMessages($event)">
               <div class="pull-left text-center">
-                <img alt="image" class="img-circle message-avatar" ng-src="{{contact.imgUrl}}">
+                <img alt="image" class="img-circle message-avatar" data-click-name="{{friend.$id}}" ng-src="{{friend.imgUrl}}">
               </div>
-              <div class="media-body">
-                {{contact.displayName}}
+              <div class="media-body" data-click-name="{{friend.$id}}">
+                {{friend.displayName}}
               </div>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="tab-pane" ng-class="{active: tab2}" ng-controller="IMCtrl">
+      <div class="tab-pane" ng-class="{active: tab2}">
         <div class="small-chat-box ng-small-chat">
 
-          <div class="content">
-            <div class="left">
+          <div class="content" ng-repeat="message in myMessages">
+            <div ng-class-odd="'left'" ng-class-even="'right'">
               <div class="author-name">
-                {{currentUser}} 
+                {{message.displayName}} 
                 <small class="chat-date">
-                10:02 am
+                {{message.createdAt}}
               </small>
             </div>
             <div class="chat-message active">
-              {{message}}
+              {{message.text}}
             </div>
           </div>
         </div>
 
-        <div class="form-chat">
-          <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
+        <form ng-submit="addMessage()" class="form-chat">
+          <div class="input-group input-group-sm"><input ng-model="message" type="text" class="form-control"> <span class="input-group-btn"> 
+            <button
             class="btn btn-primary" type="button">Send
           </button> </span></div>
-        </div>
+        </form>
 
         </div>
 
