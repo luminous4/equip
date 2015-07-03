@@ -1,11 +1,16 @@
 (function() {
    angular.module('equip')
 
-  .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, User, FirebaseFactory) {
+  .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, refUrl, User, FirebaseFactory, Messages) {
 
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = User.getCurrentUser();
+    var currentUserObject = User.getUserInfo(currentUser.uid);
     var currentTeam = JSON.parse(localStorage.selectedTeam).$value;
+
+    // get all msgs in order to link events with chat
+    var ref = new Firebase(refUrl + '/teams/');
+    var allTeamMessages = new Messages(ref.child(currentTeam).child('messages'));
 
     this.setInputDefaults = function() {
       this.fulldayEvent = true;
@@ -52,7 +57,7 @@
       var month = dateObj.getMonth() + 1;
       var day = dateObj.getDate();
 
-      date = year + ' ' + month + ' ' + day;
+      date = month + ' ' + day + ' ' + year;
       return date;
     };
 
@@ -123,8 +128,21 @@
       newEvent.endTime = milToStandard(endTime);
 
       FirebaseFactory.addToCollection('events', newEvent);
+      addEventToChat(newEvent);
       this.setInputDefaults();
     };
+
+     var addEventToChat = function(event) {
+      allTeamMessages.$loaded()
+      .then(function() {
+        allTeamMessages.$add({
+          chatName: currentUserObject.displayName,
+          userImg: currentUserObject.imgUrl,
+          text: '#newEvent: ' + '"' + event.title + '"' + ' on ' + event.startDate + ' from ' + event.startTime + ' - ' + event.endTime,
+          createdAt: Firebase.ServerValue.TIMESTAMP
+        });
+       });
+      }
 
     /* event entry on mouseover*/
     $scope.eventRender = function(event, element, view) {
@@ -148,9 +166,10 @@
 
     $scope.allEvents = FirebaseFactory.getCollection(['teams', currentTeam, 'events'], true);
 
-    // events on calendar
+    // events displayed on /calendar
     $scope.eventSources = [$scope.allEvents];
 
+    // today events displayed on /home
     $rootScope.$watch('selectedTeam', function() {
       if ($rootScope.selectedTeam) {
         $scope.dashboardEvents = FirebaseFactory.getCollection('events')
@@ -158,7 +177,7 @@
             var year = moment().year();
             var date = moment().date();
             var month = moment().month() + 1;
-            var today = year + " " + month + " " + date;
+            var today = month + ' ' + date + ' ' + year;
             var results = [];
 
             angular.forEach(data, function (value) {
