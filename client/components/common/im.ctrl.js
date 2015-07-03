@@ -68,7 +68,8 @@ angular.module('equip')
   $scope.$watch('allFriendsIds', getAllFriendObjects);
 
   $scope.loadMessages = function(event) {
-    $scope.clickedUser = event.target.dataset.clickName;
+    $scope.clickedUser = event.target.dataset.clickId;
+    $scope.clickedUserName = event.target.dataset.clickName;
     $scope.tab2 = true; 
     $scope.tab1 = false;
     $scope.myMessages = FirebaseFactory.getCollection(['users', userId, 'instantMessages', $scope.clickedUser], true);
@@ -76,16 +77,20 @@ angular.module('equip')
   }
 
   $scope.addMessage = function() {
+    var currentDate = new Date();
+    var formattedDate = moment(currentDate).format('h:mm a');
     $scope.myMessages.$add({
       displayName: $scope.currentUser,
       sender: userId,
       text: $scope.message,
+      displayDate: formattedDate, 
       createdAt: Firebase.ServerValue.TIMESTAMP
     });
     $scope.theirMessages.$add({
       displayName: $scope.currentUser,
       sender: userId,
       text: $scope.message,
+      displayDate: formattedDate,
       createdAt: Firebase.ServerValue.TIMESTAMP
     });
 
@@ -100,6 +105,14 @@ angular.module('equip')
     } else {
       $scope.tab1 = false;
       $scope.tab2 = true;
+    }
+  }
+
+  $scope.rightOrLeft = function(sender) {
+    if (sender === userId) {
+      return 'right';
+    } else {
+      return 'left';
     }
   }
 

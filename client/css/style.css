@@ -3044,8 +3044,8 @@ a.forum-item-title:hover {
     right: 0;
 }
 #right-sidebar.sidebar-open.sidebar-top {
-    top: 0;
-    border-top: none;
+/*    top: 0;
+    border-top: none;*/
 }
 .sidebar-container ul.nav-tabs {
     border: none;
