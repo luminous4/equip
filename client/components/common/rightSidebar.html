@@ -11,24 +11,23 @@
       </a></li>
     </ul>
 
-    <div class="tab-content">
-      
-      <div class="tab-pane" ng-class="{active: tab1}"  ng-controller="ContactController">
+    <div class="tab-content" ng-controller="IMCtrl">
+      <div class="tab-pane" ng-class="{active: tab1}">
         <div>
-          <div class="sidebar-message" ng-repeat="contact in teamContacts">
+          <div class="sidebar-message" ng-repeat="friend in allFriends">
             <a href="#">
               <div class="pull-left text-center">
-                <img alt="image" class="img-circle message-avatar" ng-src="{{contact.imgUrl}}">
+                <img alt="image" class="img-circle message-avatar" ng-src="{{friend.imgUrl}}">
               </div>
               <div class="media-body">
-                {{contact.displayName}}
+                {{friend.displayName}}
               </div>
             </a>
           </div>
         </div>
       </div>
 
-      <div class="tab-pane" ng-class="{active: tab2}" ng-controller="IMCtrl">
+      <div class="tab-pane" ng-class="{active: tab2}">
         <div class="small-chat-box ng-small-chat">
 
           <div class="content">

@@ -146,7 +146,10 @@
 .btn-calendar {
   margin-bottom: 2.5px;
 }
-
+.message-avatar {
+  width: 28px !important;
+  height: 28px !important;
+}
 .navbar-brand {
     position: absolute;
     width: 100%;
