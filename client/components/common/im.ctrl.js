@@ -4,7 +4,6 @@ angular.module('equip')
 
 .controller('IMCtrl', function($scope, $rootScope, $firebaseArray, User, FirebaseFactory) {
 
-  $scope.message = 'Hey everyone, I\m cool!';
   var userId = User.getCurrentUser().uid;
   var userData = FirebaseFactory.getObject(['users', userId], true);
   var interimFriends = [];
@@ -69,10 +68,29 @@ angular.module('equip')
   $scope.$watch('allFriendsIds', getAllFriendObjects);
 
   $scope.loadMessages = function(event) {
-    clickedUser = event.target.dataset.clickName;
+    $scope.clickedUser = event.target.dataset.clickName;
     $scope.tab2 = true; 
     $scope.tab1 = false;
+    $scope.myMessages = FirebaseFactory.getCollection(['users', userId, 'instantMessages', $scope.clickedUser], true);
+    $scope.theirMessages = FirebaseFactory.getCollection(['users', $scope.clickedUser, 'instantMessages', userId], true)
   }
+
+  $scope.addMessage = function() {
+    $scope.myMessages.$add({
+      displayName: $scope.currentUser,
+      sender: userId,
+      text: $scope.message,
+      createdAt: Firebase.ServerValue.TIMESTAMP
+    });
+    $scope.theirMessages.$add({
+      displayName: $scope.currentUser,
+      sender: userId,
+      text: $scope.message,
+      createdAt: Firebase.ServerValue.TIMESTAMP
+    });
+
+    $scope.message = '';
+  };
 
   $scope.switchTabs = function(event) {
     clickedTabNumber = event.target.dataset.tabNumber;

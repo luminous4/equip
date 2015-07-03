@@ -30,25 +30,26 @@
       <div class="tab-pane" ng-class="{active: tab2}">
         <div class="small-chat-box ng-small-chat">
 
-          <div class="content">
-            <div class="left">
+          <div class="content" ng-repeat="message in myMessages">
+            <div ng-class-odd="'left'" ng-class-even="'right'">
               <div class="author-name">
-                {{currentUser}} 
+                {{message.displayName}} 
                 <small class="chat-date">
-                10:02 am
+                {{message.createdAt}}
               </small>
             </div>
             <div class="chat-message active">
-              {{message}}
+              {{message.text}}
             </div>
           </div>
         </div>
 
-        <div class="form-chat">
-          <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
+        <form ng-submit="addMessage()" class="form-chat">
+          <div class="input-group input-group-sm"><input ng-model="message" type="text" class="form-control"> <span class="input-group-btn"> 
+            <button
             class="btn btn-primary" type="button">Send
           </button> </span></div>
-        </div>
+        </form>
 
         </div>
 
