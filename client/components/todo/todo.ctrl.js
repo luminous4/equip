@@ -50,17 +50,23 @@
   if ($rootScope.selectedTeam) {
     var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
     tempList0.$loaded().then(function() {
-      $scope.lists[0] = furtherSterilization(tempList0);
+      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
     });
-    $scope.lists[1] = FirebaseFactory.getCollection(['todo', 1]);
-    $scope.lists[2] = FirebaseFactory.getCollection(['todo', 2]);
+    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
+    tempList1.$loaded().then(function() {
+      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
+    });
+    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
+    tempList2.$loaded().then(function() {
+      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+    });
   } 
 
   // Options for sortableui directive
   $scope.sortableOptions = {
     connectWith: ".connectList",
     // update: function(e, ui) {
-    //   updateFirebaseTodos();
+    //   $scope.updateFirebaseTodos();
     // }
   };
 
@@ -69,60 +75,94 @@
     /////////////////////////
 
   // Updates firebase with the entire todo list dataset
-  var updateFirebaseTodos = function() {
+  $scope.updateFirebaseTodos = function() {
     var thisTeam = $rootScope.selectedTeam;
+
+    var endResult = {};
 
     for(var i = 0; i < 5; i++) {
 
       if($scope.lists[i] === undefined) continue;
-      var duplicatesHash = {};
 
-      var newList = $scope.lists[i].slice();
+      var newList = [];
 
-      var path = refUrl + '/teams/' + thisTeam.$value + '/todo/' + i;
-      var ref = new Firebase(path);
-      var repeatHash = {};
-      var newestList = [];
+      var j = 0;
 
-      for(var j = 0; j < newList.length; j++) {
-        newList[j] = furtherSterilization(newList[j]);
-        if(!duplicatesHash[newList[j].content]) {
-          duplicatesHash[newList[j].content] = true;
-          newestList.push(newList[j]);
-        } 
+      while($scope.lists[i][j] !== undefined) {
+        console.dir($scope.lists[i][j]);
+        $scope.lists[i].forEach(furtherSterilization);
+        newList.push(objectify($scope.lists[i][j]));
+        j++;
       }
 
-      // newList = furtherSterilization(newList);
-      ref.set(newestList);
+      console.log('newList');
+      console.log(newList);
+
+      endResult[i] = newList;
     }
+
+    FirebaseFactory.updateItem(['todo'], endResult);
+
+    // var path = refUrl + '/teams/' + thisTeam.$value + '/todo/' + i;
+    // var ref = new Firebase(path);
+
+    // ref.update(endResult);
+
+    console.log('endResult');
+    console.log(endResult);
+
+    // show loading symbol while you refetch crap from the database
+
+    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
+    tempList0.$loaded().then(function() {
+      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+    });
+    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
+    tempList1.$loaded().then(function() {
+      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
+    });
+    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
+    tempList2.$loaded().then(function() {
+      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+    });
   }
 
   // Sterilization method which could definitely go into the 
   // FirebaseFactory 
   var furtherSterilization = function(input) {
-    if (input['$$added'] !== undefined)     delete input['$$added'];
-    if (input['$$error'] !== undefined)     delete input['$$error'];
-    if (input['$$getKey'] !== undefined)    delete input['$$getKey'];
-    if (input['$$moved'] !== undefined)     delete input['$$moved'];
-    if (input['$$notify'] !== undefined)    delete input['$$notify'];
-    if (input['$$process'] !== undefined)   delete input['$$process'];
-    if (input['$$removed'] !== undefined)   delete input['$$removed'];
-    if (input['$$updated'] !== undefined)   delete input['$$updated'];
-    if (input['$add'] !== undefined)        delete input['$add'];
-    if (input['$destroy'] !== undefined)    delete input['$destroy'];
-    if (input['$destroy'] !== undefined)    delete input['$destroy'];
-    if (input['$getRecord'] !== undefined)  delete input['$getRecord'];
-    if (input['$indexFor'] !== undefined)   delete input['$indexFor'];
-    if (input['$keyAt'] !== undefined)      delete input['$keyAt'];
-    if (input['$loaded'] !== undefined)     delete input['$loaded'];
-    if (input['$ref'] !== undefined)        delete input['$ref'];
-    if (input['$remove'] !== undefined)     delete input['$remove'];
-    if (input['$save'] !== undefined)       delete input['$save'];
-    if (input['$watch'] !== undefined)      delete input['$watch'];
-    if (input['$$hashKey'] !== undefined)   delete input['$$hashKey'];
-    if (input['$id'] !== undefined)         delete input['$id'];
-    if (input['$priority'] !== undefined)   delete input['$priority'];
+    var keys = Object.keys(input);
+    for(var i = 0; i < keys.length; i++) {
+      if(keys[i].indexOf('$') > -1) {
+        delete input[keys[i]];
+      }
+    }
+
     return input;
   }
+
+  var objectify = function(input) {
+    if(!Array.isArray(input)) return input;
+
+    var newObj = {};
+
+    for(var i = 0; i < input.length; i++) {
+      newObj[i] = input[i];
+    }
+
+    return newObj;
+  }
+
+  var arrayify = function(input) {
+    var array = [];
+
+    var i = 0;
+    while(input[i] !== undefined) {
+      array.push(input[i]);
+      i++;
+    }
+
+    return array;
+  }
+
   });
 })();
