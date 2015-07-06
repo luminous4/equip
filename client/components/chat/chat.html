@@ -26,7 +26,7 @@
                 <div class="col-sm-1">
                   <img alt="image" class="img-circle" ng-src="{{message.userImg}}" />
                 </div>
-                <div class="media-body col-sm-7">
+                <div class="media-body col-sm-9">
                   <div class="chat-name">{{message.chatName}}</div>
                   <small class="text-muted">{{message.displayDate}}</small>
                   <p class="m-b-xs chat-text" ng-bind-html="message.text | linky">
@@ -35,7 +35,7 @@
               </div>
               <div ng-show="{{!message.showImg}}">
                 <div class="col-sm-1"></div>
-                <div class="media-body col-sm-7" title="{{message.createdAt}}">
+                <div class="media-body col-sm-9" title="{{message.createdAt}}">
                   <p class="m-b-xs chat-text" ng-bind-html="message.text | linky">
                   </p>
                 </div>
