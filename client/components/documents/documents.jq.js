@@ -6,7 +6,8 @@ $(function() {
 		wait: true,
 		// The upload to Transloadit should start as soon as the user
 		// selects some files.
-		triggerUploadOnFileSelection: true,
+		triggerUploadOnFileSelection: false,
+		autoSubmit: false,
 
 		params: {
 			auth: {
@@ -29,7 +30,8 @@ $(function() {
 			console.log(assembly.assembly_id);
 			fb = fb.child('teams').child(window.selectedTeam).child('images').child(assembly.assembly_id);
 			fb.set(assembly.results);
-			window.location.href('/#/index.documents');
+
+			//window.location.href('/#/index.documents');
 		}
 	});
 });
