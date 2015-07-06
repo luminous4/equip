@@ -31,6 +31,8 @@
 
       $scope.teams.$loaded().then(function() {
 
+        console.log($scope.teams);
+
         $scope.loading = false;
 
         // Will track which users are connected to the logged in user
