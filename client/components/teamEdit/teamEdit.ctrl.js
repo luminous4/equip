@@ -1,7 +1,8 @@
 (function() {
   angular.module('equip')
 
-  .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
+  .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, 
+                                      $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
 
     var currentUser;
     $scope.currentTab = "Team List";
@@ -13,6 +14,9 @@
     $scope.searchString = "";
     $scope.loading = true;
     $scope.triedToLeave = false;
+    $scope.teamJoinString = "";
+    $scope.teams = [];
+    $scope.allUsers = [];
 
     $scope.initialize = function() {
       currentUser = User.getCurrentUser();
@@ -148,6 +152,27 @@
      // List editing functions //
     ////////////////////////////
 
+    $scope.tryToJoinTeam = function() {
+      console.log('trying'); 
+      var searchStringAtSubmit = $scope.teamJoinString;
+      var userInfo = User.getCurrentUser(); 
+      var foundTeam = FirebaseFactory.getObject(['teams', searchStringAtSubmit], true);
+      foundTeam.$loaded().then(function() {
+        if(!foundTeam || !foundTeam.users) {
+          console.log('found team was falsy');
+          return;
+        }
+        FirebaseFactory.updateItem(
+          ['users', userInfo.uid, 'teams', searchStringAtSubmit], 
+          searchStringAtSubmit, 
+          true);
+        foundTeam.users.push(userInfo.uid);
+        foundTeam.$save().then(function() {
+          $scope.initialize();
+        })
+      });
+      //update current team list with new info
+    },
 
     $scope.leaveTeam = function(team) {
 

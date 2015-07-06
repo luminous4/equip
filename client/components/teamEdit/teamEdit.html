@@ -38,21 +38,31 @@
         <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
 
           <div class="row m-b-sm m-t-sm">
-            <div class="col-md-6">
-              <div class="input-group">
-                Find a team! <input type="text" ng-model="searchString" placeholder="Find a team..." class="input-lg form-control"> 
+            <p style="padding:20px;padding-bottom:0px">Join a team!</p>
+            <!-- <br/> -->
+            <form ng-submit="tryToJoinTeam()">
+              <div class="input-group" style="padding:20px">              
+                <input type="text" class="form-control" ng-model="teamJoinString"> 
+                <span class="input-group-btn"> 
+                  <button type="submit" class="btn btn-primary">
+                    Go!
+                  </button> 
+                </span>
               </div>
-            </div>
+            </form>
+          </div>
+          <br/>
+          <br/>
 
 
           <!-- Search bar -->
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-bottom:20px">
               <div class="input-group">
                 <input type="text" ng-model="searchString" placeholder="Search" class="input-lg form-control"> 
               </div>
             </div>
-          </div>
+            <br/>
 
           <!-- List of teams -->
 
