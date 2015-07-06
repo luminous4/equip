@@ -125,6 +125,7 @@
 
     var getCurrentUser = function() {
       var userObj = $window.localStorage.getItem('firebase:session::mksequip');
+      if(!userObj) $state.go('login');
       var user = JSON.parse(userObj);
       return user;
     };

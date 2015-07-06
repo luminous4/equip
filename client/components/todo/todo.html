@@ -32,7 +32,9 @@
             <form ng-submit="submitNewColumnName(0)">
               <span ng-hide="columnNameEdit[0]">{{columnNames[0]}}</span>
               <input type="text" ng-show="columnNameEdit[0]" ng-model="columnNames[0]" class="input input-sm form-control"> 
-              <span class="text-right"><i ng-hide="columnNameEdit[0]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(0)"></i>
+              <span class="text-right">
+                <i ng-hide="columnNameEdit[0]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(0)"></i>
+              </span>
             </form>
           </h2>
 
@@ -40,8 +42,8 @@
             <div class="col-sm-10">
               <form ng-submit="addTask(0)">
                 <div class="input-group m-b">
+                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[0]" class="input input-sm form-control">
                   <span class="input-group-btn">
-                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[0]" class="input input-sm form-control">
                     <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
                   </span> 
                   </div>
@@ -87,8 +89,8 @@
             <div class="col-sm-10">
               <form ng-submit="addTask(1)">
                 <div class="input-group m-b">
+                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[1]" class="input input-sm form-control">
                   <span class="input-group-btn">
-                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[1]" class="input input-sm form-control">
                     <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
                   </span> 
                 </div>
@@ -134,8 +136,8 @@
             <div class="col-sm-10">
               <form ng-submit="addTask(2)">
                 <div class="input-group m-b">
+                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[2]" class="input input-sm form-control">
                   <span class="input-group-btn">
-                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[2]" class="input input-sm form-control">
                     <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
                   </span> 
                 </div>
@@ -181,8 +183,8 @@
             <div class="col-sm-10">
               <form ng-submit="addTask(3)">
                 <div class="input-group m-b">
+                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[3]" class="input input-sm form-control">
                   <span class="input-group-btn">
-                    <input type="text" style="width:60%" placeholder="Add new task. " ng-model="inputFields[3]" class="input input-sm form-control">
                     <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
                   </span> 
                 </div>
