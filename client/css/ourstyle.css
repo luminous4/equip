@@ -165,7 +165,9 @@
     color: #999c9e;
 }
 .logo {
-    width: 35px; height: 35px; display: inline !important;
+    width: 35px;
+    height: 35px;
+    display: inline !important;
 }
 .logo-wrapper {
   position: absolute;
@@ -190,4 +192,13 @@
   font-weight: 700;
   color: #676a6c;
   border: 1px solid #e7eaec;
+}
+.logo-register-wrapper {
+  list-style: none;
+  display: inline-block;
+  padding-left: 0px;
+}
+.logo-register {
+  width: 70px;
+  height: 70px;
 }
