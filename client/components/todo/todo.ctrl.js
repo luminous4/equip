@@ -20,16 +20,56 @@
   $scope.loading = true;
   $scope.firstLoad = true;
 
+  // Utilities
+  // Could go into fb factory?
+  var furtherSterilization = function(input) {
+    var keys = Object.keys(input);
+    for(var i = 0; i < keys.length; i++) {
+      if(keys[i].indexOf('$') > -1) {
+        delete input[keys[i]];
+      }
+    }
+
+    return input;
+  }
+
+  var objectify = function(input) {
+    if(!Array.isArray(input)) return input;
+
+    var newObj = {};
+
+    for(var i = 0; i < input.length; i++) {
+      newObj[i] = input[i];
+    }
+
+    return newObj;
+  }
+
+  var arrayify = function(input) {
+    var array = [];
+
+    var i = 0;
+    while(input[i] !== undefined) {
+      array.push(input[i]);
+      i++;
+    }
+
+    return array;
+  }
+
 
   $scope.loadEverything = function() {
     // all this should be one function that gets called on save and also on load
     var counter = 0;
     var whenEverythingIsLoaded = function() {
       counter++;
-      if(counter === 3) {
+      console.log($scope.loading);
+      if(counter === 4) {
         if($scope.firstLoad) {
+          console.log($scope.lists);
           $scope.firstLoad = false;
           $scope.loading = false;
+          console.log($scope.loading);
         } else {
           $scope.showSavedDisplay();
         }
@@ -38,31 +78,36 @@
 
     var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
     tempList0.$loaded().then(function() {
+      console.log('0');
       $scope.lists[0] = arrayify(furtherSterilization(tempList0));
       whenEverythingIsLoaded();
     });
     var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
     tempList1.$loaded().then(function() {
+      console.log('1');
       $scope.lists[1] = arrayify(furtherSterilization(tempList1));
       whenEverythingIsLoaded();
     });
     var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
     tempList2.$loaded().then(function() {
+      console.log('2');
       $scope.lists[2] = arrayify(furtherSterilization(tempList2));
       whenEverythingIsLoaded();
     });
     var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
     columnNames.$loaded().then(function() {
+      console.log('3');
       $scope.columnNames[0] = columnNames[0].$value;
       $scope.columnNames[1] = columnNames[1].$value;
       $scope.columnNames[2] = columnNames[2].$value;
+      whenEverythingIsLoaded();
     });
   }
-  // $rootScope.$watch('selectedTeam', function() {
-    // if ($rootScope.selectedTeam) {
+  $rootScope.$watch('selectedTeam', function() {
+    if ($rootScope && $rootScope.selectedTeam && $rootScope.selectedTeam.$value) {
       $scope.loadEverything();
-    // }
-  // });
+    }
+  });
 
   // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
@@ -111,10 +156,6 @@
   $scope.submitNewColumnName = function(columnNumber) {
     $scope.columnNameEdit[columnNumber] = false;
   }
-
-  // Loads stuff from firebase once
-  $scope.loadEverything();
-
 
   // Options for sortableui directive
   $scope.sortableOptions = {
@@ -167,43 +208,6 @@
     }
     $scope.savedDisplay = "Saved!";
     $timeout(removeErrorMessage, 2000);
-  }
-
-  // Sterilization method which could definitely go into the 
-  // FirebaseFactory 
-  var furtherSterilization = function(input) {
-    var keys = Object.keys(input);
-    for(var i = 0; i < keys.length; i++) {
-      if(keys[i].indexOf('$') > -1) {
-        delete input[keys[i]];
-      }
-    }
-
-    return input;
-  }
-
-  var objectify = function(input) {
-    if(!Array.isArray(input)) return input;
-
-    var newObj = {};
-
-    for(var i = 0; i < input.length; i++) {
-      newObj[i] = input[i];
-    }
-
-    return newObj;
-  }
-
-  var arrayify = function(input) {
-    var array = [];
-
-    var i = 0;
-    while(input[i] !== undefined) {
-      array.push(input[i]);
-      i++;
-    }
-
-    return array;
   }
 
   });
