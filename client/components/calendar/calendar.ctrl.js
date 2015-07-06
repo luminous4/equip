@@ -6,11 +6,16 @@
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = User.getCurrentUser();
     var currentUserObject = User.getUserInfo(currentUser.uid);
-    var currentTeam = JSON.parse(localStorage.selectedTeam).$value;
+    var currentTeam;
+    if ($rootScope.selectedTeam) {
+      currentTeam = JSON.parse(localStorage.selectedTeam).$value;
+    }
 
     // get all msgs in order to link events with chat
     var ref = new Firebase(refUrl + '/teams/');
-    var allTeamMessages = new Messages(ref.child(currentTeam).child('messages'));
+    if (currentTeam) {
+      var allTeamMessages = new Messages(ref.child(currentTeam).child('messages'));
+    }
 
     this.setInputDefaults = function() {
       this.fulldayEvent = true;
@@ -164,10 +169,12 @@
       }
     };
 
-    $scope.allEvents = FirebaseFactory.getCollection(['teams', currentTeam, 'events'], true);
+    if (currentTeam) {
+      $scope.allEvents = FirebaseFactory.getCollection(['teams', currentTeam, 'events'], true);
 
-    // events displayed on /calendar
-    $scope.eventSources = [$scope.allEvents];
+      // events displayed on /calendar
+      $scope.eventSources = [$scope.allEvents];      
+    }
 
     // today events displayed on /home
     $rootScope.$watch('selectedTeam', function() {
