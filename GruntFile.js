@@ -56,7 +56,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/example.js']
+        src: ['test/unit/*.js']
       }
     },
 
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'client/js/*.js', 
+          'client/js/*.js',
           'client/components/**/*.js'
         ],
         tasks: [
@@ -155,7 +155,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', [
     //'jshint',
-    //'mochaTest'
+    'mochaTest',
     'casperjs'
   ]);
 
