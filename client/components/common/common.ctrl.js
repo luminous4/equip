@@ -40,7 +40,6 @@ angular.module('equip')
         } else {
           $scope.currentTeamOption = $scope.usersTeams[0];
           $rootScope.selectedTeam = $scope.currentTeamOption;
-          console.log($rootScope.selectedTeam);
           localStorage.selectedTeam = JSON.stringify($scope.currentTeamOption);          
         }
       }
