@@ -1313,7 +1313,7 @@ button.dim:active:before {
 }
 .media-body {
     display: block;
-    width: auto;
+    /*width: auto;*/
 }
 .chat-element > .pull-left {
     margin-right: 10px;

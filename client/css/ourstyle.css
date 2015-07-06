@@ -205,3 +205,11 @@
   top: 12px !important;
   right: 30px !important;
 }
+@media (min-width: 768px)
+.col-sm-9 {
+  width: 75% !important;
+}
+
+.col-sm-9 {
+  width: 75% !important;
+}
