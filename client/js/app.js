@@ -6,10 +6,12 @@
 		'summernote',
     'ui.calendar',
     'luegg.directives',
-		'ngMessages', // Angular Messages,
+		'ngMessages',
     'ui.bootstrap',
     'sticky',
     'ui.sortable',
-    'ngSanitize'
+    'ngSanitize',
+		'ng-transloadit',
+		'oc.lazyLoad'
 	])
 })();
