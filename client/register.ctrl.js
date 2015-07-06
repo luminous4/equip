@@ -28,7 +28,6 @@
           $scope.userSuccess = false;
           $scope.email = '';
           $scope.password = '';
-          $scope.teamName = '';
         }
 
         if (teamNotFound) {
