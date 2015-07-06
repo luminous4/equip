@@ -37,10 +37,17 @@
 
         <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
 
+          <div class="row m-b-sm m-t-sm">
+            <div class="col-md-6">
+              <div class="input-group">
+                Find a team! <input type="text" ng-model="searchString" placeholder="Find a team..." class="input-lg form-control"> 
+              </div>
+            </div>
+
+
           <!-- Search bar -->
 
-          <div class="row m-b-sm m-t-sm">
-            <div class="col-md-11">
+            <div class="col-md-6">
               <div class="input-group">
                 <input type="text" ng-model="searchString" placeholder="Search" class="input-lg form-control"> 
               </div>
