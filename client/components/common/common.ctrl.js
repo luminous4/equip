@@ -35,7 +35,14 @@ angular.module('equip')
         }
         $rootScope.selectedTeam = $scope.currentTeamOption;
       } else {
-        $scope.currentTeamOption = $rootScope.selectedTeam;
+        if ($rootScope.selectedTeam) {
+          $scope.currentTeamOption = $rootScope.selectedTeam;
+        } else {
+          $scope.currentTeamOption = $scope.usersTeams[0];
+          $rootScope.selectedTeam = $scope.currentTeamOption;
+          console.log($rootScope.selectedTeam);
+          localStorage.selectedTeam = JSON.stringify($scope.currentTeamOption);          
+        }
       }
     });
 
