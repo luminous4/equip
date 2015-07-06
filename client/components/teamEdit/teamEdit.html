@@ -38,7 +38,7 @@
         <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
 
           <div class="row m-b-sm m-t-sm">
-            <p style="padding:20px;padding-bottom:0px">Join a team!</p>
+            <h2 style="padding:20px;padding-bottom:0px">Join a team!</h2>
             <!-- <br/> -->
             <form ng-submit="tryToJoinTeam()">
               <div class="input-group" style="padding:20px">              
@@ -51,18 +51,18 @@
               </div>
             </form>
           </div>
+          <div class="hr-line-dashed"></div>
           <br/>
           <br/>
 
 
           <!-- Search bar -->
 
-            <div class="col-md-6" style="padding-bottom:20px">
-              <div class="input-group">
-                <input type="text" ng-model="searchString" placeholder="Search" class="input-lg form-control"> 
-              </div>
+          <div class="col-md-12" style="padding-bottom:20px">
+            <div class="input-group" ng-hide="loading">
+              <input type="text" ng-model="searchString" placeholder="Search" class="input-lg form-control"> 
             </div>
-            <br/>
+          </div>
 
           <!-- List of teams -->
 
@@ -70,8 +70,8 @@
             <table class="table table-hover" >
               <tbody>
                 <tr>
-                  <div class="center">
-                    <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
+                  <div ng-show="loading" class="center" >
+                    <i class="center fa fa-spinner fa-spin fa-5x" ></i>
                   </div>
                 </tr>
                 <tr ng-repeat="team in teams | teamSearch:searchString">

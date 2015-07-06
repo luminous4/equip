@@ -155,6 +155,8 @@
     $scope.tryToJoinTeam = function() {
       console.log('trying'); 
       var searchStringAtSubmit = $scope.teamJoinString;
+      $scope.teamJoinString = "";
+      console.log(searchStringAtSubmit);
       var userInfo = User.getCurrentUser(); 
       var foundTeam = FirebaseFactory.getObject(['teams', searchStringAtSubmit], true);
       foundTeam.$loaded().then(function() {
@@ -162,9 +164,11 @@
           console.log('found team was falsy');
           return;
         }
+        var obj = {};
+        obj[searchStringAtSubmit] = searchStringAtSubmit;
         FirebaseFactory.updateItem(
-          ['users', userInfo.uid, 'teams', searchStringAtSubmit], 
-          searchStringAtSubmit, 
+          ['users', userInfo.uid, 'teams'], 
+          obj, 
           true);
         foundTeam.users.push(userInfo.uid);
         foundTeam.$save().then(function() {
@@ -418,7 +422,6 @@
         $timeout(removeErrorMessage, 4000);
         return false;
       }
-
       return !$scope.triedToLeave;
     }
 
