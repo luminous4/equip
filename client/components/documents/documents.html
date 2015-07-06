@@ -20,9 +20,10 @@
           <div class="file-manager">
             <a ui-sref="index.texteditor"><button class="btn btn-primary btn-block">New Document</button></a>
             <div class="clearfix"></div>
-              <form id="upload-form" enctype="multipart/form-data" method="POST">
+              <form id="upload-form" enctype="multipart/form-data">
                   <input type="file" name="my_file" multiple="multiple" />
                   <input type="submit" value="Upload">
+                  <input type="text" name="teamname" value="{{selectedTeam.$value}}">
                   <!--<input type="hidden" name="username" value="usernamehere">-->
               </form>
             </div>
@@ -50,7 +51,24 @@
                       </a>
                     </div>
                   </div>
-                  <!--<h5>Files</h5>-->
+                    <!-- End Document List-->
+                    <div class="file-box" ng-repeat="image in imageList">
+                        <div class="file">
+                            <a href="">
+                                <span class="corner"></span>
+
+                                <div class="image">
+                                    <img alt="image" class="img-responsive" ng-src="{{image.preview[0].url}}"></img>
+                                </div>
+                                <div class="file-name">
+                                    {{image.preview[0].name}}
+                                    <br/>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!--<h5>Files</h5>-->
                   <!--<div ibox-tools></div>-->
                 <!--</div>-->
                 <!--<div class="ibox-content">-->
