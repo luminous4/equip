@@ -14,7 +14,7 @@ $(function() {
 		params: {
 			auth: {
 				// This is your API key.
-				key: config.key
+				key: process.env.TRANSLOADIT || config.key
 			},
 			template_id: '275df800240e11e5a20c2dc0bd276748'
 		},
