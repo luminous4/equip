@@ -53,7 +53,6 @@
           </div>
           <div class="hr-line-dashed"></div>
           <br/>
-          <br/>
 
 
           <!-- Search bar -->
@@ -66,7 +65,7 @@
 
           <!-- List of teams -->
 
-          <div class="project-list" ng-show="loading">
+          <div class="project-list">
             <table class="table table-hover" >
               <tbody>
                 <tr>
@@ -74,20 +73,20 @@
                     <i class="center fa fa-spinner fa-spin fa-5x" ></i>
                   </div>
                 </tr>
-                <tr ng-repeat="team in teams | teamSearch:searchString">
+                <tr ng-repeat="team in teams | teamSearch:searchString" ng-show="!loading">
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
                     <br/>
                     <small>Created at {{team.createdAt}}</small>
                   </td>
-                  <td class="project-people">
+                  <td class="project-people" ng-show="!loading">
                     <span ng-repeat="userId in team.users">
                       <a href="google.com">
                         <img alt="image" class="img-circle" ng-src="{{getUserPicture(userId)}}">
                       </a>
                     </span>
                   </td>
-                  <td class="project-actions">
+                  <td class="project-actions" ng-show="!loading">
                     <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
                     <a ng-click="setTab('Edit Team', team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a> 
                     <a ng-click="leaveTeam(team)" class="btn btn-white btn-sm"><i class="fa fa-user-times"></i> Leave </a>
