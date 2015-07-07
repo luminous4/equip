@@ -1,3 +1,5 @@
+var config = require('./config.js');
+
 $(function() {
 	// We reference our HTML form here
 	$('#upload-form').transloadit({
@@ -12,7 +14,7 @@ $(function() {
 		params: {
 			auth: {
 				// This is your API key.
-				key: "INSERT-KEY-HERE"
+				key: config.key
 			},
 			template_id: '275df800240e11e5a20c2dc0bd276748'
 		},

@@ -1,5 +1,7 @@
 node_modules
 client/bower_components
+client/components/documents/config.js
+client/components/documents/documents.compiled.js
 
 # Webstorm-specific files
 .idea
