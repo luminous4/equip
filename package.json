@@ -1,6 +1,6 @@
 {
   "name": "equip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
   "main": "server/server.js",
   "scripts": {
@@ -46,14 +46,13 @@
     "grunt-shell": "^1.1.2",
     "jshint": "^2.7.0",
     "load-grunt-tasks": "^3.2.0",
-    "mocha": "^2.2.5",
     "nodemon": "^1.3.7",
-    "serve-favicon": "^2.2.1"
+    "serve-favicon": "^2.2.1",
+    "grunt-browserify": "^3.8.0",
+    "grunt-casperjs": "^2.1.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",
-    "grunt-browserify": "^3.8.0",
-    "grunt-casperjs": "^2.1.0",
     "karma": "^0.12.37",
     "karma-chai": "^0.1.0",
     "karma-story-reporter": "^0.3.1",
