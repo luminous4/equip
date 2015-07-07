@@ -60,47 +60,59 @@
 
   $scope.loadEverything = function() {
     // all this should be one function that gets called on save and also on load
-    var counter = 0;
-    var whenEverythingIsLoaded = function() {
-      counter++;
-      console.log($scope.loading);
-      if(counter === 4) {
-        if($scope.firstLoad) {
-          console.log($scope.lists);
-          $scope.firstLoad = false;
-          $scope.loading = false;
-          console.log($scope.loading);
-        } else {
-          $scope.showSavedDisplay();
+
+    var loadTodos = FirebaseFactory.getObject('todo');
+
+    loadTodos.$loaded().then(function() {
+
+      if(!loadTodos || !loadTodos.$value  ) {
+        $scope.firstLoad = false;
+        $scope.loading = false;
+        return;
+      } 
+
+      var counter = 0;
+      var whenEverythingIsLoaded = function() {
+        counter++;
+        console.log($scope.loading);
+        if(counter === 4) {
+          if($scope.firstLoad) {
+            console.log($scope.lists);
+            $scope.firstLoad = false;
+            $scope.loading = false;
+            console.log($scope.loading);
+          } else {
+            $scope.showSavedDisplay();
+          }
         }
       }
-    }
 
-    var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
-    tempList0.$loaded().then(function() {
-      console.log('0');
-      $scope.lists[0] = arrayify(furtherSterilization(tempList0));
-      whenEverythingIsLoaded();
-    });
-    var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
-    tempList1.$loaded().then(function() {
-      console.log('1');
-      $scope.lists[1] = arrayify(furtherSterilization(tempList1));
-      whenEverythingIsLoaded();
-    });
-    var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
-    tempList2.$loaded().then(function() {
-      console.log('2');
-      $scope.lists[2] = arrayify(furtherSterilization(tempList2));
-      whenEverythingIsLoaded();
-    });
-    var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
-    columnNames.$loaded().then(function() {
-      console.log('3');
-      $scope.columnNames[0] = columnNames[0].$value;
-      $scope.columnNames[1] = columnNames[1].$value;
-      $scope.columnNames[2] = columnNames[2].$value;
-      whenEverythingIsLoaded();
+      var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
+      tempList0.$loaded().then(function() {
+        console.log('0');
+        $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+        whenEverythingIsLoaded();
+      });
+      var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
+      tempList1.$loaded().then(function() {
+        console.log('1');
+        $scope.lists[1] = arrayify(furtherSterilization(tempList1));
+        whenEverythingIsLoaded();
+      });
+      var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
+      tempList2.$loaded().then(function() {
+        console.log('2');
+        $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+        whenEverythingIsLoaded();
+      });
+      var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
+      columnNames.$loaded().then(function() {
+        console.log('3');
+        $scope.columnNames[0] = columnNames[0].$value;
+        $scope.columnNames[1] = columnNames[1].$value;
+        $scope.columnNames[2] = columnNames[2].$value;
+        whenEverythingIsLoaded();
+      });
     });
   }
   $rootScope.$watch('selectedTeam', function() {
