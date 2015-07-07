@@ -1,4 +1,6 @@
-var config = require('./config.js');
+if (!process.env.TRANSLOADIT) {
+	var config = require('./config.js');
+}
 
 $(function() {
 	// We reference our HTML form here
