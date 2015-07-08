@@ -1,8 +1,8 @@
-//var config = require('./config.js');
+var config = require('./config.js');
 $(function() {
 	$('#upload-form').transloadit({
 		// We want to wait for all encodings to finish before the form
-		// is submitted.
+		// is submitted.veaea
 		wait: true,
 		// The upload to Transloadit should start as soon as the user
 		// selects some files.
