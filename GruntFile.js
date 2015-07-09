@@ -81,14 +81,9 @@ module.exports = function(grunt) {
       karma: {
         // run these tasks when these files change
         files: [
-          'client/components/**/*.js',
           'test/unit/*.js'
         ],
-        tasks: ['karma'] // note the :run flag
-      },
-      browserify: {
-        files: 'client/components/documents/*.js',
-        tasks: ['browserify']
+        tasks: ['karma']
       },
       scripts: {
         files: [
@@ -98,6 +93,7 @@ module.exports = function(grunt) {
         tasks: [
           'concat',
           'uglify',
+          'karma'
         ]
       },
       css: {
@@ -180,7 +176,6 @@ module.exports = function(grunt) {
   grunt.registerTask('unit-test', [
     //'jshint',
     'karma'
-    // 'mochaTest',
     // 'casperjs'
   ]);
 
