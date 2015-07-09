@@ -58,21 +58,34 @@ module.exports = function(grunt) {
       }
     },
 
-    mochaTest: {
-      test: {
-        options: {
-          reporter: 'spec'
-        },
-        src: ['test/unit/*.js']
-      }
-    },
-
     casperjs: {
       files: ['test/e2e/appSpec.js']
     },
 
+    karma: {
+      options: {
+        configFile: 'test/karma.config.js'
+      },
+      unit: {
+      // run tests once instead of continuously
+        singleRun: true
+      },
+      continuous: {
+        // keep karma running in the background
+        background: true
+      }
+    },
+
     // Watching
     watch: {
+      karma: {
+        // run these tasks when these files change
+        files: [
+          'client/components/**/*.js',
+          'test/unit/*.js'
+        ],
+        tasks: ['karma'] // note the :run flag
+      },
       browserify: {
         files: 'client/components/documents/*.js',
         tasks: ['browserify']
@@ -164,10 +177,11 @@ module.exports = function(grunt) {
   // Secondary grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('test', [
+  grunt.registerTask('unit-test', [
     //'jshint',
-    'mochaTest',
-    'casperjs'
+    'karma'
+    // 'mochaTest',
+    // 'casperjs'
   ]);
 
 
