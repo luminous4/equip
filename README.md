@@ -2,6 +2,9 @@
 
 Equip your team with the tools you'll need.
 
+![Equip Dashboard, Calendar, Chat](http://www.joeprempeh.net/equip/git/dashboard.gif)
+![Equip Documents](http://www.joeprempeh.net/equip/git/documents.gif)
+
 ## Demo ##
 [www.equipp.me](http://www.equipp.me)
 
