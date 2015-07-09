@@ -10,7 +10,7 @@
   };
 
   $scope.savedDisplay = "";
-  $scope.listBools = [true,true,true,false];
+  $scope.listBools = [true,true,true,true];
   $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
   $scope.inputFields = ['','','',''];
   $scope.columnNameEdit = [false, false, false, false]
@@ -85,7 +85,8 @@
       var counter = 0;
       var whenEverythingIsLoaded = function() {
         counter++;
-        if(counter === 3) {
+        console.log(counter);
+        if(counter === 5) {
           if($scope.firstLoad) {
             $scope.firstLoad = false;
             $scope.loading = false;
@@ -110,14 +111,21 @@
         $scope.lists[2] = arrayify(furtherSterilization(tempList2));
         whenEverythingIsLoaded();
       });
+      var tempList3 = FirebaseFactory.getCollection(['todo', 3]);
+      tempList3.$loaded().then(function() {
+        $scope.lists[3] = arrayify(furtherSterilization(tempList3));
+        whenEverythingIsLoaded();
+      });
       var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
       columnNames.$loaded().then(function() {
-        // $scope.columnNames[0] = columnNames[0].$value;
-        // $scope.columnNames[1] = columnNames[1].$value;
-        // $scope.columnNames[2] = columnNames[2].$value;
-        $scope.columnNames[0] = 'Backlog';
-        $scope.columnNames[1] = 'Ready to start';
-        $scope.columnNames[2] = 'In progress';
+        $scope.columnNames[0] = columnNames[0].$value;
+        $scope.columnNames[1] = columnNames[1].$value;
+        $scope.columnNames[2] = columnNames[2].$value;
+        $scope.columnNames[3] = columnNames[3].$value;
+        // $scope.columnNames[0] = 'Backlog';
+        // $scope.columnNames[1] = 'Ready to start';
+        // $scope.columnNames[2] = 'In progress';
+        // $scope.columnNames[3] = 'asdf';
         whenEverythingIsLoaded();
       });
     });
@@ -133,13 +141,13 @@
   $scope.addTask = function(listNum) {
     if($scope.inputFields[listNum] === '') return;
 
-    var now = moment().format('MMMM Do YYYY, h:mm a');
+    var now = moment().format('l');
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
       date: now,
       statusClass: 'success',
-      tagName: 'Tag!!!'
+      tagName: 'Nonessential'
     }].concat($scope.lists[listNum]);
 
     $scope.inputFields[listNum] = '';
@@ -204,7 +212,6 @@
       var j = 0;
 
       while($scope.lists[i][j] !== undefined) {
-        console.dir($scope.lists[i][j]);
         $scope.lists[i].forEach(furtherSterilization);
         newList.push(objectify($scope.lists[i][j]));
         j++;
@@ -215,6 +222,7 @@
       endResult.names[i] = $scope.columnNames[i];
     }
 
+    console.dir(endResult);
 
     FirebaseFactory.updateItem(['todo'], endResult);
 

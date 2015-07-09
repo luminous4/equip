@@ -13,7 +13,10 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <div class="wrapper wrapper-content">
+    <div style="padding-top:20px" class="center" ng-show="loading" >
+      <i class="center fa fa-spinner fa-spin fa-5x" ></i>
+    </div>
+    <div ng-hide="loading" class="wrapper wrapper-content">
       <div class="ibox">
 
         <!-- Box title -->
@@ -38,7 +41,7 @@
         <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
 
           <div class="row m-b-sm m-t-sm">
-            <h2 style="padding:20px;padding-bottom:0px">Join a team!</h2>
+            <h3 style="padding-left:30px;padding-bottom:0px">Join a team</h3>
             <!-- <br/> -->
             <form ng-submit="tryToJoinTeam()">
               <div class="input-group" style="padding:20px">              
@@ -57,9 +60,10 @@
 
           <!-- Search bar -->
 
+          <h3 style="padding-left:10px;padding-bottom:20px">Edit your teams</h3>
           <div class="col-md-12" style="padding-bottom:20px">
-            <div class="input-group" ng-hide="loading">
-              <input type="text" ng-model="searchString" placeholder="Search" class="input-lg form-control"> 
+            <div class="input-group" >
+              <input type="text" ng-model="searchString" placeholder="Search within teams" class="input-lg form-control"> 
             </div>
           </div>
 
@@ -68,25 +72,20 @@
           <div class="project-list">
             <table class="table table-hover" >
               <tbody>
-                <tr>
-                  <div ng-show="loading" class="center" >
-                    <i class="center fa fa-spinner fa-spin fa-5x" ></i>
-                  </div>
-                </tr>
-                <tr ng-repeat="team in teams | teamSearch:searchString" ng-show="!loading">
+                <tr ng-repeat="team in teams | teamSearch:searchString">
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
                     <br/>
                     <small>Created at {{team.createdAt}}</small>
                   </td>
-                  <td class="project-people" ng-show="!loading">
+                  <td class="project-people">
                     <span ng-repeat="userId in team.users">
                       <a href="google.com">
                         <img alt="image" class="img-circle" ng-src="{{getUserPicture(userId)}}">
                       </a>
                     </span>
                   </td>
-                  <td class="project-actions" ng-show="!loading">
+                  <td class="project-actions">
                     <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
                     <a ng-click="setTab('Edit Team', team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a> 
                     <a ng-click="leaveTeam(team)" class="btn btn-white btn-sm"><i class="fa fa-user-times"></i> Leave </a>
