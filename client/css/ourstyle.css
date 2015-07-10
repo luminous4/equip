@@ -232,3 +232,8 @@
 .tab-pane {
   height:inherit !important;
 }
+.top-nav {
+  position:fixed;
+  top:0;
+  left:0;
+}
