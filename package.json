@@ -4,7 +4,7 @@
   "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo testing!!!; test/example.js",
+    "test": "echo testing!!!; test/unit/*.js",
     "start": "node server/server.js",
     "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt build && ./node_modules/bower/bin/bower install"
   },
