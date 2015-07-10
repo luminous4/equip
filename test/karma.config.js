@@ -26,7 +26,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['PhantomJS'],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -53,7 +53,7 @@ module.exports = function(config) {
     plugins: [
         'karma-story-reporter',
         // 'karma-junit-reporter',
-        'karma-chrome-launcher',
+        // 'karma-chrome-launcher',
         'karma-jasmine',
         'karma-phantomjs-launcher'
     ]
