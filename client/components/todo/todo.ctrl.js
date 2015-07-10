@@ -10,7 +10,7 @@
   };
 
   $scope.savedDisplay = "";
-  $scope.listBools = [true,true,true,false];
+  $scope.listBools = [true,true,true,true];
   $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
   $scope.inputFields = ['','','',''];
   $scope.columnNameEdit = [false, false, false, false]
@@ -19,6 +19,9 @@
   $scope.lists = [];
   $scope.loading = true;
   $scope.firstLoad = true;
+
+  setInterval(function() {
+  }, 5000);
 
   // Utilities
   // Could go into fb factory?
@@ -57,30 +60,36 @@
     return array;
   }
 
-
   $scope.loadEverything = function() {
-    // all this should be one function that gets called on save and also on load
+
+
+    if(!$scope.selectedTeam) return;
 
     var loadTodos = FirebaseFactory.getObject('todo');
 
     loadTodos.$loaded().then(function() {
 
-      if(!loadTodos || !loadTodos.$value  ) {
+
+      if(!loadTodos) {
         $scope.firstLoad = false;
         $scope.loading = false;
         return;
       } 
 
+      // var numTodoLists = 6;
+      // while(loadTodos[numTodoLists] === undefined) {
+      //   numTodoLists--;
+      //   if(numTodoLists === -1) break;
+      // }
+
       var counter = 0;
       var whenEverythingIsLoaded = function() {
         counter++;
-        console.log($scope.loading);
-        if(counter === 4) {
+        console.log(counter);
+        if(counter === 5) {
           if($scope.firstLoad) {
-            console.log($scope.lists);
             $scope.firstLoad = false;
             $scope.loading = false;
-            console.log($scope.loading);
           } else {
             $scope.showSavedDisplay();
           }
@@ -89,49 +98,56 @@
 
       var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
       tempList0.$loaded().then(function() {
-        console.log('0');
         $scope.lists[0] = arrayify(furtherSterilization(tempList0));
         whenEverythingIsLoaded();
       });
       var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
       tempList1.$loaded().then(function() {
-        console.log('1');
         $scope.lists[1] = arrayify(furtherSterilization(tempList1));
         whenEverythingIsLoaded();
       });
       var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
       tempList2.$loaded().then(function() {
-        console.log('2');
         $scope.lists[2] = arrayify(furtherSterilization(tempList2));
+        whenEverythingIsLoaded();
+      });
+      var tempList3 = FirebaseFactory.getCollection(['todo', 3]);
+      tempList3.$loaded().then(function() {
+        $scope.lists[3] = arrayify(furtherSterilization(tempList3));
         whenEverythingIsLoaded();
       });
       var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
       columnNames.$loaded().then(function() {
-        console.log('3');
         $scope.columnNames[0] = columnNames[0].$value;
         $scope.columnNames[1] = columnNames[1].$value;
         $scope.columnNames[2] = columnNames[2].$value;
+        $scope.columnNames[3] = columnNames[3].$value;
+        // $scope.columnNames[0] = 'Backlog';
+        // $scope.columnNames[1] = 'Ready to start';
+        // $scope.columnNames[2] = 'In progress';
+        // $scope.columnNames[3] = 'asdf';
         whenEverythingIsLoaded();
       });
     });
   }
+
   $rootScope.$watch('selectedTeam', function() {
-    if ($rootScope && $rootScope.selectedTeam && $rootScope.selectedTeam.$value) {
-      $scope.loadEverything();
-    }
+    $scope.loadEverything();  
   });
+
+  $scope.loadEverything();
 
   // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
     if($scope.inputFields[listNum] === '') return;
 
-    var now = moment().format('MMMM Do YYYY, h:mm a');
+    var now = moment().format('l');
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
       date: now,
       statusClass: 'success',
-      tagName: 'Tag!!!'
+      tagName: 'Nonessential'
     }].concat($scope.lists[listNum]);
 
     $scope.inputFields[listNum] = '';
@@ -196,7 +212,6 @@
       var j = 0;
 
       while($scope.lists[i][j] !== undefined) {
-        console.dir($scope.lists[i][j]);
         $scope.lists[i].forEach(furtherSterilization);
         newList.push(objectify($scope.lists[i][j]));
         j++;
@@ -207,6 +222,7 @@
       endResult.names[i] = $scope.columnNames[i];
     }
 
+    console.dir(endResult);
 
     FirebaseFactory.updateItem(['todo'], endResult);
 
