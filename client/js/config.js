@@ -1,25 +1,58 @@
 function config($stateProvider, $urlRouterProvider) {
+	// Add CSS for main app (index/login/register) here
+	var mainCSS = [
+		'built/styles.min.css',
+		'bower_components/bootstrap/dist/css/bootstrap.min.css',
+		'bower_components/animate.css/animate.min.css',
+		'bower_components/font-awesome/css/font-awesome.min.css',
+		'bower_components/fullcalendar/dist/fullcalendar.css',
+		'http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700',
+		'bower_components/summernote/dist/summernote.css',
+		'bower_components/summernote/dist/summernote-bs3.css',
+		'bower_components/metisMenu/dist/metisMenu.min.css',
+		'bower_components/blueimp-gallery/css/blueimp-gallery.min.css',
+		'bower_components/nouislider/jquery.nouislider.css'
+
+	];
+
 	$urlRouterProvider.otherwise('/index');
-
 	$stateProvider
-
+		.state('landing', {
+			url:'/landing',
+			templateUrl: '/landing.html',
+			data: {
+				css: [
+					'css/landing/landing.css',
+					'bower_components/bootstrap/dist/css/bootstrap.min.css',
+					'bower_components/animate.css/animate.min.css',
+					'bower_components/font-awesome/css/font-awesome.min.css'
+					]
+			}
+		})
 		.state('login', {
 			url:'/login',
 			templateUrl: '/login.html',
 			controller: 'LoginCtrl as userLogin',
-			data: { pageTitle: 'login' }
+			data: {
+				css: mainCSS
+			}
 		})
 		.state('register', {
 			url:'/register',
 			templateUrl: '/register.html',
 			controller: 'RegisterCtrl as userRegister',
-			data: { pageTitle: 'register' }
+			data: {
+				css: mainCSS
+			}
 		})
 		.state('index', {
 			abstract: true,
 			url: '/index',
 			templateUrl: 'components/common/content.html',
-			authenticate: true
+			authenticate: true,
+			data: {
+				css: mainCSS
+			}
 		})
 		.state('index.todo', {
 			url: '/todo',
@@ -99,7 +132,7 @@ angular
    		if (next && next.authenticate && !User.isAuth()) {
  				evt.preventDefault();
  				$rootScope.$evalAsync(function() {
- 				  $location.path('/login');
+ 				  $location.path('/landing');
  				});
    		}
  		});
