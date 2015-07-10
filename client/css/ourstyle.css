@@ -206,11 +206,16 @@
   top: 12px !important;
   right: 30px !important;
 }
-@media (min-width: 768px)
-.col-sm-9 {
-  width: 75% !important;
+@media (min-width: 768px) {
+  .col-sm-9 {
+    width: 75% !important;
+  }
+  .disappear-desktop-width {
+    display:none;
+  }
 }
-
-.col-sm-9 {
-  width: 75% !important;
+@media (max-width: 768px) {
+  .disappear-mobile-width {
+    display:none;
+  }
 }
