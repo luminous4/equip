@@ -1,4 +1,6 @@
-var config = require('./config.js');
+
+
+var config = (process.env.TRAVIS) ? process.env.config :require('./config.js');
 $(function() {
 	$('#upload-form').transloadit({
 		// We want to wait for all encodings to finish before the form
