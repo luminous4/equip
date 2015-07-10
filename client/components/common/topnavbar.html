@@ -1,20 +1,22 @@
 <div class="row border-bottom">
   <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
 
+    <!-- Desktop top navbar -->
+    <div id="scrolltop"></div>
     <div class="navbar-header">
       <span minimaliza-sidebar></span>
     </div>
-    <ul class="nav navbar-top-links navbar-left">
+    <ul class="nav navbar-top-links navbar-left disappear-mobile-width">
       <li>
         <a ui-sref="index.home"><i class="fa fa-group"></i>{{selectedTeam.$value}}</a>
       </li>
     </ul>
-    <div class="logo-wrapper">
+    <div class="logo-wrapper disappear-mobile-width">
       <span class="navbar-brand">
         <img src="img/equipp_icon_blue.png" class="logo" /> Equipp
       </span>
     </div>
-    <ul class="nav navbar-top-links navbar-right">
+    <ul class="nav navbar-top-links navbar-right disappear-mobile-width">
       <li style="text-al">
         <a ng-click="signOut()">
           <i class="fa fa-sign-out"></i> Log out
@@ -27,6 +29,33 @@
         </a>
       </li>
     </ul>
+
+    <!-- Mobile top navbar -->
+
+    <ul class="nav navbar-top-links navbar-left disappear-desktop-width">
+      <li>
+        <a ui-sref="index.home"><i class="fa fa-group"></i>{{selectedTeam.$value}}</a>
+      </li>
+      <li style="float:right!important">
+        <a ng-click="$root.rightSidebar = !$root.rightSidebar" style="padding-right:20px">
+          <!-- <span class="message-alert badge badge-warning pull-right">5</span> -->
+          <i class="fa fa-comment"></i>
+        </a>
+      </li>
+      <li  ng-click="signOut()" style="text-al;float:right!important;margin-right:0px;">
+        <a>
+          <i class="fa fa-sign-out"></i> Log out
+        </a>
+      </li>
+    </ul>
+
+    <div style="position:absolute; pointer-events:none; top:12px;width:100%;" class="disappear-desktop-width">
+      <div style="margin: 0 auto;width: 35px;height: 35px;">
+        <span>
+          <img src="img/equipp_icon_blue.png" class="logo" />
+        </span>
+      </div>
+    </div>
 
   </nav>
 </div>

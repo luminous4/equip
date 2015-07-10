@@ -85,7 +85,6 @@
       var counter = 0;
       var whenEverythingIsLoaded = function() {
         counter++;
-        console.log(counter);
         if(counter === 5) {
           if($scope.firstLoad) {
             $scope.firstLoad = false;
@@ -222,7 +221,6 @@
       endResult.names[i] = $scope.columnNames[i];
     }
 
-    console.dir(endResult);
 
     FirebaseFactory.updateItem(['todo'], endResult);
 
