@@ -23,10 +23,9 @@
         </a>
       </li>
       <li>
-        <a ng-click="$root.rightSidebar = !$root.rightSidebar">
-          <!-- <span class="message-alert badge badge-warning pull-right">5</span> -->
+        <button ng-click="$root.rightSidebar = !$root.rightSidebar" class="imButton btn btn-default btn-circle" type="button">
           <i class="fa fa-comment"></i>
-        </a>
+        </button>
       </li>
     </ul>
 
@@ -36,11 +35,10 @@
       <li>
         <a ui-sref="index.home"><i class="fa fa-group"></i>{{selectedTeam.$value}}</a>
       </li>
-      <li style="float:right!important">
-        <a ng-click="$root.rightSidebar = !$root.rightSidebar" style="padding-right:20px">
-          <!-- <span class="message-alert badge badge-warning pull-right">5</span> -->
+      <li style="padding:12px;float:right!important;">
+        <button ng-click="$root.rightSidebar = !$root.rightSidebar" class="imButton btn btn-default btn-circle" type="button">
           <i class="fa fa-comment"></i>
-        </a>
+        </button>
       </li>
       <li  ng-click="signOut()" style="text-al;float:right!important;margin-right:0px;">
         <a>

@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 .chat-activity-list {
-  max-height: 450px;
+  max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -218,4 +218,25 @@
   .disappear-mobile-width {
     display:none;
   }
+}
+@media (min-width: 768px)
+.col-sm-9 {
+  width: 75% !important;
+}
+
+.col-sm-9 {
+  width: 75% !important;
+}
+
+.tab-pane {
+  height:inherit !important;
+}
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.imButton {
+  background-color: #18a689 !important;
+  border-color: #18a689 !important;  
 }

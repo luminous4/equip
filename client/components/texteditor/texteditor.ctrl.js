@@ -2,6 +2,7 @@
 angular.module('equip')
 	.controller('TextEditorCtrl', function ($scope, $firebaseObject, $stateParams,
                                           $state, User, FirebaseFactory) {
+		$rootScope.goToTop();
 
 		$scope.documentId = $stateParams.documentId;
 		$scope.documentTitle = $stateParams.documentTitle;

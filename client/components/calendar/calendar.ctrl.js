@@ -3,6 +3,8 @@
 
   .controller('CalendarCtrl', function($scope, $rootScope, $compile, uiCalendarConfig, refUrl, User, FirebaseFactory, Messages) {
 
+    $rootScope.goToTop();
+
     var allUsers = FirebaseFactory.getCollection('users', true);
     var currentUser = User.getCurrentUser();
     var currentUserObject = User.getUserInfo(currentUser.uid);

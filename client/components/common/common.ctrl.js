@@ -7,7 +7,7 @@ angular.module('equip')
   $scope.usersTeams = FirebaseFactory.getCollection(['users', userId, 'teams'], true);
   var userData = FirebaseFactory.getObject(['users', userId], true);
 
-  $scope.goToTop = function() {
+  $rootScope.goToTop = function() {
     $location.hash('scrolltop');
     $anchorScroll();
   }
