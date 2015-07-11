@@ -47,13 +47,6 @@ function config($stateProvider, $urlRouterProvider) {
 			data: { pageTitle: 'Chat' },
 			authenticate: true
 		})
-		.state('index.teamedit', {
-			url: '/team',
-			templateUrl: 'components/teamEdit/teamEdit.html',
-			controller: 'TeamController',
-			data: { pageTitle: 'Edit Your Teams' },
-			authenticate: true
-		})
 		.state('index.contactlist', {
 			url: '/contactlist',
 			templateUrl: 'components/contactList/contactList.html',
@@ -81,11 +74,23 @@ function config($stateProvider, $urlRouterProvider) {
 			params: { documentId: null, documentTitle: null, documentBody: null },
 			authenticate: true
 		})
-		.state('index.settings', {
+		.state('settings', {
+			abstract: true,
 			url: '/settings',
+			templateUrl: 'components/common/content.html'
+		})
+		.state('settings.account', {
+			url: '/account',
 			controller: 'SettingsCtrl as settings',
 			templateUrl: 'components/settings/settings.html',
 			data: { pageTitle: 'Settings'},
+			authenticate: true
+		})
+		.state('settings.teamedit', {
+			url: '/team',
+			templateUrl: 'components/teamEdit/teamEdit.html',
+			controller: 'TeamController',
+			data: { pageTitle: 'Edit Your Teams' },
 			authenticate: true
 		})
 }

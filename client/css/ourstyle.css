@@ -213,7 +213,11 @@
     width: 75% !important;
   }
   .disappear-desktop-width {
-    display:none;
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    top: 12px;
+    width: 100%;
   }
 }
 @media (max-width: 768px) {
@@ -221,18 +225,6 @@
     display:none;
   }
 }
-
-/* is this old, broken code?*/
-/* commenting it out to see if it matters */
-/*@media (min-width: 768px)
-.col-sm-9 {
-  width: 75% !important;
-}
-
-.col-sm-9 {
-  width: 75% !important;
-}
-*/
 
 .tab-pane {
   height:inherit !important;
