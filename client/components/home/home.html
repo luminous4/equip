@@ -8,7 +8,7 @@
               <h5><i class="fa fa-group"></i>&nbsp;&nbsp;&nbsp;Choose Your Team</h5>
               <div ibox-tools></div>
             </div>
-            <div class="ibox-content">
+            <div class="ibox-content dashboard-team-select">
               <div>
                 <select class="team-select btn btn-white dropdown-toggle"
                         ng-options="team.$value for team in usersTeams track by team.$id"
@@ -103,22 +103,24 @@
           <!-- Todo Controller -->
           <div ng-controller="TodoController" class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;Todo List</h5>
+              <h5><i class="fa fa-table-o"></i>&nbsp;&nbsp;&nbsp;Todo List</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
-              <ul class="agile-list">
-                <li class="{{task.statusClass}}-element animated fadeIn" ng-repeat="task in lists[0]">
+              <ul class="agile-list list-group dashboard-agile-list">
+                <li class="{{task.statusClass}}-element dashboard-agile-list-element" ng-repeat="task in lists[0]">
                   {{task.content}}
-                  <div class="agile-detail">
-                    <a ng-click="deleteTask(task, 0)" href="#" class="pull-right btn btn-xs btn-white">
-                      <i class="fa fa-times"></i>
-                    </a>
-                    <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                  <div class="agile-detail dashboard-agile-list-element">
+                    <a href="#" class="dashboard-agile-list-tag dashboard-agile-list-element">
                       {{task.tagName}}
                     </a>
-                    <i class="fa fa-clock-o"></i> {{task.date}}
+                      <i class="fa fa-clock-o"></i> {{task.date}}
                   </div>
+                </li>
+                <li class="dashboard-todo-button dashboard-agile-list-element">
+                  <a ui-sref="index.todo">
+                    <button class="btn dashboard-agile-list-element btn-primary btn-block m-t"><i class="fa dashboard-agile-list-element fa-arrow-right"></i> Go to Todo List</button>
+                  </a>
                 </li>
               </ul>
             </div>
