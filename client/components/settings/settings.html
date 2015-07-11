@@ -26,7 +26,7 @@
           <form name="userForm" class="form-horizontal">
             <div class="form-group">
               <label class="col-sm-2 control-label">Name</label>
-              <div class="col-sm-10">
+              <div class="col-sm-10 top-two-inputs">
                 <input ng-focus="checkSuccess()" type="text" class="form-control" placeholder="{{showDisplayName || 'Jane Doe'}}" ng-model="displayName">
               </div>
             </div>
@@ -35,7 +35,7 @@
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Phone Number</label>
-              <div class="col-sm-10">
+              <div class="col-sm-10 top-two-inputs">
                 <input type="text" ng-focus="checkSuccess()" class="form-control" placeholder="{{showPhoneNumber || '4085555555'}}" ng-model="phoneNumber">
               </div>
             </div>
@@ -69,7 +69,7 @@
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Profile Photo URL</label>
-              <div class="col-sm-10"> 
+              <div class="col-sm-10 photo-input"> 
                 <input type="text" class="form-control" ng-focus="checkSuccess()" ng-model="imgUrl">
               </div>
             </div>
