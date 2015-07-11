@@ -1,9 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-8">
-    <h2>Team Edit Directory</h2>
+    <h2>Team Settings</h2>
     <ol class="breadcrumb">
       <li>
         <a ui-sref="index.home">Home</a>
+      </li>
+      <li>
+          Settings
       </li>
       <li class="active">
         <strong>{{currentTab}}</strong>
@@ -44,8 +47,8 @@
             <h3 class="team-edit-join-title">Join a team</h3>
             <!-- <br/> -->
             <form ng-submit="tryToJoinTeam()">
-              <div class="input-group">              
-                <input type="text" class="form-control" ng-model="teamJoinString"> 
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="teamJoinString" placeholder="Enter a team name to join">
                 <span class="input-group-btn"> 
                   <button type="submit" class="btn btn-primary">
                     Go!
@@ -60,11 +63,8 @@
 
           <!-- Search bar -->
 
-          <h3 class="team-edit-search-bar">Edit your teams</h3>
+          <h3 class="team-edit-search-bar">Your Teams</h3>
           <div class="col-md-12 team-edit-search-bar">
-            <div class="input-group" >
-              <input type="text" ng-model="searchString" placeholder="Search within teams" class="input-lg form-control"> 
-            </div>
           </div>
 
           <!-- List of teams -->
@@ -117,7 +117,7 @@
                           <br/>
                         </td>
                         <td class="project-people">
-                          <span ng-repeat="user in editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></a></span>
+                          <span ng-repeat="user in editingTeamUserlist"><img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></span>
                         </td>
                       </tr>
                     </tbody>

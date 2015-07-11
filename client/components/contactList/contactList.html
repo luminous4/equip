@@ -6,7 +6,7 @@
         <a ui-sref="index.home">Home</a>
       </li>
       <li class="active">
-        <strong>Contact List</strong>
+        <strong>Contacts</strong>
       </li>
     </ol>
   </div>
@@ -46,7 +46,7 @@
                           <td ng-click="viewContact(contact)">{{getUserPhoneNumber(contact)}}</td>
                           <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                           <td class="client-status" ng-click="viewContact(contact)">{{contact.email}}</td>
-                          <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">Click for more info!</span></td>
+                          <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">More Info</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -88,10 +88,10 @@
                     <tr>
                       <td>
                       <span> 
-                         <span class="contact-type"><i class="fa fa-phone fa-2x" > </i></span>
+                         <span class="contact-type"><i class="fa fa-phone fa-2x"> </i></span>
                       </span>
                       <h2 class="phone-number">
-                          &nbsp;{{getUserPhoneNumber(currentContact)}}
+                          <a ng-href="tel://{{getUserPhoneNumber(currentContact)}}">{{getUserPhoneNumber(currentContact)}}</a>
                       </h2>
                     </td>
                     </tr>
