@@ -206,7 +206,6 @@
   top: 12px !important;
   right: 30px !important;
 }
-<<<<<<< HEAD
 @media (min-width: 768px) {
   .col-sm-9 {
     width: 75% !important;
@@ -236,4 +235,8 @@
   position: fixed;
   top: 0;
   left: 0;
+}
+.imButton {
+  background-color: #18a689 !important;
+  border-color: #18a689 !important;  
 }
