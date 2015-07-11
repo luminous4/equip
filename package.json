@@ -59,7 +59,6 @@
     "phantomjs": "~1.9.17",
     "karma-phantomjs-launcher": "~0.1",
     "jasmine": "~2.3.1",
-    "grunt-casperjs": "^2.1.0",
     "karma-unicorn-reporter": "~0.1.4"
   }
 }
