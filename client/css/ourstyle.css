@@ -246,3 +246,9 @@
 .chat-activity-list .media-body {
   padding-top: 5px;
 }
+.contact-table span {
+  padding: 5px;
+}
+.contact-table .phone-number {
+  display: inline-block !important;
+}
