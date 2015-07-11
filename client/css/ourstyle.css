@@ -293,3 +293,37 @@
 .todo-input {
   width:75%!important;
 }
+
+/* dashboard */
+.dashboard-agile-list {
+  padding:20px;
+  padding-top:15px;
+}
+.dashboard-agile-list-element {
+
+}
+.dashboard-agile-list-tag {
+background-color: rgb(255, 255, 255);
+border: 1px solid rgb(231, 234, 236);
+border-radius: 3px;
+color: rgb(103, 106, 108);
+display: block;
+float: right;
+font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 12px;
+height: 22px;
+line-height: 20px;
+padding: 1px 5px;
+text-align: left;
+text-decoration: none;
+cursor:default!important;
+}
+.dashboard-padding {
+  margin:20px;
+}
+.dashboard-todo-button {
+  margin-bottom: 
+}
+.dashboard-team-select {
+  padding-top:5px!important;
+}
