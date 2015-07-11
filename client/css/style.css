@@ -1551,6 +1551,8 @@ table.dataTable thead .sorting:after {
     text-align: center;
     font-size: 12px;
     line-height: 1.428571429;
+    outline: 0;
+    outline: none;
 }
 .btn-circle.btn-lg {
     width: 50px;

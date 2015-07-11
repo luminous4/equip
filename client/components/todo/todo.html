@@ -28,25 +28,19 @@
             <form ng-submit="submitNewColumnName(0)">
               <span ng-hide="columnNameEdit[0]">{{columnNames[0]}}</span>
               <input type="text" ng-show="columnNameEdit[0]" ng-model="columnNames[0]" class="input input-sm form-control"> 
-              <span class="text-right">
-                <i ng-hide="columnNameEdit[0]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(0)"></i>
-              </span>
+              <span class="text-right"><i ng-hide="columnNameEdit[0]" style="cursor:pointer" class="fa fa-pencil" ng-click="editColumnName(0)"></i>
             </form>
           </h3>
 
           <div class="input-group">
-            <div class="col-sm-10">
               <form ng-submit="addTask(0)">
                 <div class="input-group m-b">
-                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[0]" class="input input-sm form-control">
-                  <div>
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
-                    </span> 
-                  </div>
-                 </div>
+                  <input type="text" style="width:75%" placeholder="Add new task " ng-model="inputFields[0]" class="form-control">
+                  <span class="input-group-addon-sm">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i></button> 
+                  </span>
+                </div>
               </form>
-            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[0].$save()" ng-model="lists[0]">
@@ -59,7 +53,6 @@
                 <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
                   {{task.tagName}}
                 </a>
-                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
@@ -84,18 +77,14 @@
           </h3>
 
           <div class="input-group">
-            <div class="col-sm-10">
               <form ng-submit="addTask(1)">
                 <div class="input-group m-b">
-                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[1]" class="input input-sm form-control">
-                  <div>
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
-                    </span> 
-                  </div>
+                  <input type="text" style="width:75%" placeholder="Add new task " ng-model="inputFields[1]" class="form-control">
+                  <span class="input-group-addon-sm">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i></button> 
+                  </span>
                 </div>
               </form>
-            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[1].$save()" ng-model="lists[1]">
@@ -108,7 +97,6 @@
                 <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
                   {{task.tagName}}
                 </a>
-                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
@@ -133,18 +121,14 @@
           </h3>
 
           <div class="input-group">
-            <div class="col-sm-10">
               <form ng-submit="addTask(2)">
                 <div class="input-group m-b">
-                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[2]" class="input input-sm form-control">
-                  <div>
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
-                    </span> 
-                  </div>
+                  <input type="text" style="width:75%" placeholder="Add new task " ng-model="inputFields[2]" class="form-control">
+                  <span class="input-group-addon-sm">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i></button> 
+                  </span>
                 </div>
               </form>
-            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[2].$save()" ng-model="lists[2]">
@@ -157,7 +141,6 @@
                 <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
                   {{task.tagName}}
                 </a>
-                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
@@ -182,18 +165,14 @@
           </h3>
 
           <div class="input-group">
-            <div class="col-sm-10">
               <form ng-submit="addTask(3)">
                 <div class="input-group m-b">
-                  <input type="text" style="width:90%" placeholder="Add new task. " ng-model="inputFields[3]" class="input input-sm form-control">
-                  <div>
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i> Add task</button> 
-                    </span> 
-                  </div>
+                  <input type="text" style="width:75%" placeholder="Add new task " ng-model="inputFields[3]" class="form-control">
+                  <span class="input-group-addon-sm">
+                    <button type="submit" class="btn btn-white"><i class="fa fa-plus"></i></button> 
+                  </span>
                 </div>
               </form>
-            </div>
           </div>
 
           <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-change="lists[3].$save()" ng-model="lists[3]">
@@ -206,7 +185,6 @@
                 <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
                   {{task.tagName}}
                 </a>
-                &nbsp;&nbsp;
                 <i class="fa fa-clock-o"></i> {{task.date}}
               </div>
             </li>
