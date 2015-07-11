@@ -12,6 +12,7 @@
     'ui.sortable',
     'ngSanitize',
 		'oc.lazyLoad',
-		'uiRouterStyles'
+		'uiRouterStyles',
+		'ng-transloadit'
 	])
 })();
