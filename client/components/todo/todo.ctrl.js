@@ -10,19 +10,22 @@
     handler: ".ibox-title"
   };
 
+  var log = function() {
+    console.log($scope.lists[0]);
+  }
+
+  setInterval(log, 3000);
+
   $scope.savedDisplay = "";
   $scope.listBools = [true,true,true,true];
   $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
   $scope.inputFields = ['','','',''];
   $scope.columnNameEdit = [false, false, false, false]
-  $scope.tags = ['Nonessential', 'Important', 'Urgent', 'Info'];
+  $scope.tags = ['Issue', 'Important', 'Urgent', 'Info'];
   $scope.statuses = ['success', 'warning', 'danger', 'info'];
   $scope.lists = [];
   $scope.loading = true;
   $scope.firstLoad = true;
-
-  setInterval(function() {
-  }, 5000);
 
   // Utilities
   // Could go into fb factory?
@@ -63,6 +66,9 @@
 
   $scope.loadEverything = function() {
 
+    console.log('slk')
+
+
 
     if(!$scope.selectedTeam) return;
 
@@ -70,91 +76,79 @@
 
     loadTodos.$loaded().then(function() {
 
-
       if(!loadTodos) {
         $scope.firstLoad = false;
         $scope.loading = false;
         return;
       } 
 
-      // var numTodoLists = 6;
-      // while(loadTodos[numTodoLists] === undefined) {
-      //   numTodoLists--;
-      //   if(numTodoLists === -1) break;
-      // }
-
       var counter = 0;
       var whenEverythingIsLoaded = function() {
         counter++;
         if(counter > 4) {
+          console.log('stuff is loaded!');
           if($scope.firstLoad) {
             $scope.firstLoad = false;
             $scope.loading = false;
-            return true;
           } else {
             $scope.showSavedDisplay();
-            return true;
           }
         }
-        return false;
       }
 
       var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
       tempList0.$loaded().then(function() {
-        $scope.lists[0] = arrayify(furtherSterilization(tempList0));
         whenEverythingIsLoaded();
+        $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+        console.log('i made lists happen', $scope.lists[0]);
       });
       var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
       tempList1.$loaded().then(function() {
-        $scope.lists[1] = arrayify(furtherSterilization(tempList1));
         whenEverythingIsLoaded();
+        $scope.lists[1] = arrayify(furtherSterilization(tempList1));
       });
       var tempList2 = FirebaseFactory.getCollection(['todo', 2]);
       tempList2.$loaded().then(function() {
-        $scope.lists[2] = arrayify(furtherSterilization(tempList2));
         whenEverythingIsLoaded();
+        $scope.lists[2] = arrayify(furtherSterilization(tempList2));
       });
       var tempList3 = FirebaseFactory.getCollection(['todo', 3]);
       tempList3.$loaded().then(function() {
-        $scope.lists[3] = arrayify(furtherSterilization(tempList3));
         whenEverythingIsLoaded();
+        $scope.lists[3] = arrayify(furtherSterilization(tempList3));
       });
       var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
       columnNames.$loaded().then(function() {
-        if(columnNames[0] === undefined) {
-          while(!whenEverythingIsLoaded()){};
-          return;
-        }
-        $scope.columnNames[0] = columnNames[0].$value;
-        $scope.columnNames[1] = columnNames[1].$value;
-        $scope.columnNames[2] = columnNames[2].$value;
-        $scope.columnNames[3] = columnNames[3].$value;
-        // $scope.columnNames[0] = 'Backlog';
-        // $scope.columnNames[1] = 'Ready to start';
-        // $scope.columnNames[2] = 'In progress';
-        // $scope.columnNames[3] = 'asdf';
-        
+        whenEverythingIsLoaded();
+        if(columnNames[0]) $scope.columnNames[0] = columnNames[0].$value;
+        if(columnNames[1]) $scope.columnNames[1] = columnNames[1].$value;
+        if(columnNames[2]) $scope.columnNames[2] = columnNames[2].$value;
+        if(columnNames[3]) $scope.columnNames[3] = columnNames[3].$value;
       });
     });
   }
 
+  $scope.loadEverything();
+
   $rootScope.$watch('selectedTeam', function() {
     $scope.loadEverything();  
   });
-
-  $scope.loadEverything();
 
   // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
     if($scope.inputFields[listNum] === '') return;
 
     var now = moment().format('l');
+    console.log(typeof now);
+    var reg = new RegExp("(\d+/\d+/)\d\d(\d\d)/\1\2/");
+    // now = reg.exec(now);
+    console.log(now);
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
       date: now,
       statusClass: 'success',
-      tagName: 'Nonessential'
+      tagName: 'Issue'
     }].concat($scope.lists[listNum]);
 
     $scope.inputFields[listNum] = '';
