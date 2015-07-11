@@ -75,6 +75,8 @@
                 <tr ng-repeat="team in teams | teamSearch:searchString">
                   <td class="project-title">
                     <a ui-sref="team_detail">{{team.$id}}</a>
+                    <br/>
+                    <small>Created at {{team.createdAt}}</small>
                   </td>
                   <td class="project-people">
                     <span ng-repeat="userId in team.users">
