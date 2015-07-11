@@ -4,6 +4,8 @@
   .controller('ContactController', function($scope, $rootScope, $state, $stateParams, $firebaseObject,
                                             $firebaseArray, refUrl, FirebaseFactory) {
 
+    $rootScope.goToTop();
+
     $scope.currentContact = null;
     $scope.loading = true;
     $scope.searchString = '';

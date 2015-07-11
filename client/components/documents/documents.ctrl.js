@@ -1,6 +1,7 @@
 (function() {
 	angular.module('equip')
 		.controller('DocumentCtrl', function ($scope, $rootScope, $http, FirebaseFactory, Transloadit, $ocLazyLoad) {
+			$rootScope.goToTop();
 			// Load Jquery Plugin
 			$ocLazyLoad.load('components/documents/documents.compiled.js');
 			// Teams

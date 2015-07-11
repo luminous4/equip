@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 .chat-activity-list {
-  max-height: 450px;
+  max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -59,8 +59,8 @@
 .chat-name {
   display: inline;
   margin-right: 10px;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 800;
 }
 .chat-text {
   font-size: 15px;
@@ -153,18 +153,19 @@
   height: 28px !important;
 }
 .navbar-brand {
-    left: 0;
-    text-align: center;
-    margin: auto;
-    color: #999c9e;
+  padding-left:0px;
+  text-align: center;
+  margin: auto;
+  color: #999c9e;
+  padding-top:12px;
 }
 .nav > li > a {
     color: #999c9e;
 }
 .logo {
-    width: 35px;
-    height: 35px;
-    display: inline !important;
+  width: 35px;
+  height: 35px;
+  display: inline !important;
 }
 .logo-wrapper {
   position: absolute;
@@ -205,6 +206,19 @@
   top: 12px !important;
   right: 30px !important;
 }
+@media (min-width: 768px) {
+  .col-sm-9 {
+    width: 75% !important;
+  }
+  .disappear-desktop-width {
+    display:none;
+  }
+}
+@media (max-width: 768px) {
+  .disappear-mobile-width {
+    display:none;
+  }
+}
 @media (min-width: 768px)
 .col-sm-9 {
   width: 75% !important;
@@ -212,4 +226,23 @@
 
 .col-sm-9 {
   width: 75% !important;
+}
+
+.tab-pane {
+  height:inherit !important;
+}
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.imButton {
+  background-color: #18a689 !important;
+  border-color: #18a689 !important;  
+}
+.chat-activity-list .col-sm-1 {
+  width: 4% !important;
+}
+.chat-activity-list .media-body {
+  padding-top: 5px;
 }

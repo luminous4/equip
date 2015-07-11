@@ -11,7 +11,8 @@
     'sticky',
     'ui.sortable',
     'ngSanitize',
-		'ng-transloadit',
-		'oc.lazyLoad'
+		'oc.lazyLoad',
+		'uiRouterStyles',
+		'ng-transloadit'
 	])
 })();

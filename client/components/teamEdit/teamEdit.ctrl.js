@@ -3,6 +3,7 @@
 
   .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, 
                                       $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
+    $rootScope.goToTop();
 
     var currentUser;
     $scope.currentTab = "Team List";
@@ -31,7 +32,6 @@
 
       $scope.teams.$loaded().then(function() {
 
-        console.log($scope.teams);
 
         $scope.loading = false;
 
@@ -155,15 +155,12 @@
     ////////////////////////////
 
     $scope.tryToJoinTeam = function() {
-      console.log('trying'); 
       var searchStringAtSubmit = $scope.teamJoinString;
       $scope.teamJoinString = "";
-      console.log(searchStringAtSubmit);
       var userInfo = User.getCurrentUser(); 
       var foundTeam = FirebaseFactory.getObject(['teams', searchStringAtSubmit], true);
       foundTeam.$loaded().then(function() {
         if(!foundTeam || !foundTeam.users) {
-          console.log('found team was falsy');
           return;
         }
         var obj = {};

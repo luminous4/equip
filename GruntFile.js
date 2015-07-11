@@ -101,11 +101,17 @@ module.exports = function(grunt) {
         tasks: ['cssmin']
       }
     },
+
     nodemon: {
       dev: {
         script: 'server/server.js'
+      },
+      ignore: ['node_modules/**', 'client/bower_components/**'],
+      options: {
+        'no-preload': true 
       }
     },
+
     // Deploying
     shell: {
       rebase: {
@@ -182,6 +188,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'browserify',
+    'concat',
+    'uglify',
+    'cssmin'
+  ]);
+
+  grunt.registerTask('build-deploy', [
     'concat',
     'uglify',
     'cssmin'

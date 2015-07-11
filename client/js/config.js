@@ -1,19 +1,20 @@
 function config($stateProvider, $urlRouterProvider) {
+	// Add CSS for main app (index/login/register) here
 	$urlRouterProvider.otherwise('/index');
-
 	$stateProvider
-
+		.state('landing', {
+			url:'/landing',
+			templateUrl: '/landing.html'
+		})
 		.state('login', {
 			url:'/login',
 			templateUrl: '/login.html',
-			controller: 'LoginCtrl as userLogin',
-			data: { pageTitle: 'login' }
+			controller: 'LoginCtrl as userLogin'
 		})
 		.state('register', {
 			url:'/register',
 			templateUrl: '/register.html',
-			controller: 'RegisterCtrl as userRegister',
-			data: { pageTitle: 'register' }
+			controller: 'RegisterCtrl as userRegister'
 		})
 		.state('index', {
 			abstract: true,
@@ -99,7 +100,7 @@ angular
    		if (next && next.authenticate && !User.isAuth()) {
  				evt.preventDefault();
  				$rootScope.$evalAsync(function() {
- 				  $location.path('/login');
+ 				  $location.path('/landing');
  				});
    		}
  		});

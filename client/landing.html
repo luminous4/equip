@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="equip" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,23 +10,19 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Equipp</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Animation CSS -->
-    <link href="bower_components/animate.css/animate.min.css" rel="stylesheet">
-
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="css/landing/landing.css" rel="stylesheet">
 </head>
 <body id="page-top">
+<div class="landing-page">
 <div class="navbar-wrapper">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -41,7 +37,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="#page-top">Home</a></li>
+                    <li><a class="page-scroll" href="#inSlider">Home</a></li>
                     <li><a class="page-scroll" href="#features">Features</a></li>
                     <li><a class="page-scroll" href="#team">Team</a></li>
                     <li><a class="page-scroll" href="#contact">Get Started</a></li>
@@ -60,8 +56,8 @@
                         they'll need.<br/></h1>
                     <p>File management, chat, calendar, to do & more.</p>
                     <p>
-                        <a class="btn btn-lg btn-primary" href="#/reigster/" role="button">Register</a>
-                        <a class="btn btn-lg btn-primary" href="#/login/" role="button">Login</a>
+                        <a class="btn btn-lg btn-primary" ui-sref="register" role="button">Register</a>
+                        <a class="btn btn-lg btn-primary" ui-sref="login" role="button">Login</a>
                     </p>
                 </div>
                 <div class="carousel-image wow zoomIn">
@@ -102,12 +98,12 @@
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
                 <i class="fa fa-comments features-icon"></i>
-                <h2>Chat & DM's</h2>
+                <h2>Chat & Direct Messaging</h2>
                 <p>Get in touch with your friends and colleagues with chat and direct messaging.</p>
             </div>
             <div class="m-t-lg">
                 <i class="fa fa-table features-icon"></i>
-                <h2>Agile Board</h2>
+                <h2>Todo List</h2>
                 <p>Track your projects using the to-do board. </p>
             </div>
         </div>
@@ -175,11 +171,11 @@
                     <h4><span class="navy">Nick</span> McCormick</h4>
                     <p>Super sharp Software Engineer with a strong sense of initiative and humor.</p>
                     <ul class="list-inline social-icon">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        <li><a href="https://github.com/kenning/" target="_blank"><i class="fa fa-github"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        <li><a href="mailto:hwerzog@gmail.com"><i class="fa fa-fa-envelope-o"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        <li><a href="https://www.linkedin.com/in/nmcco" target="_blank"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -200,7 +196,8 @@
                 <div class="navy-line"></div>
                 <h1>Get Started</h1>
                 <p>Ready to start? Let's go!</p>
-                <a class="btn btn-lg btn-primary" href="#/reigster/" role="button">Register</a> <a class="btn btn-lg btn-primary" href="#/login/" role="button">Login</a>
+                <a class="btn btn-lg btn-primary" ui-sref="register" role="button">Register</a>
+                <a class="btn btn-lg btn-primary" ui-sref="login" role="button">Login</a>
             </div>
         </div>
         <div class="row">
@@ -210,6 +207,7 @@
         </div>
     </div>
 </section>
+</div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/pace/pace.min.js"></script>

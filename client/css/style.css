@@ -3141,6 +3141,9 @@ body {
     color: #676a6c;
     overflow-x: hidden;
 }
+.landing-page {
+    background-color: white !important;
+}
 html,
 body {
     height: 100%;
@@ -3801,7 +3804,7 @@ table.table-mail tr td {
     color: #ed5565;
 }
 .text-muted {
-    color: #888888;
+    color: #B8B8B8;
 }
 .simple_tag {
     background-color: #f3f3f4;

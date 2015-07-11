@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '0.10'
+before_script: chmod 0777 ./test
+deploy:
+  provider: heroku
+  api_key:
+    secure: KBr9BPM79+9XlBqtfZnuBD7tCXdlnXsVpFy4P9Al2sb1HP6mWEOYLV2X+OfvqCEn8BmxCGU/64zAEjNQiuZrVbWLUoxwB7s+8TJ0OUR8r3fA+s2d+bYJwaUG3HIjT7hpt4s4R6hrE0BpKdn3Zrk0wmlP/J3cKSA0gmLEROIKCOkgCmxHrqfVi/3Jx3dAYxhzbHNUOuNy8+C9T5wiRuoz+rJrkewh5WaPFgazwjYQ8c17gCpQvjDd45FG7z9AL7vPeSxnglsIULku1hLsbtgQEXOL9odNLYyi4k6GHRemylaOkZEsxx/5FpM8Ckmz4oNLyjPSw/6Ydt9Y2/9oNCDSYFIGWdW1GdrqhO52ESXM0KmkpOhvB1zaKUEqewgyQastCr069WakY2PyQvdG3n7tnWL3f50KgL4UZKW8ksFx0KIYrGXb/vrWu/eVS2jP92qf/ay95gpqIzucE5pcoGVRk9U4yhakVDL5RUjYGomePnuId49UkhxvRhX9v3X7nlHfhzTlV6vZUeLseiTG1NlXj0CRGImTJWbqybv3I07V75/BLZ8EJuJxxlTC1qIGsY7EGn1erCLto65hRQiAAY8lFsIWXLux8t3AZvmHBRzIAC+TRC9F6CBBKAdDNyxz3EKaoZK2hp/MyRWB64T+BG1vNRzQGYe5qrs9OshYbQb+p+I=
+  app: luminous4-equip
+  on:
+    repo: luminous4/equip
