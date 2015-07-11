@@ -59,8 +59,8 @@
 .chat-name {
   display: inline;
   margin-right: 10px;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 800;
 }
 .chat-text {
   font-size: 15px;
@@ -239,4 +239,10 @@
 .imButton {
   background-color: #18a689 !important;
   border-color: #18a689 !important;  
+}
+.chat-activity-list .col-sm-1 {
+  width: 4% !important;
+}
+.chat-activity-list .media-body {
+  padding-top: 5px;
 }
