@@ -3,6 +3,7 @@
 
   .controller('TodoController', function($scope, $state, $stateParams, FirebaseFactory,
                       $firebaseArray, $timeout,  $rootScope, refUrl, $firebaseObject) {
+  $rootScope.goToTop();
 
   $scope.sortableOptions = {
     connectWith: ".connectPanels",

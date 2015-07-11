@@ -3,6 +3,7 @@
 
   .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, 
                                       $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
+    $rootScope.goToTop();
 
     var currentUser;
     $scope.currentTab = "Team List";

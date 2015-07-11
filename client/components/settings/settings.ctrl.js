@@ -2,6 +2,7 @@
 
 angular.module('equip')
 .controller('SettingsCtrl', function($scope, User, FirebaseFactory) {
+  $rootScope.goToTop();
 
   var userId = User.getCurrentUser().uid;
   $scope.socialSelect = 'Facebook';

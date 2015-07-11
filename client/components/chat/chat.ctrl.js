@@ -25,6 +25,8 @@ angular.module('equip')
 
 .controller('ChatCtrl', function($scope, $rootScope, $firebaseArray, refUrl, Messages, User, FirebaseFactory) {
 
+  $rootScope.goToTop();
+
   var userId = User.getCurrentUser().uid;
   var userData = FirebaseFactory.getObject(['users', userId], true);
   $scope.canSend = true;
