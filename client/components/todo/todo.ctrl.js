@@ -86,14 +86,17 @@
       var counter = 0;
       var whenEverythingIsLoaded = function() {
         counter++;
-        if(counter === 5) {
+        if(counter > 4) {
           if($scope.firstLoad) {
             $scope.firstLoad = false;
             $scope.loading = false;
+            return true;
           } else {
             $scope.showSavedDisplay();
+            return true;
           }
         }
+        return false;
       }
 
       var tempList0 = FirebaseFactory.getCollection(['todo', 0]);
@@ -118,6 +121,10 @@
       });
       var columnNames = FirebaseFactory.getCollection(['todo', 'names']);
       columnNames.$loaded().then(function() {
+        if(columnNames[0] === undefined) {
+          while(!whenEverythingIsLoaded()){};
+          return;
+        }
         $scope.columnNames[0] = columnNames[0].$value;
         $scope.columnNames[1] = columnNames[1].$value;
         $scope.columnNames[2] = columnNames[2].$value;
@@ -126,7 +133,7 @@
         // $scope.columnNames[1] = 'Ready to start';
         // $scope.columnNames[2] = 'In progress';
         // $scope.columnNames[3] = 'asdf';
-        whenEverythingIsLoaded();
+        
       });
     });
   }
