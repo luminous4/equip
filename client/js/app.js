@@ -12,7 +12,6 @@
     'ui.sortable',
     'ngSanitize',
 		'ng-transloadit',
-		'oc.lazyLoad',
-    'ngMock'
+		'oc.lazyLoad'
 	])
 })();
