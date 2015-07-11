@@ -54,11 +54,11 @@
         var end = "";
         for(var i = 0; i < str.length; i++) {
           if (i === 0) {
-            end += "(";
+            end += "";
           } else if (i === 3) {
-            end += ") ";
+            end += "-";
           } else if (i === 6) {
-            end += " - ";
+            end += "-";
           }
           end += str[i];
         }
