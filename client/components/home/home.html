@@ -41,9 +41,7 @@
           <div class="ibox float-e-margins">
             <div class="ibox-title">
               <h5><i class="fa fa-comments-o"></i>&nbsp;&nbsp;&nbsp;Chat</h5>
-
-              <div class="ibox-tools">
-              </div>
+              <div ibox-tools></div>
             </div>
             <div class="ibox-content">
 
@@ -102,6 +100,30 @@
               </a>
             </div>
           </div>
+          <!-- Todo Controller -->
+          <div ng-controller="TodoController" class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;Todo List</h5>
+              <div ibox-tools></div>
+            </div>
+            <div class="ibox-content no-padding">
+              <ul class="agile-list">
+                <li class="{{task.statusClass}}-element animated fadeIn" ng-repeat="task in lists[0]">
+                  {{task.content}}
+                  <div class="agile-detail">
+                    <a ng-click="deleteTask(task, 0)" href="#" class="pull-right btn btn-xs btn-white">
+                      <i class="fa fa-times"></i>
+                    </a>
+                    <a ng-click="cycleTag(task)" href="#" class="pull-right btn btn-xs btn-white">
+                      {{task.tagName}}
+                    </a>
+                    <i class="fa fa-clock-o"></i> {{task.date}}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         </div>
 
       </div>

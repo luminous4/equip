@@ -10,6 +10,12 @@
     handler: ".ibox-title"
   };
 
+  var log = function() {
+    console.log($scope.lists[0]);
+  }
+
+  setInterval(log, 3000);
+
   $scope.savedDisplay = "";
   $scope.listBools = [true,true,true,true];
   $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
@@ -20,9 +26,6 @@
   $scope.lists = [];
   $scope.loading = true;
   $scope.firstLoad = true;
-
-  setInterval(function() {
-  }, 5000);
 
   // Utilities
   // Could go into fb factory?
@@ -63,6 +66,9 @@
 
   $scope.loadEverything = function() {
 
+    console.log('slk')
+
+
 
     if(!$scope.selectedTeam) return;
 
@@ -80,6 +86,7 @@
       var whenEverythingIsLoaded = function() {
         counter++;
         if(counter > 4) {
+          console.log('stuff is loaded!');
           if($scope.firstLoad) {
             $scope.firstLoad = false;
             $scope.loading = false;
@@ -93,6 +100,7 @@
       tempList0.$loaded().then(function() {
         whenEverythingIsLoaded();
         $scope.lists[0] = arrayify(furtherSterilization(tempList0));
+        console.log('i made lists happen', $scope.lists[0]);
       });
       var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
       tempList1.$loaded().then(function() {
@@ -120,23 +128,27 @@
     });
   }
 
+  $scope.loadEverything();
+
   $rootScope.$watch('selectedTeam', function() {
     $scope.loadEverything();  
   });
-
-  $scope.loadEverything();
 
   // Submits a form to the provided list to create a new task
   $scope.addTask = function(listNum) {
     if($scope.inputFields[listNum] === '') return;
 
     var now = moment().format('l');
+    console.log(typeof now);
+    var reg = new RegExp("(\d+/\d+/)\d\d(\d\d)/\1\2/");
+    // now = reg.exec(now);
+    console.log(now);
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
       date: now,
       statusClass: 'success',
-      tagName: 'Nonessential'
+      tagName: 'Issue'
     }].concat($scope.lists[listNum]);
 
     $scope.inputFields[listNum] = '';

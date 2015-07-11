@@ -206,6 +206,8 @@
   top: 12px !important;
   right: 30px !important;
 }
+
+/* top navbar media queries */
 @media (min-width: 768px) {
   .col-sm-9 {
     width: 75% !important;
@@ -219,7 +221,10 @@
     display:none;
   }
 }
-@media (min-width: 768px)
+
+/* is this old, broken code?*/
+/* commenting it out to see if it matters */
+/*@media (min-width: 768px)
 .col-sm-9 {
   width: 75% !important;
 }
@@ -227,6 +232,7 @@
 .col-sm-9 {
   width: 75% !important;
 }
+*/
 
 .tab-pane {
   height:inherit !important;
@@ -251,4 +257,39 @@
 }
 .contact-table .phone-number {
   display: inline-block !important;
+}
+
+/* team edit */
+.loading-spinner {
+  padding-top:20px;
+}
+.pointer-cursor {
+  cursor:pointer;
+}
+.team-edit-join-title {
+  padding-bottom:10px;
+  padding-left:0px!important;
+}
+.team-edit-padding-20 {
+  padding:20px;
+}
+.team-edit-search-bar {
+  padding-left:10px;
+  padding-bottom:10px;
+}
+.team-edit-search-bar-inner-div {
+  padding-left:10px;
+  padding-bottom:20px!important;
+}
+.team-edit-btn {
+  margin-left:20px;
+}
+.team-edit-padding-25 {
+  padding-left:25px!important;
+  padding-bottom:15px;
+}
+
+/* todo list */
+.todo-input {
+  width:75%!important;
 }
