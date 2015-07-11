@@ -4896,13 +4896,15 @@ table.issue-tracker tbody tr td {
     margin: 0;
 }
 .agile-list li {
+    margin: 10px 0px!important;
+}
+.agile-list li:not(.dashboard-todo-button){
     background: #FAFAFB;
     border: 1px solid #e7eaec;
-    margin: 0px 0 10px 0;
     padding: 10px;
     border-radius: 2px;
 }
-.agile-list li:hover {
+.agile-list li:not(.dashboard-agile-list-element):hover  {
     cursor: pointer;
     background: #fff;
 }
