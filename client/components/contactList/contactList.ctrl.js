@@ -76,7 +76,6 @@
       searchString = searchString.toLowerCase();
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item) {
-        console.log(item);
         if (item !== null && item !== undefined && item.displayName.toLowerCase().indexOf(searchString) !== -1) {
           result.push(item);
         }

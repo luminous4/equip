@@ -10,12 +10,6 @@
     handler: ".ibox-title"
   };
 
-  var log = function() {
-    console.log($scope.lists[0]);
-  }
-
-  setInterval(log, 3000);
-
   $scope.savedDisplay = "";
   $scope.listBools = [true,true,true,true];
   $scope.columnNames = ['Backlog','Ready to start','In progress','Done'];
@@ -66,10 +60,6 @@
 
   $scope.loadEverything = function() {
 
-    console.log('slk')
-
-
-
     if(!$scope.selectedTeam) return;
 
     var loadTodos = FirebaseFactory.getObject('todo');
@@ -86,7 +76,6 @@
       var whenEverythingIsLoaded = function() {
         counter++;
         if(counter > 4) {
-          console.log('stuff is loaded!');
           if($scope.firstLoad) {
             $scope.firstLoad = false;
             $scope.loading = false;
@@ -100,7 +89,6 @@
       tempList0.$loaded().then(function() {
         whenEverythingIsLoaded();
         $scope.lists[0] = arrayify(furtherSterilization(tempList0));
-        console.log('i made lists happen', $scope.lists[0]);
       });
       var tempList1 = FirebaseFactory.getCollection(['todo', 1]);
       tempList1.$loaded().then(function() {
@@ -139,10 +127,8 @@
     if($scope.inputFields[listNum] === '') return;
 
     var now = moment().format('l');
-    console.log(typeof now);
     var reg = new RegExp("(\d+/\d+/)\d\d(\d\d)/\1\2/");
     // now = reg.exec(now);
-    console.log(now);
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
@@ -152,8 +138,6 @@
     }].concat($scope.lists[listNum]);
 
     $scope.inputFields[listNum] = '';
-
-    // updateFirebaseTodos();
   }
 
   // Changes the current tag to the next tag. Also changes color
@@ -189,9 +173,6 @@
   // Options for sortableui directive
   $scope.sortableOptions = {
     connectWith: ".connectList",
-    // update: function(e, ui) {
-    //   $scope.updateFirebaseTodos();
-    // }
   };
 
     /////////////////////////
