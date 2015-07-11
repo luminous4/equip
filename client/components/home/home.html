@@ -22,7 +22,7 @@
           <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
               <h5><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;Recent Documents</h5>
-              <a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>
+              <!--<a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>-->
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
@@ -103,7 +103,7 @@
           <!-- Todo Controller -->
           <div ng-controller="TodoController" class="ibox float-e-margins">
             <div class="ibox-title">
-              <h5><i class="fa fa-table-o"></i>&nbsp;&nbsp;&nbsp;Todo List</h5>
+              <h5><i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;To-Do</h5>
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
@@ -119,7 +119,8 @@
                 </li>
                 <li class="dashboard-todo-button dashboard-agile-list-element">
                   <a ui-sref="index.todo">
-                    <button class="btn dashboard-agile-list-element btn-primary btn-block m-t"><i class="fa dashboard-agile-list-element fa-arrow-right"></i> Go to Todo List</button>
+                    <button class="btn dashboard-agile-list-element btn-primary btn-block m-t">
+                        <i class="fa dashboard-agile-list-element fa-arrow-right"></i> Go to To-Do</button>
                   </a>
                 </li>
               </ul>
