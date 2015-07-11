@@ -58,10 +58,6 @@ module.exports = function(grunt) {
       }
     },
 
-    casperjs: {
-      files: ['test/e2e/appSpec.js']
-    },
-
     karma: {
       options: {
         configFile: 'test/karma.config.js'
@@ -108,7 +104,7 @@ module.exports = function(grunt) {
       },
       ignore: ['node_modules/**', 'client/bower_components/**'],
       options: {
-        'no-preload': true 
+        'no-preload': true
       }
     },
 
@@ -182,7 +178,6 @@ module.exports = function(grunt) {
   grunt.registerTask('unit-test', [
     //'jshint',
     'karma'
-    // 'casperjs'
   ]);
 
 
