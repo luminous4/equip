@@ -341,3 +341,10 @@ cursor:default!important;
 .im-input {
   margin-left: 12px;
 }
+.photo-input {
+  padding-right: 30px;
+  padding-left: 10px;
+}
+.top-two-inputs {
+  padding-left: 0 !important;
+}

@@ -2,6 +2,7 @@
    angular.module('equip')
 
   .controller('LoginCtrl', function($scope, $firebaseAuth, $location, User, refUrl) {
+    localStorage.selectedTeam = 'null';
     var ref = new Firebase(refUrl);
     var loginObj = $firebaseAuth(ref);
 
