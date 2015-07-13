@@ -1,6 +1,6 @@
 (function(){
 angular.module('equip')
-	.controller('TextEditorCtrl', function ($scope, $firebaseObject, $stateParams,
+	.controller('TextEditorCtrl', function ($scope, $rootScope, $firebaseObject, $stateParams,
                                           $state, User, FirebaseFactory) {
 		$rootScope.goToTop();
 
