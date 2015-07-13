@@ -6530,6 +6530,9 @@ body.landing-page {
     margin-top: 25px;
     margin-left: 22px;
 }
+#landing-page-feature-image {
+    display: inline !important;
+}
 .landing-page .comments-avatar .commens-name {
     font-weight: 600;
     font-size: 14px;
