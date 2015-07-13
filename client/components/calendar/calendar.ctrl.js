@@ -9,7 +9,7 @@
     var currentUser = User.getCurrentUser();
     var currentUserObject = User.getUserInfo(currentUser.uid);
     var currentTeam;
-    if (localStorage.selectedTeam) {
+    if (localStorage.selectedTeam && localStorage.selectedTeam !== 'null') {
       currentTeam = JSON.parse(localStorage.selectedTeam).$value;
     }
 
