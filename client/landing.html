@@ -27,13 +27,18 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Equipp</a>
+                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+                    <!--<span class="sr-only">Toggle navigation</span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                    <!--<span class="icon-bar"></span>-->
+                <!--</button>-->
+                <div>
+                    <div class="logo-landing-wrapper">
+                        <img src="img/equipp_icon_white.png" class="logo-landing"/>
+                        <a class="navbar-brand" href="#"><span class="logo-text-landing">Equipp</span></a>
+                    </div>
+                </div>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -56,8 +61,12 @@
                         they'll need.<br/></h1>
                     <p>File management, chat, calendar, to do & more.</p>
                     <p>
-                        <a class="btn btn-lg btn-primary" ui-sref="register" role="button">Register</a>
-                        <a class="btn btn-lg btn-primary" ui-sref="login" role="button">Login</a>
+                        <a class="btn btn-lg btn-primary" ui-sref="login" role="button">
+                            <i class="fa fa-sign-in"></i> Login
+                        </a>
+                        <a class="btn btn-lg btn-primary" ui-sref="register" role="button">
+                            <i class="fa fa-user-plus"></i> Register
+                        </a>
                     </p>
                 </div>
                 <div class="carousel-image wow zoomIn">
@@ -76,7 +85,7 @@
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
             <h1>Groupware as <br/> <span class="navy"> adaptable as you need it to be.</span> </h1>
-            <p>Start at the dashboard, which gives you a helpful glance of your stuff.</p>
+            <p>Start at the dashboard, which gives you a helpful glance of your information.</p>
         </div>
     </div>
     <div class="row">
@@ -93,7 +102,7 @@
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
-            <img src="img/landing/dashboard.png" alt="dashboard">
+            <img src="img/landing/dashboard.png" alt="dashboard" class="img-responsive" id="landing-page-feature-image">
         </div>
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
@@ -102,9 +111,9 @@
                 <p>Get in touch with your friends and colleagues with chat and direct messaging.</p>
             </div>
             <div class="m-t-lg">
-                <i class="fa fa-table features-icon"></i>
-                <h2>Todo List</h2>
-                <p>Track your projects using the to-do board. </p>
+                <i class="fa fa-clock-o features-icon"></i>
+                <h2>To-Do</h2>
+                <p>Track your projects & tasks using To-Do. </p>
             </div>
         </div>
     </div>
@@ -124,13 +133,13 @@
                 <div class="team-member wow fadeInLeft">
                     <img src="img/landing/team/christiane.png" class="img-responsive img-circle" alt="Christiane Kammerl">
                     <h4><span class="navy">Christiane</span> Kammerl</h4>
-                    <p>Super sensible Software Engineer with a positive spirit and encouraging smile. </p>
+                    <p>Super savvy Software Engineer with a positive spirit and encouraging smile. </p>
                     <ul class="list-inline social-icon">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        <li><a href="http://www.github.com/ckammerl" target="_blank"><i class="fa fa-github"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        <li><a href="http://www.kammerl.com" target="_blank"><i class="fa fa-rss"></i></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        <li><a href="http://www.linkedin.com/in/christianekammerl" target="_blank"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -167,13 +176,13 @@
             </div>
             <div class="col-sm-3">
                 <div class="team-member wow fadeInRight">
-                    <img src="img/landing/team/nick.jpg" class="img-responsive img-circle" alt="Nick McCormick">
+                    <img src="img/landing/team/nick.png" class="img-responsive img-circle" alt="Nick McCormick">
                     <h4><span class="navy">Nick</span> McCormick</h4>
                     <p>Super sharp Software Engineer with a strong sense of initiative and humor.</p>
                     <ul class="list-inline social-icon">
                         <li><a href="https://github.com/kenning/" target="_blank"><i class="fa fa-github"></i></a>
                         </li>
-                        <li><a href="mailto:hwerzog@gmail.com"><i class="fa fa-fa-envelope-o"></i></a>
+                        <li><a href="mailto:hwerzog@gmail.com"><i class="fa fa-envelope-o"></i></a>
                         </li>
                         <li><a href="https://www.linkedin.com/in/nmcco" target="_blank"><i class="fa fa-linkedin"></i></a>
                         </li>
@@ -196,8 +205,8 @@
                 <div class="navy-line"></div>
                 <h1>Get Started</h1>
                 <p>Ready to start? Let's go!</p>
-                <a class="btn btn-lg btn-primary" ui-sref="register" role="button">Register</a>
-                <a class="btn btn-lg btn-primary" ui-sref="login" role="button">Login</a>
+                <a class="btn btn-lg btn-primary" ui-sref="login" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a class="btn btn-lg btn-primary" ui-sref="register" role="button"><i class="fa fa-user-plus"></i> Register</a>
             </div>
         </div>
         <div class="row">

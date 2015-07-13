@@ -1,9 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-8">
-    <h2>Team Edit Directory</h2>
+    <h2>Team Settings</h2>
     <ol class="breadcrumb">
       <li>
         <a ui-sref="index.home">Home</a>
+      </li>
+      <li>
+          Settings
       </li>
       <li class="active">
         <strong>{{currentTab}}</strong>
@@ -13,7 +16,7 @@
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <div style="padding-top:20px" class="center" ng-show="loading" >
+    <div class="center loading-spinner" ng-show="loading" >
       <i class="center fa fa-spinner fa-spin fa-5x" ></i>
     </div>
     <div ng-hide="loading" class="wrapper wrapper-content">
@@ -38,14 +41,14 @@
 
         <!-- Team List tab -->
 
-        <div class="ibox-content" style="min-height:200px" ng-show="currentTab === 'Team List'">
+        <div class="ibox-content" ng-show="currentTab === 'Team List'">
 
-          <div class="row m-b-sm m-t-sm">
-            <h3 style="padding-left:30px;padding-bottom:0px">Join a team</h3>
+          <div class="row m-b-sm m-t-sm team-edit-padding-25">
+            <h3 class="team-edit-join-title">Join a team</h3>
             <!-- <br/> -->
             <form ng-submit="tryToJoinTeam()">
-              <div class="input-group" style="padding:20px">              
-                <input type="text" class="form-control" ng-model="teamJoinString"> 
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="teamJoinString" placeholder="Enter a team name to join">
                 <span class="input-group-btn"> 
                   <button type="submit" class="btn btn-primary">
                     Go!
@@ -60,11 +63,8 @@
 
           <!-- Search bar -->
 
-          <h3 style="padding-left:10px;padding-bottom:20px">Edit your teams</h3>
-          <div class="col-md-12" style="padding-bottom:20px">
-            <div class="input-group" >
-              <input type="text" ng-model="searchString" placeholder="Search within teams" class="input-lg form-control"> 
-            </div>
+          <h3 class="team-edit-search-bar">Your Teams</h3>
+          <div class="col-md-12 team-edit-search-bar">
           </div>
 
           <!-- List of teams -->
@@ -117,7 +117,7 @@
                           <br/>
                         </td>
                         <td class="project-people">
-                          <span ng-repeat="user in editingTeamUserlist"><a href="google.com"><img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></a></span>
+                          <span ng-repeat="user in editingTeamUserlist"><img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></span>
                         </td>
                       </tr>
                     </tbody>
@@ -135,7 +135,7 @@
                   <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
-                        <label ng-click="flipPresence(user)" ng-repeat="user in allUsers" style="text-align:left;" class="project-people teamuserHover" ng-hide="hideOwnUser(user)">
+                        <label ng-click="flipPresence(user)" ng-repeat="user in allUsers" class="project-people teamuserHover pull-right" ng-hide="hideOwnUser(user)">
                           <div> 
                             <img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></img>
                             <span class="teamuserName">{{user.displayName}}</span>
@@ -143,14 +143,14 @@
                         </label>
                       </div>
                     </div>
-                    <h2 ng-show="triedToLeave" style="padding-bottom:20px">
+                    <h2 ng-show="triedToLeave" class="team-edit-padding-20">
                         You can't leave your last team!
                     </h2>
                     <div class="input-group m-b">
                       <button type="button" ng-show="currentTab === 'Create A Team'" ng-click="createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
-                      <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamSubmit()" class="btn btn-primary">Save changes!</button>   
-                      <button style="margin-left:20px" type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamDelete()" class="btn btn-primary">Delete this team</button>
-                      <button style="margin-left:20px" type="button" ng-show="currentTab === 'Edit Team' || currentTab === 'Create A Team'" ng-click="setTab('Team List')" class="btn btn-primary">Cancel</button>
+                      <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamSubmit()" class="btn btn-primary team-edit-btn">Save changes!</button>   
+                      <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamDelete()" class="btn btn-primary team-edit-btn">Delete this team</button>
+                      <button type="button" ng-show="currentTab === 'Edit Team' || currentTab === 'Create A Team'" ng-click="setTab('Team List')" class="btn btn-primary team-edit-btn">Cancel</button>
                     </div>
                   </div>
                 </div>

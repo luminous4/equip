@@ -54,11 +54,11 @@
         var end = "";
         for(var i = 0; i < str.length; i++) {
           if (i === 0) {
-            end += "(";
+            end += "";
           } else if (i === 3) {
-            end += ") ";
+            end += "-";
           } else if (i === 6) {
-            end += " - ";
+            end += "-";
           }
           end += str[i];
         }
@@ -76,7 +76,6 @@
       searchString = searchString.toLowerCase();
       // Using the forEach helper method to loop through the array
       angular.forEach(arr, function(item) {
-        console.log(item);
         if (item !== null && item !== undefined && item.displayName.toLowerCase().indexOf(searchString) !== -1) {
           result.push(item);
         }

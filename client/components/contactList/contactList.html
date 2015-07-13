@@ -6,7 +6,7 @@
         <a ui-sref="index.home">Home</a>
       </li>
       <li class="active">
-        <strong>Contact List</strong>
+        <strong>Contacts</strong>
       </li>
     </ol>
   </div>
@@ -16,7 +16,8 @@
     <div class="col-lg-12">
     <div class="{{mainPageClass}}">
       <div class="ibox">
-        <div class="ibox-content">
+        <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
+        <div ng-hide="loading" class="ibox-content">
 
           <div ng-show="currentContact === null" class="form-group">
             <form class="form-horizontal">
@@ -36,7 +37,6 @@
               <div id="tab-1" class="tab-pane active">
                 <div class="full-height-scroll" full-scroll>
                   <div class="table-responsive">
-                    <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
                     <table class="table table-hover">
                       <tbody>
                         <tr ng-repeat="contact in teamContacts | contactSearch:searchString" style="cursor:pointer">
@@ -46,7 +46,7 @@
                           <td ng-click="viewContact(contact)">{{getUserPhoneNumber(contact)}}</td>
                           <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                           <td class="client-status" ng-click="viewContact(contact)">{{contact.email}}</td>
-                          <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">Click for more info!</span></td>
+                          <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">More Info</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -61,11 +61,11 @@
 
     <!-- Contact Info -->
     
-    <div class="{{sideViewClass}}" ng-show="(currentContact !== null)" ng-click="undisplayContact()">
+    <div class="{{sideViewClass}}" ng-show="(currentContact !== null)">
       <div class="ibox">
         <div class="ibox-content">
           <div class="ibox-tools dropdown">
-            <i class="close-contact fa fa-times"></i>
+            <i class="close-contact fa fa-times" ng-click="undisplayContact()"></i>
           </div>
           <div class="tab-content">
             <div id="contact-1" class="tab-pane active" >
@@ -86,52 +86,33 @@
 
                   <table class="contact-table">
                     <tr>
-                      <td> 
-                         <span class="contact-type"><i class="fa fa-phone" > </i></span>
-                      </td>
                       <td>
-                          &nbsp;{{getUserPhoneNumber(currentContact)}}
-                      </td>
+                      <span> 
+                         <span class="contact-type"><i class="fa fa-phone fa-2x"> </i></span>
+                      </span>
+                      <h2 class="phone-number">
+                          <a ng-href="tel://{{getUserPhoneNumber(currentContact)}}">{{getUserPhoneNumber(currentContact)}}</a>
+                      </h2>
+                    </td>
                     </tr>
-                    <tr ng-show="provided('Twitter')">
-                      <td> 
-                         <i class="fa fa-twitter"><i/>  
-                      </td>
+                    <tr>
                       <td>
-                        &nbsp;<a target="_blank" href="http://{{currentContact.Twitter}}">{{currentContact.Twitter}}</a>
-                      </td>
-                    </tr>                   
-                    <tr ng-show="provided('LinkedIn')">
-                      <td> 
-                         <i class="fa fa-linkedin"><i/>  
-                      </td>
-                      <td>
-                        &nbsp;<a target="_blank" href="http://{{currentContact.LinkedIn}}">{{currentContact.LinkedIn}}</a>
-                      </td>
-                    </tr>                    
-                    <tr ng-show="provided('Facebook')">
-                      <td> 
-                         <i class="fa fa-facebook-square"><i/>  
-                      </td>
-                      <td>
-                        &nbsp;<a target="_blank" href="http://{{currentContact.Facebook}}">{{currentContact.Facebook}}</a>
-                      </td>
-                    </tr>                   
-                    <tr ng-show="provided('GitHub')">
-                      <td> 
-                         <i class="fa fa-github"><i/>  
-                      </td>
-                      <td>
-                        &nbsp;<a target="_blank" href="http://{{currentContact.GitHub}}">{{currentContact.GitHub}}</a>
-                      </td>
-                    </tr>  
-                    <tr ng-show="provided('Other')">
-                      <td> 
-                         <i class="fa fa-info"><i/>  
-                      </td>
-                      <td>
-                        &nbsp;<a target="_blank" href="http://{{currentContact.Other}}">{{currentContact.Other}}</a>
-                      </td>
+                      <span ng-if="provided('Twitter')"> 
+                         <a target="_blank" ng-href="http://{{currentContact.Twitter}}" ><i class="fa fa-twitter fa-3x"></i></a>  
+                      </span>                  
+                      <span ng-if="provided('LinkedIn')"> 
+                         <a ng-href="http://{{currentContact.LinkedIn}}" target="_blank" ><i class="fa fa-linkedin fa-3x" ></i></a>
+                      </span>
+                      <span ng-if="provided('Facebook')"> 
+                         <a target="_blank" href="http://{{currentContact.Facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
+                      </span>                   
+                      <span ng-if="provided('GitHub')"> 
+                         <a target="_blank" href="http://{{currentContact.GitHub}}"><i class="fa fa-github fa-3x"></i></a>
+                      </span>
+                      <span ng-if="provided('Other')"> 
+                         <a target="_blank" href="http://{{currentContact.Other}}"><i class="fa fa-info fa-3x"></i></a>
+                      </span>
+                    </td>
                     </tr>                 
                   </table>
 

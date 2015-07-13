@@ -1,13 +1,16 @@
 <div>
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-      <h2>Settings</h2>
+      <h2>Account Settings</h2>
       <ol class="breadcrumb">
         <li>
           <a ui-sref="index.home">Home</a>
         </li>
+          <li>
+              Settings
+          </li>
         <li class="active">
-          <strong>Settings</strong>
+          <strong>Account</strong>
         </li>
       </ol>
     </div>
@@ -17,13 +20,13 @@
     <div class="col-lg-12">
       <div class="ibox float-e-margins settings-display">
         <div class="ibox-title">
-          <h5>Update your personal info</h5>
+          <h5>Personal Information</h5>
         </div>
         <div class="ibox-content">
           <form name="userForm" class="form-horizontal">
             <div class="form-group">
-              <label class="col-sm-2 control-label">Display Name</label>
-              <div class="col-sm-10">
+              <label class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10 top-two-inputs">
                 <input ng-focus="checkSuccess()" type="text" class="form-control" placeholder="{{showDisplayName || 'Jane Doe'}}" ng-model="displayName">
               </div>
             </div>
@@ -32,7 +35,7 @@
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Phone Number</label>
-              <div class="col-sm-10">
+              <div class="col-sm-10 top-two-inputs">
                 <input type="text" ng-focus="checkSuccess()" class="form-control" placeholder="{{showPhoneNumber || '4085555555'}}" ng-model="phoneNumber">
               </div>
             </div>
@@ -66,26 +69,16 @@
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Profile Photo URL</label>
-              <div class="col-sm-10"> 
+              <div class="col-sm-10 photo-input"> 
                 <input type="text" class="form-control" ng-focus="checkSuccess()" ng-model="imgUrl">
               </div>
             </div>
 
             <div class="hr-line-dashed"></div>
 
-              <div class="form-group">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-10"> 
-                  <button class="btn team-direct"><a ui-sref="index.teamedit">Manage Your Teams</a></button>
-                </div>
-              </div>
-
-            <div class="hr-line-dashed"></div>
-
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                <h2 ng-show="success">Saved!</h2>
-                  <button class="btn btn-primary" ng-click="saveUserInfo()">Save changes</button>
+                  <button class="btn btn-primary" ng-click="saveUserInfo()">Save changes</button> <span ng-show="success">Saved!</span>
                 </div>
             </div>
           </form>

@@ -1,6 +1,6 @@
 {
   "name": "equip",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/luminous4/equip",
   "authors": [
     "Emily Shenfield",
@@ -44,7 +44,9 @@
     "WOW": "~1.1.2",
     "classie": "~1.0.1",
     "angular-ui-router-styles": "~0.0.5",
-    "ng-transloadit": "*"
+    "ng-transloadit": "*",
+    "blueimp-gallery": "~2.15.2",
+    "angular-mocks": "latest"
   },
   "resolutions": {
     "angular": ">=1.2.x"

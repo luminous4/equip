@@ -14,26 +14,33 @@
           <a ui-sref="index.home"><i class="fa fa fa-home"></i> <span class="nav-label">Home</span> </a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="index.todo"><i class="fa fa-table"></i> <span class="nav-label">Todo</span> </a>
+          <a ui-sref="index.chat"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="index.calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="index.chat"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+            <a ui-sref="index.documents"><i class="fa fa-hdd-o"></i> <span class="nav-label">Drive</span></a>
         </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.contactlist"><i class="fa fa-users"></i> <span class="nav-label">Contact List</span></a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.documents"><i class="fa fa-file-text"></i> <span class="nav-label">Documents</span></a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.settings"><i class="fa fa-cog"></i> <span class="nav-label">Account Settings</span></a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.teamedit"><i class="fa fa-briefcase"></i> <span class="nav-label">Team Settings</span></a>
-        </li>
+          <li ui-sref-active="active">
+              <a ui-sref="index.todo"><i class="fa fa-clock-o"></i> <span class="nav-label">To-Do</span> </a>
+          </li>
+          <li ui-sref-active="active">
+              <a ui-sref="index.contactlist"><i class="fa fa-phone"></i> <span class="nav-label">Contacts</span></a>
+          </li>
+          <li ng-class="{active: $state.includes('settings')}">
+              <a href=""><i class="fa fa-cog"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level" ng-class="{in: $state.includes('settings')}">
+
+                  <li ui-sref-active="active">
+                      <a ui-sref="settings.account"><i class="fa fa-cog"></i> <span class="nav-label">Account</span></a>
+                  </li>
+                  <li ui-sref-active="active">
+                      <a ui-sref="settings.teamedit"><i class="fa fa-users"></i> <span class="nav-label">Team</span></a>
+
+              </ul>
+          </li>
+
       </ul>
 
     </div>

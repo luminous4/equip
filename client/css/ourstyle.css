@@ -200,32 +200,49 @@
   width: 70px;
   height: 70px;
 }
+.logo-landing-wrapper {
+  position: relative;
+}
+.logo-landing {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 16px;
+  left: -5px;
+}
+.logo-text-landing {
+  padding-left: 20px;
+}
+.logo-scroll {
+  top: 25px;
+}
+.text-scroll {
+  padding-left: 25px;
+}
 .message-alert {
   position: fixed;
   z-index: 99999;
   top: 12px !important;
   right: 30px !important;
 }
+
+/* top navbar media queries */
 @media (min-width: 768px) {
   .col-sm-9 {
     width: 75% !important;
   }
   .disappear-desktop-width {
-    display:none;
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    top: 12px;
+    width: 100%;
   }
 }
 @media (max-width: 768px) {
   .disappear-mobile-width {
     display:none;
   }
-}
-@media (min-width: 768px)
-.col-sm-9 {
-  width: 75% !important;
-}
-
-.col-sm-9 {
-  width: 75% !important;
 }
 
 .tab-pane {
@@ -238,11 +255,96 @@
 }
 .imButton {
   background-color: #18a689 !important;
-  border-color: #18a689 !important;  
+  border-color: #18a689 !important;
 }
 .chat-activity-list .col-sm-1 {
   width: 4% !important;
 }
 .chat-activity-list .media-body {
   padding-top: 5px;
+}
+.contact-table span {
+  padding: 5px;
+}
+.contact-table .phone-number {
+  display: inline-block !important;
+}
+
+/* team edit */
+.loading-spinner {
+  padding-top:20px;
+}
+.pointer-cursor {
+  cursor:pointer;
+}
+.team-edit-join-title {
+  padding-bottom:10px;
+  padding-left:0px!important;
+}
+.team-edit-padding-20 {
+  padding:20px;
+}
+.team-edit-search-bar {
+  padding-left:10px;
+  padding-bottom:10px;
+}
+.team-edit-search-bar-inner-div {
+  padding-left:10px;
+  padding-bottom:20px!important;
+}
+.team-edit-btn {
+  margin-left:20px;
+}
+.team-edit-padding-25 {
+  padding-left:25px!important;
+  padding-bottom:15px;
+}
+
+/* todo list */
+.todo-input {
+  width:75%!important;
+}
+
+/* dashboard */
+.dashboard-agile-list {
+  padding:20px;
+  padding-top:15px;
+}
+.dashboard-agile-list-element {
+
+}
+.dashboard-agile-list-tag {
+background-color: rgb(255, 255, 255);
+border: 1px solid rgb(231, 234, 236);
+border-radius: 3px;
+color: rgb(103, 106, 108);
+display: block;
+float: right;
+font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 12px;
+height: 22px;
+line-height: 20px;
+padding: 1px 5px;
+text-align: left;
+text-decoration: none;
+cursor:default!important;
+}
+.dashboard-padding {
+  margin:20px;
+}
+.dashboard-todo-button {
+  margin-bottom:
+}
+.dashboard-team-select {
+  padding-top:5px!important;
+}
+.im-input {
+  margin-left: 12px;
+}
+.photo-input {
+  padding-right: 30px;
+  padding-left: 10px;
+}
+.top-two-inputs {
+  padding-left: 0 !important;
 }

@@ -1551,6 +1551,8 @@ table.dataTable thead .sorting:after {
     text-align: center;
     font-size: 12px;
     line-height: 1.428571429;
+    outline: 0;
+    outline: none;
 }
 .btn-circle.btn-lg {
     width: 50px;
@@ -4894,13 +4896,15 @@ table.issue-tracker tbody tr td {
     margin: 0;
 }
 .agile-list li {
+    margin: 10px 0px!important;
+}
+.agile-list li:not(.dashboard-todo-button){
     background: #FAFAFB;
     border: 1px solid #e7eaec;
-    margin: 0px 0 10px 0;
     padding: 10px;
     border-radius: 2px;
 }
-.agile-list li:hover {
+.agile-list li:not(.dashboard-agile-list-element):hover  {
     cursor: pointer;
     background: #fff;
 }
@@ -6301,10 +6305,8 @@ body.landing-page {
     width: 100%;
 }
 .landing-page .header-back.one {
-    background: url('../img/landing/header_one.jpg') 50% 0 no-repeat;
 }
 .landing-page .header-back.two {
-    background: url('../img/landing/header_two.jpg') 50% 0 no-repeat;
 }
 .landing-page .carousel {
     height: 470px;
@@ -6514,7 +6516,6 @@ body.landing-page {
     color: #1ab394;
 }
 .landing-page .contact {
-    background-image: url('../img/landing/word_map.png');
     background-position: 50% 50%;
     background-repeat: no-repeat;
     margin-top: 60px;
@@ -6528,6 +6529,9 @@ body.landing-page {
 .landing-page .comments-avatar {
     margin-top: 25px;
     margin-left: 22px;
+}
+#landing-page-feature-image {
+    display: inline !important;
 }
 .landing-page .comments-avatar .commens-name {
     font-weight: 600;

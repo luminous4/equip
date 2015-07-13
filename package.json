@@ -1,6 +1,6 @@
 {
   "name": "equip",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "### A group collaboration tool with a customizable set of features to fit any group's needs. ###",
   "main": "server/server.js",
   "scripts": {
@@ -59,7 +59,6 @@
     "phantomjs": "~1.9.17",
     "karma-phantomjs-launcher": "~0.1",
     "jasmine": "~2.3.1",
-    "grunt-casperjs": "^2.1.0",
     "karma-unicorn-reporter": "~0.1.4"
   }
 }
