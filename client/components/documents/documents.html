@@ -1,97 +1,93 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div id="blueimp-gallery" class="blueimp-gallery">
-        <div class="slides"></div>
-        <h3 class="title"></h3>
-        <a class="prev">‹</a>
-        <a class="next">›</a>
-        <a class="close">×</a>
-        <a class="play-pause"></a>
-        <ol class="indicator"></ol>
-    </div>
-    <div class="col-lg-9">
-        <h2>Documents</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a ui-sref="index.home">Home</a>
-            </li>
-            <li class="active">
-                <strong>Documents</strong>
-            </li>
-        </ol>
-    </div>
+  <div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  </div>
+  <div class="col-lg-9">
+    <h2>Documents</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a ui-sref="index.home">Home</a>
+      </li>
+      <li class="active">
+        <strong>Documents</strong>
+      </li>
+    </ol>
+  </div>
 </div>
+
 <!-- Document Controller -->
+
 <div class="wrapper wrapper-content" ng-controller="DocumentCtrl">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <div class="file-manager">
-                        <a ui-sref="index.texteditor"><button class="btn btn-primary btn-block">New Document</button></a>
-                        <div class="clearfix"></div>
-                        <form id="upload-form" enctype="multipart/form-data">
-                            <input type="file" name="my_file" multiple="multiple" />
-                            <input type="submit" value="Upload">
-                            <input type="hidden" name="teamname" value="{{selectedTeam.$value}}">
-                            <!--<input type="hidden" name="username" value="usernamehere">-->
-                        </form>
-                    </div>
-                </div>
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <div class="file-manager">
+            <a ui-sref="index.texteditor"><button class="btn btn-primary btn-block">New Document</button></a>
+            <div class="clearfix"></div>
+              <form id="upload-form" enctype="multipart/form-data">
+                  <input type="file" name="my_file" multiple="multiple" />
+                  <input type="submit" value="Upload">
+                  <input type="hidden" name="teamname" value="{{selectedTeam.$value}}">
+              </form>
             </div>
         </div>
-        <!-- Start File Content -->
-        <div class="col-md-9 animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Images -->
-                    <div class="file-box" ng-repeat="image in imageList">
-                        <div class="file">
-                            <span class="corner"></span>
-                            <a ng-href="{{image.preview[0].url}}" data-gallery="">
-                                <div class="image">
-                                    <img alt="image" class="img-responsive" ng-src="{{image.thumbnail[0].url}}"></img>
-                                </div>
-                                <div class="file-name">
-                                    {{image.preview[0].name}}
-                                    <br/>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Documents -->
-                    <div class="file-box" ng-repeat="document in documentList">
-                        <div class="lightBoxGallery">
-                            <div class="file">
-                                <a ui-sref="index.texteditor({ documentId: document.$id,
-                                                     documentTitle: document.title,
-                                                     documentBody: document.body})">
-                                    <span class="corner"></span>
+      </div>
 
-                                    <div class="icon">
-                                        <i class="fa fa-file"></i>
-                                    </div>
-                                    <div class="file-name">
-                                        {{document.title}}
-                                        <br/>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+      <!-- Start File Content -->
 
-                        </div>
-                    </div>
-                    <!-- End Document List-->
-
-
-                    <!--<h5>Files</h5>-->
-                    <!--<div ibox-tools></div>-->
-                    <!--</div>-->
-                    <!--<div class="ibox-content">-->
-                    <!--Your files will appear here as you create them.-->
-                    <!--</div>-->
+      <div class="col-md-9 animated fadeInRight">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Images -->
+            <div class="file-box" ng-repeat="image in imageList">
+                <div class="file">
+                  <span class="corner"></span>
+                    <a ng-href="{{image.preview[0].url}}" data-gallery="">
+                      <div class="image">
+                        <img alt="image" class="img-responsive" ng-src="{{image.thumbnail[0].url}}"></img>
+                      </div>
+                      <div class="file-name">
+                        {{image.preview[0].name}}
+                        <br/>
+                      </div>
+                    </a>
                 </div>
             </div>
-            <!--End File Content-->
-        </div>
-    </div>
-</div>
+
+            <!-- Documents -->
+
+            <div class="file-box" ng-repeat="document in documentList">
+              <div class="lightBoxGallery">
+                <div class="file">
+                  <a ui-sref="index.texteditor({ documentId: document.$id,
+                                               documentTitle: document.title,
+                                               documentBody: document.body})">
+                    <span class="corner"></span>
+                    <div class="icon">
+                      <i class="fa fa-file"></i>
+                    </div>
+                    <div class="file-name">
+                      {{document.title}}
+                      <br/>
+                    </div>
+                  </a>
+                </div>
+                <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+              </div> <!-- lightBoxGallery -->
+            </div>
+            <!-- End Document List-->
+          </div> <!-- col-12 -->
+        </div> <!-- row -->
+        <!--End File Content-->
+      </div> <!-- col-md-9 -->
+  </div> <!-- row -->
+</div> <!-- wrapper -->
+

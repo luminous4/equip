@@ -14,114 +14,113 @@
 <div class="wrapper wrapper-content">
   <div class="row">
     <div class="col-lg-12">
-    <div class="{{mainPageClass}}">
-      <div class="ibox">
-        <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
-        <div ng-hide="loading" class="ibox-content">
-
-          <div ng-show="currentContact === null" class="form-group">
-            <form class="form-horizontal">
+      <div class="{{mainPageClass}}">
+        <div class="ibox">
+          <i ng-show="loading" class="center fa fa-spinner fa-spin fa-5x"></i>
+          <div ng-hide="loading" class="ibox-content">
+            <div ng-show="currentContact === null" class="form-group">
+              <form class="form-horizontal">
+                <input type="text" placeholder="Search for contacts" class="form-control" ng-model="searchString">
+              </form>
+            </div>
+            <div ng-hide="currentContact === null" class="input-group">
               <input type="text" placeholder="Search for contacts" class="form-control" ng-model="searchString">
-            </form>
-          </div>
-          <div ng-hide="currentContact === null" class="input-group">
-            <input type="text" placeholder="Search for contacts" class="form-control" ng-model="searchString">
-          </div>
+            </div>
 
+            <div class="clients-list">
 
-          <div class="clients-list">
+              <!-- Contact List -->
 
-            <!-- Contact List -->
-
-            <div class="tab-content">
-              <div id="tab-1" class="tab-pane active">
-                <div class="full-height-scroll" full-scroll>
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <tbody>
-                        <tr ng-repeat="contact in teamContacts | contactSearch:searchString" style="cursor:pointer">
-                          <td class="client-avatar" ng-click="viewContact(contact)"><img alt="image" ng-src="{{contact.imgUrl}}"> </td>
-                          <td ng-click="viewContact(contact)"><a class="client-link">{{contact.displayName}}</a></td>
-                          <td class="contact-type"><i class="fa fa-phone"> </i></td>
-                          <td ng-click="viewContact(contact)">{{getUserPhoneNumber(contact)}}</td>
-                          <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                          <td class="client-status" ng-click="viewContact(contact)">{{contact.email}}</td>
-                          <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">More Info</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                  <div class="full-height-scroll" full-scroll>
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <tbody>
+                          <tr ng-repeat="contact in teamContacts | contactSearch:searchString" style="cursor:pointer">
+                            <td class="client-avatar" ng-click="viewContact(contact)"><img alt="image" ng-src="{{contact.imgUrl}}"> </td>
+                            <td ng-click="viewContact(contact)"><a class="client-link">{{contact.displayName}}</a></td>
+                            <td class="contact-type"><i class="fa fa-phone"> </i></td>
+                            <td ng-click="viewContact(contact)">{{getUserPhoneNumber(contact)}}</td>
+                            <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                            <td class="client-status" ng-click="viewContact(contact)">{{contact.email}}</td>
+                            <td class="client-status" ng-show="currentContact === null" ng-click="viewContact(contact)"><span class="label label-primary">More Info</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
 
     <!-- Contact Info -->
-    
-    <div class="{{sideViewClass}}" ng-show="(currentContact !== null)">
-      <div class="ibox">
-        <div class="ibox-content">
-          <div class="ibox-tools dropdown">
-            <i class="close-contact fa fa-times" ng-click="undisplayContact()"></i>
-          </div>
-          <div class="tab-content">
-            <div id="contact-1" class="tab-pane active" >
-              <div class="row m-b-lg">
-                <div class="col-lg-3 text-center">
-                  <div class="m-b-sm">
-                    <img alt="image" class="img-circle" ng-src="{{currentContact.imgUrl}}"
-                    style="width: 62px">
+
+      <div class="{{sideViewClass}}" ng-show="(currentContact !== null)">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="ibox-tools dropdown">
+              <i class="close-contact fa fa-times" ng-click="undisplayContact()"></i>
+            </div>
+            <div class="tab-content">
+              <div id="contact-1" class="tab-pane active" >
+                <div class="row m-b-lg">
+                  <div class="col-lg-3 text-center">
+                    <div class="m-b-sm">
+                      <img alt="image" class="img-circle" ng-src="{{currentContact.imgUrl}}"
+                      style="width: 62px">
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-9">
-                  <h2>{{currentContact.displayName}}</h2>
-                  <a href="mailto:{{currentContact.email}}">
-                    <button type="button" class="btn btn-primary btn-sm btn-block email"><i
-                      class="fa fa-envelope"></i> Send Email
-                    </button>
-                  </a>
+                  <div class="col-lg-9">
+                    <h2>{{currentContact.displayName}}</h2>
+                    <a href="mailto:{{currentContact.email}}">
+                      <button type="button" class="btn btn-primary btn-sm btn-block email"><i
+                        class="fa fa-envelope"></i> Send Email
+                      </button>
+                    </a>
 
-                  <table class="contact-table">
-                    <tr>
-                      <td>
-                      <span> 
-                         <span class="contact-type"><i class="fa fa-phone fa-2x"> </i></span>
-                      </span>
-                      <h2 class="phone-number">
-                          <a ng-href="tel://{{getUserPhoneNumber(currentContact)}}">{{getUserPhoneNumber(currentContact)}}</a>
-                      </h2>
-                    </td>
-                    </tr>
-                    <tr>
-                      <td>
-                      <span ng-if="provided('Twitter')"> 
-                         <a target="_blank" ng-href="http://{{currentContact.Twitter}}" ><i class="fa fa-twitter fa-3x"></i></a>  
-                      </span>                  
-                      <span ng-if="provided('LinkedIn')"> 
-                         <a ng-href="http://{{currentContact.LinkedIn}}" target="_blank" ><i class="fa fa-linkedin fa-3x" ></i></a>
-                      </span>
-                      <span ng-if="provided('Facebook')"> 
-                         <a target="_blank" href="http://{{currentContact.Facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
-                      </span>                   
-                      <span ng-if="provided('GitHub')"> 
-                         <a target="_blank" href="http://{{currentContact.GitHub}}"><i class="fa fa-github fa-3x"></i></a>
-                      </span>
-                      <span ng-if="provided('Other')"> 
-                         <a target="_blank" href="http://{{currentContact.Other}}"><i class="fa fa-info fa-3x"></i></a>
-                      </span>
-                    </td>
-                    </tr>                 
-                  </table>
+                    <table class="contact-table">
+                      <tr>
+                        <td>
+                        <span>
+                           <span class="contact-type"><i class="fa fa-phone fa-2x"> </i></span>
+                        </span>
+                        <h2 class="phone-number">
+                            <a ng-href="tel://{{getUserPhoneNumber(currentContact)}}">{{getUserPhoneNumber(currentContact)}}</a>
+                        </h2>
+                      </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        <span ng-if="provided('Twitter')">
+                           <a target="_blank" ng-href="http://{{currentContact.Twitter}}" ><i class="fa fa-twitter fa-3x"></i></a>
+                        </span>
+                        <span ng-if="provided('LinkedIn')">
+                           <a ng-href="http://{{currentContact.LinkedIn}}" target="_blank" ><i class="fa fa-linkedin fa-3x" ></i></a>
+                        </span>
+                        <span ng-if="provided('Facebook')">
+                           <a target="_blank" href="http://{{currentContact.Facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
+                        </span>
+                        <span ng-if="provided('GitHub')">
+                           <a target="_blank" href="http://{{currentContact.GitHub}}"><i class="fa fa-github fa-3x"></i></a>
+                        </span>
+                        <span ng-if="provided('Other')">
+                           <a target="_blank" href="http://{{currentContact.Other}}"><i class="fa fa-info fa-3x"></i></a>
+                        </span>
+                      </td>
+                      </tr>
+                    </table>
 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </div> <!-- col-12 -->
+  </div>  <!-- row -->
+</div> <!-- wrapper -->

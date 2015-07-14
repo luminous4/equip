@@ -18,11 +18,12 @@
               </div>
             </div>
           </div>
+
           <!-- Documents Widget -->
+
           <div ng-controller="DocumentCtrl" class="ibox float-e-margins">
             <div class="ibox-title">
               <h5><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;Recent Documents</h5>
-              <!--<a ui-sref="index.texteditor"><span class="label label-primary">New Document</span></a>-->
               <div ibox-tools></div>
             </div>
             <div class="ibox-content no-padding">
@@ -35,8 +36,10 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> <!-- col-lg-4 -->
+
         <!-- Chat Widget-->
+
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -44,33 +47,29 @@
               <div ibox-tools></div>
             </div>
             <div class="ibox-content">
-
               <div>
                 <div class="feed-activity-list" ng-controller="ChatCtrl as chat">
-
                   <div class="feed-element" ng-repeat="message in dashboardMessages">
                     <a ui-sref="profile" class="pull-left">
                       <img alt="image" class="img-circle" ng-src="{{message.userImg}}">
                     </a>
-
                     <div class="media-body ">
                       <small class="pull-right">{{message.chatName}}</small>
                       <strong>{{message.text}}</strong><br>
                       <small class="text-muted">{{message.displayDate}}</small>
-
                     </div>
                   </div>
                 </div>
                 <a ui-sref="index.chat">
-                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-right"></i> Go to Chat</button>
+                  <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-right"></i> Go to Chat</button>
                 </a>
               </div>
-
-            </div>
+            </div> <!-- ibox-content -->
           </div>
-
         </div>
+
         <!-- Calendar Widget -->
+
         <div class="col-lg-4">
           <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -79,7 +78,6 @@
             </div>
             <!-- Calendar Controller-->
             <div ng-controller="CalendarCtrl as calendar" class="ibox-content inspinia-timeline">
-
               <div class="timeline-item" ng-repeat="event in dashboardEvents">
                 <div class="row">
                   <div class="col-xs-3 date">
@@ -89,23 +87,25 @@
                   </div>
                   <div class="col-xs-7 content no-top-border">
                     <p class="m-b-xs">
-                      <strong>{{event.title}}</strong></p>
-
-
+                      <strong>{{event.title}}</strong>
+                    </p>
                   </div>
-                </div>
-              </div>
+                </div> <!-- row -->
+              </div> <!-- timeline-item -->
               <a ui-sref="index.calendar">
                 <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-right"></i> Go to Calendar</button>
               </a>
             </div>
           </div>
+
           <!-- Todo Controller -->
+
           <div ng-controller="TodoController" class="ibox float-e-margins">
             <div class="ibox-title">
               <h5><i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;To-Do</h5>
               <div ibox-tools></div>
             </div>
+
             <div class="ibox-content no-padding">
               <ul class="agile-list list-group dashboard-agile-list">
                 <li class="{{task.statusClass}}-element dashboard-agile-list-element" ng-repeat="task in lists[0]">
@@ -120,15 +120,15 @@
                 <li class="dashboard-todo-button dashboard-agile-list-element">
                   <a ui-sref="index.todo">
                     <button class="btn dashboard-agile-list-element btn-primary btn-block m-t">
-                        <i class="fa dashboard-agile-list-element fa-arrow-right"></i> Go to To-Do</button>
+                      <i class="fa dashboard-agile-list-element fa-arrow-right"></i> Go to To-Do
+                    </button>
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-        </div>
-
+            </div> <!-- ibox-content -->
+          </div> <!-- TodoController -->
+        </div> <!-- col-lg-4 -->
       </div>
     </div>
   </div>
+</div>
