@@ -53,7 +53,6 @@ module.exports = function(grunt) {
           'client/js/plugins/**/*.js',
           'client/js/angular-nouislider.js',
           'client/js/icheck.min.js'
-
         ]
       }
     },
@@ -157,12 +156,10 @@ module.exports = function(grunt) {
 
   });
 
-
   grunt.registerTask('rebase', [
     'shell:rebase',
     'build'
   ]);
-
 
   grunt.registerTask('push', [
     'shell:rebase',
@@ -180,7 +177,6 @@ module.exports = function(grunt) {
     'karma'
   ]);
 
-
   grunt.registerTask('build', [
     'browserify',
     'concat',
@@ -193,5 +189,4 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin'
   ]);
-
 };
