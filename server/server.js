@@ -10,4 +10,3 @@ app.use(express.static(__dirname + '/../client'));
 var server = app.listen(port, function () {
 	console.log('Equip listening at http://localhost:%s', port);
 });
-

@@ -70,7 +70,7 @@
         $scope.firstLoad = false;
         $scope.loading = false;
         return;
-      } 
+      }
 
       var counter = 0;
       var whenEverythingIsLoaded = function() {
@@ -119,7 +119,7 @@
   $scope.loadEverything();
 
   $rootScope.$watch('selectedTeam', function() {
-    $scope.loadEverything();  
+    $scope.loadEverything();
   });
 
   // Submits a form to the provided list to create a new task
@@ -128,7 +128,6 @@
 
     var now = moment().format('l');
     var reg = new RegExp("(\d+/\d+/)\d\d(\d\d)/\1\2/");
-    // now = reg.exec(now);
 
     $scope.lists[listNum] = [{
       content: $scope.inputFields[listNum],
@@ -175,9 +174,9 @@
     connectWith: ".connectList",
   };
 
-    /////////////////////////
-    /// Utility functions ///
-    /////////////////////////
+  /////////////////////////
+  /// Utility functions ///
+  /////////////////////////
 
   // Updates firebase with the entire todo list dataset
   $scope.updateFirebaseTodos = function() {

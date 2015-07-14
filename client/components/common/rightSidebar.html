@@ -2,13 +2,12 @@
   <div class="sidebar-container" full-scroll>
 
     <ul class="nav nav-tabs navs-2">
-
-      <li ng-class="{active: tab1}"><a data-tab-number="1" ng-click="switchTabs($event)" ng-init="tab1 = true">
-        Contacts
-      </a></li>
-      <li ng-class="{active: tab2}"><a  data-tab-number="2" ng-click="switchTabs($event)">
-        Messages
-      </a></li>
+      <li ng-class="{active: tab1}">
+        <a data-tab-number="1" ng-click="switchTabs($event)" ng-init="tab1 = true">Contacts</a>
+      </li>
+      <li ng-class="{active: tab2}">
+        <a  data-tab-number="2" ng-click="switchTabs($event)">Messages</a>
+      </li>
     </ul>
 
     <div class="tab-content">
@@ -36,25 +35,25 @@
             <div ng-repeat="message in myMessages">
               <div ng-class="rightOrLeft(message.sender)">
                 <div class="author-name">
-                  {{message.displayName}} 
+                  {{message.displayName}}
                   <small class="chat-date">
                     {{message.displayDate}}
                   </small>
                 </div>
-              <div class="chat-message active">
-                {{message.text}}
+                <div class="chat-message active">
+                  {{message.text}}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <form ng-submit="addMessage()" class="form-chat imSend">
-        <div class="input-group input-group-sm im-input"><input ng-model="message" type="text" class="form-control"> <span class="input-group-btn"> <button
-          class="btn btn-primary" type="button">Send
-        </button> </span></div>
+        <div class="input-group input-group-sm im-input">
+          <input ng-model="message" type="text" class="form-control">
+          <span class="input-group-btn"><button class="btn btn-primary" type="button">Send</button></span>
+        </div>
       </form>
     </div>
-  </div>
-
-  </div>
+  </div> <!-- tab content -->
+  </div> <!-- sidebar-container -->
 </div>

@@ -19,11 +19,6 @@ function iboxTools($timeout) {
                     ibox.find('[id^=map-]').resize();
                 }, 50);
             }
-            // Function for close ibox
-            // $scope.closebox = function () {
-            //     var ibox = $element.closest('div.ibox');
-            //     ibox.remove();
-            // }
         }
     };
 };

@@ -59,12 +59,6 @@ function config($stateProvider, $urlRouterProvider) {
 			templateUrl: 'components/documents/documents.html',
 			data: { pageTitle: 'Documents' },
 			authenticate: true
-			//resolve: {
-			//	uploader: ['$ocLazyLoad', function($ocLazyLoad) {
-			//		// you can lazy load files for an existing module
-			//		return $ocLazyLoad.load('/components/documents/documents.jq.js');
-			//	}]
-			//}
 		})
 		.state('index.texteditor', {
 			url: '/texteditor',
@@ -110,5 +104,3 @@ angular
    		}
  		});
 	});
-
-

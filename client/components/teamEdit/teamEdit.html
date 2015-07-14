@@ -49,10 +49,10 @@
             <form ng-submit="tryToJoinTeam()">
               <div class="input-group">
                 <input type="text" class="form-control" ng-model="teamJoinString" placeholder="Enter a team name to join">
-                <span class="input-group-btn"> 
+                <span class="input-group-btn">
                   <button type="submit" class="btn btn-primary">
                     Go!
-                  </button> 
+                  </button>
                 </span>
               </div>
             </form>
@@ -60,12 +60,10 @@
           <div class="hr-line-dashed"></div>
           <br/>
 
-
           <!-- Search bar -->
 
           <h3 class="team-edit-search-bar">Your Teams</h3>
-          <div class="col-md-12 team-edit-search-bar">
-          </div>
+          <div class="col-md-12 team-edit-search-bar"></div>
 
           <!-- List of teams -->
 
@@ -87,14 +85,14 @@
                   </td>
                   <td class="project-actions">
                     <!-- <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a> -->
-                    <a ng-click="setTab('Edit Team', team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a> 
+                    <a ng-click="setTab('Edit Team', team)" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
                     <a ng-click="leaveTeam(team)" class="btn btn-white btn-sm"><i class="fa fa-user-times"></i> Leave </a>
                   </td>
                 </tr>
               </tbody>
             </table>
             <h2 ng-show="triedToLeave">
-              You can't leave your last team! 
+              You can't leave your last team!
             </h2>
           </div>
         </div>
@@ -108,7 +106,7 @@
                 <div>
 
                   <!-- Displayed team -->
-                  
+
                   <table class="table table-hover">
                     <tbody>
                       <tr>
@@ -136,7 +134,7 @@
                     <div class="ibox float-e-margins">
                       <div class="ibox-content">
                         <label ng-click="flipPresence(user)" ng-repeat="user in allUsers" class="project-people teamuserHover pull-right" ng-hide="hideOwnUser(user)">
-                          <div> 
+                          <div>
                             <img alt="image" class="img-circle" ng-src="{{getUserPicture(user.$id)}}"></img>
                             <span class="teamuserName">{{user.displayName}}</span>
                           </div>
@@ -147,8 +145,8 @@
                         You can't leave your last team!
                     </h2>
                     <div class="input-group m-b">
-                      <button type="button" ng-show="currentTab === 'Create A Team'" ng-click="createTeamSubmit()" class="btn btn-primary">Create a new team!</button> 
-                      <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamSubmit()" class="btn btn-primary team-edit-btn">Save changes!</button>   
+                      <button type="button" ng-show="currentTab === 'Create A Team'" ng-click="createTeamSubmit()" class="btn btn-primary">Create a new team!</button>
+                      <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamSubmit()" class="btn btn-primary team-edit-btn">Save changes!</button>
                       <button type="button" ng-show="currentTab === 'Edit Team'" ng-click="editTeamDelete()" class="btn btn-primary team-edit-btn">Delete this team</button>
                       <button type="button" ng-show="currentTab === 'Edit Team' || currentTab === 'Create A Team'" ng-click="setTab('Team List')" class="btn btn-primary team-edit-btn">Cancel</button>
                     </div>

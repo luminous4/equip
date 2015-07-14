@@ -115,9 +115,5 @@ angular.module('equip')
       return 'left';
     }
   }
-
-
-
 })
 })();
-

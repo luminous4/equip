@@ -14,6 +14,7 @@
     </ol>
   </div>
 </div>
+
 <div class="wrapper wrapper-content" ng-controller="TextEditorCtrl">
   <div class="row">
     <div class="col-lg-12">
@@ -23,7 +24,9 @@
           <div ibox-tools></div>
         </div>
         <div class="ibox-content no-padding">
+
           <!-- Text Editor Title-->
+
           <div class="row">
             <div class="col-lg-12">
               <form method="get"
@@ -40,48 +43,51 @@
                   name="documentTitle">
                 </div>
               </div>
-
             </div>
           </div>
+
           <div class="row"
           ng-messages="documentInfo.documentTitle.$error"
           ng-if="documentInfo.documentTitle.$touched || documentInfo.$submitted"
           ng-class="{ 'has-error': documentInfo.documentTitle.$touched && userForm.name.$invalid }">
-          <div class="col-lg-12">
-            <p ng-message="required">A document title is required.</p>
+            <div class="col-lg-12">
+              <p ng-message="required">A document title is required.</p>
+            </div>
           </div>
-        </div>
-        <!-- Text Editor Box-->
-        <div summernote focus
-        class="summernote"
-        ng-model="document.body">
+
+          <!-- Text Editor Box-->
+
+          <div summernote focus
+          class="summernote"
+          ng-model="document.body">
+          </div>
+          <div class="hr-line-dashed"></div>
+          <div class="form-group pull-right">
+
+          <!--Save and Continue -->
+
+          <button class="btn btn-success"
+                  type="submit"
+                  ng-disabled="!document.title || !document.body"
+                  ng-click="saveAndExit()">
+            <i class="fa fa-check"></i>&nbsp;Save & Exit
+          </button>
+
+          <!-- Save and Exit-->
+
+          <button class="btn btn-primary"
+                  type="submit"
+                  ng-disabled="!document.title || !document.body"
+                  ng-click="saveDocument()">
+            <i class="fa fa-floppy-o"></i>&nbsp;Save & Continue
+          </button>
+
+          <button ng-click="cancel()" class="btn btn-default">Cancel</button>
+        </form>
+        <!--</div>-->
       </div>
-      <div class="hr-line-dashed"></div>
-      <div class="form-group pull-right">
-
-        <!--<div class="col-sm-4 col-sm-offset-2">-->
-        <!--<div class="col-sm-4 col-sm-offset-2">-->
-        <!--Save and Continue -->
-        <button class="btn btn-success"
-                type="submit"
-                ng-disabled="!document.title || !document.body"
-                ng-click="saveAndExit()">
-          <i class="fa fa-check"></i>&nbsp;Save & Exit
-        </button>
-        <!-- Save and Exit-->
-        <button class="btn btn-primary"
-                type="submit"
-                ng-disabled="!document.title || !document.body"
-                ng-click="saveDocument()">
-          <i class="fa fa-floppy-o"></i>&nbsp;Save & Continue
-        </button>
-
-      <button ng-click="cancel()" class="btn btn-default">Cancel</button>
-    </form>
-    <!--</div>-->
+    </div>
   </div>
-</div>
-</div>
 </div>
 </div>
 </div>

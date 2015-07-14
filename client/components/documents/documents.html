@@ -20,7 +20,9 @@
         </ol>
     </div>
 </div>
+
 <!-- Document Controller -->
+
 <div class="wrapper wrapper-content" ng-controller="DocumentCtrl">
     <div class="row">
         <div class="col-md-3">
@@ -33,13 +35,14 @@
                             <input type="file" name="my_file" multiple="multiple" />
                             <input type="submit" value="Upload">
                             <input type="hidden" name="teamname" value="{{selectedTeam.$value}}">
-                            <!--<input type="hidden" name="username" value="usernamehere">-->
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Start File Content -->
+
         <div class="col-md-9 animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
@@ -58,7 +61,9 @@
                             </a>
                         </div>
                     </div>
+
                     <!-- Documents -->
+
                     <div class="file-box" ng-repeat="document in documentList">
                         <div class="lightBoxGallery">
                             <div class="file">
@@ -81,14 +86,6 @@
                         </div>
                     </div>
                     <!-- End Document List-->
-
-
-                    <!--<h5>Files</h5>-->
-                    <!--<div ibox-tools></div>-->
-                    <!--</div>-->
-                    <!--<div class="ibox-content">-->
-                    <!--Your files will appear here as you create them.-->
-                    <!--</div>-->
                 </div>
             </div>
             <!--End File Content-->

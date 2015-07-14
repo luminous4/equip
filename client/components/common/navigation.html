@@ -1,48 +1,48 @@
-  <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
 
-      <ul side-navigation class="nav metismenu" id="side-menu">
-        <li class="nav-header prof-info">
-          <div class="dropdown profile-element">
-            <img alt="image" class="img-circle prof-pic" ng-src="{{img}}" />
-            <h5 class="welcome">Welcome {{name}}</h5>
-          </div>
-          <div class="logo-element"></div>
-        </li>
-        <!-- Navigation Items-->
-        <li ui-sref-active="active">
-          <a ui-sref="index.home"><i class="fa fa fa-home"></i> <span class="nav-label">Home</span> </a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.chat"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="index.calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="index.documents"><i class="fa fa-hdd-o"></i> <span class="nav-label">Drive</span></a>
-        </li>
-          <li ui-sref-active="active">
-              <a ui-sref="index.todo"><i class="fa fa-clock-o"></i> <span class="nav-label">To-Do</span> </a>
-          </li>
-          <li ui-sref-active="active">
-              <a ui-sref="index.contactlist"><i class="fa fa-phone"></i> <span class="nav-label">Contacts</span></a>
-          </li>
-          <li ng-class="{active: $state.includes('settings')}">
-              <a href=""><i class="fa fa-cog"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level" ng-class="{in: $state.includes('settings')}">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header prof-info">
+        <div class="dropdown profile-element">
+          <img alt="image" class="img-circle prof-pic" ng-src="{{img}}" />
+          <h5 class="welcome">Welcome {{name}}</h5>
+        </div>
+        <div class="logo-element"></div>
+      </li>
 
-                  <li ui-sref-active="active">
-                      <a ui-sref="settings.account"><i class="fa fa-cog"></i> <span class="nav-label">Account</span></a>
-                  </li>
-                  <li ui-sref-active="active">
-                      <a ui-sref="settings.teamedit"><i class="fa fa-users"></i> <span class="nav-label">Team</span></a>
+      <!-- Navigation Items-->
 
-              </ul>
-          </li>
+      <li ui-sref-active="active">
+        <a ui-sref="index.home"><i class="fa fa fa-home"></i> <span class="nav-label">Home</span> </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="index.chat"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="index.calendar"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+      </li>
+      <li ui-sref-active="active">
+          <a ui-sref="index.documents"><i class="fa fa-hdd-o"></i> <span class="nav-label">Drive</span></a>
+      </li>
+      <li ui-sref-active="active">
+          <a ui-sref="index.todo"><i class="fa fa-clock-o"></i> <span class="nav-label">To-Do</span> </a>
+      </li>
+      <li ui-sref-active="active">
+          <a ui-sref="index.contactlist"><i class="fa fa-phone"></i> <span class="nav-label">Contacts</span></a>
+      </li>
+      <li ng-class="{active: $state.includes('settings')}">
+          <a href=""><i class="fa fa-cog"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level" ng-class="{in: $state.includes('settings')}">
+              <li ui-sref-active="active">
+                  <a ui-sref="settings.account"><i class="fa fa-cog"></i> <span class="nav-label">Account</span></a>
+              </li>
+              <li ui-sref-active="active">
+                  <a ui-sref="settings.teamedit"><i class="fa fa-users"></i> <span class="nav-label">Team</span></a>
+              </li>
+          </ul>
+      </li>
 
-      </ul>
-
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>
 
