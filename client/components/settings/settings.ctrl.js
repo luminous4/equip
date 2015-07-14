@@ -53,6 +53,5 @@ angular.module('equip')
     $scope.phoneNumber = '';
     $scope.imgUrl = '';
   };
-
 });
 })();

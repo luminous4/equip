@@ -1,7 +1,7 @@
 (function() {
   angular.module('equip')
 
-  .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout, 
+  .controller('TeamController', function($scope, $state, $stateParams, $firebaseArray, $timeout,
                                       $rootScope, $firebaseObject, User, FirebaseFactory, refUrl) {
     $rootScope.goToTop();
 
@@ -29,7 +29,6 @@
        *  $scope.allUsers to the actual information the user is supposed to see.
        *  NOTE: this is not scalable!!! It wouldn't be too hard to change it though
        */
-
       $scope.teams.$loaded().then(function() {
 
 
@@ -157,7 +156,7 @@
     $scope.tryToJoinTeam = function() {
       var searchStringAtSubmit = $scope.teamJoinString;
       $scope.teamJoinString = "";
-      var userInfo = User.getCurrentUser(); 
+      var userInfo = User.getCurrentUser();
       var foundTeam = FirebaseFactory.getObject(['teams', searchStringAtSubmit], true);
       foundTeam.$loaded().then(function() {
         if(!foundTeam || !foundTeam.users) {
@@ -166,8 +165,8 @@
         var obj = {};
         obj[searchStringAtSubmit] = searchStringAtSubmit;
         FirebaseFactory.updateItem(
-          ['users', userInfo.uid, 'teams'], 
-          obj, 
+          ['users', userInfo.uid, 'teams'],
+          obj,
           true);
         foundTeam.users.push(userInfo.uid);
         foundTeam.$save().then(function() {

@@ -145,6 +145,7 @@
         allTeamMessages.$add({
           chatName: currentUserObject.displayName,
           userImg: currentUserObject.imgUrl,
+          // 'bot' msg on chat
           text: '#newEvent: ' + '"' + event.title + '"' + ' on ' + event.startDate + ' from ' + event.startTime + ' - ' + event.endTime,
           createdAt: Firebase.ServerValue.TIMESTAMP
         });
@@ -175,7 +176,7 @@
       $scope.allEvents = FirebaseFactory.getCollection(['teams', currentTeam, 'events'], true);
 
       // events displayed on /calendar
-      $scope.eventSources = [$scope.allEvents];      
+      $scope.eventSources = [$scope.allEvents];
     }
 
     // today events displayed on /home

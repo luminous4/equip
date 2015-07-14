@@ -1,5 +1,3 @@
-
-
 var config = (process.env.TRAVIS) ? process.env.config :require('./config.js');
 $(function() {
 	$('#upload-form').transloadit({
